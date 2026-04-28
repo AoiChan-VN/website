@@ -1,31 +1,39 @@
 import Component from './core/Component.js';
-import { projects, navLinks } from './store/data.js';
+import { projects } from './store/data.js';
+import ProjectCard from './components/ProjectCard.js';
 
 class App extends Component {
     template() {
         return `
-            <nav id="navbar"></nav>
+            <header>
+                <nav><strong>MY PORTFOLIO</strong></nav>
+            </header>
             <main>
                 <section id="hero">
-                    <h1>Xin chào, tôi là Developer</h1>
-                    <p>Xây dựng web app với hiệu năng tối đa.</p>
+                    <h1>Creative Developer</h1>
+                    <p>Minimalist design, Maximum performance.</p>
                 </section>
                 <section id="projects">
-                    <h2>Dự án tiêu biểu</h2>
+                    <h2>Selected Work</h2>
                     <div id="project-list" class="grid"></div>
                 </section>
             </main>
         `;
     }
 
-    // Sau khi App render xong khung, ta nạp các component con vào
     render() {
-        super.render();
-        // Logic render các sub-components sẽ viết tiếp ở bước sau...
-        console.log("App đã sẵn sàng!");
+        super.render(); // Vẽ khung HTML trước
+        
+        // Tìm vị trí để đổ danh sách card vào
+        const $projectList = this.$target.querySelector('#project-list');
+        
+        // Tái sử dụng ProjectCard cho từng item trong data
+        projects.forEach(item => {
+            const $wrapper = document.createElement('div');
+            $projectList.appendChild($wrapper);
+            new ProjectCard($wrapper, item);
+        });
     }
 }
 
-// Khởi tạo ứng dụng tại thẻ #app
 new App(document.querySelector('#app'));
- 
