@@ -5,14 +5,15 @@ import { projects } from './store/data.js';
 
 class App extends Component {
     setup() {
-        this.state = { path: window.location.pathname };
+        // Lấy hash hiện tại, nếu trống thì mặc định là #/
+        this.state = { hash: window.location.hash || '#/' };
+        
         const savedTheme = localStorage.getItem('theme') || 'light';
         document.documentElement.setAttribute('data-theme', savedTheme);
 
-        // Lắng nghe sự kiện điều hướng nội bộ
-        window.addEventListener('navigate', (e) => {
-            window.history.pushState(null, '', e.detail);
-            this.setState({ path: e.detail });
+        // Lắng nghe sự kiện thay đổi hash (khi user click link hoặc back trang)
+        window.addEventListener('hashchange', () => {
+            this.setState({ hash: window.location.hash || '#/' });
         });
     }
 
@@ -25,22 +26,22 @@ class App extends Component {
     }
 
     createRoute() {
-        const path = this.state.path;
-        if (path === '/' || path === '/index.html') {
+        const hash = this.state.hash;
+        if (hash === '#/' || hash === '') {
             return `
                 <section class="hero">
                     <h1>Xin chào, tôi là Developer</h1>
                     <p>Sản phẩm này được build 100% từ Vanilla JS.</p>
                 </section>
             `;
-        } else if (path === '/projects') {
+        } else if (hash === '#/projects') {
             return `
                 <section class="projects-page">
                     <h2>Dự án của tôi</h2>
                     <div id="project-list" class="grid"></div>
                 </section>
             `;
-        } else if (path === '/contact') {
+        } else if (hash === '#/contact') {
             return `
                 <section class="contact">
                     <h2>Liên hệ</h2>
@@ -53,10 +54,8 @@ class App extends Component {
 
     render() {
         super.render();
-        // Luôn render Navbar
         new Navbar(this.$target.querySelector('#header-nav'));
 
-        // Nếu ở trang Projects thì render danh sách card
         const $list = this.$target.querySelector('#project-list');
         if ($list) {
             projects.forEach(item => {
