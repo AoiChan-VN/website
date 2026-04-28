@@ -73,4 +73,61 @@ body {
     color: var(--primary);
     font-weight: 600;
 }
- 
+
+header {
+    position: fixed;
+    top: 0;
+    width: 100%;
+    background: rgba(255, 255, 255, 0.8);
+    backdrop-filter: blur(10px);
+    z-index: 1000;
+    border-bottom: 1px solid rgba(0,0,0,0.1);
+}
+
+.nav-container {
+    max-width: 1200px;
+    margin: 0 auto;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 15px 20px;
+}
+
+.nav-links {
+    display: flex;
+    list-style: none;
+    gap: 30px;
+    align-items: center;
+}
+
+.nav-links a {
+    text-decoration: none;
+    color: var(--text);
+    font-weight: 500;
+    font-size: 14px;
+}
+
+#theme-toggle {
+    background: none;
+    border: none;
+    cursor: pointer;
+    font-size: 1.2rem;
+}
+
+/* Section Spacing */
+section { padding: 100px 0 60px 0; }
+h2 { font-size: 2.5rem; margin-bottom: 40px; }
+
+/* Responsive */
+@media (max-width: 768px) {
+    #hero h1 { font-size: 2.5rem; }
+    .nav-links { display: none; } /* Có thể làm thêm menu mobile nếu cần */
+}
+
+/* Hiệu ứng mượt mà cho ảnh dự án (nếu bạn thêm tag img) */
+.card-image {
+    width: 100%;
+    height: 200px;
+    background: #e0e0e2;
+    object-fit: cover;
+}
