@@ -1,26 +1,28 @@
 export default class Component {
-    constructor($target, props = {}) {
-        this.$target = $target; // Phần tử HTML chứa component này
-        this.props = props;     // Dữ liệu truyền từ ngoài vào
-        this.setup();           // Khởi tạo state ban đầu
-        this.render();          // Vẽ giao diện
-    }
-
-    setup() {} // Sẽ được override ở các class con
-
-    template() { return ''; } // Trả về chuỗi HTML
-
-    render() {
-        this.$target.innerHTML = this.template();
-        this.setEvent(); // Sau khi vẽ xong thì gắn sự kiện
-    }
-
-    setEvent() {} // Gắn các sự kiện click, hover...
-
-    // Phương thức cập nhật dữ liệu và vẽ lại
-    setState(newState) {
-        this.state = { ...this.state, ...newState };
-        this.render();
-    }
+  $target; $props; $state;
+  constructor($target, $props) {
+    this.$target = $target;
+    this.$props = $props;
+    this.setup();
+    this.setEvent();
+    this.render();
+  }
+  setup() {} // Khởi tạo state
+  mounted() {} // Gọi sau khi render (gọi API, init plugin ngoài)
+  template() { return ''; } // HTML string
+  render() {
+    this.$target.innerHTML = this.template();
+    this.mounted();
+  }
+  setState(newState) {
+    this.$state = { ...this.$state, ...newState };
+    this.render();
+  }
+  addEvent(eventType, selector, callback) {
+    this.$target.addEventListener(eventType, (event) => {
+      if (!event.target.closest(selector)) return false;
+      callback(event);
+    });
+  }
+  setEvent() {} // Gán sự kiện tại đây
 }
- 
