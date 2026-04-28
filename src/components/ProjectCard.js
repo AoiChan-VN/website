@@ -2,19 +2,23 @@ import Component from '../core/Component.js';
 
 export default class ProjectCard extends Component {
     template() {
-        const { title, desc, tech, link } = this.props;
+        const { title, desc, tech, link, image } = this.props;
         return `
-            <div class="card">
-                <div class="card-content">
-                    <h3>${title}</h3>
-                    <p>${desc}</p>
-                    <div class="tech-stack">
-                        ${tech.map(t => `<span class="badge">${t}</span>`).join('')}
-                    </div>
-                    <a href="${link}" class="btn-link">Khám phá →</a>
-                </div>
-            </div>
-        `;
-    }
+        <div class="card reveal">
+        <div class="card-image-container">
+        <img src="${image}" loading="lazy" alt="${title} class="card-img">
+        </div>
+        
+        <div class="card">
+        <div class="card-content">
+        <h3>${title}</h3>
+        <p>${desc}</p>
+        
+        <div class="tech-stack">
+        ${tech.map(t => `<span class="badge">${t}</span>`).join('')}
+        </div>
+        <a href="${link}" class="btn-link">Khám phá →</a>
+        </div>
+        </div>
+    `;
 }
- 
