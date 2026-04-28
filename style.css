@@ -1,144 +1,25 @@
-/* Variables - Hệ thống màu sắc & font chuẩn */
 :root {
-    --primary: #007aff;
-    --bg: #ffffff;
-    --text: #1d1d1f;
-    --gray: #86868b;
-    --card-bg: #f5f5f7;
-    --gap: 20px;
+    --bg: #ffffff; --text: #1d1d1f; --primary: #007aff;
+    --card: #f5f5f7; --nav-bg: rgba(255,255,255,0.8);
 }
-
 [data-theme="dark"] {
-    --bg: #000000;
-    --text: #f5f5f7;
-    --card-bg: #1c1c1e;
+    --bg: #000000; --text: #f5f5f7; --primary: #0a84ff;
+    --card: #1c1c1e; --nav-bg: rgba(0,0,0,0.8);
 }
-
 * { margin: 0; padding: 0; box-sizing: border-box; }
-
-body {
-    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
-    background-color: var(--bg);
-    color: var(--text);
-    line-height: 1.5;
-    transition: 0.3s;
-}
-
-/* Layout */
-#app { max-width: 1200px; margin: 0 auto; padding: 0 20px; }
-
-#hero {
-    height: 60vh;
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
-    text-align: center;
-}
-
-#hero h1 { font-size: 4rem; font-weight: 700; letter-spacing: -2px; }
-
-/* Grid dự án */
-.grid {
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-    gap: var(--gap);
-    padding: 40px 0;
-}
-
-/* Card Component */
-.card {
-    background: var(--card-bg);
-    border-radius: 18px;
-    overflow: hidden;
-    transition: transform 0.3s ease;
-}
-
-.card:hover { transform: translateY(-10px); }
-
-.card-content { padding: 30px; }
-
-.tech-stack { margin: 15px 0; display: flex; gap: 8px; }
-
-.badge {
-    background: rgba(0, 122, 255, 0.1);
-    color: var(--primary);
-    padding: 4px 10px;
-    border-radius: 20px;
-    font-size: 12px;
-}
-
-.btn-link {
-    text-decoration: none;
-    color: var(--primary);
-    font-weight: 600;
-}
-
-header {
-    position: fixed;
-    top: 0;
-    width: 100%;
-    background: rgba(255, 255, 255, 0.8);
-    backdrop-filter: blur(10px);
-    z-index: 1000;
-    border-bottom: 1px solid rgba(0,0,0,0.1);
-}
-
-.nav-container {
-    max-width: 1200px;
-    margin: 0 auto;
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    padding: 15px 20px;
-}
-
-.nav-links {
-    display: flex;
-    list-style: none;
-    gap: 30px;
-    align-items: center;
-}
-
-.nav-links a {
-    text-decoration: none;
-    color: var(--text);
-    font-weight: 500;
-    font-size: 14px;
-}
-
-#theme-toggle {
-    background: none;
-    border: none;
-    cursor: pointer;
-    font-size: 1.2rem;
-}
-
-/* Section Spacing */
-section { padding: 100px 0 60px 0; }
-h2 { font-size: 2.5rem; margin-bottom: 40px; }
-
-/* Responsive */
-@media (max-width: 768px) {
-    #hero h1 { font-size: 2.5rem; }
-    .nav-links { display: none; } /* Có thể làm thêm menu mobile nếu cần */
-}
-
-/* Hiệu ứng mượt mà cho ảnh dự án (nếu bạn thêm tag img) */
-.card-image {
-    width: 100%;
-    height: 200px;
-    background: #e0e0e2;
-    object-fit: cover;
-}
-
-.reveal {
-    opacity: 0;
-    transform: translateY(30px);
-    transition: all 0.8s ease-out;
-}
-.reveal.visible {
-    opacity: 1;
-    transform: translateY(0);
-}
-
+body { font-family: sans-serif; background: var(--bg); color: var(--text); transition: 0.3s; }
+header { position: fixed; top:0; width:100%; background: var(--nav-bg); backdrop-filter: blur(10px); z-index:10; }
+.nav-container { max-width: 1100px; margin: 0 auto; display: flex; justify-content: space-between; padding: 20px; }
+.nav-links { display: flex; list-style: none; gap: 20px; }
+.nav-links a { text-decoration: none; color: var(--text); font-weight: 600; }
+main { max-width: 1100px; margin: 0 auto; padding-top: 100px; min-height: 80vh; }
+.hero { text-align: center; padding: 100px 20px; }
+.grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 20px; padding: 20px 0; }
+.card { background: var(--card); border-radius: 15px; overflow: hidden; transition: 0.3s; }
+.card:hover { transform: scale(1.02); }
+.card-img { width: 100%; height: 200px; object-fit: cover; }
+.card-content { padding: 20px; }
+.badge { background: var(--primary); color: white; padding: 2px 8px; border-radius: 4px; font-size: 12px; margin-right: 5px; }
+.btn-link { display: block; margin-top: 15px; color: var(--primary); text-decoration: none; font-weight: bold; }
+footer { text-align: center; padding: 40px; border-top: 1px solid #333; }
+ 
