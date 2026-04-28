@@ -5,10 +5,10 @@ export default class Navbar extends Component {
     template() {
         return `
             <div class="nav-container">
-                <div class="logo">PORTFOLIO.</div>
+                <div class="logo" style="cursor:pointer" data-path="/">DEV.PORTFOLIO</div>
                 <ul class="nav-links">
                     ${navLinks.map(link => `
-                        <li><a href="${link.href}">${link.name}</a></li>
+                        <li><a href="${link.href}" data-path="${link.href}">${link.name}</a></li>
                     `).join('')}
                     <li><button id="theme-toggle">👻</button></li>
                 </ul>
@@ -17,23 +17,22 @@ export default class Navbar extends Component {
     }
 
     setEvent() {
-        // Tính năng Dark Mode thực tế
+        // Xử lý Dark Mode
         this.$target.querySelector('#theme-toggle').addEventListener('click', () => {
-            const currentTheme = document.documentElement.getAttribute('data-theme');
-            const targetTheme = currentTheme === 'dark' ? 'light' : 'dark';
-            document.documentElement.setAttribute('data-theme', targetTheme);
-            localStorage.setItem('theme', targetTheme); // Lưu lại lựa chọn của người dùng
+            const isDark = document.documentElement.getAttribute('data-theme') === 'dark';
+            const nextTheme = isDark ? 'light' : 'dark';
+            document.documentElement.setAttribute('data-theme', nextTheme);
+            localStorage.setItem('theme', nextTheme);
         });
 
-        // Xử lý cuộn mượt khi click link
-        this.$target.querySelectorAll('a').forEach(anchor => {
-            anchor.addEventListener('click', (e) => {
+        // Điều hướng không load trang (SPA)
+        this.$target.addEventListener('click', (e) => {
+            const target = e.target.closest('[data-path]');
+            if (target) {
                 e.preventDefault();
-                const targetId = anchor.getAttribute('href');
-                if(targetId === '#') return;
-                document.querySelector(targetId).scrollIntoView({ behavior: 'smooth' });
-            });
+                const path = target.getAttribute('data-path');
+                window.dispatchEvent(new CustomEvent('navigate', { detail: path }));
+            }
         });
     }
 }
- 
