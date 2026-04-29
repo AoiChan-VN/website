@@ -1,16 +1,36 @@
 import Router from './core/Router.js';
 import DashboardPage from './pages/DashboardPage.js';
 
-// Định nghĩa các trang ứng với đường dẫn
+// Cấu hình các trang trong ứng dụng
 const routes = [
   { path: '/', component: DashboardPage },
-  { path: '/plugins', component: class extends DashboardPage {
-      template() { return '<div><h2>Trang Plugins đang xây dựng...</h2><a href="/">Về Dashboard</a></div>'; }
-  }},
-  { path: '/404', component: class { 
-      constructor($t) { $t.innerHTML = '<h1>404 - Không tìm thấy trang</h1>'; } 
-  }}
+  { 
+    path: '/plugins', 
+    component: class extends DashboardPage {
+      template() { 
+        return `
+          <div id="navbar-container"></div>
+          <div class="container">
+            <h2>Danh sách Plugins</h2>
+            <p>Hệ thống đang cập nhật dữ liệu...</p>
+            <a href="#/">← Quay lại Dashboard</a>
+          </div>
+        `;
+      }
+      mounted() {
+        // Vẫn cần render Navbar cho trang này
+        const Navbar = (await import('./components/shared/Navbar.js')).default;
+        new Navbar(this.$target.querySelector('#navbar-container'));
+      }
+    } 
+  },
+  { 
+    path: '/404', 
+    component: class {
+      constructor($t) { $t.innerHTML = '<div class="container"><h1>404</h1><p>Trang không tồn tại!</p><a href="#/">Về trang chủ</a></div>'; }
+    } 
+  }
 ];
 
-// Khởi tạo Router
+// Kích hoạt Router
 new Router(routes);
