@@ -1,40 +1,46 @@
 import Component from '../core/Component.js';
-import { globalStore } from '../store/index.js';
+import { store, setModal, addToast } from '../store/index.js';
 
 export default class DashboardPage extends Component {
   setup() {
-    globalStore.subscribe(() => this.render());
-    this.fetchServerData();
+    store.subscribe(() => this.render());
+    // Giả lập lấy data từ API mỗi 2 giây
+    if (!window.dashInterval) {
+      window.dashInterval = setInterval(() => {
+        store.state.serverStatus = {
+          ram: (Math.random() * 8).toFixed(1),
+          cpu: Math.floor(Math.random() * 100),
+          players: Math.floor(Math.random() * 50),
+          status: 'Online'
+        };
+      }, 2000);
+    }
   }
-
-  async fetchServerData() {
-    // Giả lập gọi API Minecraft Server
-    const mockData = { ram: 4.5, cpu: 12, players: 45 };
-    globalStore.state.serverStatus = mockData;
-  }
-
   template() {
-    const { ram, cpu, players } = globalStore.state.serverStatus;
+    const { ram, cpu, players, status } = store.state.serverStatus;
     return `
-      <div class="dashboard">
-        <h1>Server Status</h1>
-        <div class="stats-grid">
-          <div class="stat-card">RAM: ${ram}GB</div>
-          <div class="stat-card">CPU: ${cpu}%</div>
-          <div class="stat-card">Online: ${players}</div>
+      <div class="dashboard-page">
+        <h1>Server Console</h1>
+        <div class="status-badge ${status.toLowerCase()}">${status}</div>
+        <div class="grid">
+          <div class="card"><h4>RAM</h4><p>${ram} GB / 8GB</p></div>
+          <div class="card"><h4>CPU</h4><p>${cpu}%</p></div>
+          <div class="card"><h4>PLAYERS</h4><p>${players}/100</p></div>
         </div>
-        <button class="open-settings">Server Settings</button>
-      </div>
-    `;
+        <button class="btn-config">Open Quick Config</button>
+      </div>`;
   }
-
   setEvent() {
-    this.addEvent('click', '.open-settings', () => {
-      globalStore.state.modal = {
-        isOpen: true,
-        title: 'Server Settings',
-        content: '<p>Cấu hình RAM tối đa cho Server...</p>'
-      };
+    this.addEvent('click', '.btn-config', () => {
+      setModal({ 
+        isOpen: true, 
+        title: 'Quick Config', 
+        content: '<input type="text" placeholder="Server Name..."><button id="save">Save</button>' 
+      });
+    });
+    this.addEvent('click', '#save', () => {
+      addToast('Configuration Saved!');
+      setModal({ isOpen: false });
     });
   }
 }
