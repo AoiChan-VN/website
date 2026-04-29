@@ -1,4 +1,5 @@
 import Component from '../../core/Component.js';
+import { store } from '../../store/index.js';
 
 export default class Navbar extends Component {
   template() {
@@ -16,16 +17,12 @@ export default class Navbar extends Component {
   }
 
   setEvent() {
-    // Sự kiện mở Pop-up cài đặt (Sử dụng Store để điều khiển Modal)
     this.addEvent('click', '.btn-settings', () => {
-      import('../../store/index.js').then(({ store }) => {
-        store.state.modal = {
-          isOpen: true,
-          title: 'Cài đặt hệ thống',
-          content: '<p>Cấu hình Server Minecraft của bạn tại đây...</p>'
-        };
-      });
+      store.state.modal = {
+        isOpen: true,
+        title: 'Cài đặt hệ thống',
+        content: '<p>Đây là bảng cài đặt Minecraft Server của bạn.</p>'
+      };
     });
   }
 }
- 
