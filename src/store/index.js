@@ -1,17 +1,24 @@
 import { createStore } from '../core/Store.js';
 
-export const pluginStore = createStore({
-  items: [
-    { id: 1, name: 'EssentialsX', version: '2.19.0', status: 'Active' },
-    { id: 2, name: 'WorldEdit', version: '7.2.0', status: 'Update Available' },
-    { id: 3, name: 'LuckPerms', version: '5.4.0', status: 'Active' }
+export const store = createStore({
+  // Server data
+  serverStatus: { ram: 0, cpu: 0, players: 0, status: 'Offline' },
+  // Content data
+  plugins: [
+    { id: 1, name: 'EssentialsX', version: '2.19', desc: 'Core server commands' },
+    { id: 2, name: 'LuckPerms', version: '5.4', desc: 'Permissions management' }
   ],
-  searchQuery: ''
+  // UI State
+  modal: { isOpen: false, title: '', content: '' },
+  toasts: []
 });
 
-export const resourceStore = createStore({
-  packs: [
-    { id: 1, name: 'Faithful 32x', resolution: '32x32', size: '15MB' },
-    { id: 2, name: 'PureBDcraft', resolution: '128x128', size: '80MB' }
-  ]
-});
+// Actions giúp gọn code ở page
+export const setModal = (payload) => { store.state.modal = { ...store.state.modal, ...payload }; };
+export const addToast = (msg) => {
+  const id = Date.now();
+  store.state.toasts = [...store.state.toasts, { id, msg }];
+  setTimeout(() => {
+    store.state.toasts = store.state.toasts.filter(t => t.id !== id);
+  }, 3000);
+};
