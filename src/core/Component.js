@@ -7,9 +7,9 @@ export default class Component {
     this.setEvent();
     this.render();
   }
-  setup() {} // Khởi tạo state
-  mounted() {} // Gọi sau khi render (gọi API, init plugin ngoài)
-  template() { return ''; } // HTML string
+  setup() {}
+  mounted() {}
+  template() { return ''; }
   render() {
     this.$target.innerHTML = this.template();
     this.mounted();
@@ -24,5 +24,5 @@ export default class Component {
       callback(event);
     });
   }
-  setEvent() {} // Gán sự kiện tại đây
+  setEvent() {}
 }
