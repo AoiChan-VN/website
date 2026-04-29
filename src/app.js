@@ -1,80 +1,102 @@
 import Component from './core/Component.js';
 import Navbar from './components/Navbar.js';
 import ProjectCard from './components/ProjectCard.js';
-import { parseMarkdown } from './utils/Parser.js';
 import { plugins, resources, videos } from './store/data.js';
 
 class App extends Component {
     setup() {
         this.state = { hash: window.location.hash || '#/' };
+        const savedTheme = localStorage.getItem('theme') || 'dark'; // Minecraft dev thường thích Dark Mode
+        document.documentElement.setAttribute('data-theme', savedTheme);
         window.addEventListener('hashchange', () => {
             this.setState({ hash: window.location.hash || '#/' });
-            window.scrollTo(0, 0);
+            window.scrollTo(0, 0); // Cuộn lên đầu khi đổi trang
         });
     }
 
-    // Xử lý ảnh: Ưu tiên assets/ nếu không có http
-    getImg(path) {
-        if (!path) return './assets/img/default.png';
-        return path.startsWith('http') ? path : `./${path}`;
+    template() {
+        return `
+            <header id="header-nav"></header>
+            <main id="main-content">${this.createRoute()}</main>
+            <footer><p>&copy; 2024 Minecraft Server Portfolio</p></footer>
+        `;
     }
 
-    // Xử lý Content: Ưu tiên đọc file .md trong folder content/
-    async getContent(item) {
-        if (item.file && item.file.endsWith('.md')) {
-            try {
-                const res = await fetch(`./${item.file}`);
-                if (res.ok) return parseMarkdown(await res.text());
-            } catch (e) { console.error("Lỗi file .md"); }
-        }
-        return parseMarkdown(item.desc || "Không có nội dung chi tiết.");
-    }
-
-    async template() {
+    createRoute() {
         const hash = this.state.hash;
 
-        // TRANG CHI TIẾT
-        if (hash.startsWith('#/plugins/') || hash.startsWith('#/resources/')) {
-            const isPlugin = hash.startsWith('#/plugins/');
-            const id = isPlugin ? hash.replace('#/plugins/', '') : hash.replace('#/resources/', '');
-            const item = (isPlugin ? plugins : resources).find(p => p.id === id);
+        // Trang chủ
+        if (hash === '#/') return `
+            <section class="hero">
+                <h1>Minecraft Server Developer</h1>
+                <p>Chuyên cung cấp Plugins & Resource Packs chất lượng cao.</p>
+            </section>
+        `;
 
-            if (!item) return '<h1>404 - Không tìm thấy</h1>';
+        // Trang danh sách Plugins
+        if (hash === '#/plugins') return `
+            <section>
+                <h2>Premium Plugins</h2>
+                <div id="plugin-list" class="grid"></div>
+            </section>
+        `;
 
-            return `
-                <div class="container">
-                    <button onclick="window.history.back()">← Quay lại</button>
-                    <div style="display:flex; align-items:center; gap:20px; margin:20px 0;">
-                        <img src="${this.getImg(item.image)}" width="80">
-                        <h1>${item.title}</h1>
-                    </div>
-                    <hr>
-                    <div class="content">${await this.getContent(item)}</div>
+        // Trang danh sách Resources
+        if (hash === '#/resources') return `
+            <section>
+                <h2>Resource Packs</h2>
+                <div id="resource-list" class="grid"></div>
+            </section>
+        `;
+
+        // Trang Media (Video/Ảnh)
+        if (hash === '#/media') return `
+            <section>
+                <h2>Server Media</h2>
+                <div class="grid">
+                    ${videos.map(v => `
+                        <div class="card">
+                            <iframe width="100%" height="200" src="${v.url}" frameborder="0"></iframe>
+                            <div class="card-content"><h3>${v.title}</h3></div>
+                        </div>
+                    `).join('')}
                 </div>
-            `;
+            </section>
+        `;
+
+        // Logic trang CHI TIẾT Plugin (Dynamic Route)
+        if (hash.startsWith('#/plugins/')) {
+            const id = hash.replace('#/plugins/', '');
+            const item = plugins.find(p => p.id === id);
+            return item ? `
+                <section class="detail-page">
+                    <a href="#/plugins">← Quay lại</a>
+                    <img src="${item.image}" class="detail-img">
+                    <h1>${item.title}</h1>
+                    <div class="content">${item.content}</div>
+                </section>
+            ` : '<h1>Không tìm thấy Plugin</h1>';
         }
 
-        // TRANG DANH SÁCH
-        if (hash === '#/plugins') return `<div class="container"><h2>Plugins</h2><div id="plugin-list" class="grid"></div></div>`;
-        if (hash === '#/resources') return `<div class="container"><h2>Resources</h2><div id="resource-list" class="grid"></div></div>`;
-
-        // TRANG CHỦ
-        return `<div class="hero"><h1>Minecraft Portfolio</h1><p>Phát triển bởi Vanila JS</p></div>`;
+        return `<h1>404 - Trang không tồn tại</h1>`;
     }
 
-    mounted() {
-        new Navbar(this.$target.querySelector('#header-nav') || document.createElement('div'));
-        
+    render() {
+        super.render();
+        new Navbar(this.$target.querySelector('#header-nav'));
+
+        // Tái sử dụng logic render card cho các trang khác nhau
         const renderList = (selector, data, type) => {
             const $el = this.$target.querySelector(selector);
             if ($el) {
                 data.forEach(item => {
-                    const $div = document.createElement('div');
-                    $el.appendChild($div);
-                    new ProjectCard($div, { ...item, image: this.getImg(item.image), type });
+                    const $wrapper = document.createElement('div');
+                    $el.appendChild($wrapper);
+                    new ProjectCard($wrapper, { ...item, type });
                 });
             }
         };
+
         renderList('#plugin-list', plugins, 'plugins');
         renderList('#resource-list', resources, 'resources');
     }
