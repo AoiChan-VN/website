@@ -6,22 +6,24 @@ export default class Router {
   }
 
   init() {
-    // Lắng nghe sự kiện thay đổi Hash (#)
+    // Theo dõi sự kiện thay đổi hashtag trên thanh địa chỉ
     window.addEventListener('hashchange', () => this.route());
+    // Chạy lần đầu khi trang vừa load
     window.addEventListener('load', () => this.route());
-    this.route();
   }
 
+  // Hàm điều hướng thủ công bằng code
   navigate(url) {
-    window.location.hash = url; // Điều hướng bằng hash
+    window.location.hash = url;
   }
 
   route() {
-    // Lấy path sau dấu #, nếu không có thì mặc định là /
-    const path = window.location.hash.replace('#', '') || '/';
+    // Lấy phần đường dẫn sau dấu # (ví dụ: #/plugins -> /plugins)
+    const path = window.location.hash.slice(1) || '/';
     const route = this.routes.find(r => r.path === path) || this.routes.find(r => r.path === '/404');
     
-    this.$app.innerHTML = ''; // Clear trước khi render trang mới
+    // Xóa nội dung cũ để render trang mới
+    this.$app.innerHTML = '';
     new route.component(this.$app);
   }
 }
