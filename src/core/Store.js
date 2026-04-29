@@ -1,12 +1,22 @@
 export const createStore = (initialState) => {
-  const observers = new Set();
-  const state = new Proxy(initialState, {
+  let state = initialState;
+  const observers = [];
+
+  // Đăng ký component muốn lắng nghe thay đổi
+  const subscribe = (callback) => observers.push(callback);
+
+  const notify = () => observers.forEach((fn) => fn());
+
+  const proxyState = new Proxy(state, {
     set(target, key, value) {
       target[key] = value;
-      observers.forEach((fn) => fn());
+      notify(); // Thông báo cho UI render lại
       return true;
+    },
+    get(target, key) {
+      return target[key];
     }
   });
-  const subscribe = (fn) => observers.add(fn);
-  return { state, subscribe };
+
+  return { state: proxyState, subscribe };
 };
