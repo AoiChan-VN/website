@@ -6,9 +6,9 @@ export default class Navbar extends Component {
       <nav>
         <div class="logo">MC Server Manager</div>
         <div class="menu">
-          <a href="/">Dashboard</a>
-          <a href="/plugins">Plugins</a>
-          <a href="/resources">Resources</a>
+          <a href="#/">Dashboard</a>
+          <a href="#/plugins">Plugins</a>
+          <a href="#/resources">Resources</a>
           <button class="btn btn-settings" style="margin-left: 20px;">Cài đặt</button>
         </div>
       </nav>
