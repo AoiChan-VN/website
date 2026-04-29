@@ -6,32 +6,22 @@ export default class Router {
   }
 
   init() {
-    // Lắng nghe sự kiện tiến/lùi trang của trình duyệt
-    window.addEventListener('popstate', () => this.route());
-    
-    // Gắn sự kiện click toàn cục để chặn load trang khi bấm thẻ <a>
-    document.addEventListener('click', (e) => {
-      const link = e.target.closest('a');
-      if (link && link.getAttribute('href').startsWith('/')) {
-        e.preventDefault();
-        this.navigate(link.getAttribute('href'));
-      }
-    });
-
+    // Lắng nghe sự kiện thay đổi Hash (#)
+    window.addEventListener('hashchange', () => this.route());
+    window.addEventListener('load', () => this.route());
     this.route();
   }
 
   navigate(url) {
-    window.history.pushState(null, null, url);
-    this.route();
+    window.location.hash = url; // Điều hướng bằng hash
   }
 
   route() {
-    const path = window.location.pathname;
+    // Lấy path sau dấu #, nếu không có thì mặc định là /
+    const path = window.location.hash.replace('#', '') || '/';
     const route = this.routes.find(r => r.path === path) || this.routes.find(r => r.path === '/404');
     
-    // Khởi tạo Component tương ứng với đường dẫn
+    this.$app.innerHTML = ''; // Clear trước khi render trang mới
     new route.component(this.$app);
   }
 }
- 
