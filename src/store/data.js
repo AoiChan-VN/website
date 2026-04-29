@@ -9,8 +9,8 @@ export const plugins = [
     { id: "anti-cheat", 
      title: "Pro Anti-Cheat", 
      desc: "Chặn 99% hack cho Server 1.20+", 
-     content: "plugin.md", 
-     image: "./assets/img/plugin/pl-1.webp" /* "https://picsum.photos" */
+     content: "#", 
+     image: "https://picsum.photos"
     },
     { id: "economy",
      title: "Global Economy",
