@@ -1,26 +1,23 @@
 export default class Component {
     constructor($target, props = {}) {
-        this.$target = $target; // Phần tử HTML chứa component này
-        this.props = props;     // Dữ liệu truyền từ ngoài vào
-        this.setup();           // Khởi tạo state ban đầu
-        this.render();          // Vẽ giao diện
+        this.$target = $target;
+        this.props = props;
+        this.setup();
+        this.render();
     }
-
-    setup() {} // Sẽ được override ở các class con
-
-    template() { return ''; } // Trả về chuỗi HTML
-
-    render() {
-        this.$target.innerHTML = this.template();
-        this.setEvent(); // Sau khi vẽ xong thì gắn sự kiện
+    setup() {}
+    async template() { return ''; } 
+    async render() {
+        // Đợi template xử lý xong (đọc file, lọc data)
+        const html = await this.template();
+        this.$target.innerHTML = html;
+        this.mounted();
+        this.setEvent();
     }
-
-    setEvent() {} // Gắn các sự kiện click, hover...
-
-    // Phương thức cập nhật dữ liệu và vẽ lại
+    mounted() {} 
+    setEvent() {}
     setState(newState) {
         this.state = { ...this.state, ...newState };
         this.render();
     }
 }
- 
