@@ -1,20 +1,22 @@
 import Component from '../../core/Component.js';
-import { globalStore } from '../../store/index.js';
 
 export default class ProjectCard extends Component {
   template() {
-    const { item, type } = this.$props;
+    const { item } = this.$props;
     return `
-      <div class="card" data-id="${item.id}">
-        <div class="card-info">
-          <h3>${item.name}</h3>
-          <p>${type === 'plugin' ? `Version: ${item.version}` : `Res: ${item.resolution}`}</p>
+      <div class="project-card">
+        <div class="project-header">
+          <img src="https://ui-avatars.com{item.name}" alt="icon">
+          <div class="project-title">
+            <h4>${item.name}</h4>
+            <span class="version-tag">v${item.version}</span>
+          </div>
         </div>
-        <div class="card-actions">
-          <button class="btn-detail" data-id="${item.id}">Chi tiết</button>
-          <button class="btn-delete" data-id="${item.id}">Xóa</button>
+        <p class="project-desc">${item.desc || 'No description available for this pack.'}</p>
+        <div class="project-footer">
+          <button class="btn-manage" data-id="${item.id}">Manage</button>
+          <span class="status-text">${item.status || 'Installed'}</span>
         </div>
-      </div>
-    `;
+      </div>`;
   }
 }
