@@ -9,8 +9,8 @@ export const plugins = [
     { id: "Aoi Plugin", 
      title: "Hệ thống tu tiên", 
      desc: "Server 1.21+", 
-     image: "./assets/plugin/pl.webp",
-     file: "content/plugins/Aoi-Plugin.md"
+     image: "./assets/img-pl/Pl-img.webp",
+     file: "content/plugins/Pl.md"
     },
     { id: "economy",
      title: "Global Economy",
