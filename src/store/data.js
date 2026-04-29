@@ -6,8 +6,18 @@ export const navLinks = [
 ];
 
 export const plugins = [
-    { id: "anti-cheat", title: "Pro Anti-Cheat", desc: "Chặn 99% hack cho Server 1.20+", content: "Nội dung chi tiết về cách cài đặt Anti-cheat...", image: "https://picsum.photos" },
-    { id: "economy", title: "Global Economy", desc: "Hệ thống tiền tệ liên server.", content: "Hướng dẫn sử dụng lệnh /bal, /pay...", image: "https://picsum.photos" }
+    { id: "anti-cheat", 
+     title: "Pro Anti-Cheat", 
+     desc: "Chặn 99% hack cho Server 1.20+", 
+     content: "Nội dung chi tiết về cách cài đặt Anti-cheat...", 
+     image: "https://picsum.photos" 
+    },
+    { id: "economy",
+     title: "Global Economy",
+     desc: "Hệ thống tiền tệ liên server.",
+     content: "Hướng dẫn sử dụng lệnh /bal, /pay...",
+     image: "https://picsum.photos"
+    }
 ];
 
 export const resources = [
