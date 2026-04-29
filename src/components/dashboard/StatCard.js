@@ -2,14 +2,14 @@ import Component from '../../core/Component.js';
 
 export default class StatCard extends Component {
   template() {
-    const { title, value, icon, color } = this.$props;
+    const { title, value, unit, color } = this.$props;
     return `
-      <div class="stat-card" style="border-left: 4px solid ${color || '#55FF55'}">
-        <div class="stat-icon">${icon || '📊'}</div>
-        <div class="stat-info">
-          <span class="stat-label">${title}</span>
-          <h2 class="stat-value">${value}</h2>
+      <div class="stat-card" style="border-left: 5px solid ${color}">
+        <div class="stat-title">${title}</div>
+        <div class="stat-value">
+          ${value} <span class="unit">${unit}</span>
         </div>
-      </div>`;
+      </div>
+    `;
   }
 }
