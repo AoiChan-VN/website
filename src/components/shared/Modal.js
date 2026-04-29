@@ -1,23 +1,41 @@
 import Component from '../../core/Component.js';
-import { store, setModal } from '../../store/index.js';
+import { store } from '../../store/index.js';
 
 export default class Modal extends Component {
-  setup() { store.subscribe(() => this.render()); }
+  setup() {
+    // Đăng ký lắng nghe store để tự render lại khi đóng/mở
+    store.subscribe(() => this.render());
+  }
+
   template() {
     const { isOpen, title, content } = store.state.modal;
-    if (!isOpen) return '';
+    if (!isOpen) return ''; // Nếu đóng thì không vẽ gì cả
+
     return `
-      <div class="modal-backdrop">
-        <div class="modal-box">
-          <div class="modal-header"><h3>${title}</h3><button class="close-x">&times;</button></div>
-          <div class="modal-body">${content}</div>
+      <div class="modal-overlay">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h2>${title}</h2>
+            <button class="close-btn">&times;</button>
+          </div>
+          <div class="modal-body">
+            ${content}
+          </div>
         </div>
-      </div>`;
+      </div>
+    `;
   }
+
   setEvent() {
-    this.addEvent('click', '.close-x', () => setModal({ isOpen: false }));
-    this.addEvent('click', '.modal-backdrop', (e) => {
-      if(e.target.classList.contains('modal-backdrop')) setModal({ isOpen: false });
+    // Sự kiện đóng modal
+    this.addEvent('click', '.close-btn', () => {
+      store.state.modal = { ...store.state.modal, isOpen: false };
+    });
+
+    this.addEvent('click', '.modal-overlay', (e) => {
+      if (e.target.classList.contains('modal-overlay')) {
+        store.state.modal = { ...store.state.modal, isOpen: false };
+      }
     });
   }
 }
