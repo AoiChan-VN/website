@@ -2,23 +2,21 @@ import Component from '../../core/Component.js';
 
 export default class Chart extends Component {
   template() {
-    const { title, data } = this.$props; // data: [{label, value}]
+    const { title, data } = this.$props;
     const max = Math.max(...data.map(d => d.value), 1);
-    
     return `
-      <div class="chart-container">
+      <div class="chart-box">
         <h3>${title}</h3>
-        <div class="chart-bars">
+        <div class="bars-container">
           ${data.map(d => `
-            <div class="bar-wrapper">
-              <div class="bar" style="height: ${(d.value / max) * 100}%">
-                <span class="tooltip">${d.value}</span>
+            <div class="bar-group">
+              <div class="bar-value" style="height: ${(d.value / max) * 100}%">
+                <span class="tooltip">${d.value}%</span>
               </div>
-              <span class="bar-label">${d.label}</span>
+              <span class="label">${d.label}</span>
             </div>
           `).join('')}
         </div>
       </div>`;
   }
 }
-
