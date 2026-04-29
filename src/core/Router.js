@@ -1,35 +1,25 @@
 export default class Router {
   constructor(routes) {
     this.routes = routes;
-    this.init();
+    this._init();
   }
 
-  init() {
+  _init() {
     window.addEventListener('popstate', () => this.routing());
-    document.addEventListener('click', (e) => {
-      const link = e.target.closest('a[data-link]');
-      if (link) {
+    document.addEventListener('click', e => {
+      const target = e.target.closest('a[data-link]');
+      if (target) {
         e.preventDefault();
-        this.navigate(link.getAttribute('href'));
+        history.pushState(null, null, target.href);
+        this.routing();
       }
     });
     this.routing();
   }
 
-  navigate(url) {
-    history.pushState(null, null, url);
-    this.routing();
-  }
-
   routing() {
     const path = window.location.pathname;
-    // Xử lý Dynamic Route cơ bản (ví dụ: /plugins/123)
-    let match = this.routes.find(r => r.path === path);
-    
-    if (!match) {
-      match = this.routes[0]; // Mặc định về trang đầu
-    }
-
+    const match = this.routes.find(route => route.path === path) || this.routes[0];
     const $app = document.querySelector('#app');
     new match.view($app);
   }
