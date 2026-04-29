@@ -6,17 +6,17 @@ export const navLinks = [
 ];
 
 export const plugins = [
-    { id: "anti-cheat", 
-     title: "Pro Anti-Cheat", 
-     desc: "Chặn 99% hack cho Server 1.20+", 
-     content: "#", 
-     image: "https://picsum.photos"
+    { id: "Aoi Plugin", 
+     title: "Hệ thống tu tiên", 
+     desc: "Server 1.21+", 
+     image: "./assets/plugin/pl.webp",
+     file: "content/plugins/Aoi-Plugin.md"
     },
     { id: "economy",
      title: "Global Economy",
      desc: "Hệ thống tiền tệ liên server.",
-     content: "Hướng dẫn sử dụng lệnh /bal, /pay...",
-     image: "https://picsum.photos"
+     image: "https://picsum.photos",
+     file: "#"
     }
 ];
 
