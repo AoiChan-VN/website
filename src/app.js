@@ -13,67 +13,70 @@ class App extends Component {
         });
     }
 
-    // Hàm xử lý đường dẫn ảnh (Local assets vs Remote link)
+    // Xử lý ảnh: Ưu tiên assets/ nếu không có http
     getImg(path) {
-        if (!path) return 'assets/img/default.png';
+        if (!path) return './assets/img/default.png';
         return path.startsWith('http') ? path : `./${path}`;
+    }
+
+    // Xử lý Content: Ưu tiên đọc file .md trong folder content/
+    async getContent(item) {
+        if (item.file && item.file.endsWith('.md')) {
+            try {
+                const res = await fetch(`./${item.file}`);
+                if (res.ok) return parseMarkdown(await res.text());
+            } catch (e) { console.error("Lỗi file .md"); }
+        }
+        return parseMarkdown(item.desc || "Không có nội dung chi tiết.");
     }
 
     async template() {
         const hash = this.state.hash;
 
-        // TRANG CHI TIẾT PLUGIN
-        if (hash.startsWith('#/plugins/')) {
-            const id = hash.replace('#/plugins/', '');
-            const item = plugins.find(p => p.id === id);
-            if (!item) return '<h1>Plugin không tồn tại</h1>';
+        // TRANG CHI TIẾT
+        if (hash.startsWith('#/plugins/') || hash.startsWith('#/resources/')) {
+            const isPlugin = hash.startsWith('#/plugins/');
+            const id = isPlugin ? hash.replace('#/plugins/', '') : hash.replace('#/resources/', '');
+            const item = (isPlugin ? plugins : resources).find(p => p.id === id);
 
-            // Xử lý content: Nếu là file .md thì fetch, nếu là text thì parse luôn
-            let rawContent = item.content;
-            if (item.content.endsWith('.md')) {
-                try {
-                    const response = await fetch(`./${item.content}`);
-                    rawContent = await response.text();
-                } catch (e) {
-                    rawContent = "Lỗi: Không thể load file nội dung nội bộ.";
-                }
-            }
+            if (!item) return '<h1>404 - Không tìm thấy</h1>';
 
             return `
-                <section class="detail">
+                <div class="container">
                     <button onclick="window.history.back()">← Quay lại</button>
-                    <div class="header">
-                        <img src="${this.getImg(item.image)}" width="120">
+                    <div style="display:flex; align-items:center; gap:20px; margin:20px 0;">
+                        <img src="${this.getImg(item.image)}" width="80">
                         <h1>${item.title}</h1>
                     </div>
-                    <div class="markdown-body">${parseMarkdown(rawContent)}</div>
-                </section>
+                    <hr>
+                    <div class="content">${await this.getContent(item)}</div>
+                </div>
             `;
         }
 
-        // CÁC TRANG DANH SÁCH (Sử dụng khung để mounted render list)
-        if (hash === '#/plugins') return `<section><h2>Plugins</h2><div id="list" class="grid"></div></section>`;
-        if (hash === '#/resources') return `<section><h2>Resources</h2><div id="list" class="grid"></div></section>`;
-        
+        // TRANG DANH SÁCH
+        if (hash === '#/plugins') return `<div class="container"><h2>Plugins</h2><div id="plugin-list" class="grid"></div></div>`;
+        if (hash === '#/resources') return `<div class="container"><h2>Resources</h2><div id="resource-list" class="grid"></div></div>`;
+
         // TRANG CHỦ
-        return `<section class="hero"><h1>Minecraft Developer</h1><p>Welcome to my portfolio</p></section>`;
+        return `<div class="hero"><h1>Minecraft Portfolio</h1><p>Phát triển bởi Vanila JS</p></div>`;
     }
 
-    // mounted chạy sau khi HTML được nạp vào DOM
     mounted() {
         new Navbar(this.$target.querySelector('#header-nav') || document.createElement('div'));
         
-        const listContainer = this.$target.querySelector('#list');
-        if (listContainer) {
-            const isPlugin = this.state.hash === '#/plugins';
-            const data = isPlugin ? plugins : resources;
-            data.forEach(item => {
-                const $wrapper = document.createElement('div');
-                listContainer.appendChild($wrapper);
-                // Truyền ảnh đã xử lý đường dẫn vào ProjectCard
-                new ProjectCard($wrapper, { ...item, image: this.getImg(item.image) });
-            });
-        }
+        const renderList = (selector, data, type) => {
+            const $el = this.$target.querySelector(selector);
+            if ($el) {
+                data.forEach(item => {
+                    const $div = document.createElement('div');
+                    $el.appendChild($div);
+                    new ProjectCard($div, { ...item, image: this.getImg(item.image), type });
+                });
+            }
+        };
+        renderList('#plugin-list', plugins, 'plugins');
+        renderList('#resource-list', resources, 'resources');
     }
 }
 
