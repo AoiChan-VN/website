@@ -1,30 +1,36 @@
 export default class Router {
   constructor(routes) {
     this.routes = routes;
-    this._init();
+    this.$app = document.querySelector('#app');
+    this.init();
   }
-  _init() {
-    // Lắng nghe thay đổi hashtag trên URL
-    window.addEventListener('hashchange', () => this.routing());
-    window.addEventListener('load', () => this.routing());
 
-    document.addEventListener('click', e => {
-      const link = e.target.closest('a[data-link]');
-      if (link) {
+  init() {
+    // Lắng nghe sự kiện tiến/lùi trang của trình duyệt
+    window.addEventListener('popstate', () => this.route());
+    
+    // Gắn sự kiện click toàn cục để chặn load trang khi bấm thẻ <a>
+    document.addEventListener('click', (e) => {
+      const link = e.target.closest('a');
+      if (link && link.getAttribute('href').startsWith('/')) {
         e.preventDefault();
-        const href = link.getAttribute('href');
-        // Chuyển hướng bằng hash: /plugins -> #/plugins
-        location.hash = href; 
+        this.navigate(link.getAttribute('href'));
       }
     });
+
+    this.route();
   }
-  routing() {
-    // Lấy path từ hash, mặc định là '/'
-    const hashPath = location.hash.replace('#', '') || '/';
-    const match = this.routes.find(r => r.path === hashPath) || this.routes[0];
+
+  navigate(url) {
+    window.history.pushState(null, null, url);
+    this.route();
+  }
+
+  route() {
+    const path = window.location.pathname;
+    const route = this.routes.find(r => r.path === path) || this.routes.find(r => r.path === '/404');
     
-    const $app = document.querySelector('#app');
-    $app.innerHTML = ''; // Clear để render trang mới
-    new match.view($app);
+    // Khởi tạo Component tương ứng với đường dẫn
+    new route.component(this.$app);
   }
 }
