@@ -8,46 +8,21 @@ export default class Router {
     });
   }
 
-  pathToRegex(path) {
-    return new RegExp(
-      "^" + path.replace(/:\w+/g, "([^/]+)") + "$"
-    );
-  }
-
-  getParams(match) {
-    const values = match.result.slice(1);
-    const keys = [...match.route.path.matchAll(/:(\w+)/g)].map(
-      (r) => r[1]
-    );
-
-    return Object.fromEntries(
-      keys.map((key, i) => [key, values[i]])
-    );
+  match(path) {
+    return this.routes.find(r => r.path === path);
   }
 
   loadRoute(path) {
-    const match = this.routes
-      .map((route) => ({
-        route,
-        result: path.match(this.pathToRegex(route.path)),
-      }))
-      .find((m) => m.result !== null);
-
-    if (!match) return;
-
-    const params = this.getParams(match);
+    const route = this.match(path) || this.match("/");
 
     const app = document.querySelector("#app");
     app.innerHTML = "";
 
-    new match.route.component({
-      target: app,
-      props: params,
-    });
+    new route.component({ target: app });
   }
 
   navigate(path) {
     history.pushState(null, null, path);
     this.loadRoute(path);
   }
-} 
+}
