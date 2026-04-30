@@ -1,40 +1,48 @@
+import { siteData } from '../data/database.js';
+
 export const Header = () => {
-    // Lấy tên trang hiện tại từ URL (ví dụ: plugins.html)
     const currentPage = window.location.pathname.split("/").pop() || 'index.html';
-
-    const navLinks = [
-        { name: 'Trang Chủ', href: 'index.html' },
-        { name: 'Plugins', href: 'plugins.html' },
-        { name: 'Resource Packs', href: 'resources.html' },
-        { name: 'Youtube', href: 'youtube.html' },
-        { name: 'Download', href: 'download.html' }
-    ];
-
+    
     return `
     <header class="navbar">
-        <div class="logo" style="font-weight: bold; color: var(--primary);">MC PORTFOLIO</div>
+        <div class="logo">
+            <img src="${siteData.settings.logo}" alt="Logo" class="logo-img" onerror="this.src='https://placehold.co'">
+            <span>MC SERVER</span>
+        </div>
         <nav>
-            ${navLinks.map(link => `
-                <a href="${link.href}" class="${currentPage === link.href ? 'active' : ''}">
-                    ${link.name}
-                </a>
-            `).join('')}
+            <a href="index.html" class="${currentPage === 'index.html' ? 'active' : ''}">Trang Chủ</a>
+            <a href="plugins.html" class="${currentPage === 'plugins.html' ? 'active' : ''}">Plugins</a>
+            <a href="resources.html" class="${currentPage === 'resources.html' ? 'active' : ''}">Tài Nguyên</a>
+            <a href="youtube.html" class="${currentPage === 'youtube.html' ? 'active' : ''}">Youtube</a>
+            <button onclick="window.openSettings()" class="btn-settings">⚙️</button>
         </nav>
     </header>
     `;
 };
 
-export const ProjectCard = (item) => {
+export const SettingsPanel = () => {
     return `
-    <div class="card">
-        <img src="${item.img}" alt="${item.name || item.title}">
-        <div class="card-body">
-            <h3>${item.name || item.title}</h3>
-            <p class="tag">${item.version || item.size || 'Video'}</p>
-            <p class="desc">${item.desc || 'Bấm để xem chi tiết.'}</p>
-            <button class="btn-primary">Xem chi tiết</button>
+    <div id="settings-modal" class="modal-overlay" style="display:none;">
+        <div class="settings-content card">
+            <h3>Cài Đặt Hệ Thống</h3>
+            <div class="setting-item">
+                <label>Nhạc nền:</label>
+                <input type="checkbox" id="music-toggle" onchange="window.toggleMusic(this.checked)">
+            </div>
+            <div class="setting-item">
+                <label>Chọn bài hát:</label>
+                <select id="track-list" onchange="window.changeTrack(this.value)">
+                    <option value="music/background-1.mp3">Bản nhạc 1</option>
+                    <option value="music/background-2.mp3">Bản nhạc 2</option>
+                </select>
+            </div>
+            <div class="setting-item">
+                <label>Giao diện:</label>
+                <button onclick="window.toggleTheme()" class="btn-primary">Đổi Dark/Light</button>
+            </div>
+            <button onclick="window.closeSettings()" class="btn-primary" style="background:#ff4444; margin-top:20px;">Đóng</button>
         </div>
     </div>
+    <audio id="bg-audio" loop></audio>
     `;
 };
- 
