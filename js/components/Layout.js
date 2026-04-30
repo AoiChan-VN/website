@@ -2,7 +2,6 @@ import { siteData } from '../data/database.js';
 
 export const Header = () => {
     const currentPage = window.location.pathname.split("/").pop() || 'index.html';
-    
     return `
     <header class="navbar">
         <div class="logo">
@@ -14,35 +13,33 @@ export const Header = () => {
             <a href="plugins.html" class="${currentPage === 'plugins.html' ? 'active' : ''}">Plugins</a>
             <a href="resources.html" class="${currentPage === 'resources.html' ? 'active' : ''}">Tài Nguyên</a>
             <a href="youtube.html" class="${currentPage === 'youtube.html' ? 'active' : ''}">Youtube</a>
-            <button onclick="window.openSettings()" class="btn-settings">⚙️</button>
+            <button onclick="window.openSettings()" class="btn-settings">⚙️ Settings</button>
         </nav>
-    </header>
-    `;
+    </header>`;
 };
 
 export const SettingsPanel = () => {
     return `
     <div id="settings-modal" class="modal-overlay" style="display:none;">
-        <div class="settings-content card">
-            <h3>Cài Đặt Hệ Thống</h3>
+        <div class="card settings-content">
+            <h3>⚙️ Cài Đặt</h3>
             <div class="setting-item">
-                <label>Nhạc nền:</label>
+                <span>Nhạc nền</span>
                 <input type="checkbox" id="music-toggle" onchange="window.toggleMusic(this.checked)">
             </div>
             <div class="setting-item">
-                <label>Chọn bài hát:</label>
+                <span>Chọn bài</span>
                 <select id="track-list" onchange="window.changeTrack(this.value)">
-                    <option value="music/background-1.mp3">Bản nhạc 1</option>
-                    <option value="music/background-2.mp3">Bản nhạc 2</option>
+                    <option value="./music/background-1.mp3">Bản nhạc 1</option>
+                    <option value="./music/background-2.mp3">Bản nhạc 2</option>
                 </select>
             </div>
             <div class="setting-item">
-                <label>Giao diện:</label>
+                <span>Giao diện</span>
                 <button onclick="window.toggleTheme()" class="btn-primary">Đổi Dark/Light</button>
             </div>
-            <button onclick="window.closeSettings()" class="btn-primary" style="background:#ff4444; margin-top:20px;">Đóng</button>
+            <button onclick="window.closeSettings()" class="btn-primary" style="background:#ff4444; width:100%; margin-top:15px;">Đóng</button>
         </div>
     </div>
-    <audio id="bg-audio" loop></audio>
-    `;
+    <audio id="bg-audio" loop></audio>`;
 };
