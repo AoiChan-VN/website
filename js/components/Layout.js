@@ -1,13 +1,24 @@
 export const Header = () => {
+    // Lấy tên trang hiện tại từ URL (ví dụ: plugins.html)
+    const currentPage = window.location.pathname.split("/").pop() || 'index.html';
+
+    const navLinks = [
+        { name: 'Trang Chủ', href: 'index.html' },
+        { name: 'Plugins', href: 'plugins.html' },
+        { name: 'Resource Packs', href: 'resources.html' },
+        { name: 'Youtube', href: 'youtube.html' },
+        { name: 'Download', href: 'download.html' }
+    ];
+
     return `
     <header class="navbar">
-        <div class="logo">MC SERVER PORTFOLIO</div>
+        <div class="logo" style="font-weight: bold; color: var(--primary);">MC PORTFOLIO</div>
         <nav>
-            <a href="index.html">Trang Chủ</a>
-            <a href="plugins.html">Plugins</a>
-            <a href="resources.html">Resource Packs</a>
-            <a href="youtube.html">Youtube</a>
-            <a href="download.html">Download</a>
+            ${navLinks.map(link => `
+                <a href="${link.href}" class="${currentPage === link.href ? 'active' : ''}">
+                    ${link.name}
+                </a>
+            `).join('')}
         </nav>
     </header>
     `;
