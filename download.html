@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Trung Tâm Tải Về</title>
+    <link rel="stylesheet" href="./css/style.css">
+</head>
+<body>
+    <div id="header-root"></div>
+
+    <main style="padding: 40px 10%;">
+        <h2>Tải về tài nguyên</h2>
+        <div style="background: var(--dark-light); padding: 20px; border-radius: 10px;">
+            <table style="width: 100%; border-collapse: collapse; text-align: left;">
+                <tr style="border-bottom: 1px solid var(--primary);">
+                    <th style="padding: 15px;">Tên file</th>
+                    <th>Loại</th>
+                    <th>Hành động</th>
+                </tr>
+                <tr>
+                    <td style="padding: 15px;">Server_Pack_v1.zip</td>
+                    <td>Resource Pack</td>
+                    <td><a href="#" style="color: var(--primary);">Tải xuống trực tiếp</a></td>
+                </tr>
+            </table>
+        </div>
+    </main>
+
+    <script type="module">
+        import { Header } from './js/components/Layout.js';
+        document.getElementById('header-root').innerHTML = Header();
+    </script>
+</body>
+</html>
+ 
