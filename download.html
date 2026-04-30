@@ -3,34 +3,35 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Trung Tâm Tải Về</title>
+    <title>🌊𝓐𝓸𝓲𝓒𝓱𝓪𝓷 | 𝐃𝐨𝐰𝐧𝐥𝐨𝐚𝐝</title>
     <link rel="stylesheet" href="./css/style.css">
 </head>
 <body>
-    <div id="header-root"></div>
-
-    <main style="padding: 40px 10%;">
-        <h2>Tải về tài nguyên</h2>
-        <div style="background: var(--dark-light); padding: 20px; border-radius: 10px;">
-            <table style="width: 100%; border-collapse: collapse; text-align: left;">
-                <tr style="border-bottom: 1px solid var(--primary);">
-                    <th style="padding: 15px;">Tên file</th>
-                    <th>Loại</th>
-                    <th>Hành động</th>
-                </tr>
-                <tr>
-                    <td style="padding: 15px;">Server_Pack_v1.zip</td>
-                    <td>Resource Pack</td>
-                    <td><a href="#" style="color: var(--primary);">Tải xuống trực tiếp</a></td>
-                </tr>
-            </table>
+    <div id="layout-root"></div>
+    <main style="padding: 50px 10%;">
+        <div class="card" style="max-width: 900px; margin: 0 auto; padding: 40px;">
+            <h2 style="margin-top:0; color:var(--primary);">📥 Trung Tâm Tải Về</h2>
+            <p style="opacity:0.7;">Tất cả tài nguyên được quét virus và bảo mật nội bộ.</p>
+            <hr style="opacity:0.1; margin: 25px 0;">
+            <div id="download-list"></div>
         </div>
     </main>
 
     <script type="module">
         import { Header } from './js/components/Layout.js';
-        document.getElementById('header-root').innerHTML = Header();
+        import { siteData } from './js/data/database.js';
+        import './js/main.js';
+
+        document.getElementById('layout-root').innerHTML = Header();
+        document.getElementById('download-list').innerHTML = siteData.downloads.map(f => `
+            <div style="display:flex; justify-content:space-between; align-items:center; padding:15px; border-bottom:1px solid var(--border);">
+                <div>
+                    <strong style="display:block; font-size:1.1rem;">${f.name}</strong>
+                    <span style="font-size:0.8rem; opacity:0.6;">Dung lượng: ${f.size}</span>
+                </div>
+                <a href="${f.link}" class="btn-primary" style="width:auto; padding:8px 25px; text-decoration:none;">Tải Ngay</a>
+            </div>
+        `).join('');
     </script>
 </body>
 </html>
- 
