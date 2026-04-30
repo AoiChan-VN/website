@@ -28,6 +28,12 @@ body {
     font-weight: 500;
 }
 
+.navbar nav a.active {
+    color: var(--primary);
+    border-bottom: 2px solid var(--primary);
+    padding-bottom: 5px;
+}
+
 .navbar nav a:hover { color: var(--primary); }
 
 .grid-container {
