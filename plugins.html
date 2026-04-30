@@ -3,28 +3,37 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Sản Phẩm Plugins</title>
+    <title>Plugins | MC Portfolio</title>
     <link rel="stylesheet" href="./css/style.css">
 </head>
 <body>
     <div id="header-root"></div>
-
-    <main style="padding: 20px 10%;">
-        <h2 style="border-left: 5px solid var(--primary); padding-left: 15px;">Kho Plugins Nội Bộ</h2>
+    <main style="padding: 40px 10%;">
+        <h2 class="section-title">Kho Plugins</h2>
         <div id="plugin-list" class="grid-container"></div>
     </main>
+    <div id="settings-root"></div>
 
     <script type="module">
-        import { Header, ProjectCard } from './js/components/Layout.js';
+        import { Header, SettingsPanel } from './js/components/Layout.js';
         import { siteData } from './js/data/database.js';
+        import './js/main.js';
 
-        // Khởi tạo giao diện
         document.getElementById('header-root').innerHTML = Header();
-        
-        // Đổ dữ liệu Plugins
+        document.getElementById('settings-root').innerHTML = SettingsPanel();
+
         const container = document.getElementById('plugin-list');
-        container.innerHTML = siteData.plugins.map(item => ProjectCard(item)).join('');
+        container.innerHTML = siteData.plugins.map(item => `
+            <div class="card">
+                <img src="${item.img}" style="width:100%; height:180px; object-fit:cover;">
+                <div class="card-body">
+                    <h3>${item.name}</h3>
+                    <p class="tag">Phiên bản: ${item.version}</p>
+                    <p>${item.desc}</p>
+                    <button onclick="window.viewDetail('${item.mdPath}')" class="btn-primary">Xem Chi Tiết</button>
+                </div>
+            </div>
+        `).join('');
     </script>
 </body>
 </html>
- 
