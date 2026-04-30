@@ -30,7 +30,7 @@ export const SettingsPanel = () => {
             <div class="setting-item">
                 <span>Chọn bài</span>
                 <select id="track-list" onchange="window.changeTrack(this.value)">
-                    <option value="./music/background-1.mp3">Bản nhạc 1</option>
+                    <option value="./music/Acoustic.mp3">Bản nhạc 1</option>
                     <option value="./music/background-2.mp3">Bản nhạc 2</option>
                 </select>
             </div>
