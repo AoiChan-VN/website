@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Resource Packs | MC Server</title>
+    <link rel="stylesheet" href="./css/style.css">
+</head>
+<body>
+    <div id="header-root"></div>
+
+    <main style="padding: 20px 10%;">
+        <h2 style="border-left: 5px solid #22c55e; padding-left: 15px;">Resource Packs Nội Bộ</h2>
+        <div id="resource-list" class="grid-container"></div>
+    </main>
+
+    <script type="module">
+        import { Header, ProjectCard } from './js/components/Layout.js';
+        import { siteData } from './js/data/database.js';
+
+        document.getElementById('header-root').innerHTML = Header();
+        
+        // Đổ dữ liệu Resource Packs
+        const container = document.getElementById('resource-list');
+        container.innerHTML = siteData.resources.map(item => ProjectCard(item)).join('');
+    </script>
+</body>
+</html>
+ 
