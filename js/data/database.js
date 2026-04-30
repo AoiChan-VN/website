@@ -1,29 +1,39 @@
 export const siteData = {
     settings: {
         logo: "./assets/Logo.webp",
-        youtubeChannel: "http://www.youtube.com/@_Kawaii.2K "
+        youtubeChannel: "http://www.youtube.com/@_Kawaii.2K"
     },
     plugins: [
-        { 
-            id: 1, 
-            name: "Anti-Grief System", 
-            version: "1.20.1", 
-            desc: "Hệ thống bảo vệ vùng đất nâng cao.",
-            mdPath: "./content/plugin.md",
-            img: "https://placehold.co"
+        { id: 1, name: "Aoi-Plugin",
+         version: "1.21+",
+         desc: "Hệ thống tu luyện huyền huyễn.",
+         mdPath: "content/plugin.md",
+         img: "https://placehold.co"
         }
     ],
     resources: [
-        { 
-            id: 1, 
-            name: "Survival Texture", 
-            size: "25MB", 
-            desc: "Texture pack sinh tồn cực nhẹ cho máy yếu.",
-            mdPath: "./content/resource1.md",
-            img: "https://placehold.co"
+        { id: 1, name: "Kawaii Texture",
+         size: "30MB",
+         desc: "Texture pack phong cách Kawaii.",
+         mdPath: "content/resource.md",
+         img: "https://placehold.co"
         }
     ],
     youtube: [
-        { id: "v1", title: "Trailer Máy Chủ 2024", videoId: "dQw4w9WgXcQ", date: "30/04/2024" }
+        { id: "v1",
+         title: "Trailer Server 2026",
+         videoId: "dQw4w9WgXcQ",
+         date: "2026"
+        }
+    ],
+    downloads: [
+        { name: "Minecraft Client 1.20.1",
+         size: "150MB",
+         link: "#"
+        },
+        { name: "Java 17 & 21 (Windows)",
+         size: "80MB",
+         link: "#"
+        }
     ]
 };
