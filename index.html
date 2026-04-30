@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>MC Portfolio | Trang Chủ</title>
+    <link rel="stylesheet" href="./css/style.css">
+</head>
+<body>
+    <div id="header-root"></div>
+
+    <section class="hero" style="text-align: center; padding: 80px 10%; background: linear-gradient(rgba(15,23,42,0.8), rgba(15,23,42,0.8)), url('https://placehold.co'); background-size: cover;">
+        <h1 style="font-size: 3rem; margin-bottom: 10px;">Chào mừng tới MC Portfolio</h1>
+        <p>Nơi lưu trữ và giới thiệu các sản phẩm nội bộ của Server.</p>
+    </section>
+
+    <div id="footer-root"></div>
+
+    <script type="module">
+        import { Header } from './js/components/Layout.js';
+        document.getElementById('header-root').innerHTML = Header();
+    </script>
+</body>
+</html>
+ 
