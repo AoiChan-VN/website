@@ -3,36 +3,58 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Video Media | MC Server</title>
+    <title>Media & Trailers | MC Server</title>
     <link rel="stylesheet" href="./css/style.css">
 </head>
 <body>
     <div id="header-root"></div>
 
-    <main style="padding: 20px 10%;">
-        <h2 style="border-left: 5px solid #ef4444; padding-left: 15px;">Media & Trailer</h2>
-        <div id="video-list" class="grid-container"></div>
+    <main style="padding: 40px 10%;">
+        <h2 style="border-left: 5px solid #ff0000; padding-left: 15px; margin-bottom: 30px;">
+            Hành Trình Video
+        </h2>
+        
+        <div id="video-list" class="grid-container">
+            <!-- Video sẽ tự động hiện ở đây -->
+        </div>
     </main>
+
+    <div id="settings-root"></div>
 
     <script type="module">
         import { Header, ProjectCard } from './js/components/Layout.js';
         import { siteData } from './js/data/database.js';
+        import { SettingsPanel } from './js/components/Settings.js';
 
+        // 1. Load giao diện
         document.getElementById('header-root').innerHTML = Header();
+        document.getElementById('settings-root').innerHTML = SettingsPanel();
 
+        // 2. Render danh sách video
         const container = document.getElementById('video-list');
-        container.innerHTML = siteData.youtube.map(vid => `
-            <div class="card">
-                <iframe width="100%" src="https://youtube.com{vid.videoId}" frameborder="0"></iframe>
-                <div class="card-body">
-                    <h3>${vid.title}</h3>
-                    <a href="${siteData.settings.youtubeChannel}" target="_blank" class="btn-primary">
-                        🎬 Xem kênh chính chủ
-                    </a>
+        
+        if (siteData.youtube.length === 0) {
+            container.innerHTML = "<p>Đang cập nhật video...</p>";
+        } else {
+            container.innerHTML = siteData.youtube.map(vid => `
+                <div class="card">
+                    <div class="video-container">
+                        <iframe 
+                            src="https://youtube.com{vid.videoId}" 
+                            frameborder="0" 
+                            allowfullscreen>
+                        </iframe>
+                    </div>
+                    <div class="card-body">
+                        <h3>${vid.title}</h3>
+                        <p class="tag">Ngày đăng: ${vid.date}</p>
+                        <a href="${siteData.settings.youtubeChannel}" target="_blank" class="btn-primary" style="display: block; text-align: center; text-decoration: none; margin-top: 10px;">
+                            Ghé thăm kênh Youtube
+                        </a>
+                    </div>
                 </div>
-            </div>
-        `).join('');
+            `).join('');
+        }
     </script>
 </body>
 </html>
- 
