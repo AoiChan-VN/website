@@ -69,3 +69,10 @@ body {
     width: 100%;
 }
  
+.modal-settings {
+    position: fixed; top: 50%; left: 50%; transform: translate(-50%, -50%);
+    background: var(--dark-light); padding: 20px; border-radius: 12px;
+    border: 2px solid var(--primary); z-index: 2000; width: 300px;
+}
+.setting-item { display: flex; justify-content: space-between; margin: 15px 0; }
+.logo-img { height: 45px; vertical-align: middle; margin-right: 10px; }
