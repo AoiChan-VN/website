@@ -23,17 +23,17 @@ export const Header = () => {
     </header>
     <div id="settings-modal" class="modal-overlay" style="display:none;">
         <div class="card settings-content">
-            <h3>⚙️〈Cài đặt〉</h3>
+            <h3>︵»|Cài đặt|«︵</h3>
             <div class="setting-item">
-                <span>🌌〈Giao diện〉</span>
+                <span>🌌 Giao diện ➥</span>
                 <button onclick="window.toggleTheme()" class="btn-theme-toggle">👻</button>
             </div>
             <div class="setting-item">
-                <span>🌍〈Ngôn ngữ〉</span>
+                <span>🌍 Ngôn ngữ ➥</span>
                 <select class="lang-select"><option>Tiếng Việt</option><option>English</option></select>
             </div>
             <hr style="opacity:0.1; margin: 15px 0;">
-            <button onclick="window.closeSettings()" class="btn-primary" style="background:#ff4444;">✘〈Thoát〉</button>
+            <button onclick="window.closeSettings()" class="btn-primary" style="background:#ff4444;">✘ Thoát</button>
         </div>
     </div>`;
 };
