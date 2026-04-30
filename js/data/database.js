@@ -1,7 +1,7 @@
 export const siteData = {
     settings: {
         logo: "./assets/Logo.webp",
-        youtubeChannel: "https://youtube.com"
+        youtubeChannel: "http://www.youtube.com/@_Kawaii.2K "
     },
     plugins: [
         { 
