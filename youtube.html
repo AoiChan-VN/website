@@ -19,15 +19,19 @@
         import { siteData } from './js/data/database.js';
 
         document.getElementById('header-root').innerHTML = Header();
-        
+
         const container = document.getElementById('video-list');
-        // Tái sử dụng ProjectCard nhưng với dữ liệu Youtube
-        container.innerHTML = siteData.youtube.map(item => ProjectCard({
-            name: item.title,
-            version: item.date,
-            desc: "Bấm để xem video trên nền tảng Youtube.",
-            img: "https://placehold.co" // Giả lập ảnh thumb video
-        })).join('');
+        container.innerHTML = siteData.youtube.map(vid => `
+            <div class="card">
+                <iframe width="100%" src="https://youtube.com{vid.videoId}" frameborder="0"></iframe>
+                <div class="card-body">
+                    <h3>${vid.title}</h3>
+                    <a href="${siteData.settings.youtubeChannel}" target="_blank" class="btn-primary">
+                        🎬 Xem kênh chính chủ
+                    </a>
+                </div>
+            </div>
+        `).join('');
     </script>
 </body>
 </html>
