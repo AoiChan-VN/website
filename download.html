@@ -3,17 +3,19 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>🌊𝐃𝐨𝐰𝐧𝐥𝐨𝐚𝐝</title>
+    <title>Tải Về | Kawaii.2K</title>
     <link rel="stylesheet" href="./css/style.css">
 </head>
 <body>
     <div id="layout-root"></div>
-    <main style="padding: 50px 10%;">
-        <div class="card" style="max-width: 900px; margin: 0 auto; padding: 40px;">
-            <h2 style="margin-top:0; color:var(--primary);">📥 Trung Tâm Tải Về</h2>
-            <p style="opacity:0.7;">Tất cả tài nguyên được quét virus và bảo mật nội bộ.</p>
-            <hr style="opacity:0.1; margin: 25px 0;">
-            <div id="download-list"></div>
+    <main style="padding: 60px 10%;">
+        <div class="card download-box" style="max-width: 900px; margin: 0 auto; padding: 40px; border-radius: 30px;">
+            <h2 style="margin-top:0;">📥 Trung Tâm Dữ Liệu</h2>
+            <p style="opacity: 0.6; margin-bottom: 30px;">Vui lòng chọn đúng phiên bản phù hợp với thiết bị của bạn.</p>
+            
+            <div class="table-container">
+                <div id="file-list"></div>
+            </div>
         </div>
     </main>
 
@@ -23,13 +25,13 @@
         import './js/main.js';
 
         document.getElementById('layout-root').innerHTML = Header();
-        document.getElementById('download-list').innerHTML = siteData.downloads.map(f => `
-            <div style="display:flex; justify-content:space-between; align-items:center; padding:15px; border-bottom:1px solid var(--border);">
+        document.getElementById('file-list').innerHTML = siteData.downloads.map(f => `
+            <div style="display:flex; justify-content:space-between; align-items:center; padding:20px; background:rgba(0,0,0,0.1); margin-bottom:10px; border-radius:15px;">
                 <div>
-                    <strong style="display:block; font-size:1.1rem;">${f.name}</strong>
-                    <span style="font-size:0.8rem; opacity:0.6;">Dung lượng: ${f.size}</span>
+                    <span style="font-weight:bold; font-size:1.1rem; display:block;">${f.name}</span>
+                    <small style="opacity:0.5;">Dung lượng: ${f.size}</small>
                 </div>
-                <a href="${f.link}" class="btn-primary" style="width:auto; padding:8px 25px; text-decoration:none;">Tải Ngay</a>
+                <a href="${f.link}" class="btn-primary" style="width:auto; padding:10px 30px; text-decoration:none;">Download</a>
             </div>
         `).join('');
     </script>
