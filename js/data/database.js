@@ -8,7 +8,7 @@ export const siteData = {
          version: "1.21+",
          desc: "Hệ thống tu luyện huyền huyễn.",
          mdPath: "content/plugin.md",
-         img: "https://placehold.co"
+         img: "./assets/img-pl/aoi-pl.webp"
         }
     ],
     resources: [
@@ -23,6 +23,7 @@ export const siteData = {
         { id: "v1",
          title: "Trailer Server 2026",
          videoId: "dQw4w9WgXcQ",
+         gifPreview: "./assets/images/trailer.gif",
          date: "2026"
         }
     ],
