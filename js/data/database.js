@@ -23,12 +23,12 @@ export const siteData = {
         { id: "v1",
          title: "Trailer Server 2026",
          videoId: "dQw4w9WgXcQ",
-         gifPreview: "./assets/images/Trailer.gif",
+         gifThumb: "./assets/images/Trailer.gif",
          date: "2026"
         }
     ],
     downloads: [
-        { name: "Minecraft Client 1.20.1",
+        { name: "Minecraft Client 1.21.1",
          size: "150MB",
          link: "#"
         },
