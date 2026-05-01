@@ -8,7 +8,7 @@ export const siteData = {
          version: "1.21+",
          desc: "Hệ thống tu luyện huyền huyễn.",
          mdPath: "content/plugin.md",
-         img: "./assets/img-pl/aoi-pl.webp"
+         img: "./assets/img-pl/aoi-pl.jpg"
         }
     ],
     resources: [
@@ -23,7 +23,7 @@ export const siteData = {
         { id: "v1",
          title: "Trailer Server 2026",
          videoId: "dQw4w9WgXcQ",
-         gifPreview: "./assets/images/trailer.gif",
+         gifPreview: "./assets/images/Trailer.gif",
          date: "2026"
         }
     ],
