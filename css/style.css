@@ -219,10 +219,6 @@ nav a:hover::after, nav a.active::after {
     animation: fadeIn 0.3s ease;
 }
 
-@keyframes fadeIn {
-    from { opacity: 0; } to { opacity: 1; }
-}
-
 .settings-content {
     width: 340px;
     padding: 35px;
@@ -262,6 +258,50 @@ nav a:hover::after, nav a.active::after {
     padding: 5px 10px;
     border-radius: 8px;
     outline: none;
+}
+
+/* Container bọc tiêu đề để tạo khoảng không gian ẩn chữ */
+.page-header {
+    overflow: hidden; /* Giữ chữ không bị lộ ra ngoài vạch kẻ khi chưa trượt */
+}
+
+/* Hiệu ứng cho Tiêu đề chính (H2) */
+.section-title {
+    font-size: 2rem;
+    border-left: 6px solid var(--primary);
+    padding-left: 20px;
+    margin-bottom: 5px;
+    
+    /* Animation: Trượt và Hiện */
+    display: block;
+    opacity: 0;
+    transform: translateX(-30px); /* Bắt đầu từ bên trái vạch kẻ */
+    animation: revealText 0.8s cubic-bezier(0.77, 0, 0.175, 1) forwards;
+}
+
+/* Hiệu ứng cho dòng mô tả nhỏ bên dưới tiêu đề */
+.page-header p {
+    margin-left: 26px; /* Căn lề thẳng với tiêu đề sau khi trượt */
+    opacity: 0;
+    transform: translateX(-20px);
+    animation: revealText 0.8s cubic-bezier(0.77, 0, 0.175, 1) forwards;
+    animation-delay: 0.2s; /* Hiện sau tiêu đề chính một chút */
+}
+
+/* Định nghĩa chuyển động */
+@keyframes fadeIn {
+    from { opacity: 0; } to { opacity: 1; }
+}
+
+@keyframes revealText {
+    0% {
+        opacity: 0;
+        transform: translateX(-30px);
+    }
+    100% {
+        opacity: 1;
+        transform: translateX(0);
+    }
 }
 
 /* --- ĐIỀU CHỈNH CHO DI ĐỘNG (RESPONSIVE) --- */
