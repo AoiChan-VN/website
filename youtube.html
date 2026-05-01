@@ -30,14 +30,14 @@
                     <!-- Hiện GIF thay vì Iframe thô kệch -->
                     <img src="${vid.gifThumb}" alt="${vid.title}" onerror="this.src='https://placehold.co'">
                 </div>
-                <div class="card-body" style="display: flex; flex-direction: column; height: 160px; justify-content: space-between;">
+                <div class="card-body" style="display: flex; flex-direction: column; height: 180px; justify-content: space-between;">
                     <div>
-                        <h3 style="margin: 0; font-size:1.1rem;">${vid.title}</h3>
-                        <p style="font-size:0.8rem; opacity:0.6;">Ngày đăng: ${vid.date}</p>
+                        <span style="color:var(--primary); font-size:0.75rem; font-weight:bold; text-transform:uppercase;">Phát hành: ${vid.date}</span>
+                        <h3 style="margin: 10px 0; font-size:1.15rem; line-height:1.4; display: -webkit-box; -webkit-line-clamp: 2; -webkit-box-orient: vertical; overflow: hidden;">${vid.title}</h3>
                     </div>
-                    <a href="https://youtube.com{vid.videoId}" target="_blank" class="btn-primary" 
-                       style="display: flex; align-items: center; justify-content: center; text-decoration: none;">
-                       Xem Video Trên Youtube
+                    <a href="${siteData.settings.youtubeChannel}" target="_blank" class="btn-primary" 
+                       style="display: flex; align-items: center; justify-content: center; text-decoration: none; box-sizing: border-box; text-align: center;">
+                       Kênh 【Youtube】
                     </a>
                 </div>
             </div>
