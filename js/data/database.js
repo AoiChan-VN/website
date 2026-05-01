@@ -4,11 +4,16 @@ export const siteData = {
         youtubeChannel: "http://www.youtube.com/@_Kawaii.2K"
     },
     plugins: [
-        { id: 1, name: "Aoi-Plugin",
+        { id: 1, name: "Aoi Plugin",
          version: "1.21+",
          desc: "Hệ thống tu luyện huyền huyễn.",
          mdPath: "content/plugin.md",
          img: "./assets/img-pl/aoi-pl.jpg"
+        },
+        { id: 2, name: "Hướng dẫn",
+         version: "v1",
+         desc: "Hướng dẫn cơ bản dành cho...",
+         mdPath: "content/info.md"
         }
     ],
     resources: [
