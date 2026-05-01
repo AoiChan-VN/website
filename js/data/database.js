@@ -7,8 +7,8 @@ export const siteData = {
         { id: 1, name: "Aoi Plugin",
          version: "1.21+",
          desc: "Hệ thống tu luyện huyền huyễn.",
-         mdPath: "content/plugin.md",
-         img: "./assets/img-pl/aoi-pl.jpg"
+         mdPath: "content/plugins/plugin.md",
+         img: "./assets/img/aoi-pl.jpg"
         },
         { id: 2, name: "Hướng dẫn",
          version: "v1",
@@ -20,7 +20,7 @@ export const siteData = {
         { id: 1, name: "Kawaii Texture",
          size: "30MB",
          desc: "Texture pack phong cách Kawaii.",
-         mdPath: "content/resource.md",
+         mdPath: "content/resources/resource.md",
          img: "https://placehold.co"
         }
     ],
