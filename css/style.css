@@ -53,6 +53,25 @@ nav a.active, nav a:hover { color: var(--primary); opacity: 1; }
 
 .card-body { padding: 25px; }
 
+/* Khung chứa ảnh của Card */
+.card-img-wrapper {
+    width: 100%;
+    aspect-ratio: 16 / 9; /* Ép mọi ảnh về tỷ lệ 16:9 */
+    overflow: hidden;
+    background: #000;
+}
+
+.card-img-wrapper img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover; /* Ảnh to quá sẽ được cắt gọn tự động, không bị méo */
+    transition: transform 0.5s ease;
+}
+
+.card:hover .card-img-wrapper img {
+    transform: scale(1.1); /* Hiệu ứng zoom nhẹ khi rê chuột */
+}
+
 .btn-primary {
     background: linear-gradient(135deg, var(--primary), #ffb3c1);
     color: white; border: none; padding: 12px; border-radius: 12px;
