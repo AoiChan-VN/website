@@ -8,62 +8,72 @@
     <link rel="stylesheet" href="./css/style.css">
 </head>
 <body>
-    <!-- Vùng chứa Header & Settings -->
     <div id="layout-root"></div>
 
     <main style="padding: 40px 5%;">
-        <!-- Header Trang Chủ -->
         <div class="page-header" style="display: flex; justify-content: space-between; align-items: flex-end; margin-bottom: 30px;">
-            <div style="flex: 1;">
+            <div>
                 <h2 class="section-title">🌊𝓐𝓸𝓲𝓒𝓱𝓪𝓷 𝓟𝓸𝓻𝓽𝓯𝓸𝓵𝓲𝓸</h2>
-                <p style="margin: 5px 0 0 26px; opacity: 0.6;">◞𝓒𝓸𝓹𝔂𝓻𝓲𝓰𝓱𝓽◡𝓐𝓸𝓲𝓒𝓱𝓪𝓷︵</p>
+                <p style="margin: 5px 0 0 26px; opacity: 0.6;">Dữ liệu hệ thống & Máy chủ Minecraft.</p>
             </div>
             <button onclick="window.toggleDashboard()" class="btn-primary" style="width: auto; padding: 12px 30px; border-radius: 50px;">
-                📊 Dashboard Panel
+                📊 Monitoring Panel
             </button>
         </div>
 
-        <!-- Dashboard Area: Cấu trúc Admin Panel -->
+        <!-- DASHBOARD AREA -->
         <section id="dashboard-area" style="display: none;">
-            <div class="main-panel">
+            
+            <!-- TẦNG 1: ADMIN PANEL (Quản lý Web) -->
+            <div class="main-panel admin-layer" style="position: relative; margin-bottom: 30px;">
+                <div class="panel-tag">ADMIN MONITOR</div>
                 
-                <!-- 1. Biểu đồ chính (Chiếm 3 cột) -->
-                <div class="widget widget-main-chart">
-                    <h3 class="panel-title">📈 Biểu đồ</h3>
-                    <div id="chart-root" class="chart-wrapper"
-                        <!-- dữ liệu svg sẽ đổ vào đây -->
+                <!-- Biểu đồ Stock mỏng -->
+                <div class="widget widget-stock-chart">
+                    <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 20px;">
+                        <h3 style="margin: 0; font-size: 0.9rem; letter-spacing: 1px; color: var(--primary);">📈 RESOURCE METRICS</h3>
+                        <span class="live-tag">INTERNAL DATA</span>
+                    </div>
+                    <div id="stock-chart" class="stock-chart-container">
+                        <!-- JS Render: Cột mảnh + Chấm + Icon -->
                     </div>
                 </div>
 
-                <!-- 2. Nhật ký Log (Chiếm 1 cột bên phải) -->
-                <div class="widget widget-logs">
-                    <h3 style="margin: 0 0 20px 0; font-size: 1.1rem; color: var(--primary);">📄 Dữ liệu</h3>
-                    <div id="log-list" class="log-container">
-                        <!-- JS đổ dữ liệu vào đây -->
+                <!-- Bảng danh sách phân loại -->
+                <div class="widget widget-data-list">
+                    <h3 style="margin: 0 0 15px 0; font-size: 0.9rem; letter-spacing: 1px;">📂 DANH MỤC CHI TIẾT</h3>
+                    <div class="category-tabs" style="display: flex; gap: 10px; margin-bottom: 15px;">
+                        <button class="tab-btn active" onclick="renderLogsV2('all')">Tất cả</button>
+                        <button class="tab-btn" onclick="renderLogsV2('plugin')">Plugins</button>
+                        <button class="tab-btn" onclick="renderLogsV2('resource')">Resource</button>
                     </div>
+                    <div id="log-list-v2" class="log-container-v2" style="max-height: 200px; overflow-y: auto;"></div>
                 </div>
-
-                <!-- 3. Hàng Thẻ Thống Kê (Dàn hàng ngang 4 ô) -->
-                <div class="mini-stats-grid">
-                    <div class="stat-item">
-                        <span>Plugins</span>
-                        <strong id="p-val">0</strong>
-                    </div>
-                    <div class="stat-item">
-                        <span>Resources</span>
-                        <strong id="r-val">0</strong>
-                    </div>
-                    <div class="stat-item">
-                        <span>Media</span>
-                        <strong id="m-val">0</strong>
-                    </div>
-                    <div class="stat-item">
-                        <span>Server Status</span>
-                        <strong style="color: #22c55e; font-size: 1.2rem;">Online</strong>
-                    </div>
-                </div>
-
             </div>
+
+            <!-- TẦNG 2: SERVER PANEL (Liên kết máy chủ thật) -->
+            <div class="main-panel server-layer" style="position: relative; border-color: #22c55e;">
+                <div class="panel-tag" style="background: #22c55e;">SERVER CONSOLE</div>
+                <div class="server-stats-grid">
+                    <div class="stat-box">
+                        <span style="font-size: 0.7rem; opacity: 0.6;">TRẠNG THÁI</span>
+                        <strong id="srv-status" style="font-size: 1.2rem; display: block; color: #ff4444;">OFFLINE</strong>
+                    </div>
+                    <div class="stat-box">
+                        <span style="font-size: 0.7rem; opacity: 0.6;">NGƯỜI CHƠI</span>
+                        <strong id="srv-players" style="font-size: 1.2rem; display: block;">0 / 0</strong>
+                    </div>
+                    <div class="stat-box">
+                        <span style="font-size: 0.7rem; opacity: 0.6;">PHIÊN BẢN</span>
+                        <strong id="srv-version" style="font-size: 1.2rem; display: block;">-</strong>
+                    </div>
+                    <div class="stat-box">
+                        <span style="font-size: 0.7rem; opacity: 0.6;">IP MÁY CHỦ</span>
+                        <code id="srv-ip" style="font-size: 0.8rem; color: var(--primary);">Loading...</code>
+                    </div>
+                </div>
+            </div>
+
         </section>
     </main>
 
@@ -72,48 +82,80 @@
         import { siteData } from './js/data/database.js';
         import './js/main.js';
 
-        // Khởi tạo Header
         document.getElementById('layout-root').innerHTML = Header();
 
-        // Hàm load SVG từ file riêng
-        async function loadChart() {
-            const chartRoot = document.getElementById('chart-root');
-            if (chartRoot && chartRoot.innerHTML.trim() === "") {
-                const response = await fetch('./assets/vectors/chart.svg');
-                const svgText = await response.text();
-                chartRoot.innerHTML = svgText;
+        // --- HÀM GỌI API MÁY CHỦ THẬT ---
+        async function fetchServerStatus() {
+            const ip = siteData.settings.serverIP || "mc.hypixel.net"; // Lấy từ database.js
+            document.getElementById('srv-ip').innerText = ip;
+            
+            try {
+                const response = await fetch(`https://mcsrvstat.us{ip}`);
+                const data = await response.json();
+
+                const statusEl = document.getElementById('srv-status');
+                if (data.online) {
+                    statusEl.innerText = "ONLINE";
+                    statusEl.style.color = "#22c55e";
+                    document.getElementById('srv-players').innerText = `${data.players.online} / ${data.players.max}`;
+                    document.getElementById('srv-version').innerText = data.version || "Unknown";
+                } else {
+                    statusEl.innerText = "OFFLINE";
+                    statusEl.style.color = "#ff4444";
+                }
+            } catch (e) {
+                console.error("API Error");
             }
         }
 
-        // Logic điều khiển Dashboard
+        // --- RENDER BIỂU ĐỒ STOCK ---
+        function renderStockChart() {
+            const chart = document.getElementById('stock-chart');
+            const metrics = [
+                { name: 'P', count: siteData.plugins.length, icon: './assets/icons/plugin-tag.png' },
+                { name: 'R', count: siteData.resources.length, icon: './assets/icons/resource-tag.png' },
+                { name: 'V', count: siteData.youtube.length, icon: './assets/icons/youtube-tag.png' },
+                { name: 'D', count: siteData.downloads.length, icon: './assets/icons/download-tag.png' }
+            ];
+
+            chart.innerHTML = metrics.map(m => `
+                <div class="stock-column">
+                    <div class="stock-line" style="--height: ${m.count * 15 + 20}">
+                        <div class="stock-dot"></div>
+                    </div>
+                    <img src="${m.icon}" class="stock-icon" title="${m.name}" onerror="this.style.display='none'">
+                </div>
+            `).join('');
+        }
+
+        // --- RENDER DANH SÁCH PHÂN LOẠI ---
+        window.renderLogsV2 = (type) => {
+            const list = document.getElementById('log-list-v2');
+            let data = [
+                ...siteData.plugins.map(i => ({...i, category: 'plugin'})),
+                ...siteData.resources.map(i => ({...i, category: 'resource'}))
+            ];
+
+            if (type !== 'all') data = data.filter(i => i.category === type);
+
+            list.innerHTML = data.map(item => `
+                <div class="log-item-v2 type-${item.category}">
+                    <span style="font-weight:bold;">${item.name}</span>
+                    <span class="badge-mini">${item.category.toUpperCase()}</span>
+                </div>
+            `).join('');
+        };
+
+        // --- TOGGLE DASHBOARD ---
         window.toggleDashboard = () => {
             const area = document.getElementById('dashboard-area');
             const isHidden = area.style.display === 'none';
-            
             area.style.display = isHidden ? 'block' : 'none';
 
             if (isHidden) {
-                // Load Chart khi mở Dashboard
-                loadChart();
-                
-                // Cập nhật số liệu
-                document.getElementById('p-val').innerText = siteData.plugins.length;
-                document.getElementById('r-val').innerText = siteData.resources.length;
-                document.getElementById('m-val').innerText = siteData.youtube.length;
-
-                // Đổ dữ liệu Log
-                const logList = document.getElementById('log-list');
-                const allData = [...siteData.plugins, ...siteData.resources];
-                
-                logList.innerHTML = allData.map(item => `
-                    <div class="log-entry">
-                        <div>
-                            <b style="color:white; display:block;">${item.name}</b>
-                            <small style="opacity:0.5;">Update: ${item.version || item.size}</small>
-                        </div>
-                        <div class="status-indicator"></div>
-                    </div>
-                `).join('');
+                renderStockChart();
+                renderLogsV2('all');
+                fetchServerStatus();
             }
         };
     </script>
