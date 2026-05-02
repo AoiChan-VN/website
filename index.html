@@ -10,35 +10,84 @@
 <body>
     <div id="layout-root"></div>
 
-    <main style="padding-top: 40px;">
-        <!-- Phần mở đầu có hiệu ứng chữ trượt từ vạch hồng -->
-        <div class="page-header" style="padding: 0 10%;">
-            <h2 class="section-title">🌊𝓐𝓸𝓲𝓒𝓱𝓪𝓷 𝓟𝓸𝓻𝓽𝓯𝓸𝓵𝓲𝓸</h2>
-            <p>| 🌊𝓒𝓸𝓹𝔂𝓻𝓲𝓰𝓱𝓽◡𝓐𝓸𝓲𝓒𝓱𝓪𝓷◦👻</p>
+    <main style="padding: 40px 5%;">
+    <div class="page-header">
+        <h2 class="section-title">Hệ Thống Thống Kê</h2>
+        <button onclick="window.toggleDashboard()" class="btn-primary" style="width:auto; padding: 8px 20px;">📊 Bật/Tắt Dashboard</button>
+    </div>
+
+    <!-- Container Dashboard: Chia 2 vùng Trái (Biểu đồ) - Phải (Bảng) -->
+    <section id="dashboard-area" class="dashboard-grid" style="display: none;">
+        <!-- Bên Trái: Biểu đồ cột CSS -->
+        <div class="card chart-container">
+            <h3>📈 Tăng Trưởng Tài Nguyên</h3>
+            <div class="bar-chart">
+                <div class="bar" id="bar-plugins" style="--size: 0.1;"><span class="label">Plugins</span></div>
+                <div class="bar" id="bar-resources" style="--size: 0.1;"><span class="label">Res</span></div>
+                <div class="bar" id="bar-media" style="--size: 0.1;"><span class="label">Media</span></div>
+            </div>
         </div>
 
-        <!-- Bảng thống kê 3 cột -->
-        <section class="grid-container" style="padding-top: 50px;">
-            <div class="card stat-card">
-                <div class="card-body">
-                    <h3>Plugins</h3>
-                    <div class="stat-value" id="count-plugins">0</div>
-                </div>
-            </div>
-            <div class="card stat-card">
-                <div class="card-body">
-                    <h3>Resource Packs</h3>
-                    <div class="stat-value" id="count-resources">0</div>
-                </div>
-            </div>
-            <div class="card stat-card">
-                <div class="card-body">
-                    <h3>Lượt truy cập & Tải</h3>
-                    <div class="stat-value">999+</div>
-                </div>
-            </div>
-        </section>
-    </main>
+        <!-- Bên Phải: Bảng số liệu chi tiết -->
+        <div class="card table-container">
+            <h3>📄 Nhật Ký Cập Nhật</h3>
+            <table class="data-table">
+                <thead>
+                    <tr>
+                        <th>Tên dự án</th>
+                        <th>Phiên bản</th>
+                        <th>Trạng thái</th>
+                    </tr>
+                </thead>
+                <tbody id="stat-table-body">
+                    <!-- Dữ liệu thật từ database sẽ đổ vào đây -->
+                </tbody>
+            </table>
+        </div>
+    </section>
+</main>
+
+<script type="module">
+    import { Header } from './js/components/Layout.js';
+    import { siteData } from './js/data/database.js';
+    import './js/main.js';
+
+    document.getElementById('layout-root').innerHTML = Header();
+
+    // Hàm khởi tạo số liệu thật cho biểu đồ và bảng
+    window.initDashboard = () => {
+        const pCount = siteData.plugins.length;
+        const rCount = siteData.resources.length;
+        const mCount = siteData.youtube.length;
+        const max = Math.max(pCount, rCount, mCount, 1);
+
+        // Cập nhật biểu đồ cột tỉ lệ thuận với số lượng thật
+        document.getElementById('bar-plugins').style.setProperty('--size', pCount / max);
+        document.getElementById('bar-resources').style.setProperty('--size', rCount / max);
+        document.getElementById('bar-media').style.setProperty('--size', mCount / max);
+
+        // Đổ dữ liệu vào bảng chi tiết
+        const tableBody = document.getElementById('stat-table-body');
+        const allItems = [...siteData.plugins, ...siteData.resources];
+        tableBody.innerHTML = allItems.map(item => `
+            <tr>
+                <td>${item.name}</td>
+                <td>${item.version || item.size}</td>
+                <td><span class="status-tag">Hoạt động</span></td>
+            </tr>
+        `).join('');
+    };
+
+    window.toggleDashboard = () => {
+        const area = document.getElementById('dashboard-area');
+        if(area.style.display === 'none') {
+            area.style.display = 'grid';
+            window.initDashboard();
+        } else {
+            area.style.display = 'none';
+        }
+    };
+</script>
 
     <script type="module">
         import { Header } from './js/components/Layout.js';
