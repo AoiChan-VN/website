@@ -10,39 +10,54 @@
 <body>
     <div id="layout-root"></div>
 
-    <main style="padding: 40px 5%;">
-    <div class="page-header">
-        <h2 class="section-title">Hệ Thống Thống Kê</h2>
-        <button onclick="window.toggleDashboard()" class="btn-primary" style="width:auto; padding: 8px 20px;">📊 Bật/Tắt Dashboard</button>
+<main style="padding: 40px 8%;">
+    <div class="page-header" style="display: flex; justify-content: space-between; align-items: center;">
+        <div>
+            <h2 class="section-title">Hệ Thống Phân Tích</h2>
+            <p>| Dữ liệu tài nguyên thời gian thực.</p>
+        </div>
+        <button onclick="window.toggleDashboard()" class="btn-primary" style="width:auto; padding: 10px 25px; border-radius: 50px;">
+            ✨ Khám Phá Dashboard
+        </button>
     </div>
 
-    <!-- Container Dashboard: Chia 2 vùng Trái (Biểu đồ) - Phải (Bảng) -->
-    <section id="dashboard-area" class="dashboard-grid" style="display: none;">
-        <!-- Bên Trái: Biểu đồ cột CSS -->
-        <div class="card chart-container">
-            <h3>📈 Tăng Trưởng Tài Nguyên</h3>
-            <div class="bar-chart">
-                <div class="bar" id="bar-plugins" style="--size: 0.1;"><span class="label">Plugins</span></div>
-                <div class="bar" id="bar-resources" style="--size: 0.1;"><span class="label">Res</span></div>
-                <div class="bar" id="bar-media" style="--size: 0.1;"><span class="label">Media</span></div>
+    <!-- Dashboard Area -->
+    <section id="dashboard-area" class="analytics-container" style="display: none;">
+        
+        <!-- Bên Trái: Biểu đồ tăng trưởng (SVG Line Chart) -->
+        <div class="card glass-panel chart-box">
+            <div class="panel-header">
+                <h3>📈 Biểu đồ Tăng trưởng</h3>
+                <span class="live-tag">LIVE</span>
+            </div>
+            <div class="svg-wrapper">
+                <svg viewBox="0 0 400 150" class="line-chart-svg">
+                    <!-- Đồ thị dạng sóng -->
+                    <path class="chart-path" d="M0,120 Q50,80 100,100 T200,40 T300,70 T400,20" fill="none" stroke="var(--primary)" stroke-width="3" />
+                    <path class="chart-fill" d="M0,120 Q50,80 100,100 T200,40 T300,70 T400,20 L400,150 L0,150 Z" fill="url(#grad)" opacity="0.2" />
+                    <defs>
+                        <linearGradient id="grad" x1="0%" y1="0%" x2="0%" y2="100%">
+                            <stop offset="0%" style="stop-color:var(--primary);stop-opacity:1" />
+                            <stop offset="100%" style="stop-color:var(--primary);stop-opacity:0" />
+                        </linearGradient>
+                    </defs>
+                </svg>
+            </div>
+            <div class="stats-row">
+                <div class="stat-mini"><span>Plugins</span><strong id="p-val">0</strong></div>
+                <div class="stat-mini"><span>Resources</span><strong id="r-val">0</strong></div>
+                <div class="stat-mini"><span>Total</span><strong id="t-val">0</strong></div>
             </div>
         </div>
 
-        <!-- Bên Phải: Bảng số liệu chi tiết -->
-        <div class="card table-container">
-            <h3>📄 Nhật Ký Cập Nhật</h3>
-            <table class="data-table">
-                <thead>
-                    <tr>
-                        <th>Tên dự án</th>
-                        <th>Phiên bản</th>
-                        <th>Trạng thái</th>
-                    </tr>
-                </thead>
-                <tbody id="stat-table-body">
-                    <!-- Dữ liệu thật từ database sẽ đổ vào đây -->
-                </tbody>
-            </table>
+        <!-- Bên Phải: Bảng nhật ký cao cấp -->
+        <div class="card glass-panel log-box">
+            <div class="panel-header">
+                <h3>📄 Nhật Ký Hoạt Động</h3>
+            </div>
+            <div class="log-list" id="log-list">
+                <!-- Dữ liệu sẽ tự đổ vào đây -->
+            </div>
         </div>
     </section>
 </main>
@@ -54,51 +69,29 @@
 
     document.getElementById('layout-root').innerHTML = Header();
 
-    // Hàm khởi tạo số liệu thật cho biểu đồ và bảng
-    window.initDashboard = () => {
-        const pCount = siteData.plugins.length;
-        const rCount = siteData.resources.length;
-        const mCount = siteData.youtube.length;
-        const max = Math.max(pCount, rCount, mCount, 1);
+    window.toggleDashboard = () => {
+        const el = document.getElementById('dashboard-area');
+        el.style.display = el.style.display === 'none' ? 'grid' : 'none';
+        
+        // Cập nhật số liệu thật
+        const p = siteData.plugins.length;
+        const r = siteData.resources.length;
+        document.getElementById('p-val').innerText = p;
+        document.getElementById('r-val').innerText = r;
+        document.getElementById('t-val').innerText = p + r;
 
-        // Cập nhật biểu đồ cột tỉ lệ thuận với số lượng thật
-        document.getElementById('bar-plugins').style.setProperty('--size', pCount / max);
-        document.getElementById('bar-resources').style.setProperty('--size', rCount / max);
-        document.getElementById('bar-media').style.setProperty('--size', mCount / max);
-
-        // Đổ dữ liệu vào bảng chi tiết
-        const tableBody = document.getElementById('stat-table-body');
-        const allItems = [...siteData.plugins, ...siteData.resources];
-        tableBody.innerHTML = allItems.map(item => `
-            <tr>
-                <td>${item.name}</td>
-                <td>${item.version || item.size}</td>
-                <td><span class="status-tag">Hoạt động</span></td>
-            </tr>
+        // Đổ nhật ký
+        const list = document.getElementById('log-list');
+        list.innerHTML = [...siteData.plugins, ...siteData.resources].map(item => `
+            <div class="log-item">
+                <div class="item-info">
+                    <span class="item-name">${item.name}</span>
+                    <span class="item-date">v${item.version || '1.0'} • Hoạt động</span>
+                </div>
+                <div class="status-dot"></div>
+            </div>
         `).join('');
     };
-
-    window.toggleDashboard = () => {
-        const area = document.getElementById('dashboard-area');
-        if(area.style.display === 'none') {
-            area.style.display = 'grid';
-            window.initDashboard();
-        } else {
-            area.style.display = 'none';
-        }
-    };
 </script>
-
-    <script type="module">
-        import { Header } from './js/components/Layout.js';
-        import { siteData } from './js/data/database.js';
-        import './js/main.js';
-
-        document.getElementById('layout-root').innerHTML = Header();
-
-        // Tự động đếm số lượng từ database để hiện lên bảng
-        document.getElementById('count-plugins').innerText = siteData.plugins.length;
-        document.getElementById('count-resources').innerText = siteData.resources.length;
-    </script>
 </body>
 </html>
