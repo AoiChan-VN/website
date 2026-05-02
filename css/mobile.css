@@ -1,0 +1,15 @@
+/* --- ĐIỀU CHỈNH CHO DI ĐỘNG --- */
+@media (max-width: 768px) {
+    .navbar { padding: 10px 15px; }
+    
+    nav { display: none; } /* Ẩn menu chữ trên mobile */
+    
+    .brand-name { font-size: 1rem; }
+
+    .grid-container {
+        padding: 30px 5%;
+        gap: 20px;
+        grid-template-columns: 1fr; /* 1 cột cho mobile */
+    }
+}
+ 
