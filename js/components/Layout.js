@@ -15,7 +15,7 @@ export const Header = () => {
         <!-- Ảnh Logo (trái) -->
         <div class="logo">
             <img src="${siteData.settings.logo}" class="logo-img" onerror="this.src='https://placehold.co'">
-            <span class="brand-name">🌊𝓐𝓸𝓲𝓒𝓱𝓪𝓷◡</span>
+            <span class="brand-name">🌊◞𝓐𝓸𝓲𝓒𝓱𝓪𝓷◡</span>
         </div>
 
         <!-- Khối Menu & Settings (phải) -->
