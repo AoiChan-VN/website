@@ -3,100 +3,111 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>🌊Home</title>
+    <title>🏠◞𝓗𝓸𝓶𝓮︵</title>
     <link rel="icon" type="image/webp" href="./assets/Logo.webp">
     <link rel="stylesheet" href="./css/style.css">
 </head>
 <body>
+    <!-- Vùng chứa Header & Settings -->
     <div id="layout-root"></div>
 
-<main style="padding: 40px 8%;">
-    <div class="page-header" style="display: flex; justify-content: space-between; align-items: center;">
-        <div>
-            <h2 class="section-title">🌊𝓐𝓸𝓲𝓒𝓱𝓪𝓷 𝓟𝓸𝓻𝓽𝓯𝓸𝓵𝓲𝓸🎐</h2>
-            <p>|◞𝓒𝓸𝓹𝔂𝓻𝓲𝓰𝓱𝓽◡𝓐𝓸𝓲𝓒𝓱𝓪𝓷◦</p>
+    <main style="padding: 40px 5%;">
+        <!-- Header Trang Chủ: Fix lệch dòng bằng Flexbox -->
+        <div class="page-header" style="display: flex; justify-content: space-between; align-items: flex-end; margin-bottom: 30px;">
+            <div style="flex: 1;">
+                <h2 class="section-title">🌊𝓐𝓸𝓲𝓒𝓱𝓪𝓷 𝓟𝓸𝓻𝓽𝓯𝓸𝓵𝓲𝓸</h2>
+                <p style="margin: 5px 0 0 26px; opacity: 0.6;">|◞𝓒𝓸𝓹𝔂𝓻𝓲𝓰𝓱𝓽◡𝓐𝓸𝓲𝓒𝓱𝓪𝓷︵</p>
+            </div>
+            <button onclick="window.toggleDashboard()" class="btn-primary" style="width: auto; padding: 12px 30px; border-radius: 50px;">
+                📊 Dashboard Panel
+            </button>
         </div>
-        <button onclick="window.toggleDashboard()" class="btn-primary" style="width:auto; padding: 10px 25px; border-radius: 50px;">
-            📊Dashboard
-        </button>
-    </div>
 
-    <!-- Dashboard Area -->
-    <section id="dashboard-area" style="display: none;">
-        <div class="main-panel">
-        
-            <!-- 1. Biểu đồ Tăng trưởng (Main Widget) -->
-            <div class="widget widget-main-chart">
-                <div style="display:flex; justify-content:space-between; margin-bottom:15px;">
-                    <h4 style="margin:0;">📊 Phân tích tài nguyên</h4>
-                    <span class="live-tag">REAL-TIME</span>
+        <!-- Dashboard Area: Cấu trúc Admin Panel -->
+        <section id="dashboard-area" style="display: none;">
+            <div class="main-panel">
+                
+                <!-- 1. Biểu đồ chính (Chiếm 3 cột) -->
+                <div class="widget widget-main-chart">
+                    <div style="display: flex; justify-content: space-between; align-items: center;">
+                        <h3 style="margin: 0; font-size: 1.1rem; color: var(--primary);">📈 Biểu đồ</h3>
+                        <span class="live-tag">𝓛𝓲𝓿𝓮</span>
+                    </div>
+                    <!-- Đồ thị SVG -->
+                    <svg viewBox="0 0 400 150" class="line-chart-svg">
+                        <path class="chart-path" d="M0,120 Q50,80 100,100 T200,40 T300,70 T400,20" fill="none" stroke="var(--primary)" stroke-width="3" />
+                        <path d="M0,120 Q50,80 100,100 T200,40 T300,70 T400,20 L400,150 L0,150 Z" fill="rgba(255, 133, 161, 0.1)" />
+                    </svg>
                 </div>
-                <svg viewBox="0 0 400 120" class="line-chart-svg">
-                    <path d="M0,100 Q50,20 100,80 T200,30 T300,90 T400,10" fill="none" stroke="var(--primary)" stroke-width="3" />
-                    <path d="M0,100 Q50,20 100,80 T200,30 T300,90 T400,10 L400,120 L0,120 Z" fill="rgba(255, 133, 161, 0.1)" />
-                </svg>
+
+                <!-- 2. Nhật ký Log (Chiếm 1 cột bên phải) -->
+                <div class="widget widget-logs">
+                    <h3 style="margin: 0 0 20px 0; font-size: 1.1rem; color: var(--primary);">📄 Dữ liệu</h3>
+                    <div id="log-list" class="log-container">
+                        <!-- JS đổ dữ liệu vào đây -->
+                    </div>
+                </div>
+
+                <!-- 3. Hàng Thẻ Thống Kê (Dàn hàng ngang 4 ô) -->
+                <div class="mini-stats-grid">
+                    <div class="stat-item">
+                        <span>Plugins</span>
+                        <strong id="p-val">0</strong>
+                    </div>
+                    <div class="stat-item">
+                        <span>Resources</span>
+                        <strong id="r-val">0</strong>
+                    </div>
+                    <div class="stat-item">
+                        <span>Media</span>
+                        <strong id="m-val">0</strong>
+                    </div>
+                    <div class="stat-item">
+                        <span>Server Status</span>
+                        <strong style="color: #22c55e; font-size: 1.2rem;">ONLINE</strong>
+                    </div>
+                </div>
+
             </div>
+        </section>
+    </main>
 
-            <!-- 2. Nhật ký hệ thống (Right Widget) -->
-            <div class="widget widget-logs">
-                <h4 style="margin-bottom:15px;">📄 Log Hệ Thống</h4>
-                <div id="log-list" style="max-height: 350px; overflow-y: auto;">
-                    <!-- Dữ liệu tự đổ -->
-                </div>
-            </div>
+    <script type="module">
+        import { Header } from './js/components/Layout.js';
+        import { siteData } from './js/data/database.js';
+        import './js/main.js';
 
-            <!-- 3. Thống kê nhanh (Bottom Widget) -->
-            <div class="mini-stats-grid">
-                <div class="stat-item">
-                    <span id="label-p">Plugins</span>
-                    <strong id="p-val">0</strong>
-                </div>
-                <div class="stat-item">
-                    <span id="label-r">Resources</span>
-                    <strong id="r-val">0</strong>
-                </div>
-                <div class="stat-item">
-                    <span id="label-m">Media</span>
-                    <strong id="m-val">0</strong>
-                </div>
-                <div class="stat-item">
-                    <span>Trạng thái</span>
-                    <strong style="color:#22c55e; font-size:1.2rem;">ONLINE</strong>
-                </div>
-            </div>
-    
-        </div>
-    </section>
-</main>
+        // Khởi tạo Header
+        document.getElementById('layout-root').innerHTML = Header();
 
-<script type="module">
-    import { Header } from './js/components/Layout.js';
-    import { siteData } from './js/data/database.js';
-    import './js/main.js';
+        // Logic điều khiển Dashboard
+        window.toggleDashboard = () => {
+            const area = document.getElementById('dashboard-area');
+            const isHidden = area.style.display === 'none';
+            
+            area.style.display = isHidden ? 'block' : 'none';
 
-    document.getElementById('layout-root').innerHTML = Header();
+            if (isHidden) {
+                // Cập nhật số liệu
+                document.getElementById('p-val').innerText = siteData.plugins.length;
+                document.getElementById('r-val').innerText = siteData.resources.length;
+                document.getElementById('m-val').innerText = siteData.youtube.length;
 
-    window.toggleDashboard = () => {
-        const area = document.getElementById('dashboard-area');
-        area.style.display = area.style.display === 'none' ? 'block' : 'none';
-    
-        if(area.style.display === 'block') {
-            // Đổ số liệu thật từ database
-            document.getElementById('p-val').innerText = siteData.plugins.length;
-            document.getElementById('r-val').innerText = siteData.resources.length;
-            document.getElementById('m-val').innerText = siteData.youtube.length;
-
-            // Đổ Nhật ký (Logs)
-            const logList = document.getElementById('log-list');
-            const allData = [...siteData.plugins, ...siteData.resources];
-            logList.innerHTML = allData.map(item => `
-                <div style="padding:10px; background:rgba(255,255,255,0.03); border-radius:10px; margin-bottom:8px; font-size:0.8rem; border-left:3px solid var(--primary);">
-                    <b>${item.name}</b><br>
-                    <small style="opacity:0.5;">Đã kiểm duyệt • Sẵn sàng</small>
-                </div>
-            `).join('');
-        }
-    };
-</script>
+                // Đổ dữ liệu Log
+                const logList = document.getElementById('log-list');
+                const allData = [...siteData.plugins, ...siteData.resources];
+                
+                logList.innerHTML = allData.map(item => `
+                    <div class="log-entry">
+                        <div>
+                            <b style="color:white; display:block;">${item.name}</b>
+                            <small style="opacity:0.5;">Update: ${item.version || item.size}</small>
+                        </div>
+                        <div class="status-indicator"></div>
+                    </div>
+                `).join('');
+            }
+        };
+    </script>
 </body>
 </html>
