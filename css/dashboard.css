@@ -1,166 +1,118 @@
-/* --- DASHBOARD MAIN PANEL SYSTEM --- */
+/* --- PREMIUM DASHBOARD SYSTEM --- */
 
-/* 1. Khung tổng Dashboard (Cái Card lớn nhất bao bọc tất cả) */
+/* Khung bọc tổng: Bằng kính mờ sâu */
 .main-panel {
-    background: var(--card);
-    backdrop-filter: blur(25px);
-    -webkit-backdrop-filter: blur(25px);
-    border: 1px solid var(--primary);
-    border-radius: 30px;
-    padding: 30px;
+    background: rgba(15, 23, 42, 0.6);
+    backdrop-filter: blur(30px);
+    -webkit-backdrop-filter: blur(30px);
+    border: 1px solid rgba(255, 133, 161, 0.2);
+    border-radius: 24px;
+    padding: 25px;
     margin-top: 30px;
-    box-shadow: 0 25px 50px rgba(0,0,0,0.5), 
-                inset 0 0 20px rgba(255, 133, 161, 0.1);
-    
-    /* Hệ thống lưới Panel */
     display: grid;
-    grid-template-columns: 1fr 1fr 1fr; /* Chia 3 cột chính */
+    grid-template-columns: repeat(4, 1fr); /* Chia 4 cột để linh hoạt hơn */
     gap: 20px;
-    
-    /* Hiệu ứng xuất hiện */
-    animation: panelSlideUp 0.8s cubic-bezier(0.25, 1, 0.5, 1) forwards;
+    box-shadow: 0 40px 100px rgba(0, 0, 0, 0.6);
 }
 
-@keyframes panelSlideUp {
-    from { opacity: 0; transform: translateY(50px) scale(0.95); }
-    to { opacity: 1; transform: translateY(0) scale(1); }
-}
-
-/* 2. Các Widget con bên trong */
+/* Các Widget con: Hiệu ứng nổi (Inner Shadow) */
 .widget {
-    background: rgba(0, 0, 0, 0.25);
-    border: 1px solid var(--border);
-    border-radius: 20px;
+    background: rgba(30, 41, 59, 0.4);
+    border: 1px solid rgba(255, 255, 255, 0.03);
+    border-radius: 16px;
     padding: 20px;
+    box-shadow: inset 0 0 20px rgba(0,0,0,0.2);
     transition: var(--transition);
 }
 
 .widget:hover {
     border-color: var(--primary);
-    background: rgba(255, 133, 161, 0.05);
+    background: rgba(255, 133, 161, 0.03);
+    transform: translateY(-2px);
 }
 
-/* Biểu đồ chính chiếm 2 cột đầu */
+/* Biểu đồ chính: Chiếm 3 cột trên, tạo điểm nhấn */
 .widget-main-chart {
-    grid-column: span 2;
-    display: flex;
-    flex-direction: column;
-    justify-content: space-between;
+    grid-column: span 3;
+    min-height: 250px;
 }
 
-/* Bảng nhật ký chiếm hàng dọc bên phải */
+/* Nhật ký bên phải: Nhỏ gọn và tinh tế hơn */
 .widget-logs {
     grid-column: span 1;
-    display: flex;
-    flex-direction: column;
+    background: rgba(15, 23, 42, 0.3);
 }
 
-/* 3. Đồ thị Line Chart SVG */
+/* Hàng Mini Stats dưới cùng: Dàn hàng ngang */
+.mini-stats-grid {
+    grid-column: span 4;
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 20px;
+}
+
+.stat-item {
+    background: linear-gradient(145deg, rgba(30, 41, 59, 0.4), rgba(15, 23, 42, 0.4));
+    padding: 20px;
+    border-radius: 16px;
+    border: 1px solid rgba(255, 255, 255, 0.05);
+    text-align: left; /* Chuyển sang trái */
+}
+
+.stat-item span {
+    font-size: 0.75rem;
+    color: var(--primary);
+    text-transform: uppercase;
+    letter-spacing: 1.5px;
+    display: block;
+    margin-bottom: 5px;
+}
+
+.stat-item strong {
+    font-size: 2rem;
+    font-family: 'JetBrains Mono', monospace; /* Font số kỹ thuật */
+    color: #fff;
+    text-shadow: 0 0 20px var(--primary-glow);
+}
+
+/* Biểu đồ đường (Line Chart) */
 .line-chart-svg {
     width: 100%;
-    height: 140px;
-    margin: 15px 0;
-    filter: drop-shadow(0 5px 15px var(--primary-glow));
+    height: 180px;
+    filter: drop-shadow(0 10px 20px var(--primary-glow));
 }
 
 .chart-path {
     stroke-dasharray: 1000;
     stroke-dashoffset: 1000;
-    animation: drawPath 3s ease forwards;
+    animation: drawPath 4s cubic-bezier(0.4, 0, 0.2, 1) forwards;
 }
 
-@keyframes drawPath {
-    to { stroke-dashoffset: 0; }
-}
-
-/* 4. Mini Stats Grid (Nằm dưới biểu đồ) */
-.mini-stats-grid {
-    grid-column: span 2;
-    display: grid;
-    grid-template-columns: repeat(4, 1fr);
-    gap: 15px;
-}
-
-.stat-item {
-    background: rgba(255, 255, 255, 0.03);
-    padding: 15px;
-    border-radius: 18px;
-    text-align: center;
-    border: 1px solid var(--border);
-    transition: var(--transition);
-}
-
-.stat-item:hover {
-    transform: translateY(-5px);
-    background: rgba(255, 255, 255, 0.08);
-}
-
-.stat-item strong {
-    font-size: 1.8rem;
-    color: var(--primary);
-    display: block;
-    text-shadow: 0 0 10px var(--primary-glow);
-}
-
-.stat-item span {
-    font-size: 0.7rem;
-    opacity: 0.6;
-    text-transform: uppercase;
-    letter-spacing: 1px;
-}
-
-/* 5. Nhật ký hệ thống (Log List) */
-.log-container {
-    flex-grow: 1;
-    overflow-y: auto;
-    max-height: 350px;
-    padding-right: 10px;
-}
-
-/* Tùy chỉnh thanh cuộn cho Logs */
-.log-container::-webkit-scrollbar {
-    width: 4px;
-}
-.log-container::-webkit-scrollbar-thumb {
-    background: var(--primary);
-    border-radius: 10px;
-}
-
+/* Nhật ký (Log Entry): Làm mảnh và hiện đại */
 .log-entry {
     padding: 12px;
-    background: rgba(255, 255, 255, 0.02);
-    border-radius: 12px;
-    margin-bottom: 10px;
-    border-left: 4px solid var(--primary);
-    font-size: 0.85rem;
-    animation: revealText 0.5s ease forwards;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+    font-size: 0.8rem;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
 }
 
-/* 6. Live Tag (Nhấp nháy) */
+.log-entry:last-child { border: none; }
+
+.status-indicator {
+    width: 6px; height: 6px;
+    border-radius: 50%;
+    background: #22c55e;
+    box-shadow: 0 0 10px #22c55e;
+}
+
+/* Live Tag */
 .live-tag {
-    background: #ff4444;
-    color: white;
-    font-size: 0.65rem;
-    padding: 3px 10px;
-    border-radius: 50px;
-    font-weight: bold;
-    animation: blink 1.5s infinite;
-}
-
-@keyframes blink {
-    0%, 100% { opacity: 1; transform: scale(1); }
-    50% { opacity: 0.7; transform: scale(0.95); }
-}
-
-/* 7. Responsive cho Dashboard */
-@media (max-width: 1024px) {
-    .main-panel {
-        grid-template-columns: 1fr; /* Chuyển về 1 cột trên iPad/Mobile */
-    }
-    .widget-main-chart, .widget-logs, .mini-stats-grid {
-        grid-column: span 1;
-    }
-    .mini-stats-grid {
-        grid-template-columns: 1fr 1fr;
-    }
+    background: rgba(255, 68, 68, 0.1);
+    color: #ff4444;
+    border: 1px solid #ff4444;
+    font-size: 0.6rem;
+    padding: 2px 8px;
+    border-radius: 4px;
 }
