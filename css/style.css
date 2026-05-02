@@ -122,6 +122,7 @@ nav a:hover::after, nav a.active::after {
     justify-content: center;
     transition: var(--transition);
     font-size: 1.1rem;
+    -webkit-tap-highlight-color: transparent;
 }
 
 .btn-settings:hover {
