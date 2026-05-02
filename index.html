@@ -8,6 +8,7 @@
     <link rel="stylesheet" href="./css/style.css">
 </head>
 <body>
+    <!-- <div id="header-root"></div> -->
     <div id="layout-root"></div>
 
     <section class="hero" style="text-align: center; padding: 80px 10%; background: linear-gradient(rgba(15,23,42,0.8), rgba(15,23,42,0.8)), url('https://placehold.co'); background-size: cover;">
@@ -31,7 +32,8 @@
         import { Header } from './js/components/Layout.js';
         import { siteData } from './js/data/database.js';
         import './js/main.js';
-        ducument.getElementById('layout-root').innerHTML = Header();
+        //document.getElementById('header-root').innerHTML = Header();
+        document.getElementById('layout-root').innerHTML = Header();
     </script>
 </body>
 </html>
