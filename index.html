@@ -29,15 +29,10 @@
                 
                 <!-- 1. Biểu đồ chính (Chiếm 3 cột) -->
                 <div class="widget widget-main-chart">
-                    <div style="display: flex; justify-content: space-between; align-items: center;">
-                        <h3 style="margin: 0; font-size: 1.1rem; color: var(--primary);">📈 Biểu đồ</h3>
-                        <span class="live-tag">𝓛𝓲𝓿𝓮</span>
+                    <h3 class="panel-title">📈 Biểu đồ</h3>
+                    <div id="chart-root" class="chart-wrapper"
+                        <!-- dữ liệu svg sẽ đổ vào đây -->
                     </div>
-                    <!-- Đồ thị SVG -->
-                    <svg viewBox="0 0 400 150" class="line-chart-svg">
-                        <path class="chart-path" d="M0,120 Q50,80 100,100 T200,40 T300,70 T400,20" fill="none" stroke="var(--primary)" stroke-width="3" />
-                        <path d="M0,120 Q50,80 100,100 T200,40 T300,70 T400,20 L400,150 L0,150 Z" fill="rgba(255, 133, 161, 0.1)" />
-                    </svg>
                 </div>
 
                 <!-- 2. Nhật ký Log (Chiếm 1 cột bên phải) -->
@@ -80,6 +75,16 @@
         // Khởi tạo Header
         document.getElementById('layout-root').innerHTML = Header();
 
+        // Hàm load SVG từ file riêng
+        async function loadChart() {
+            const chartRoot = document.getElementById('chart-root');
+            if (chartRoot && chartRoot.innerHTML.trim() === "") {
+                const response = await fetch('./assets/vectors/chart.svg');
+                const svgText = await response.text();
+                chartRoot.innerHTML = svgText;
+            }
+        }
+
         // Logic điều khiển Dashboard
         window.toggleDashboard = () => {
             const area = document.getElementById('dashboard-area');
@@ -88,6 +93,9 @@
             area.style.display = isHidden ? 'block' : 'none';
 
             if (isHidden) {
+                // Load Chart khi mở Dashboard
+                loadChart();
+                
                 // Cập nhật số liệu
                 document.getElementById('p-val').innerText = siteData.plugins.length;
                 document.getElementById('r-val').innerText = siteData.resources.length;
