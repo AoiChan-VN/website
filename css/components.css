@@ -40,26 +40,64 @@
 
 .card-body { padding: 25px; }
 
-/* --- BẢNG THỐNG KÊ --- */
-.stat-card { text-align: center; padding: 20px; }
-
-.stat-card h3 {
-    font-size: 1rem;
-    opacity: 0.7;
-    margin-bottom: 10px;
-    text-transform: uppercase;
-    letter-spacing: 1px;
+/* --- BẢNG DASHBOARD --- */
+.dashboard-grid {
+    display: grid;
+    grid-template-columns: 1fr 1.5fr; /* Trái 1 phần, Phải 1.5 phần */
+    gap: 30px;
+    margin-top: 30px;
+    animation: fadeInUp 0.6s ease forwards;
 }
 
-.stat-value {
-    font-size: 3rem;
-    font-weight: 800;
-    color: var(--primary);
-    text-shadow: 0 0 15px var(--primary-glow);
+/* Biểu đồ cột CSS thuần */
+.bar-chart {
+    display: flex;
+    align-items: flex-end;
+    gap: 20px;
+    height: 200px;
+    padding: 20px;
+    border-bottom: 2px solid var(--border);
 }
 
-/* Hiệu ứng nảy nhẹ khi load trang cho bảng thống kê */
-.stat-card { animation: fadeInUp 0.8s cubic-bezier(0.25, 1, 0.5, 1) forwards; }
+.bar {
+    flex: 1;
+    background: linear-gradient(to top, var(--primary), #ffb3c1);
+    border-radius: 8px 8px 0 0;
+    position: relative;
+    height: calc(var(--size) * 100%); /* Chiều cao dựa trên tỉ lệ số liệu */
+    transition: height 1s ease-in-out;
+}
+
+.bar .label {
+    position: absolute;
+    bottom: -25px;
+    left: 50%;
+    transform: translateX(-50%);
+    font-size: 0.7rem;
+    white-space: nowrap;
+}
+
+/* Bảng dữ liệu chuyên nghiệp */
+.data-table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: 10px;
+    font-size: 0.9rem;
+}
+
+.data-table th, .data-table td {
+    padding: 12px;
+    text-align: left;
+    border-bottom: 1px solid var(--border);
+}
+
+.status-tag {
+    background: rgba(34, 197, 94, 0.2);
+    color: #22c55e;
+    padding: 2px 8px;
+    border-radius: 4px;
+    font-size: 0.75rem;
+}
 
 /* --- NÚT BẤM (BUTTONS) --- */
 .btn-primary {
