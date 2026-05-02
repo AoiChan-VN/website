@@ -27,7 +27,7 @@ export const siteData = {
         { id: "v1",
          title: "Videos Trailer",
          videoId: "dQw4w9WgXcQ",
-         gifThumb: "./assets/videos/Kana.gif",
+         gifThumb: "./assets/videos/Kanna-Kamui.gif",
          date: "2026"
         }
     ],
