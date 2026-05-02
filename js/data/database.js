@@ -8,7 +8,7 @@ export const siteData = {
          version: "1.21+",
          desc: "Hệ thống tu luyện huyền huyễn.",
          mdPath: "content/plugins/plugin.md",
-         img: "./assets/img/aoi-pl.jpg"
+         img: "./assets/images/plugin.jpg"
         },
         { id: 2, name: "Hướng dẫn",
          desc: "Hướng dẫn cơ bản dành cho...",
@@ -25,9 +25,9 @@ export const siteData = {
     ],
     youtube: [
         { id: "v1",
-         title: "Trailer Server 2026",
+         title: "Videos Trailer",
          videoId: "dQw4w9WgXcQ",
-         gifThumb: "./assets/images/Trailer.gif",
+         gifThumb: "./assets/videos/Kana.gif",
          date: "2026"
         }
     ],
