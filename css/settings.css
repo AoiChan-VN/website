@@ -1,0 +1,52 @@
+/* --- SETTINGS MODAL --- */
+.btn-settings {
+    background: rgba(255, 255, 255, 0.05);
+    border: 1px solid var(--border);
+    color: var(--text);
+    cursor: pointer;
+    width: 40px; height: 40px;
+    border-radius: 50%;
+    display: flex; align-items: center; justify-content: center;
+    transition: var(--transition);
+    font-size: 1.1rem;
+    -webkit-tap-highlight-color: transparent;
+    outline: none;
+}
+
+.btn-settings:hover {
+    transform: rotate(90deg);
+    background: var(--primary);
+    color: white;
+}
+
+.modal-overlay {
+    position: fixed; inset: 0;
+    background: rgba(0, 0, 0, 0.85);
+    display: flex; align-items: center; justify-content: center;
+    z-index: 2000; backdrop-filter: blur(12px);
+    animation: fadeIn 0.3s ease;
+}
+
+.settings-content {
+    width: 340px; padding: 35px; border-radius: 30px;
+    text-align: center; background: var(--card);
+    border: 1px solid var(--primary);
+    box-shadow: 0 0 50px rgba(0,0,0,0.5);
+}
+
+.setting-item { display: flex; justify-content: space-between; align-items: center; margin: 20px 0; }
+
+.btn-theme-toggle {
+    background: rgba(255, 255, 255, 0.1);
+    border: 1px solid var(--border);
+    color: var(--text);
+    padding: 8px 15px; border-radius: 12px;
+    cursor: pointer; transition: 0.3s;
+}
+
+.lang-select {
+    background: rgba(255, 255, 255, 0.1);
+    color: var(--text); border: 1px solid var(--border);
+    padding: 5px 10px; border-radius: 8px; outline: none;
+}
+ 
