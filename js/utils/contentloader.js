@@ -1,7 +1,7 @@
 export async function loadMarkdown(fileName) {
     try {
         const response = await fetch(`./content/${fileName}`);
-        if (!response.ok) throw new Error("Không tìm thấy bài viết.");
+        if (!response.ok) throw new Error("Không tìm thấy dữ liệu.");
         const text = await response.text();
         
         // Hiển thị nội dung vào một vùng chỉ định
