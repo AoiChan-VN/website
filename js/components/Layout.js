@@ -12,13 +12,13 @@ export const Header = () => {
 
     return `
     <header class="navbar">
-        <!-- Khối Logo sát trái -->
+        <!-- Ảnh Logo (trái) -->
         <div class="logo">
             <img src="${siteData.settings.logo}" class="logo-img" onerror="this.src='https://placehold.co'">
             <span class="brand-name">🌊𝓐𝓸𝓲𝓒𝓱𝓪𝓷◡</span>
         </div>
 
-        <!-- Khối Menu & Settings sát phải -->
+        <!-- Khối Menu & Settings (phải) -->
         <div class="nav-container">
             <nav>
                 ${nav.map(item => `<a href="${item.h}" class="${current === item.h ? 'active' : ''}">${item.n}</a>`).join('')}
@@ -42,7 +42,8 @@ export const Header = () => {
                 </select>
             </div>
             <hr style="opacity:0.1; margin: 20px 0;">
-            <button onclick="window.closeSettings()" class="btn-primary" style="background:linear-gradient(135deg, #ff4444, #cc0000); border:none;">✘ Thoát</button>
+            <button onclick="window.closeSettings()"
+            class="btn-primary" style="background:linear-gradient(135deg, #ff4444, #cc0000); border:none;">Thoát</button>
         </div>
     </div>`;
 };
