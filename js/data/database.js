@@ -11,7 +11,6 @@ export const siteData = {
          img: "./assets/img/aoi-pl.jpg"
         },
         { id: 2, name: "Hướng dẫn",
-         version: "v1",
          desc: "Hướng dẫn cơ bản dành cho...",
          mdPath: "content/info.md"
         }
