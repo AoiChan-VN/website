@@ -1,15 +1,85 @@
-/* --- ĐIỀU CHỈNH CHO DI ĐỘNG --- */
+/* --- TỐI ƯU CHO DI ĐỘNG (MOBILE & TABLET) --- */
 @media (max-width: 768px) {
-    .navbar { padding: 10px 15px; }
-    
-    nav { display: none; } /* Ẩn menu chữ trên mobile */
-    
-    .brand-name { font-size: 1rem; }
+    /* 1. Thu nhỏ Header để tiết kiệm không gian */
+    .navbar {
+        padding: 10px 4%;
+    }
 
+    .brand-name {
+        font-size: 1rem;
+        max-width: 150px;
+        overflow: hidden;
+        white-space: nowrap;
+        text-overflow: ellipsis;
+    }
+
+    /* 2. Menu chữ: Ẩn đi để tránh tràn, hoặc cho cuộn ngang */
+    nav {
+        display: flex;
+        overflow-x: auto; /* Cho phép vuốt ngang các mục Menu */
+        gap: 15px;
+        padding-bottom: 5px;
+        scrollbar-width: none; /* Ẩn thanh cuộn trên Firefox */
+    }
+    
+    nav::-webkit-scrollbar {
+        display: none; /* Ẩn thanh cuộn trên Chrome/Safari */
+    }
+
+    nav a {
+        margin-left: 0;
+        font-size: 0.85rem;
+        white-space: nowrap; /* Không cho chữ xuống dòng */
+    }
+
+    /* 3. Grid Container: Chuyển về 1 cột duy nhất */
     .grid-container {
-        padding: 30px 5%;
+        grid-template-columns: 1fr; /* Ép Card rộng 100% màn hình */
+        padding: 20px 5%;
         gap: 20px;
-        grid-template-columns: 1fr; /* 1 cột cho mobile */
+    }
+
+    /* 4. Tối ưu Card cho cảm giác chạm */
+    .card {
+        border-radius: 18px;
+    }
+
+    .card:hover {
+        transform: translateY(-5px); /* Trên mobile không cần bay quá cao */
+    }
+
+    .card-body {
+        padding: 15px;
+    }
+
+    .section-title {
+        font-size: 1.5rem;
+        margin-left: 5%;
+    }
+
+    /* 5. Nút Settings: Làm to ra một chút để dễ bấm bằng ngón tay */
+    .btn-settings {
+        width: 38px;
+        height: 38px;
+        flex-shrink: 0; /* Không cho nút bị bóp méo */
+    }
+
+    /* 6. Modal bài viết: Chiếm 95% màn hình để dễ đọc */
+    .settings-content, #md-viewer .card {
+        width: 95% !important;
+        padding: 20px !important;
+        border-radius: 20px;
+    }
+    
+    /* 7. Bảng Download trên Mobile: Chuyển sang dạng dọc */
+    .download-item {
+        flex-direction: column;
+        align-items: flex-start !important;
+        gap: 10px;
+    }
+    
+    .download-item a {
+        width: 100%; /* Nút download rộng 100% cho dễ bấm */
+        text-align: center;
     }
 }
- 
