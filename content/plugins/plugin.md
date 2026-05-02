@@ -5,14 +5,15 @@
 </div>
 
 <div align="center">
-<h2>
-  <p> ◦Máy Chủ◦ </p>
+  <h2>
+    <p> ◦Máy Chủ◦ </p>
     ⤿ 𝓢𝓹𝓲𝓰𝓸𝓽◡𝓟𝓪𝓹𝓮𝓻 ⤾
-  <p> ︵𝓥𝓮𝓻𝓼𝓲𝓸𝓷𝓼◡ɿ.੨ɿ×︵ </p>
-</h2>
-  <sub><i>
-    <p> Máy chủ cá nhân </p>
-      <p>Mọi bản dịch và sửa đổi thuộc bản quyền của tôi </p>
-    <p> ︵𝓐𝓸𝓲𝓒𝓱𝓪𝓷◦ </p>
-  </sub></i>
+    <p> ︵𝓥𝓮𝓻𝓼𝓲𝓸𝓷𝓼◡ɿ.੨ɿ×︵ </p>
+  </h2>
+</div>
+  
+<div align="center">
+  <h2> 🌊𝓒𝓸𝓹𝔂𝓻𝓲𝓰𝓱𝓽◡𝓐𝓸𝓲𝓒𝓱𝓪𝓷◦👻 </h2>
+  <p><i> Nơi lưu trữ và giới thiệu sản phẩm </p>
+  <p><i> Mọi bản dịch và sửa đổi thuộc bản quyền của tôi </i></p>
 </div>
