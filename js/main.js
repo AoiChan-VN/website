@@ -17,7 +17,8 @@ window.viewDetail = async (mdPath) => {
         viewer.innerHTML = `
             <div class="card" style="width:85%; max-height:85vh; overflow-y:auto; padding:35px;">
                 <div style="white-space: pre-wrap; text-align:left;">${content}</div>
-                <button onclick="document.getElementById('md-viewer').remove()" class="btn-primary" style="margin-top:25px; background:#ff4444;">Đóng bài viết</button>
+                <button onclick="document.getElementById('md-viewer').remove()"
+                class="btn-primary" style="margin-top:25px; background:#ff4444;">Thoát</button>
             </div>`;
         document.body.appendChild(viewer);
     } catch (e) { alert("Lỗi tải nội dung!"); }
