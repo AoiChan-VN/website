@@ -10,29 +10,46 @@
 <body>
     <div id="layout-root"></div>
 
-    <section class="hero" style="text-align: center; padding: 80px 10%; background: linear-gradient(rgba(15,23,42,0.8), rgba(15,23,42,0.8)), url('https://placehold.co'); background-size: cover;">
-        <h1 style="font-size: 3rem; margin-bottom: 10px;">Chào mừng tới Website Portfolio</h1>
-        <h1> ︵𝓢𝓮𝓻𝓿𝓮𝓻◞𝓜𝓲𝓷𝓮𝓬𝓻𝓪𝒻𝓉︵ヅ </h1>
-        <h2>
-        <p> ◦Máy Chủ◦ </p>
-        <p> ⤿ 𝓢𝓹𝓲𝓰𝓸𝓽◡𝓟𝓪𝓹𝓮𝓻 ⤾ </p>
-        <p> ︵𝓥𝓮𝓻𝓼𝓲𝓸𝓷𝓼◡ɿ.੨ɿ×︵ </p>
-        </h2>
-        <sub><i>
-        <p> Nơi lưu trữ và giới thiệu các sản phẩm nội bộ </p>
-        <p> Mọi bản dịch và sửa đổi thuộc bản quyền của tôi </p>
-        <p> 🌊𝓒𝓸𝓹𝔂𝓻𝓲𝓰𝓱𝓽◡𝓐𝓸𝓲𝓒𝓱𝓪𝓷◦👻 </p>
-        </sub></i>
-    </section>
+    <main style="padding-top: 40px;">
+        <!-- Phần mở đầu có hiệu ứng chữ trượt từ vạch hồng -->
+        <div class="page-header" style="padding: 0 10%;">
+            <h2 class="section-title">🌊𝓐𝓸𝓲𝓒𝓱𝓪𝓷 𝓟𝓸𝓻𝓽𝓯𝓸𝓵𝓲𝓸</h2>
+            <p>| 🌊𝓒𝓸𝓹𝔂𝓻𝓲𝓰𝓱𝓽◡𝓐𝓸𝓲𝓒𝓱𝓪𝓷◦👻</p>
+        </div>
 
-    <div id="footer-root"></div>
+        <!-- Bảng thống kê 3 cột -->
+        <section class="grid-container" style="padding-top: 50px;">
+            <div class="card stat-card">
+                <div class="card-body">
+                    <h3>Plugins</h3>
+                    <div class="stat-value" id="count-plugins">0</div>
+                </div>
+            </div>
+            <div class="card stat-card">
+                <div class="card-body">
+                    <h3>Resource Packs</h3>
+                    <div class="stat-value" id="count-resources">0</div>
+                </div>
+            </div>
+            <div class="card stat-card">
+                <div class="card-body">
+                    <h3>Lượt truy cập & Tải</h3>
+                    <div class="stat-value">999+</div>
+                </div>
+            </div>
+        </section>
+    </main>
 
     <script type="module">
         import { Header } from './js/components/Layout.js';
         import { siteData } from './js/data/database.js';
         import './js/main.js';
+
         document.getElementById('layout-root').innerHTML = Header();
+
+        // Tự động đếm số lượng từ database để hiện lên bảng
+        document.getElementById('count-plugins').innerText = siteData.plugins.length;
+        document.getElementById('count-resources').innerText = siteData.resources.length;
     </script>
 </body>
 </html>
- 
