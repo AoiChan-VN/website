@@ -14,6 +14,6 @@
   
 <div align="center">
   <h2> 🌊𝓒𝓸𝓹𝔂𝓻𝓲𝓰𝓱𝓽◡𝓐𝓸𝓲𝓒𝓱𝓪𝓷◦👻 </h2>
-  <p><i> Nơi lưu trữ và giới thiệu sản phẩm </p>
-  <p><i> Mọi bản dịch và sửa đổi thuộc bản quyền của tôi </i></p>
+    Nơi lưu trữ và giới thiệu sản phẩm
+    <p> Mọi bản dịch và sửa đổi thuộc bản quyền của tôi </p>
 </div>
