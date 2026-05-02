@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>🌊Youtube</title>
+    <title>📺𝓨𝓸𝓾𝓽𝓾𝓫𝓮</title>
     <link rel="icon" type="image/webp" href="./assets/Logo.webp">
     <link rel="stylesheet" href="./css/style.css">
 </head>
@@ -11,7 +11,7 @@
     <div id="layout-root"></div>
     <main>
         <div class="page-header" style="padding: 40px 10% 0 10%;">
-            <h2 class="section-title">Hành Trình Media</h2>
+            <h2 class="section-title">🌊𝓐𝓸𝓲𝓒𝓱𝓪𝓷 𝓟𝓸𝓻𝓽𝓯𝓸𝓵𝓲𝓸</h2>
             <p style="opacity: 0.6;">Theo dõi các video trailer và hướng dẫn mới nhất.</p>
         </div>
         <div id="video-list" class="grid-container"></div>
@@ -28,7 +28,6 @@
         container.innerHTML = siteData.youtube.map(vid => `
             <div class="card">
                 <div class="card-img-wrapper">
-                    <!-- Hiện GIF thay vì Iframe thô kệch -->
                     <img src="${vid.gifThumb}" alt="${vid.title}" onerror="this.src='https://placehold.co'">
                 </div>
                 <div class="card-body" style="display: flex; flex-direction: column; height: 180px; justify-content: space-between;">
