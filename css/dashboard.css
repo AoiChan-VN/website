@@ -1,99 +1,30 @@
-/* DASHBOARD LAYOUT V3 */
-.dashboard-v3 {
-    display: grid;
-    grid-template-columns: 1.8fr 1fr; /* Tỉ lệ giống Pterodactyl */
-    gap: 25px;
-    margin-top: 30px;
-}
+.admin-panel-v4 { animation: fadeInUp 0.8s ease forwards; }
 
-/* KHUNG CARD PTERO STYLE */
-.ptero-card {
-    background: rgba(13, 17, 23, 0.8) !important;
-    border: 1px solid rgba(255, 255, 255, 0.05) !important;
-    border-radius: 12px;
-    display: flex;
-    flex-direction: column;
-}
-
-.ptero-card-header {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    padding: 15px 20px;
-    border-bottom: 1px solid rgba(255, 255, 255, 0.05);
-}
-
-.ptero-title {
-    font-size: 0.75rem;
-    font-weight: 800;
-    color: #8b949e;
-    letter-spacing: 1px;
-}
-
-.ptero-chart-container {
-    width: 100%;
-    height: 180px; /* Chỉnh lại chiều cao cho vừa mắt */
-    margin-top: 10px;
-    background: rgba(0, 0, 0, 0.2); /* Tạo chiều sâu cho vùng vẽ biểu đồ */
-    border-radius: 8px;
+.main-admin-box {
+    background: rgba(13, 17, 23, 0.95) !important;
+    border: 1px solid var(--primary) !important;
     overflow: hidden;
 }
 
-.ptero-chart-container svg {
-    width: 100%;
-    height: 100%;
-    display: block; /* Xóa khoảng trống thừa ở chân file ảnh */
+.ptero-card-header {
+    padding: 15px 20px;
+    border-bottom: 1px solid rgba(255,255,255,0.05);
+    display: flex; justify-content: space-between; align-items: center;
 }
 
-/* NÚT BẤM GÓC PHẢI (START/RESTART/STOP) */
-.ptero-actions { display: flex; gap: 8px; }
+.ptero-title { font-size: 0.7rem; font-weight: 800; color: #8b949e; letter-spacing: 1px; }
 
-.ptero-btn {
-    padding: 6px 14px;
-    border-radius: 6px;
-    font-size: 0.75rem;
-    font-weight: bold;
-    border: none;
-    cursor: pointer;
-    color: white;
-    transition: 0.2s;
+#chart-wrapper svg { width: 100%; height: 100%; display: block; }
+
+.admin-stats-footer {
+    display: grid; grid-template-columns: repeat(3, 1fr);
+    background: rgba(0,0,0,0.3); border-top: 1px solid rgba(255,255,255,0.05);
 }
 
-.ptero-btn.start { background: #22c55e; }
-.ptero-btn.restart { background: #3b82f6; }
-.ptero-btn.stop { background: #ef4444; }
-.ptero-btn:hover { filter: brightness(1.2); }
+.footer-item { padding: 20px; text-align: center; border-right: 1px solid rgba(255,255,255,0.05); }
+.footer-item:last-child { border-right: none; }
+.footer-item span { display: block; font-size: 0.65rem; opacity: 0.5; text-transform: uppercase; margin-bottom: 5px; }
+.footer-item strong { font-size: 1.8rem; color: var(--primary); text-shadow: 0 0 10px var(--primary-glow); }
 
-/* BODY & INFO ROW */
-.ptero-card-body { padding: 20px; }
-
-.ptero-info-row {
-    display: flex;
-    justify-content: space-between;
-    margin-bottom: 15px;
-    font-size: 0.9rem;
-}
-
-.status-online { color: #22c55e; }
-.status-offline { color: #ef4444; }
-
-/* PROGRESS BAR (DISK USAGE) */
-.progress-bar-container {
-    width: 100%;
-    height: 8px;
-    background: rgba(255, 255, 255, 0.05);
-    border-radius: 10px;
-    margin-top: 10px;
-}
-
-.progress-bar-fill {
-    height: 100%;
-    background: var(--primary);
-    border-radius: 10px;
-    box-shadow: 0 0 10px var(--primary-glow);
-}
-
-/* RESPONSIVE */
-@media (max-width: 1024px) {
-    .dashboard-v3 { grid-template-columns: 1fr; }
-}
+.live-indicator { color: #22c55e; font-size: 0.7rem; font-weight: bold; animation: blink 1.5s infinite; }
+@keyframes blink { 0%, 100% { opacity: 1; } 50% { opacity: 0.3; } }
