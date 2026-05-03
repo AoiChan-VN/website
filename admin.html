@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>GitHub Admin Dashboard</title>
+    <title>Admin Dashboard</title>
     <script src="https://tailwindcss.com"></script>
     <style>
         .card { background: #1e293b; border: 1px solid #334155; border-radius: 12px; padding: 1.5rem; }
@@ -14,7 +14,7 @@
     <!-- Giao diện Nhập Token (Chỉ hiện khi chưa có Token) -->
     <div id="login-screen" class="hidden max-w-md mx-auto mt-20 card text-center">
         <h2 class="text-2xl font-bold mb-4">Kết nối GitHub</h2>
-        <p class="text-sm text-slate-400 mb-6">Nhập Personal Access Token để quản lý dữ liệu thực tế.</p>
+        <p class="text-sm text-slate-400 mb-6">Nhập Personal Access Token.</p>
         <input type="password" id="token-input" placeholder="Paste GitHub Token here..." 
                class="w-full p-3 rounded bg-slate-800 border border-slate-700 mb-4 outline-none focus:border-blue-500">
         <button onclick="saveToken()" class="w-full bg-blue-600 hover:bg-blue-700 p-3 rounded font-bold transition">Lưu & Kết nối</button>
@@ -60,8 +60,8 @@
 
     <script>
         // THAY THÔNG TIN CỦA ANH VÀO ĐÂY
-        const REPO_OWNER = 'TEN_USER_CUA_ANH';
-        const REPO_NAME = 'TEN_REPO_CUA_ANH';
+        const REPO_OWNER = 'AoiChan-VN';
+        const REPO_NAME = 'Website';
 
         const token = localStorage.getItem('gh_token');
 
