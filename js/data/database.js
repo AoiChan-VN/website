@@ -2,8 +2,7 @@ export const siteData = {
     settings: {
         logo: "./assets/Logo.webp",
         youtubeChannel: "http://www.youtube.com/@_Kawaii.2K",
-        serverIP: "aoidev.falix.dev",
-        githubRepo: "aoichan-vn/Website"
+        githubRepo: "AoiChan-VN/Website"
     },
     plugins: [
         { id: 1, name: "Aoi Plugin",
