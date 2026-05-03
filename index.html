@@ -3,39 +3,39 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Admin Dashboard</title>
-    <link rel="icon" type="image/webp" href="./assets/Logo.webp">
+    <title>Admin Panel v5 | 🌊𝓐𝓸𝓲𝓒𝓱𝓪𝓷◡</title>
     <link rel="stylesheet" href="./css/style.css">
 </head>
-<body>
+<body class="admin-ui">
     <div id="layout-root"></div>
-
-    <main style="padding: 40px 8%;">
-        <div class="page-header" style="display: flex; justify-content: space-between; align-items: flex-end; margin-bottom: 30px;">
-            <div>
-                <h2 class="section-title">Admin Dashboard</h2>
-                <p style="margin: 5px 0 0 26px; opacity: 0.6;">| Phân tích tài nguyên nội bộ thời gian thực.</p>
-            </div>
+    <main style="padding: 40px 10%;">
+        <div class="page-header" style="margin-bottom: 30px;">
+            <h2 class="section-title">ADMINISTRATOR MONITOR</h2>
+            <p style="margin-left: 26px; opacity:0.5;">| Real-time analytics from GitHub & System.</p>
         </div>
 
-        <section class="admin-panel-v4">
-            <div class="card ptero-card main-admin-box">
-                <div class="ptero-card-header">
-                    <span class="ptero-title">SYSTEM RESOURCE MONITOR</span>
-                    <div class="live-indicator">● ONLINE DATA</div>
+        <section class="admin-grid">
+            <!-- Cột Trái: Biểu đồ & Logs -->
+            <div class="card ptero-card main-chart-area">
+                <div class="card-header-v5"><span>RESOURCE FLOW</span> <div class="live-blink">LIVE</div></div>
+                <div id="chart-wrapper" style="height: 200px;"></div>
+                <div class="stats-bar-v5">
+                    <div class="stat-v5"><span>PLUGINS</span> <b id="p-val">0</b></div>
+                    <div class="stat-v5"><span>RESOURCE</span> <b id="r-val">0</b></div>
+                    <div class="stat-v5"><span>ASSETS</span> <b id="t-val">0</b></div>
                 </div>
-                
-                <!-- Gọi biểu đồ từ file SVG ngoài -->
-                <div class="ptero-card-body" id="chart-wrapper" style="height: 220px;">
-                    <!-- SVG load ở đây -->
-                </div>
+            </div>
 
-                <!-- Thống kê số liệu thật từ database.js -->
-                <div class="admin-stats-footer">
-                    <div class="footer-item"><span>Plugins</span><strong id="p-count">0</strong></div>
-                    <div class="footer-item"><span>Resources</span><strong id="r-count">0</strong></div>
-                    <div class="footer-item"><span>Total Media</span><strong id="m-count">0</strong></div>
+            <!-- Cột Phải: GitHub & Disk Data (Dữ liệu thật) -->
+            <div class="card ptero-card github-area">
+                <div class="card-header-v5"><span>GITHUB & STORAGE</span></div>
+                <div class="data-rows">
+                    <div class="data-item"><span>Repo Name:</span> <strong id="repo-name">Website</strong></div>
+                    <div class="data-item"><span>Last Update:</span> <strong id="repo-update">--/--</strong></div>
+                    <div class="data-item"><span>Disk Usage:</span> <strong id="repo-disk">0 MB</strong></div>
                 </div>
+                <div class="storage-bar"><div id="disk-fill" class="fill"></div></div>
+                <p style="font-size: 0.7rem; opacity: 0.4; margin-top: 10px;">*Data fetched from GitHub REST API</p>
             </div>
         </section>
     </main>
@@ -45,41 +45,44 @@
         import { siteData } from './js/data/database.js';
         import './js/main.js';
 
-        // 1. Render linh kiện chung
         document.getElementById('layout-root').innerHTML = Header();
 
-        // 2. Hàm xử lý biểu đồ dựa trên số liệu thật
-        async function syncAdminDashboard() {
+        // 1. GITHUB API - Lấy dữ liệu thật
+        async function fetchGithub() {
+            try {
+                const res = await fetch(`https://github.com{siteData.settings.githubRepo || 'aoichan-vn/Website'}`);
+                const data = await res.json();
+                document.getElementById('repo-update').innerText = new Date(data.pushed_at).toLocaleDateString();
+                const sizeMB = (data.size / 1024).toFixed(2);
+                document.getElementById('repo-disk').innerText = sizeMB + " MB / 1 GB";
+                document.getElementById('disk-fill').style.width = Math.min((sizeMB / 1024) * 100, 100) + "%";
+            } catch (e) { console.error("GitHub API Down"); }
+        }
+
+        // 2. ADMIN DASHBOARD - Đồng bộ SVG & Data
+        async function initAdmin() {
             const wrapper = document.getElementById('chart-wrapper');
-            const response = await fetch('./assets/vectors/admin-chart.svg');
-            wrapper.innerHTML = await response.text();
+            const svgRes = await fetch('./assets/vectors/admin-chart.svg');
+            wrapper.innerHTML = await svgRes.text();
 
             const p = siteData.plugins.length;
             const r = siteData.resources.length;
-            const m = siteData.youtube.length;
+            const t = p + r + siteData.youtube.length;
 
-            // Cập nhật text số liệu
-            document.getElementById('p-count').innerText = p;
-            document.getElementById('r-count').innerText = r;
-            document.getElementById('m-count').innerText = m;
+            document.getElementById('p-val').innerText = p;
+            document.getElementById('r-val').innerText = r;
+            document.getElementById('t-val').innerText = t;
 
-            // Bẻ đường vẽ SVG theo dữ liệu thật (Logic Scale 15)
             const line = document.getElementById('svg-line');
             const area = document.getElementById('svg-area');
-            if (line && area) {
-                const yP = 150 - (p * 15 + 20);
-                const yR = 150 - (r * 15 + 40);
-                const yM = 150 - (m * 15 + 10);
-                
-                // Tạo chuỗi tọa độ gãy khúc (Step-line)
-                const d = `M0,150 L0,${yP} L133,${yP} L133,${yR} L266,${yR} L266,${yM} L400,${yM}`;
+            if(line && area) {
+                const d = `M0,150 L0,${150-p*15} L133,${150-p*15} L133,${150-r*15} L266,${150-r*15} L266,${150-t*5} L400,${150-t*5}`;
                 line.setAttribute('d', d);
                 area.setAttribute('d', d + ` L400,150 L0,150 Z`);
             }
         }
 
-        window.addEventListener('DOMContentLoaded', syncAdminDashboard);
+        fetchGithub(); initAdmin();
     </script>
 </body>
 </html>
- 
