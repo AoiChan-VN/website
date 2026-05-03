@@ -25,3 +25,12 @@ window.viewDetail = async (mdPath) => {
 };
 
 document.documentElement.setAttribute('data-theme', localStorage.getItem('theme') || 'dark');
+
+// Chống chuột phải và các phím tắt F12, Ctrl+U, Ctrl+Shift+I
+document.addEventListener('contextmenu', e => e.preventDefault());
+document.addEventListener('keydown', e => {
+    if (e.keyCode == 123 || (e.ctrlKey && e.shiftKey && e.keyCode == 73) || (e.ctrlKey && e.keyCode == 85)) {
+        e.preventDefault();
+        alert("Cảnh báo: Hành động này bị chặn để bảo mật!");
+    }
+});
