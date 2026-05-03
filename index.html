@@ -3,18 +3,28 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>🌊𝓐𝓸𝓲𝓒𝓱𝓪𝓷 𝓟𝓸𝓻𝓽𝓯𝓸𝓵𝓲𝓸</title>
+    <title>AoiChan Portfolio | Administrator</title>
+    <!-- Favicon chuẩn thương hiệu -->
     <link rel="icon" type="image/webp" href="./assets/Logo.webp">
+    <!-- File CSS tổng (import tất cả module CSS) -->
     <link rel="stylesheet" href="./css/style.css">
 </head>
 <body>
-    <!-- Vùng chứa Header cố định -->
+    <!-- 1. Vùng chứa Header & Modal Settings -->
     <div id="layout-root"></div>
     
-    <!-- Vùng nội dung sẽ thay đổi động -->
-    <main id="page-content"></main>
+    <!-- 2. Vùng chứa nội dung động (Home, Plugins, Youtube, Download) -->
+    <main id="page-content" style="transition: opacity 0.3s ease;"></main>
 
-    <!-- Script điều hướng chính -->
+    <!-- 3. Bộ não điều hướng (Router) - QUAN TRỌNG NHẤT -->
+    <!-- Phải để type="module" thì các lệnh import mới chạy được -->
     <script type="module" src="./js/router.js"></script>
+
+    <!-- Fallback nếu trình duyệt không hỗ trợ JS -->
+    <noscript>
+        <div style="text-align: center; padding: 50px; color: white; background: #0b0f1a;">
+            Website yêu cầu JavaScript để hoạt động. Vui lòng bật lại trong cài đặt trình duyệt.
+        </div>
+    </noscript>
 </body>
 </html>
