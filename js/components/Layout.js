@@ -1,7 +1,7 @@
 import { siteData } from '../data/database.js';
 
 export const Header = () => {
-    const current = window.location.pathname.split("/").pop() || 'index.html';
+    const current = window.location.pathname.split("/").pop() || '#index';
     const nav = [
         { n: '𝓗𝓸𝓶𝓮', h: '#index' },
         { n: '𝓟𝓵𝓾𝓰𝓲𝓷𝓼', h: '#plugins' },
