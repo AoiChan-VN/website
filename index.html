@@ -64,36 +64,90 @@
     </main>
 
     <script type="module">
-        import { Header } from './js/components/Layout.js';
-        import { siteData } from './js/data/database.js';
-        import './js/main.js';
+    import { siteData } from './js/data/database.js';
+    import { Header } from './js/components/Layout.js';
+    import './js/main.js';
 
-        document.getElementById('layout-root').innerHTML = Header();
+    document.getElementById('layout-root').innerHTML = Header();
 
-        // LOAD SVG BIỂU ĐỒ (Dùng lại bản SVG xịn của anh)
-        async function loadChart() {
-            const res = await fetch('./assets/vectors/chart.svg');
-            document.getElementById('chart-root').innerHTML = await res.text();
+    const canvas = document.getElementById('realtimeChart');
+    const ctx = canvas.getContext('2d');
+    let pingHistory = Array(30).fill(100); // Lưu trữ 30 mốc Ping thực tế
+
+    // 1. LẤY DỮ LIỆU SERVER THẬT (FALIXNODE)
+    async function updateServerStats() {
+        const ip = siteData.settings.serverIP;
+        const startPing = Date.now();
+        
+        try {
+            const res = await fetch(`https://mcsrvstat.us{ip}`);
+            const data = await res.json();
+            const duration = Date.now() - startPing;
+
+            if (data.online) {
+                document.getElementById('srv-status').innerText = "ONLINE";
+                document.getElementById('srv-status').style.color = "#22c55e";
+                document.getElementById('srv-players').innerText = `${data.players.online} / ${data.players.max}`;
+                // Đẩy dữ liệu Ping thật vào biểu đồ
+                pingHistory.push(Math.min(duration, 150)); 
+            } else {
+                document.getElementById('srv-status').innerText = "OFFLINE";
+                document.getElementById('srv-status').style.color = "#ef4444";
+                pingHistory.push(150); // Nếu sập thì biểu đồ chạm đáy
+            }
+        } catch (e) {
+            pingHistory.push(150);
         }
-        loadChart();
+        pingHistory.shift();
+        drawLiveChart();
+    }
 
-        // GỌI API THẬT (mcsrvstat.us)
-        async function getRealData() {
-            const ip = siteData.settings.serverIP || "mc.hypixel.net";
-            try {
-                const res = await fetch(`https://mcsrvstat.us{ip}`);
-                const data = await res.json();
-                const status = document.getElementById('srv-status');
-                if(data.online) {
-                    status.innerText = "ONLINE";
-                    status.className = "status-online";
-                    document.getElementById('srv-players').innerText = `${data.players.online} / ${data.players.max}`;
-                }
-            } catch(e) { console.error("API error"); }
-        }
-        getRealData();
+    // 2. LẤY DUNG LƯỢNG REPO THẬT (GITHUB)
+    async function updateDiskUsage() {
+        try {
+            const res = await fetch(`https://github.com{siteData.settings.githubRepo}`);
+            const data = await res.json();
+            const sizeMB = (data.size / 1024).toFixed(2); // GitHub trả về KB, đổi sang MB
+            
+            document.getElementById('srv-disk').innerText = `${sizeMB} MB / 1 GB`;
+            // Cập nhật thanh ngang theo % của 1GB (1024MB)
+            const percent = Math.min((sizeMB / 1024) * 100, 100);
+            document.querySelector('.progress-bar-fill').style.width = `${percent}%`;
+        } catch (e) { console.error("GitHub API Error"); }
+    }
 
-        window.serverAction = (type) => alert(`Hành động ${type.toUpperCase()} đã được gửi!`);
+    // 3. VẼ BIỂU ĐỒ DỮ LIỆU THỰC (CANVAS)
+    function drawLiveChart() {
+        ctx.clearRect(0, 0, canvas.width, canvas.height);
+        canvas.width = canvas.offsetWidth;
+        canvas.height = canvas.offsetHeight;
+
+        // Vẽ đường Line gãy khúc (Step-line chuẩn Ptero)
+        ctx.beginPath();
+        ctx.strokeStyle = '#ff85a1';
+        ctx.lineWidth = 2;
+        ctx.shadowBlur = 10;
+        ctx.shadowColor = '#ff85a1';
+
+        const step = canvas.width / (pingHistory.length - 1);
+        pingHistory.forEach((val, i) => {
+            const x = i * step;
+            const y = (val / 150) * canvas.height; // Tỉ lệ hóa Ping vào khung hình
+            if (i === 0) ctx.moveTo(x, y);
+            else ctx.lineTo(x, y);
+        });
+        ctx.stroke();
+    }
+
+    // Chạy cập nhật mỗi 5 giây (Tránh bị GitHub khóa API do request quá nhanh)
+    setInterval(() => {
+        updateServerStats();
+        updateDiskUsage();
+    }, 5000);
+
+    // Chạy lần đầu ngay khi mở trang
+    updateServerStats();
+    updateDiskUsage();
     </script>
 </body>
 </html>
