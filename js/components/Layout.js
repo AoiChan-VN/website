@@ -3,11 +3,11 @@ import { siteData } from '../data/database.js';
 export const Header = () => {
     const current = window.location.pathname.split("/").pop() || 'index.html';
     const nav = [
-        { n: '𝓗𝓸𝓶𝓮', h: 'index.html' },
-        { n: '𝓟𝓵𝓾𝓰𝓲𝓷𝓼', h: 'plugins.html' },
-        { n: '𝓡𝓮𝓻𝓸𝓾𝓼𝓬𝓮𝓻', h: 'resources.html' },
-        { n: '𝓨𝓸𝓾𝓽𝓾𝓫𝓮', h: 'youtube.html' },
-        { n: '𝓓𝓸𝔀𝓷𝓵𝓸𝓪𝓭', h: 'download.html' }
+        { n: '𝓗𝓸𝓶𝓮', h: '#index' },
+        { n: '𝓟𝓵𝓾𝓰𝓲𝓷𝓼', h: '#plugins' },
+        { n: '𝓡𝓮𝓻𝓸𝓾𝓼𝓬𝓮𝓻', h: '#resources' },
+        { n: '𝓨𝓸𝓾𝓽𝓾𝓫𝓮', h: '#youtube' },
+        { n: '𝓓𝓸𝔀𝓷𝓵𝓸𝓪𝓭', h: '#download' }
     ];
 
     return `
