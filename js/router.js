@@ -1,4 +1,4 @@
-import { Header, SettingsPanel } from './components/Layout.js';
+import { Header, SettingsPanel } from './components/layout.js';
 import { siteData } from './data/database.js';
 import './main.js';
 
