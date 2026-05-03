@@ -1,0 +1,126 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>GitHub Admin Dashboard</title>
+    <script src="https://tailwindcss.com"></script>
+    <style>
+        .card { background: #1e293b; border: 1px solid #334155; border-radius: 12px; padding: 1.5rem; }
+    </style>
+</head>
+<body class="bg-slate-900 text-slate-100 min-h-screen p-4">
+
+    <!-- Giao diện Nhập Token (Chỉ hiện khi chưa có Token) -->
+    <div id="login-screen" class="hidden max-w-md mx-auto mt-20 card text-center">
+        <h2 class="text-2xl font-bold mb-4">Kết nối GitHub</h2>
+        <p class="text-sm text-slate-400 mb-6">Nhập Personal Access Token để quản lý dữ liệu thực tế.</p>
+        <input type="password" id="token-input" placeholder="Paste GitHub Token here..." 
+               class="w-full p-3 rounded bg-slate-800 border border-slate-700 mb-4 outline-none focus:border-blue-500">
+        <button onclick="saveToken()" class="w-full bg-blue-600 hover:bg-blue-700 p-3 rounded font-bold transition">Lưu & Kết nối</button>
+    </div>
+
+    <!-- Dashboard Chính -->
+    <div id="main-dashboard" class="hidden max-w-4xl mx-auto">
+        <header class="flex justify-between items-center mb-8">
+            <h1 class="text-xl font-bold text-blue-400">Admin Dashboard</h1>
+            <button onclick="logout()" class="text-xs bg-red-900/30 text-red-400 px-3 py-1 rounded border border-red-800">Đăng xuất</button>
+        </header>
+
+        <!-- Hàng 1: Số liệu thời gian thực -->
+        <div class="grid grid-cols-2 md:grid-cols-4 gap-4 mb-8">
+            <div class="card text-center">
+                <p class="text-slate-400 text-xs uppercase">Dung lượng</p>
+                <p id="stat-size" class="text-xl font-mono mt-1 text-blue-300">...</p>
+            </div>
+            <div class="card text-center">
+                <p class="text-slate-400 text-xs uppercase">Ngôi sao</p>
+                <p id="stat-stars" class="text-xl font-mono mt-1 text-yellow-400">...</p>
+            </div>
+            <div class="card text-center">
+                <p class="text-slate-400 text-xs uppercase">Ngôn ngữ</p>
+                <p id="stat-lang" class="text-xl font-mono mt-1 text-green-400 text-sm">...</p>
+            </div>
+            <div class="card text-center">
+                <p class="text-slate-400 text-xs uppercase">Cập nhật</p>
+                <p id="stat-update" class="text-xs font-mono mt-1 text-slate-300">...</p>
+            </div>
+        </div>
+
+        <!-- Hàng 2: Quản lý File nội dung -->
+        <div class="card">
+            <h3 class="font-bold mb-4 flex items-center">
+                <span class="mr-2">📂</span> Danh sách bài viết (.md)
+            </h3>
+            <div id="file-list" class="space-y-3">
+                <p class="text-slate-500 italic">Đang tải danh sách file...</p>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // THAY THÔNG TIN CỦA ANH VÀO ĐÂY
+        const REPO_OWNER = 'TEN_USER_CUA_ANH';
+        const REPO_NAME = 'TEN_REPO_CUA_ANH';
+
+        const token = localStorage.getItem('gh_token');
+
+        if (!token) {
+            document.getElementById('login-screen').classList.remove('hidden');
+        } else {
+            document.getElementById('main-dashboard').classList.remove('hidden');
+            loadData();
+        }
+
+        function saveToken() {
+            const val = document.getElementById('token-input').value;
+            if (val) {
+                localStorage.setItem('gh_token', val);
+                location.reload();
+            }
+        }
+
+        function logout() {
+            localStorage.removeItem('gh_token');
+            location.reload();
+        }
+
+        async function loadData() {
+            const headers = { 'Authorization': `token ${token}` };
+
+            try {
+                // 1. Lấy thông số Repo
+                const repoRes = await fetch(`https://github.com{REPO_OWNER}/${REPO_NAME}`, { headers });
+                const repoData = await repoRes.json();
+                
+                document.getElementById('stat-size').innerText = (repoData.size / 1024).toFixed(2) + ' MB';
+                document.getElementById('stat-stars').innerText = repoData.stargazers_count;
+                document.getElementById('stat-lang').innerText = repoData.language || 'N/A';
+                document.getElementById('stat-update').innerText = new Date(repoData.pushed_at).toLocaleDateString();
+
+                // 2. Lấy danh sách file trong thư mục gốc (hoặc thư mục /posts)
+                const fileRes = await fetch(`https://github.com{REPO_OWNER}/${REPO_NAME}/contents`, { headers });
+                const files = await fileRes.json();
+                
+                const listEl = document.getElementById('file-list');
+                listEl.innerHTML = '';
+                
+                files.filter(f => f.name.endsWith('.md')).forEach(file => {
+                    const item = document.createElement('div');
+                    item.className = 'flex justify-between items-center p-3 bg-slate-800/50 rounded border border-slate-700';
+                    item.innerHTML = `
+                        <span class="text-sm font-medium">${file.name}</span>
+                        <a href="${file.html_url}" target="_blank" class="text-xs text-blue-400 border border-blue-400 px-2 py-1 rounded hover:bg-blue-400 hover:text-white">Xem trên Git</a>
+                    `;
+                    listEl.appendChild(item);
+                });
+
+            } catch (err) {
+                alert("Lỗi kết nối hoặc Token sai! Vui lòng kiểm tra lại.");
+                logout();
+            }
+        }
+    </script>
+</body>
+</html>
+ 
