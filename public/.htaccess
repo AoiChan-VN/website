@@ -1,9 +1,8 @@
-# Chống Frame sniffing (Clickjacking)
+# 1. Chống Clickjacking
 Header set X-Frame-Options "SAMEORIGIN"
-# Chống XSS
+# 2. Chống XSS (Cross Site Scripting)
 Header set X-XSS-Protection "1; mode=block"
-# Chống đánh cắp loại nội dung
+# 3. Chống Sniffing (Ép trình duyệt đọc đúng định dạng file)
 Header set X-Content-Type-Options "nosniff"
-# Chính sách bảo mật nội dung mạnh mẽ
-Header set Content-Security-Policy "default-src 'self'; script-src 'self' 'unsafe-inline'; style-src 'self' 'unsafe-inline';"
- 
+# 4. Content Security Policy (Chỉ cho phép nội bộ)
+Header set Content-Security-Policy "default-src 'self'; script-src 'self' 'unsafe-inline' 'unsafe-eval'; style-src 'self' 'unsafe-inline'; img-src 'self' data:; connect-src 'self';"
