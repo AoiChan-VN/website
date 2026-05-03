@@ -11,6 +11,7 @@ export const siteData = {
          img: "./assets/images/plugin.jpg"
         },
         { id: 2, name: "Hướng dẫn",
+         version: "#",
          desc: "Hướng dẫn cơ bản dành cho...",
          mdPath: "content/info.md"
         }
