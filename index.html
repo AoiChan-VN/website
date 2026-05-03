@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Trang Chủ | 🌊𝓐𝓸𝓲𝓒𝓱𝓪𝓷◡</title>
+    <title>Admin Dashboard</title>
     <link rel="icon" type="image/webp" href="./assets/Logo.webp">
     <link rel="stylesheet" href="./css/style.css">
 </head>
@@ -11,143 +11,75 @@
     <div id="layout-root"></div>
 
     <main style="padding: 40px 8%;">
-        <div class="page-header">
-            <h2 class="section-title">Hệ Thống Quản Trị</h2>
-            <p>| Giám sát tài nguyên máy chủ thời gian thực.</p>
+        <div class="page-header" style="display: flex; justify-content: space-between; align-items: flex-end; margin-bottom: 30px;">
+            <div>
+                <h2 class="section-title">Admin Dashboard</h2>
+                <p style="margin: 5px 0 0 26px; opacity: 0.6;">| Phân tích tài nguyên nội bộ thời gian thực.</p>
+            </div>
         </div>
 
-        <!-- DASHBOARD CONTAINER (Khung chính giống Pterodactyl) -->
-        <section class="dashboard-v3">
-            
-            <!-- Card 1: Console & Biểu đồ (Chiếm 2/3 bề ngang) -->
-            <div class="card ptero-card console-box">
+        <section class="admin-panel-v4">
+            <div class="card ptero-card main-admin-box">
                 <div class="ptero-card-header">
-                    <span class="ptero-title">DASHBOARD MONITOR</span>
-                    <div class="ptero-actions">
-                        <button class="ptero-btn start" onclick="serverAction('start')">START</button>
-                        <button class="ptero-btn restart" onclick="serverAction('restart')">RESTART</button>
-                        <button class="ptero-btn stop" onclick="serverAction('stop')">STOP</button>
-                    </div>
+                    <span class="ptero-title">SYSTEM RESOURCE MONITOR</span>
+                    <div class="live-indicator">● ONLINE DATA</div>
                 </div>
-                <div class="ptero-card-body">
-                    <!-- Khu vực Biểu đồ SVG External -->
-                    <div id="chart-root" class="ptero-chart-container"></div>
+                
+                <!-- Gọi biểu đồ từ file SVG ngoài -->
+                <div class="ptero-card-body" id="chart-wrapper" style="height: 220px;">
+                    <!-- SVG load ở đây -->
+                </div>
+
+                <!-- Thống kê số liệu thật từ database.js -->
+                <div class="admin-stats-footer">
+                    <div class="footer-item"><span>Plugins</span><strong id="p-count">0</strong></div>
+                    <div class="footer-item"><span>Resources</span><strong id="r-count">0</strong></div>
+                    <div class="footer-item"><span>Total Media</span><strong id="m-count">0</strong></div>
                 </div>
             </div>
-
-            <!-- Card 2: Thông số Disk/Data (Dữ liệu thật từ API) -->
-            <div class="card ptero-card info-box">
-                <div class="ptero-card-header">
-                    <span class="ptero-title">SERVER INFORMATION</span>
-                </div>
-                <div class="ptero-card-body">
-                    <div class="ptero-info-row">
-                        <span>Trạng thái:</span>
-                        <strong id="srv-status" class="status-offline">OFFLINE</strong>
-                    </div>
-                    <div class="ptero-info-row">
-                        <span>Người chơi:</span>
-                        <strong id="srv-players">0 / 0</strong>
-                    </div>
-                    <div class="ptero-info-row">
-                        <span>Dung lượng Disk:</span>
-                        <strong id="srv-disk">9.124 MB / 12 GB</strong>
-                    </div>
-                    <!-- Thanh tiến trình Disk (Xịn sò) -->
-                    <div class="progress-bar-container">
-                        <div class="progress-bar-fill" style="width: 75%;"></div>
-                    </div>
-                </div>
-            </div>
-
         </section>
     </main>
 
     <script type="module">
-        import { siteData } from './js/data/database.js';
         import { Header } from './js/components/Layout.js';
+        import { siteData } from './js/data/database.js';
         import './js/main.js';
 
+        // 1. Render linh kiện chung
         document.getElementById('layout-root').innerHTML = Header();
 
-        const canvas = document.getElementById('realtimeChart');
-        const ctx = canvas.getContext('2d');
-        let pingHistory = Array(30).fill(100); // Lưu trữ 30 mốc Ping thực tế
+        // 2. Hàm xử lý biểu đồ dựa trên số liệu thật
+        async function syncAdminDashboard() {
+            const wrapper = document.getElementById('chart-wrapper');
+            const response = await fetch('./assets/vectors/admin-chart.svg');
+            wrapper.innerHTML = await response.text();
 
-        // 1. LẤY DỮ LIỆU SERVER THẬT (FALIXNODE)
-        async function updateServerStats() {
-            const ip = siteData.settings.serverIP;
-            const startPing = Date.now();
-        
-            try {
-                const res = await fetch(`https://mcsrvstat.us{ip}`);
-                const data = await res.json();
-                const duration = Date.now() - startPing;
+            const p = siteData.plugins.length;
+            const r = siteData.resources.length;
+            const m = siteData.youtube.length;
 
-                if (data.online) {
-                    document.getElementById('srv-status').innerText = "ONLINE";
-                    document.getElementById('srv-status').style.color = "#22c55e";
-                    document.getElementById('srv-players').innerText = `${data.players.online} / ${data.players.max}`;
-                    // Đẩy dữ liệu Ping thật vào biểu đồ
-                    pingHistory.push(Math.min(duration, 150)); 
-                } else {
-                    document.getElementById('srv-status').innerText = "OFFLINE";
-                    document.getElementById('srv-status').style.color = "#ef4444";
-                    pingHistory.push(150); // Nếu sập thì biểu đồ chạm đáy
-                }
-            } catch (e) {
-                pingHistory.push(150);
+            // Cập nhật text số liệu
+            document.getElementById('p-count').innerText = p;
+            document.getElementById('r-count').innerText = r;
+            document.getElementById('m-count').innerText = m;
+
+            // Bẻ đường vẽ SVG theo dữ liệu thật (Logic Scale 15)
+            const line = document.getElementById('svg-line');
+            const area = document.getElementById('svg-area');
+            if (line && area) {
+                const yP = 150 - (p * 15 + 20);
+                const yR = 150 - (r * 15 + 40);
+                const yM = 150 - (m * 15 + 10);
+                
+                // Tạo chuỗi tọa độ gãy khúc (Step-line)
+                const d = `M0,150 L0,${yP} L133,${yP} L133,${yR} L266,${yR} L266,${yM} L400,${yM}`;
+                line.setAttribute('d', d);
+                area.setAttribute('d', d + ` L400,150 L0,150 Z`);
             }
-            pingHistory.shift();
-            drawLiveChart();
         }
 
-        // 2. LẤY DUNG LƯỢNG REPO THẬT (GITHUB)
-        async function updateDiskUsage() {
-            try {
-                const res = await fetch(`https://github.com{siteData.settings.githubRepo}`);
-                const data = await res.json();
-                const sizeMB = (data.size / 1024).toFixed(2); // GitHub trả về KB, đổi sang MB
-            
-                document.getElementById('srv-disk').innerText = `${sizeMB} MB / 1 GB`;
-                // Cập nhật thanh ngang theo % của 1GB (1024MB)
-                const percent = Math.min((sizeMB / 1024) * 100, 100);
-                document.querySelector('.progress-bar-fill').style.width = `${percent}%`;
-            } catch (e) { console.error("GitHub API Error"); }
-        }
-
-        // 3. VẼ BIỂU ĐỒ DỮ LIỆU THỰC (CANVAS)
-        function drawLiveChart() {
-            ctx.clearRect(0, 0, canvas.width, canvas.height);
-            canvas.width = canvas.offsetWidth;
-            canvas.height = canvas.offsetHeight;
-
-            // Vẽ đường Line gãy khúc (Step-line chuẩn Ptero)
-            ctx.beginPath();
-            ctx.strokeStyle = '#ff85a1';
-            ctx.lineWidth = 2;
-            ctx.shadowBlur = 10;
-            ctx.shadowColor = '#ff85a1';
-
-            const step = canvas.width / (pingHistory.length - 1);
-            pingHistory.forEach((val, i) => {
-                const x = i * step;
-                const y = (val / 150) * canvas.height; // Tỉ lệ hóa Ping vào khung hình
-                if (i === 0) ctx.moveTo(x, y);
-                else ctx.lineTo(x, y);
-            });
-            ctx.stroke();
-        }
-        
-        // Chạy cập nhật mỗi 5 giây (Tránh bị GitHub khóa API do request quá nhanh)
-        setInterval(() => {
-            updateServerStats();
-            updateDiskUsage();
-        }, 5000);
-        
-        // Chạy lần đầu ngay khi mở trang
-        updateServerStats();
-        updateDiskUsage();
+        window.addEventListener('DOMContentLoaded', syncAdminDashboard);
     </script>
 </body>
 </html>
+ 
