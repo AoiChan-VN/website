@@ -3,86 +3,18 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Admin Panel v5 | 🌊𝓐𝓸𝓲𝓒𝓱𝓪𝓷◡</title>
+    <title>🌊𝓐𝓸𝓲𝓒𝓱𝓪𝓷 𝓟𝓸𝓻𝓽𝓯𝓸𝓵𝓲𝓸</title>
+    <link rel="icon" type="image/webp" href="./assets/Logo.webp">
     <link rel="stylesheet" href="./css/style.css">
 </head>
-<body class="admin-ui">
+<body>
+    <!-- Vùng chứa Header cố định -->
     <div id="layout-root"></div>
-    <main style="padding: 40px 10%;">
-        <div class="page-header" style="margin-bottom: 30px;">
-            <h2 class="section-title">ADMINISTRATOR MONITOR</h2>
-            <p style="margin-left: 26px; opacity:0.5;">| Real-time analytics from GitHub & System.</p>
-        </div>
+    
+    <!-- Vùng nội dung sẽ thay đổi động -->
+    <main id="page-content"></main>
 
-        <section class="admin-grid">
-            <!-- Cột Trái: Biểu đồ & Logs -->
-            <div class="card ptero-card main-chart-area">
-                <div class="card-header-v5"><span>RESOURCE FLOW</span> <div class="live-blink">LIVE</div></div>
-                <div id="chart-wrapper" style="height: 200px;"></div>
-                <div class="stats-bar-v5">
-                    <div class="stat-v5"><span>PLUGINS</span> <b id="p-val">0</b></div>
-                    <div class="stat-v5"><span>RESOURCE</span> <b id="r-val">0</b></div>
-                    <div class="stat-v5"><span>ASSETS</span> <b id="t-val">0</b></div>
-                </div>
-            </div>
-
-            <!-- Cột Phải: GitHub & Disk Data (Dữ liệu thật) -->
-            <div class="card ptero-card github-area">
-                <div class="card-header-v5"><span>GITHUB & STORAGE</span></div>
-                <div class="data-rows">
-                    <div class="data-item"><span>Repo Name:</span> <strong id="repo-name">Website</strong></div>
-                    <div class="data-item"><span>Last Update:</span> <strong id="repo-update">--/--</strong></div>
-                    <div class="data-item"><span>Disk Usage:</span> <strong id="repo-disk">0 MB</strong></div>
-                </div>
-                <div class="storage-bar"><div id="disk-fill" class="fill"></div></div>
-                <p style="font-size: 0.7rem; opacity: 0.4; margin-top: 10px;">*Data fetched from GitHub REST API</p>
-            </div>
-        </section>
-    </main>
-
-    <script type="module">
-        import { Header } from './js/components/Layout.js';
-        import { siteData } from './js/data/database.js';
-        import './js/main.js';
-
-        document.getElementById('layout-root').innerHTML = Header();
-
-        // 1. GITHUB API - Lấy dữ liệu thật
-        async function fetchGithub() {
-            try {
-                const res = await fetch(`https://github.com{siteData.settings.githubRepo || 'aoichan-vn/Website'}`);
-                const data = await res.json();
-                document.getElementById('repo-update').innerText = new Date(data.pushed_at).toLocaleDateString();
-                const sizeMB = (data.size / 1024).toFixed(2);
-                document.getElementById('repo-disk').innerText = sizeMB + " MB / 1 GB";
-                document.getElementById('disk-fill').style.width = Math.min((sizeMB / 1024) * 100, 100) + "%";
-            } catch (e) { console.error("GitHub API Down"); }
-        }
-
-        // 2. ADMIN DASHBOARD - Đồng bộ SVG & Data
-        async function initAdmin() {
-            const wrapper = document.getElementById('chart-wrapper');
-            const svgRes = await fetch('./assets/vectors/admin-chart.svg');
-            wrapper.innerHTML = await svgRes.text();
-
-            const p = siteData.plugins.length;
-            const r = siteData.resources.length;
-            const t = p + r + siteData.youtube.length;
-
-            document.getElementById('p-val').innerText = p;
-            document.getElementById('r-val').innerText = r;
-            document.getElementById('t-val').innerText = t;
-
-            const line = document.getElementById('svg-line');
-            const area = document.getElementById('svg-area');
-            if(line && area) {
-                const d = `M0,150 L0,${150-p*15} L133,${150-p*15} L133,${150-r*15} L266,${150-r*15} L266,${150-t*5} L400,${150-t*5}`;
-                line.setAttribute('d', d);
-                area.setAttribute('d', d + ` L400,150 L0,150 Z`);
-            }
-        }
-
-        fetchGithub(); initAdmin();
-    </script>
+    <!-- Script điều hướng chính -->
+    <script type="module" src="./js/router.js"></script>
 </body>
 </html>
