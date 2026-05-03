@@ -1,0 +1,7 @@
+User-agent: *
+Disallow: /js/data/
+Disallow: /content/
+Allow: /
+
+Sitemap: https://github.io
+ 
