@@ -1,42 +1,84 @@
-/* TỔNG THỂ PANEL */
-.panel-container { display: flex; min-height: 100vh; background: #0d1117; }
-
-/* SIDEBAR TRÁI */
-.side-navigation {
-    width: 260px; background: #161b22; border-right: 1px solid rgba(255,255,255,0.05);
-    display: flex; flex-direction: column; padding: 25px 15px;
+/* DASHBOARD LAYOUT V3 */
+.dashboard-v3 {
+    display: grid;
+    grid-template-columns: 1.8fr 1fr; /* Tỉ lệ giống Pterodactyl */
+    gap: 25px;
+    margin-top: 30px;
 }
-.side-logo { display: flex; align-items: center; gap: 12px; margin-bottom: 35px; color: #fff; font-weight: bold; }
-.side-logo img { height: 35px; }
-.nav-item { display: block; padding: 12px 18px; color: #8b949e; text-decoration: none; border-radius: 8px; transition: 0.3s; margin-bottom: 5px; }
-.nav-item:hover, .nav-item.active { background: rgba(0,210,255,0.1); color: #00d2ff; }
 
-/* CONTENT PHẢI */
-.main-content { flex: 1; padding: 30px; overflow-y: auto; }
-.content-header { display: flex; justify-content: space-between; align-items: center; margin-bottom: 30px; }
-.status-indicator { font-size: 0.65rem; font-weight: bold; padding: 4px 12px; border-radius: 50px; background: #334155; }
-.status-indicator.online { background: #22c55e22; color: #22c55e; border: 1px solid #22c55e44; }
+/* KHUNG CARD PTERO STYLE */
+.ptero-card {
+    background: rgba(13, 17, 23, 0.8) !important;
+    border: 1px solid rgba(255, 255, 255, 0.05) !important;
+    border-radius: 12px;
+    display: flex;
+    flex-direction: column;
+}
 
-/* NÚT ĐIỀU KHIỂN */
-.btn-ctrl { padding: 10px 22px; border-radius: 8px; border: none; font-weight: bold; cursor: pointer; color: #fff; transition: 0.2s; margin-left: 10px; }
-.start { background: #22c55e; } .restart { background: #3b82f6; } .stop { background: #ef4444; }
+.ptero-card-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 15px 20px;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+}
 
-/* LƯỚI WIDGETS */
-.widgets-grid { display: grid; grid-template-columns: 2fr 1fr; gap: 25px; }
-.widget-box { background: #161b22; border: 1px solid rgba(255,255,255,0.03); border-radius: 12px; padding: 20px; }
-.box-head { font-size: 0.75rem; color: #8b949e; margin-bottom: 15px; font-weight: bold; letter-spacing: 1px; }
+.ptero-title {
+    font-size: 0.75rem;
+    font-weight: 800;
+    color: #8b949e;
+    letter-spacing: 1px;
+}
 
-/* INFO LIST */
-.info-row { display: flex; justify-content: space-between; padding: 10px 0; border-bottom: 1px solid rgba(255,255,255,0.03); font-size: 0.85rem; }
+/* NÚT BẤM GÓC PHẢI (START/RESTART/STOP) */
+.ptero-actions { display: flex; gap: 8px; }
 
-/* VÒNG TRÒN TIẾN ĐỘ */
-.circle-box { position: relative; width: 80px; height: 80px; }
-.ring-text { position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%); font-size: 0.8rem; font-weight: bold; }
-.ring-active { transition: stroke-dashoffset 1s ease; transform: rotate(-90deg); transform-origin: 50% 50%; }
+.ptero-btn {
+    padding: 6px 14px;
+    border-radius: 6px;
+    font-size: 0.75rem;
+    font-weight: bold;
+    border: none;
+    cursor: pointer;
+    color: white;
+    transition: 0.2s;
+}
 
-/* MOBILE */
+.ptero-btn.start { background: #22c55e; }
+.ptero-btn.restart { background: #3b82f6; }
+.ptero-btn.stop { background: #ef4444; }
+.ptero-btn:hover { filter: brightness(1.2); }
+
+/* BODY & INFO ROW */
+.ptero-card-body { padding: 20px; }
+
+.ptero-info-row {
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 15px;
+    font-size: 0.9rem;
+}
+
+.status-online { color: #22c55e; }
+.status-offline { color: #ef4444; }
+
+/* PROGRESS BAR (DISK USAGE) */
+.progress-bar-container {
+    width: 100%;
+    height: 8px;
+    background: rgba(255, 255, 255, 0.05);
+    border-radius: 10px;
+    margin-top: 10px;
+}
+
+.progress-bar-fill {
+    height: 100%;
+    background: var(--primary);
+    border-radius: 10px;
+    box-shadow: 0 0 10px var(--primary-glow);
+}
+
+/* RESPONSIVE */
 @media (max-width: 1024px) {
-    .panel-container { flex-direction: column; }
-    .side-navigation { width: 100%; height: auto; }
-    .widgets-grid { grid-template-columns: 1fr; }
+    .dashboard-v3 { grid-template-columns: 1fr; }
 }
