@@ -3,48 +3,86 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Admin Panel | Kawaii.2K</title>
+    <title>Server Control Panel</title>
     <link rel="icon" type="image/webp" href="./assets/Logo.webp">
     <link rel="stylesheet" href="./css/style.css">
+    <link rel="stylesheet" href="./css/dashboard.css">
 </head>
-<body>
+<body class="pterodactyl-theme">
     <div id="layout-root"></div>
 
-    <main class="dashboard-wrapper">
-        <!-- TIÊU ĐỀ TRANG -->
-        <div class="page-header">
-            <h2 class="section-title">Hệ Thống Quản Trị</h2>
-            <p>| Giám sát tài nguyên và trạng thái máy chủ.</p>
-        </div>
-
-        <!-- CỤM DASHBOARD CHÍNH -->
-        <section class="dashboard-grid">
-            
-            <!-- BẢNG ADMIN: Thống kê Web -->
-            <div class="card panel-box">
-                <div class="panel-head"><span>ADMIN MONITOR</span></div>
-                <div class="chart-box-stock">
-                    <div id="stock-chart" class="stock-flow"></div>
-                </div>
-                <div class="mini-data-list" id="admin-logs"></div>
+    <div class="panel-container">
+        <!-- SIDEBAR BÊN TRÁI -->
+        <aside class="side-navigation">
+            <div class="side-logo">
+                <img src="./assets/Logo.webp" alt="Logo">
+                <span>PTERODACTYL</span>
             </div>
+            <nav class="nav-links">
+                <a href="index.html" class="nav-item active">📊 Console</a>
+                <a href="plugins.html" class="nav-item">📁 File Manager</a>
+                <a href="resources.html" class="nav-item">💾 Backups</a>
+                <a href="youtube.html" class="nav-item">🌍 Network</a>
+                <a href="download.html" class="nav-item">⚙️ Startup</a>
+            </nav>
+            <div class="side-footer">
+                <button onclick="window.openSettings()" class="btn-side-config">⚙️ Settings</button>
+            </div>
+        </aside>
 
-            <!-- BẢNG SERVER: Thông số thực (API) -->
-            <div class="card panel-box server-border">
-                <div class="panel-head green"><span>SERVER CONSOLE</span></div>
-                <div class="server-stats">
-                    <div class="stat-row"><span>IP:</span> <code id="srv-ip">Loading...</code></div>
-                    <div class="stat-row"><span>Status:</span> <strong id="srv-status">---</strong></div>
-                    <div class="stat-row"><span>Players:</span> <strong id="srv-players">0/0</strong></div>
-                    <div class="stat-row"><span>Version:</span> <strong id="srv-version">-</strong></div>
+        <!-- CONTENT BÊN PHẢI -->
+        <main class="main-content">
+            <!-- TOP BAR -->
+            <header class="content-header">
+                <div class="header-info">
+                    <h2 id="srv-name-display">My Minecraft Server</h2>
+                    <span class="status-indicator" id="srv-status-badge">Checking...</span>
                 </div>
-                <div class="server-actions">
-                    <button class="btn-action">START</button>
-                    <button class="btn-action stop">STOP</button>
+                <div class="header-actions">
+                    <button class="btn-ctrl start" onclick="serverAction('start')">START</button>
+                    <button class="btn-ctrl restart" onclick="serverAction('restart')">RESTART</button>
+                    <button class="btn-ctrl stop" onclick="serverAction('stop')">STOP</button>
+                </div>
+            </header>
+
+            <!-- DASHBOARD WIDGETS -->
+            <div class="widgets-grid">
+                <!-- Biểu đồ Line Chart (Dữ liệu thật) -->
+                <div class="card widget-box chart-main">
+                    <div class="box-head">MEMORY USAGE</div>
+                    <div id="chart-container" class="chart-inner">
+                        <!-- SVG trượt từ file riêng -->
+                    </div>
+                </div>
+
+                <!-- Thông số Server (Dữ liệu thật) -->
+                <div class="card widget-box">
+                    <div class="box-head">SERVER INFORMATION</div>
+                    <div class="info-list">
+                        <div class="info-row"><span>Address:</span> <code id="srv-ip-val">Loading...</code></div>
+                        <div class="info-row"><span>Players:</span> <strong id="srv-players-val">0/0</strong></div>
+                        <div class="info-row"><span>Version:</span> <strong id="srv-version-val">-</strong></div>
+                        <div class="info-row"><span>Uptime:</span> <strong id="srv-uptime">Online</strong></div>
+                    </div>
+                </div>
+
+                <!-- Backup & Disk Usage -->
+                <div class="card widget-box">
+                    <div class="box-head">DISK & BACKUP</div>
+                    <div class="stats-mini">
+                        <div class="circle-box">
+                            <svg class="progress-ring" width="80" height="80">
+                                <circle class="ring-bg" stroke="rgba(255,255,255,0.05)" stroke-width="6" fill="transparent" r="34" cx="40" cy="40"/>
+                                <circle id="disk-progress" class="ring-active" stroke="var(--primary)" stroke-width="6" stroke-dasharray="213.6" stroke-dashoffset="50" fill="transparent" r="34" cx="40" cy="40"/>
+                            </svg>
+                            <span class="ring-text">75%</span>
+                        </div>
+                        <div class="stat-text">9.124 MB / 12 GB</div>
+                    </div>
                 </div>
             </div>
-        </section>
-    </main>
+        </main>
+    </div>
 
     <script type="module">
         import { Header } from './js/components/Layout.js';
@@ -53,42 +91,34 @@
 
         document.getElementById('layout-root').innerHTML = Header();
 
-        // API THẬT - Lấy trạng thái từ mcsrvstat
-        async function updateServerInfo() {
-            const ip = siteData.settings.serverIP || "play.hypixel.net";
-            document.getElementById('srv-ip').innerText = ip;
+        // API THẬT - Lấy dữ liệu từ mcsrvstat.us
+        async function loadServerData() {
+            const ip = siteData.settings.serverIP || "mc.hypixel.net";
+            document.getElementById('srv-ip-val').innerText = ip;
             try {
                 const res = await fetch(`https://mcsrvstat.us{ip}`);
                 const data = await res.json();
-                const status = document.getElementById('srv-status');
+                const badge = document.getElementById('srv-status-badge');
                 if(data.online) {
-                    status.innerText = "ONLINE"; status.style.color = "#22c55e";
-                    document.getElementById('srv-players').innerText = `${data.players.online}/${data.players.max}`;
-                    document.getElementById('srv-version').innerText = data.version;
+                    badge.innerText = "ONLINE"; badge.className = "status-indicator online";
+                    document.getElementById('srv-players-val').innerText = `${data.players.online}/${data.players.max}`;
+                    document.getElementById('srv-version-val').innerText = data.version;
                 } else {
-                    status.innerText = "OFFLINE"; status.style.color = "#ff4444";
+                    badge.innerText = "OFFLINE"; badge.className = "status-indicator offline";
                 }
             } catch(e) { console.log("API Error"); }
         }
 
-        // Render Biểu đồ Stock (Sợi mảnh)
-        function renderAdminStats() {
-            const chart = document.getElementById('stock-chart');
-            const data = [siteData.plugins.length, siteData.resources.length, siteData.youtube.length];
-            chart.innerHTML = data.map(val => `
-                <div class="stock-col">
-                    <div class="stock-stick" style="height:${val * 20}px"><div class="dot"></div></div>
-                </div>
-            `).join('');
-            
-            // Đổ Logs phân loại
-            document.getElementById('admin-logs').innerHTML = [...siteData.plugins, ...siteData.resources].slice(0, 4).map(i => `
-                <div class="log-min"><b>${i.name}</b> <small>Active</small></div>
-            `).join('');
+        // Tải biểu đồ SVG
+        async function loadChart() {
+            const res = await fetch('./assets/vectors/chart.svg');
+            document.getElementById('chart-container').innerHTML = await res.text();
         }
 
-        updateServerInfo();
-        renderAdminStats();
+        window.serverAction = (act) => alert("Hành động: " + act.toUpperCase() + " đang được gửi tới Server...");
+
+        loadServerData();
+        loadChart();
     </script>
 </body>
 </html>
