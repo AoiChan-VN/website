@@ -1,39 +1,18 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <svg xmlns="http://w3.org" viewBox="0 0 400 150" preserveAspectRatio="none">
     <defs>
-        <linearGradient id="pteroGradient" x1="0%" y1="0%" x2="0%" y2="100%">
+        <linearGradient id="pteroGrad" x1="0%" y1="0%" x2="0%" y2="100%">
             <stop offset="0%" style="stop-color:#ff85a1; stop-opacity:0.3" />
             <stop offset="100%" style="stop-color:#ff85a1; stop-opacity:0" />
         </linearGradient>
-        <style>
-            .chart-line {
-                stroke-dasharray: 1000;
-                stroke-dashoffset: 1000;
-                animation: dash 2s linear forwards;
-            }
-            @keyframes dash { to { stroke-dashoffset: 0; } }
-        </style>
     </defs>
-
-    <!-- Hệ thống lưới vuông chuẩn Pterodactyl -->
     <g stroke="rgba(255,255,255,0.05)" stroke-width="0.5">
         <line x1="0" y1="20%" x2="100%" y2="20%" />
         <line x1="0" y1="40%" x2="100%" y2="40%" />
         <line x1="0" y1="60%" x2="100%" y2="60%" />
         <line x1="0" y1="80%" x2="100%" y2="80%" />
-        <line x1="25%" y1="0" x2="25%" y2="100%" />
-        <line x1="50%" y1="0" x2="50%" y2="100%" />
-        <line x1="75%" y1="0" x2="75%" y2="100%" />
     </g>
-
-    <!-- Vùng phủ màu dạng Gãy Khúc (Step Area) -->
-    <path d="M0,120 L50,120 L50,80 L120,80 L120,100 L200,100 L200,40 L280,40 L280,70 L400,70 L400,150 L0,150 Z" 
-          fill="url(#pteroGradient)" />
-    
-    <!-- Đường biểu đồ Gãy Khúc (Step Line) -->
-    <path class="chart-line" 
-          d="M0,120 L50,120 L50,80 L120,80 L120,100 L200,100 L200,40 L280,40 L280,70 L400,70" 
-          fill="none" 
-          stroke="#ff85a1" 
-          stroke-width="2" />
+    <!-- Các ID này để JavaScript "bẻ" đường vẽ theo số liệu thật -->
+    <path id="svg-area" d="M0,150 L0,150 L400,150 Z" fill="url(#pteroGrad)" />
+    <path id="svg-line" d="M0,150 L400,150" fill="none" stroke="#ff85a1" stroke-width="2.5" stroke-linejoin="round" />
 </svg>
