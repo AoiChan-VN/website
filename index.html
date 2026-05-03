@@ -3,75 +3,78 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>AoiChan-VN Dashboard</title>
+    <title>Admin Dashboard - AoiChan-VN</title>
     <script src="https://tailwindcss.com"></script>
     <style>
         .card { background: #1e293b; border: 1px solid #334155; border-radius: 12px; padding: 1.25rem; }
-        .loading { animation: pulse 2s cubic-bezier(0.4, 0, 0.6, 1) infinite; }
-        @keyframes pulse { 0%, 100% { opacity: 1; } 50% { opacity: .5; } }
+        ::-webkit-scrollbar { width: 5px; }
+        ::-webkit-scrollbar-thumb { background: #334155; border-radius: 10px; }
     </style>
 </head>
 <body class="bg-slate-900 text-slate-100 min-h-screen p-4 font-sans">
 
-    <!-- Màn hình Nhập Token -->
+    <!-- MÀN HÌNH ĐĂNG NHẬP -->
     <div id="login-screen" class="hidden max-w-md mx-auto mt-20 card text-center shadow-2xl">
-        <div class="text-4xl mb-4">🔐</div>
-        <h2 class="text-xl font-bold mb-2">Kết nối GitHub API</h2>
-        <p class="text-xs text-slate-400 mb-6">Token sẽ được lưu an toàn trong trình duyệt điện thoại.</p>
-        <input type="password" id="token-input" placeholder="Dán Token vào đây..." 
-               class="w-full p-3 rounded bg-slate-800 border border-slate-700 mb-4 outline-none focus:border-blue-500 text-sm">
-        <button onclick="saveToken()" class="w-full bg-blue-600 hover:bg-blue-700 p-3 rounded font-bold transition active:scale-95">Lưu & Bắt đầu</button>
+        <div class="text-4xl mb-4">🔑</div>
+        <h2 class="text-xl font-bold mb-2">GitHub Authentication</h2>
+        <p class="text-xs text-slate-400 mb-6">Dán Token của anh vào đây để kết nối với Repo <strong>Website</strong></p>
+        <input type="password" id="token-input" placeholder="ghp_xxxxxxxxxxxx" 
+               class="w-full p-3 rounded bg-slate-800 border border-slate-700 mb-4 outline-none focus:border-blue-500 text-sm font-mono">
+        <button onclick="saveToken()" class="w-full bg-blue-600 hover:bg-blue-700 p-3 rounded font-bold transition active:scale-95">Lưu & Kết nối</button>
     </div>
 
-    <!-- Dashboard Chính -->
+    <!-- DASHBOARD CHÍNH -->
     <div id="main-dashboard" class="hidden max-w-2xl mx-auto">
         <header class="flex justify-between items-center mb-6">
             <div>
                 <h1 class="text-lg font-bold text-blue-400">AoiChan-VN</h1>
-                <p class="text-[10px] text-slate-500 uppercase tracking-widest">Repo: Website</p>
+                <p class="text-[10px] text-slate-500 uppercase tracking-widest">Repository: Website</p>
             </div>
             <button onclick="logout()" class="text-[10px] bg-red-900/20 text-red-400 px-3 py-1 rounded border border-red-800/50">Thoát</button>
         </header>
 
-        <!-- Chỉ số thời gian thực -->
+        <!-- THÔNG BÁO LỖI (ẨN MẶC ĐỊNH) -->
+        <div id="error-msg" class="hidden mb-6 p-4 bg-red-900/40 border border-red-800 text-red-200 text-xs rounded-lg whitespace-pre-wrap"></div>
+
+        <!-- CÁC THẺ CHỈ SỐ -->
         <div class="grid grid-cols-2 gap-3 mb-6">
-            <div class="card flex flex-col items-center justify-center border-l-4 border-l-blue-500">
-                <span class="text-[10px] text-slate-400 uppercase">Dung lượng Repo</span>
-                <span id="stat-size" class="text-lg font-mono font-bold mt-1 tracking-tighter">-- MB</span>
+            <div class="card flex flex-col items-center border-l-4 border-l-blue-500">
+                <span class="text-[10px] text-slate-400 uppercase">Disk Usage</span>
+                <span id="stat-size" class="text-lg font-mono font-bold mt-1 text-blue-300">--</span>
             </div>
-            <div class="card flex flex-col items-center justify-center border-l-4 border-l-yellow-500">
-                <span class="text-[10px] text-slate-400 uppercase">Ngôi sao</span>
-                <span id="stat-stars" class="text-lg font-mono font-bold mt-1">--</span>
+            <div class="card flex flex-col items-center border-l-4 border-l-yellow-500">
+                <span class="text-[10px] text-slate-400 uppercase">Stars</span>
+                <span id="stat-stars" class="text-lg font-mono font-bold mt-1 text-yellow-400">--</span>
             </div>
-            <div class="card flex flex-col items-center justify-center border-l-4 border-l-green-500">
-                <span class="text-[10px] text-slate-400 uppercase">Ngôn ngữ</span>
-                <span id="stat-lang" class="text-sm font-bold mt-1">--</span>
+            <div class="card flex flex-col items-center border-l-4 border-l-green-500">
+                <span class="text-[10px] text-slate-400 uppercase">Language</span>
+                <span id="stat-lang" class="text-sm font-bold mt-1 text-green-400">--</span>
             </div>
-            <div class="card flex flex-col items-center justify-center border-l-4 border-l-purple-500">
-                <span class="text-[10px] text-slate-400 uppercase">Cập nhật</span>
-                <span id="stat-update" class="text-[10px] font-mono mt-1">--</span>
+            <div class="card flex flex-col items-center border-l-4 border-l-purple-500">
+                <span class="text-[10px] text-slate-400 uppercase">Last Update</span>
+                <span id="stat-update" class="text-[10px] font-mono mt-1 text-purple-300">--</span>
             </div>
         </div>
 
-        <!-- Quản lý File -->
+        <!-- DANH SÁCH FILE -->
         <div class="card shadow-lg">
-            <div class="flex justify-between items-center mb-4">
-                <h3 class="text-sm font-bold flex items-center"><span class="mr-2">📝</span> Nội dung (.md)</h3>
-                <span id="file-count" class="text-[10px] bg-slate-700 px-2 py-0.5 rounded text-slate-300">0 files</span>
+            <div class="flex justify-between items-center mb-4 border-b border-slate-700 pb-2">
+                <h3 class="text-sm font-bold flex items-center">📂 Files (.md)</h3>
+                <span id="file-count" class="text-[10px] bg-slate-700 px-2 py-0.5 rounded text-slate-300">0</span>
             </div>
-            <div id="file-list" class="space-y-2 max-h-[400px] overflow-y-auto pr-1">
-                <!-- File list items -->
+            <div id="file-list" class="space-y-2 max-h-[350px] overflow-y-auto">
+                <p class="text-xs text-slate-500 italic text-center py-4">Đang tải dữ liệu từ GitHub...</p>
             </div>
         </div>
-        
-        <div id="error-msg" class="hidden mt-4 p-3 bg-red-900/30 border border-red-800 text-red-400 text-xs rounded text-center"></div>
     </div>
 
     <script>
+        // Cấu hình thông tin Repo
         const OWNER = 'AoiChan-VN';
         const REPO = 'Website';
         const token = localStorage.getItem('gh_token');
 
+        // Khởi tạo giao diện
         if (!token) {
             document.getElementById('login-screen').classList.remove('hidden');
         } else {
@@ -95,51 +98,54 @@
         async function fetchData() {
             const headers = { 
                 'Authorization': `token ${token}`,
-                'Accept': 'application/vnd.github.v3+json'
+                'Accept': 'application/vnd.github.v3+json',
+                'Cache-Control': 'no-cache'
             };
             const errorEl = document.getElementById('error-msg');
-            
-            // Hàm fetch có Timeout để tránh lỗi 504 treo trang
-            const fetchWithTimeout = (url, options, timeout = 10000) => {
-                return Promise.race([
-                    fetch(url, options),
-                    new Promise((_, reject) => setTimeout(() => reject(new Error('Kết nối quá hạn (Timeout)')), timeout))
-                ]);
-            };
+            const listEl = document.getElementById('file-list');
 
             try {
-                // 1. Lấy thông tin Repo
-                const repoRes = await fetchWithTimeout(`https://github.com{OWNER}/${REPO}`, { headers });
-                if (!repoRes.ok) throw new Error(`Lỗi Repo: ${repoRes.status}`);
-                const repo = await repoRes.json();
+                // 1. Lấy thông số Repository
+                const repoRes = await fetch(`https://github.com{OWNER}/${REPO}`, { headers });
                 
+                if (!repoRes.ok) {
+                    const errorData = await repoRes.json();
+                    throw new Error(`[Lỗi ${repoRes.status}] ${errorData.message}`);
+                }
+                
+                const repo = await repoRes.json();
                 document.getElementById('stat-size').innerText = (repo.size / 1024).toFixed(2) + ' MB';
                 document.getElementById('stat-stars').innerText = repo.stargazers_count;
                 document.getElementById('stat-lang').innerText = repo.language || 'N/A';
                 document.getElementById('stat-update').innerText = new Date(repo.pushed_at).toLocaleDateString('vi-VN');
 
-                // 2. Lấy danh sách file
-                const fileRes = await fetchWithTimeout(`https://github.com{OWNER}/${REPO}/contents`, { headers });
-                if (!fileRes.ok) throw new Error(`Lỗi Files: ${fileRes.status}`);
+                // 2. Lấy danh sách file trong thư mục gốc
+                const fileRes = await fetch(`https://github.com{OWNER}/${REPO}/contents`, { headers });
+                if (!fileRes.ok) throw new Error("Không thể truy cập danh sách file.");
+                
                 const files = await fileRes.json();
+                const mdFiles = files.filter(f => f.name.toLowerCase().endsWith('.md'));
                 
-                const listEl = document.getElementById('file-list');
-                const mdFiles = files.filter(f => f.name.endsWith('.md'));
                 document.getElementById('file-count').innerText = `${mdFiles.length} files`;
-                
-                listEl.innerHTML = mdFiles.map(file => `
-                    <div class="flex justify-between items-center p-3 bg-slate-800/40 rounded border border-slate-700/50">
-                        <div class="overflow-hidden mr-2">
-                            <p class="text-xs font-medium truncate">${file.name}</p>
-                            <p class="text-[9px] text-slate-500">${(file.size / 1024).toFixed(1)} KB</p>
+
+                if (mdFiles.length === 0) {
+                    listEl.innerHTML = `<p class="text-xs text-slate-500 text-center py-4">Không tìm thấy file .md nào.</p>`;
+                } else {
+                    listEl.innerHTML = mdFiles.map(file => `
+                        <div class="flex justify-between items-center p-3 bg-slate-800/40 rounded border border-slate-700/50">
+                            <div class="overflow-hidden mr-2">
+                                <p class="text-[11px] font-bold truncate text-slate-200">${file.name}</p>
+                                <p class="text-[9px] text-slate-500 uppercase">${(file.size / 1024).toFixed(1)} KB</p>
+                            </div>
+                            <a href="${file.html_url}" target="_blank" class="shrink-0 text-[10px] text-blue-400 font-bold border border-blue-400/30 px-3 py-1 rounded active:bg-blue-400 active:text-white">GIT</a>
                         </div>
-                        <a href="${file.html_url}" target="_blank" class="shrink-0 text-[10px] text-blue-400 font-bold border border-blue-400/30 px-2 py-1 rounded">Mở</a>
-                    </div>
-                `).join('');
+                    `).join('');
+                }
 
             } catch (err) {
-                errorEl.innerText = "Lỗi: " + err.message + ". Thử dùng 4G hoặc kiểm tra lại Token.";
+                errorEl.innerText = "⚠️ " + err.message + "\n\nGiải quyết: Kiểm tra lại Token có đúng không, hoặc tên User/Repo 'AoiChan-VN/Website' đã chính xác chưa.";
                 errorEl.classList.remove('hidden');
+                listEl.innerHTML = `<p class="text-xs text-red-400 text-center py-4">Tải dữ liệu thất bại.</p>`;
                 console.error(err);
             }
         }
