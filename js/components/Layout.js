@@ -30,6 +30,7 @@ export const Header = () => {
     <div id="settings-modal" class="modal-overlay" style="display:none;">
         <div class="card settings-content">
             <h3 style="color:var(--primary); margin-bottom:20px;">︵»|Cài đặt|«︵</h3>
+            <p> © 2026 AoiChan | All rights reserved </p>
             <div class="setting-item">
                 <span>Giao diện</span>
                 <button onclick="window.toggleTheme()" class="btn-theme-toggle">👻</button>
