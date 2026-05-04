@@ -1,0 +1,7 @@
+# Standard Security Contact Information
+Contact: mailto:your-email@domain.com
+Expires: 2026-12-31T23:59:59z
+Encryption: https://your-portfolio-link.com
+Languages: vi, en
+Policy: https://your-portfolio-link.com
+ 
