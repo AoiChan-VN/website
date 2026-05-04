@@ -1,49 +1,74 @@
 <!DOCTYPE html>
-<html lang="vi">
+<html lang="vi-VN">
 <head>
+    <!-- 1. BẢO MẬT & META CƠ BẢN -->
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0">
     
-    <!-- Bảo mật: Chặn thực thi script ngoài, chặn iframe lạ, chỉ cho phép source nội bộ -->
-    <meta http-equiv="Content-Security-Policy" content="default-src 'self'; img-src 'self' data:; style-src 'self' 'unsafe-inline'; script-src 'self';">
-    <meta name="referrer" content="no-referrer">
-    
-    <title>Professional Portfolio | High Performance SPA</title>
-    <meta name="description" content="Portfolio chuẩn quốc tế - Tự xây dựng 100%">
+    <!-- Content Security Policy (CSP): Chống XSS và Script độc hại từ bên ngoài -->
+    <meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self'; style-src 'self' 'unsafe-inline'; img-src 'self' data:; connect-src 'self';">
 
-    <!-- Preload critical assets -->
-    <link rel="stylesheet" href="src/styles/main.css">
+    <title>Portfolio Professional | Senior Developer</title>
+    <meta name="description" content="Portfolio SPA chuẩn quốc tế - Plugins, Resource Packs & Youtube Channel">
+    
+    <!-- Favicon chuẩn mọi thiết bị -->
+    <link rel="icon" type="image/png" href="public/assets/images/favicon.png">
+
+    <!-- 2. HỆ THỐNG STYLES TÁCH BIỆT (Yêu cầu 5) -->
+    <!-- Load CSS quan trọng trước để tránh tình trạng layout bị giật (CLS) -->
+    <link rel="stylesheet" href="src/styles/base.css">
+    <link rel="stylesheet" href="src/styles/layout.css">
+    <link rel="stylesheet" href="src/styles/components.css">
+    <link rel="stylesheet" href="src/styles/responsive.css">
+
+    <!-- Preload Data quan trọng -->
+    <link rel="modulepreload" href="src/app.js">
 </head>
 <body>
 
-    <!-- Overlay bảo mật/loading -->
-    <div id="app-loader" class="loader"></div>
+    <!-- 3. CẤU TRÚC LAYOUT (Yêu cầu 2) -->
+    <div id="app">
+        <!-- Header: Cố định cho SPA -->
+        <header class="main-header">
+            <nav class="nav-container">
+                <a href="/" class="logo" data-link>DEV-PORTFOLIO</a>
+                <ul class="nav-links">
+                    <li><a href="/" data-link>Trang chủ</a></li>
+                    <li><a href="/plugins" data-link>Plugins</a></li>
+                    <li><a href="/resources" data-link>Resource Packs</a></li>
+                    <li><a href="/youtube" data-link>Youtube</a></li>
+                    <li><a href="/download" data-link class="btn-download">Tải về</a></li>
+                </ul>
+                <!-- Mobile Menu Toggle -->
+                <button class="menu-toggle" aria-label="Toggle Menu">
+                    <span class="bar"></span>
+                </button>
+            </nav>
+        </header>
 
-    <header id="main-nav">
-        <nav class="container">
-            <div class="logo">PORTFOLIO</div>
-            <ul class="nav-links">
-                <li><a href="#home" class="nav-item">Trang chủ</a></li>
-                <li><a href="#plugins" class="nav-item">Plugins</a></li>
-                <li><a href="#resources" class="nav-item">Resource Packs</a></li>
-                <li><a href="#youtube" class="nav-item">Kênh Youtube</a></li>
-                <li><a href="#download" class="nav-item">Download</a></li>
-            </ul>
-        </nav>
-    </header>
+        <!-- Main Content: Nơi Render SPA linh hoạt -->
+        <main id="main-content" class="fade-in">
+            <!-- Loading State mặc định -->
+            <div class="loader-container">
+                <div class="loader"></div>
+            </div>
+        </main>
 
-    <main id="app-root">
-        <!-- Nội dung SPA sẽ được Inject vào đây bởi Core Engine -->
-        <section id="view-content" class="fade-in"></section>
-    </main>
+        <!-- Footer -->
+        <footer class="main-footer">
+            <p>&copy; 2024 YourName. Build with Clean Architecture.</p>
+        </footer>
+    </div>
 
-    <footer id="main-footer">
-        <p>&copy; <span id="current-year"></span> Self-Built Ecosystem. All Rights Reserved.</p>
-    </footer>
+    <!-- 4. KHỞI TẠO SPA ENGINE (Yêu cầu 6, 7) -->
+    <script type="module" src="src/app.js"></script>
 
-    <!-- Core Engine - Load cuối cùng để đảm bảo DOM đã sẵn sàng -->
-    <script src="src/scripts/core-engine.js" type="module"></script>
+    <!-- Noscript Security -->
+    <noscript>
+        <div style="text-align: center; padding: 50px;">
+            Trình duyệt của bạn không hỗ trợ JavaScript. Vui lòng bật để trải nghiệm Website.
+        </div>
+    </noscript>
 </body>
 </html>
- 
