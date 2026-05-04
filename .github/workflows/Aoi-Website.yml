@@ -31,11 +31,6 @@ jobs:
         with:
           node-version: "24"
           
-      - name: Install & Build
-        run: |
-          npm install
-          npm run build
-        
       - name: Artifacts ➺ Deploy
         uses: actions/upload-pages-artifact@v3
         with:
