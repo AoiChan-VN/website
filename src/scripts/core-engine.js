@@ -1,7 +1,7 @@
 'use strict';
 
 /**
- * ENGINE PORTFOLIO V1.0 - CHỐNG BUG NGẦM
+ * ENGINE PORTFOLIO V1.0
  * Tự động quản lý Route và Data Local
  */
 const App = {
@@ -75,6 +75,56 @@ const App = {
             </div>
         `;
     },
+
+    // 6. Logic Render Video Youtube (Lazy Load + Sandbox)
+    renderYoutube() {
+        const data = this.db.youtube;
+        return `
+            <h1>Kênh Youtube</h1>
+            <div class="data-grid">
+                ${data.map(video => `
+                    <div class="card">
+                        <div class="video-container">
+                            <iframe 
+                                src="https://youtube.com{video.embed_id}" 
+                                sandbox="allow-scripts allow-same-origin"
+                                loading="lazy"
+                                frameborder="0" 
+                                allowfullscreen>
+                            </iframe>
+                        </div>
+                        <h3>${this.escapeHTML(video.title)}</h3>
+                    </div>
+                `).join('')}
+            </div>
+        `;
+    },
+
+    // 7. Logic Download Bảo mật (Kiểm tra nguồn gốc)
+    renderDownload() {
+        const data = this.db.resources;
+        return `
+            <h1>Kho Download</h1>
+            <div class="data-grid">
+                ${data.map(item => `
+                    <div class="card">
+                        <h3>${this.escapeHTML(item.name)}</h3>
+                        <p>Dung lượng: ${item.size}</p>
+                        <button onclick="App.secureDownload('${item.url}')" class="btn-download">Tải về an toàn</button>
+                    </div>
+                `).join('')}
+            </div>
+        `;
+    },
+
+    secureDownload(url) {
+        // Chặn download nếu URL không bắt đầu từ thư mục nội bộ
+        if(!url.startsWith('./')) {
+            alert("Cảnh báo: Liên kết tải xuống không an toàn!");
+            return;
+        }
+        window.location.href = url;
+    }
 
     // Hàm bảo mật: Chống XSS khi render từ JSON
     escapeHTML(str) {
