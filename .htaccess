@@ -1,0 +1,17 @@
+# 1. Chống Clickjacking
+Header set X-Frame-Options "DENY"
+
+# 2. Chống XSS Filtering
+Header set X-XSS-Protection "1; mode=block"
+
+# 3. Chống rò rỉ MIME type
+Header set X-Content-Type-Options "nosniff"
+
+# 4. Hạn chế Referrer (Bảo mật quyền riêng tư)
+Header set Referrer-Policy "strict-origin-when-cross-origin"
+
+# 5. Ép buộc sử dụng HTTPS (Nếu server hỗ trợ)
+RewriteEngine On
+RewriteCond % {HTTPS} off
+RewriteRule ^(.*)$ https://%{HTTP_HOST}%{REQUEST_URI} [L,R=301]
+ 
