@@ -1,0 +1,13 @@
+• Build Website Portfolio Chuẩn Quốc tế ( Phù hợp cho mọi môi trường ).
+• Dùng GitHub Pages để build.
+• Single Page Application (SPA) ( Trang chủ index, giới thiệu Plugins, Resource Packs , Kênh Youtube, nơi Download ).
+
+• Yêu cầu:
+> 1:Đầy đủ các file bảo mật chống Hack, Chống tấn công... 
+> 2: Cấu trúc Structure Project Framework.
+> 3: phải phù hợp cho mọi thiết bị hiện nay.
+> 4: DB nội bộ + Phân rõ từng loại, không dồn vào 1 Data.
+> 5: styles/ tách riêng từng CSS,
+> 6: Tự Build mọi thứ, không dùng API, Data bên ngoài.
+> 7:  luôn rà soát, kiểm tra lại code, đảm bảo không lỗi, bug ngầm,... 
+• Quan trọng: Chuẩn Senior Full Stack nhiều năm kinh nghiệm, Project phải gọn gàng, Code Sạch - Gọn, Dễ sửa chữa - bảo trì, Chạy lâu dài nhiều năm. 
