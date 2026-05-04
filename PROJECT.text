@@ -1,3 +1,4 @@
+
 /my-portfolio
 ├── /public            # Tài nguyên tĩnh
 │   ├── /assets
@@ -18,4 +19,3 @@
 ├── security-policy.md # Chính sách bảo mật code
 ├── index.html         # File duy nhất của SPA
 └── package.json
- 
