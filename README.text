@@ -1,4 +1,4 @@
-portfolio-v2/
+portfolio-v1/
 ├── .github/                # GitHub Actions (Tự động deploy)
 ├── public/                 # Tài nguyên tĩnh
 │   ├── assets/
