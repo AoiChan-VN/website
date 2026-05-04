@@ -1,4 +1,4 @@
-# My-PROMPT:
+# AoiChan-PROMPT:
 
 • Build Website Portfolio Chuẩn Quốc tế (Phù hợp cho mọi môi trường)
 
@@ -8,10 +8,10 @@
 ➨ Trang chủ | Plugins | Resource Packs | Kênh Youtube | Download
 
 ## Đảm bảo:
-> 1. Đầy đủ các file bảo mật chống Hack, Chống tấn công
+> 1. Đầy đủ các file bảo mật chống Hack, Chống tấn công,.. 
 > 2. Cấu trúc Structure Project Framework
-> 3. phải phù hợp cho mọi thiết bị hiện nay
-> 4. DB nội bộ + Phân rõ từng loại, không dồn vào 1 Data
+> 3. Phù hợp cho mọi thiết bị hiện nay
+> 4. DB nội bộ (được phân loại chuyên biệt) - (Multi-Data)
 > 5. styles/ tách riêng từng CSS
 > 6. Tự Build mọi thứ, không dùng API, Data bên ngoài
 > 7. luôn rà soát, kiểm tra lại code, tránh lỗi và bug ngầm
