@@ -9,12 +9,12 @@ const mainContent = document.getElementById('main-content');
 
 // 1. Cấu trúc Router
 const routes = {
-    '/': { title: 'Trang chủ', render: renderHome },
-    '/plugins': { title: 'Plugins Chuyên Nghiệp', render: renderPlugins },
-    '/resources': { title: 'Resource Packs', render: renderResources },
-    '/youtube': { title: 'Kênh Youtube', render: renderYoutube },
-    '/download': { title: 'Trung tâm Tải về', render: renderDownload },
-    '/404': { title: 'Không tìm thấy trang', render: render404 }
+    '#/': { title: 'Trang chủ', render: renderHome },
+    '#/plugins': { title: 'Plugins Chuyên Nghiệp', render: renderPlugins },
+    '#/resources': { title: 'Resource Packs', render: renderResources },
+    '#/youtube': { title: 'Kênh Youtube', render: renderYoutube },
+    '#/download': { title: 'Trung tâm Tải về', render: renderDownload },
+    '#/404': { title: 'Không tìm thấy trang', render: render404 }
 };
 
 // 2. Các hàm Render chuyên biệt
@@ -69,6 +69,9 @@ document.addEventListener('DOMContentLoaded', () => {
         }
     });
 
-    window.addEventListener('popstate', router);
+    window.addEventListener('hashchange', router);
     router();
+    
+    //window.addEventListener('popstate', router);
+    //router();
 });
