@@ -1,0 +1,21 @@
+/my-portfolio
+├── /public            # Tài nguyên tĩnh
+│   ├── /assets
+│   │   ├── /images    # Thumbnail Plugins, Youtube
+│   │   ├── /fonts
+│   │   └── /icons
+│   ├── robots.txt     # Chỉ dẫn công cụ tìm kiếm
+│   └── .htaccess      # (Optional) Bảo mật tầng Server (nếu có hỗ trợ)
+├── /src
+│   ├── /core          # Xử lý Logic chính, Routing SPA
+│   ├── /database      # DB nội bộ (JSON Files)
+│   │   ├── plugins.json
+│   │   ├── resources.json
+│   │   └── youtube.json
+│   ├── /components    # Các thành phần UI (Header, Footer, Card)
+│   ├── /styles        # CSS (Dùng SCSS hoặc Tailwind cho chuyên nghiệp)
+│   └── app.js         # Entry point
+├── security-policy.md # Chính sách bảo mật code
+├── index.html         # File duy nhất của SPA
+└── package.json
+ 
