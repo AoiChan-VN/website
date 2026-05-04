@@ -1,6 +1,5 @@
-// next.config.js
 const nextConfig = {
-  output: 'export', // Bắt buộc để chạy trên GitHub Pages
+  output: 'export',
   images: { unoptimized: true },
   async headers() {
     return [
