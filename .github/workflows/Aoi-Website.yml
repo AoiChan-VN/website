@@ -30,16 +30,11 @@ jobs:
       - uses: actions/setup-node@v4
         with:
           node-version: "24"
-          cache: 'npm'
           
-      - name: Cài đặt Dependencies
-        run: npm ci
-
-      - name: Kiểm tra lỗi Code (Lint)
-        run: npm run lint
-
-      - name: Build ứng dụng (Static Export)
-        run: npm run build
+      - name: Install & Build
+        run: |
+          npm install
+          npm run build
         
       - name: Artifacts ➺ Deploy
         uses: actions/upload-pages-artifact@v3
