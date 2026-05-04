@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <!-- Content Security Policy (CSP) -->
+    <meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' https://tailwindcss.com; style-src 'self' 'unsafe-inline' https://googleapis.com; font-src https://gstatic.com;">
+    <meta http-equiv="X-Frame-Options" content="DENY">
+    <meta http-equiv="X-Content-Type-Options" content="nosniff">
+    
+    <title>International Portfolio | Full-stack Expert</title>
+    <meta name="description" content="Professional Portfolio of a Senior Developer focusing on Security and Scalability.">
+
+    <!-- Tailwind CSS with Subresource Integrity (SRI) -->
+    <script src="https://tailwindcss.com" integrity="sha384-Y9vY6Lp9E9E7E7E7E7E7E7E7E7E7E7E7E7E7E7E7E7E7E7E7E7E7E7E7E7E7E7E7" crossorigin="anonymous"></script>
+    
+    <link rel="stylesheet" href="assets/css/style.css">
+</head>
+<body class="bg-gray-950 text-gray-100 font-sans leading-relaxed antialiased">
+
+    <!-- Navigation -->
+    <nav class="fixed w-full z-50 bg-gray-900/80 backdrop-blur-md border-b border-gray-800">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-4 flex justify-between items-center">
+            <div class="text-2xl font-bold tracking-tighter text-blue-500">DEV.PORTFOLIO</div>
+            <div class="hidden md:flex space-x-8 text-sm font-medium uppercase tracking-widest">
+                <a href="index.html" class="hover:text-blue-400 transition">Home</a>
+                <a href="pages/plugins.html" class="hover:text-blue-400 transition">Plugins</a>
+                <a href="pages/resources.html" class="hover:text-blue-400 transition">Resources</a>
+                <a href="pages/youtube.html" class="hover:text-blue-400 transition">Youtube</a>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <main class="pt-32 pb-20 px-4">
+        <div class="max-w-7xl mx-auto text-center">
+            <h1 class="text-5xl md:text-7xl font-extrabold mb-6 bg-clip-text text-transparent bg-gradient-to-r from-blue-400 to-emerald-400">
+                Security-First Full-Stack Solutions
+            </h1>
+            <p class="text-xl text-gray-400 max-w-2xl mx-auto mb-10">
+                Chuyên gia xây dựng hệ thống web chuẩn quốc tế với tư duy bảo mật tuyệt đối và hiệu năng tối ưu.
+            </p>
+            <div id="contact-area" class="mt-8">
+                <!-- Email sẽ được render an toàn bằng Base64 qua JS -->
+                <button id="btn-reveal-contact" class="bg-blue-600 hover:bg-blue-700 px-8 py-3 rounded-full font-bold transition-all transform hover:scale-105">
+                    Contact Professional
+                </button>
+            </div>
+        </div>
+    </main>
+
+    <!-- Project Preview (Dynamic Load) -->
+    <section class="max-w-7xl mx-auto py-20 px-4">
+        <h2 class="text-3xl font-bold mb-12 border-l-4 border-blue-500 pl-4">Featured Work</h2>
+        <div id="featured-grid" class="grid grid-cols-1 md:grid-cols-3 gap-8">
+            <!-- Data rendered from JSON via DataController -->
+        </div>
+    </section>
+
+    <!-- Core Engine Scripts -->
+    <script src="core/security.js" defer></script>
+    <script src="core/parser.js" defer></script>
+    <script src="assets/js/main.js" defer></script>
+</body>
+</html>
+ 
