@@ -3,6 +3,7 @@ import { youtubeDB } from './data/youtube.js';
 import { resourcesDB } from './data/resources.js';
 import { sanitize } from './utils/sanitizer.js';
 import { initSecurity } from './core/security.js';
+import { initMobileMenu } from './core/menu.js';
 
 const mainContent = document.getElementById('main-content');
 
@@ -57,6 +58,7 @@ const router = async () => {
 // 4. Khởi chạy hệ thống
 document.addEventListener('DOMContentLoaded', () => {
     initSecurity(); // Kích hoạt bảo mật Runtime
+    initMobileMenu(); // Kích hoạt Mobile Menu
     
     document.body.addEventListener('click', e => {
         const link = e.target.closest('[data-link]');
