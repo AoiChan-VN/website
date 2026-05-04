@@ -1,0 +1,32 @@
+/* src/styles/responsive.css */
+
+/* Tablet (Dưới 1024px) */
+@media (max-width: 1024px) {
+    .grid-container {
+        grid-template-columns: repeat(2, 1fr);
+    }
+}
+
+/* Mobile (Dưới 768px) */
+@media (max-width: 768px) {
+    .nav-links {
+        display: none; /* Cần JS để toggle menu mobile */
+    }
+    
+    .grid-container {
+        grid-template-columns: 1fr; /* 1 cột duy nhất trên mobile */
+        padding: 20px 0;
+    }
+
+    .hero h1 {
+        font-size: 1.8rem;
+    }
+}
+
+/* Màn hình siêu lớn (4K) */
+@media (min-width: 2000px) {
+    .nav-container, .main-content {
+        max-width: 1600px;
+    }
+}
+ 
