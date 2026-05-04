@@ -34,7 +34,7 @@ jobs:
       - name: Artifacts ➺ Deploy
         uses: actions/upload-pages-artifact@v3
         with:
-          path: ./out
+          path: .
           
       - name: Triển khai ➺【GitHub Pages】
         id: deployment
