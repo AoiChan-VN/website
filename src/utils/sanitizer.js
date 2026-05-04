@@ -1,5 +1,5 @@
 /**
- * Senior Security Tool: Chống XSS (Cross-Site Scripting)
+ * Security Tool: Chống XSS (Cross-Site Scripting)
  * Đảm bảo mọi dữ liệu hiển thị đều an toàn tuyệt đối.
  */
 export const sanitize = (string) => {
