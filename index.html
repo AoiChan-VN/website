@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    
+    <!-- Bảo mật: Chặn thực thi script ngoài, chặn iframe lạ, chỉ cho phép source nội bộ -->
+    <meta http-equiv="Content-Security-Policy" content="default-src 'self'; img-src 'self' data:; style-src 'self' 'unsafe-inline'; script-src 'self';">
+    <meta name="referrer" content="no-referrer">
+    
+    <title>Professional Portfolio | High Performance SPA</title>
+    <meta name="description" content="Portfolio chuẩn quốc tế - Tự xây dựng 100%">
+
+    <!-- Preload critical assets -->
+    <link rel="stylesheet" href="src/styles/main.css">
+</head>
+<body>
+
+    <!-- Overlay bảo mật/loading -->
+    <div id="app-loader" class="loader"></div>
+
+    <header id="main-nav">
+        <nav class="container">
+            <div class="logo">PORTFOLIO</div>
+            <ul class="nav-links">
+                <li><a href="#home" class="nav-item">Trang chủ</a></li>
+                <li><a href="#plugins" class="nav-item">Plugins</a></li>
+                <li><a href="#resources" class="nav-item">Resource Packs</a></li>
+                <li><a href="#youtube" class="nav-item">Kênh Youtube</a></li>
+                <li><a href="#download" class="nav-item">Download</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <main id="app-root">
+        <!-- Nội dung SPA sẽ được Inject vào đây bởi Core Engine -->
+        <section id="view-content" class="fade-in"></section>
+    </main>
+
+    <footer id="main-footer">
+        <p>&copy; <span id="current-year"></span> Self-Built Ecosystem. All Rights Reserved.</p>
+    </footer>
+
+    <!-- Core Engine - Load cuối cùng để đảm bảo DOM đã sẵn sàng -->
+    <script src="src/scripts/core-engine.js" type="module"></script>
+</body>
+</html>
+ 
