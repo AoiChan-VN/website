@@ -1,9 +1,14 @@
+import { initSecurity } from './core/security.js';
 import { pluginsDB } from './data/plugins.js';
 import { youtubeDB } from './data/youtube.js';
 import { resourcesDB } from './data/resources.js';
 import { sanitize } from './utils/sanitizer.js';
 
 const mainContent = document.getElementById('main-content');
+
+document.addEventListener('DOMContentLoaded', () => {
+    initSecurity();
+});
 
 // 1. Router: Định nghĩa các tuyến đường
 const routes = {
