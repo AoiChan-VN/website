@@ -1,13 +1,20 @@
-/** @type {import('next').NextConfig} */
+// next.config.js
 const nextConfig = {
-  output: 'export', // Xuất file tĩnh 100%
-  distDir: 'out',   // Thư mục xuất bản
-  images: {
-    unoptimized: true, // Tương thích với GitHub Pages và Server không có Node.js
+  output: 'export', // Bắt buộc để chạy trên GitHub Pages
+  images: { unoptimized: true },
+  async headers() {
+    return [
+      {
+        source: '/(.*)',
+        headers: [
+          { key: 'Content-Security-Policy', value: "default-src 'self'; script-src 'self' 'unsafe-inline'; style-src 'self' 'unsafe-inline'; img-src 'self' data:; connect-src 'self' https://github.com;" },
+          { key: 'X-Frame-Options', value: 'DENY' },
+          { key: 'X-Content-Type-Options', value: 'nosniff' },
+          { key: 'Referrer-Policy', value: 'strict-origin-when-cross-origin' },
+          { key: 'Permissions-Policy', value: 'camera=(), microphone=(), geolocation=()' }
+        ],
+      },
+    ]
   },
-  trailingSlash: true, // Tránh lỗi 404 khi F5 trên các server như Nginx/Apache
-  reactStrictMode: true, // Kiểm tra lỗi ngầm React
-  swcMinify: true, // Nén code mức cao nhất
-};
-
-export default nextConfig;
+}
+module.exports = nextConfig
