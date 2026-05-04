@@ -1,85 +1,72 @@
-import { initSecurity } from './core/security.js';
 import { pluginsDB } from './data/plugins.js';
 import { youtubeDB } from './data/youtube.js';
 import { resourcesDB } from './data/resources.js';
 import { sanitize } from './utils/sanitizer.js';
+import { initSecurity } from './core/security.js';
 
 const mainContent = document.getElementById('main-content');
 
-document.addEventListener('DOMContentLoaded', () => {
-    initSecurity();
-});
-
-// 1. Router: Định nghĩa các tuyến đường
+// 1. Cấu trúc Router
 const routes = {
     '/': { title: 'Trang chủ', render: renderHome },
     '/plugins': { title: 'Plugins Chuyên Nghiệp', render: renderPlugins },
     '/resources': { title: 'Resource Packs', render: renderResources },
     '/youtube': { title: 'Kênh Youtube', render: renderYoutube },
-    '/download': { title: 'Trung tâm Tải về', render: renderDownload }
+    '/download': { title: 'Trung tâm Tải về', render: renderDownload },
+    '/404': { title: 'Không tìm thấy trang', render: render404 }
 };
 
-// 2. Render Engine: Xử lý hiển thị (Dùng Template String tối ưu)
-function renderHome() {
+// 2. Các hàm Render chuyên biệt
+function renderResources() {
+    const html = resourcesDB.map(res => `
+        <div class="card resource-card">
+            <h3>${sanitize(res.name)}</h3>
+            <p>Độ phân giải: <strong>${res.resolution}</strong></p>
+            <p>Dung lượng: ${res.fileSize}</p>
+            <a href="${res.downloadPath}" class="btn-sm" download>Tải ngay</a>
+        </div>
+    `).join('');
+    mainContent.innerHTML = `<section class="grid-container fade-in">${html}</section>`;
+}
+
+function render404() {
     mainContent.innerHTML = `
-        <section class="hero fade-in">
-            <h1>Chào mừng tới Portfolio chuẩn Quốc tế</h1>
-            <p>Full Stack Developer - Chuyên gia tối ưu hệ thống.</p>
+        <section class="error-page fade-in">
+            <h1>404</h1>
+            <p>Yêu cầu không hợp lệ hoặc trang đã bị gỡ bỏ.</p>
+            <a href="/" data-link class="btn-main">Quay lại trang chủ</a>
         </section>
     `;
 }
 
-function renderPlugins() {
-    const html = pluginsDB.map(item => `
-        <div class="card">
-            <h3>${sanitize(item.title)}</h3>
-            <span class="badge">${item.version}</span>
-            <p>${sanitize(item.desc)}</p>
-            <a href="/download" data-link class="btn-sm">Chi tiết</a>
-        </div>
-    `).join('');
-    
-    mainContent.innerHTML = `<section class="grid-container fade-in">${html}</section>`;
-}
-
-function renderYoutube() {
-    const html = youtubeDB.map(item => `
-        <div class="video-card">
-            <img src="${item.thumbnail}" alt="${sanitize(item.title)}">
-            <h4>${sanitize(item.title)}</h4>
-            <a href="https://youtube.com{item.embedId}" target="_blank" rel="noopener noreferrer">Xem ngay</a>
-        </div>
-    `).join('');
-    mainContent.innerHTML = `<section class="grid-container fade-in">${html}</section>`;
-}
-
-// 3. Logic điều hướng không load lại trang (SPA Core)
-const navigateTo = (url) => {
-    history.pushState(null, null, url);
-    router();
-};
-
+// 3. SPA Engine - Xử lý điều hướng
 const router = async () => {
     const path = window.location.pathname;
-    const route = routes[path] || routes['/']; // Default về Home nếu không tìm thấy
+    const route = routes[path] || routes['/404']; // Chống bug gõ sai URL
     
-    document.title = `${route.title} | Senior Portfolio`;
-    route.render();
+    document.title = `${route.title} | Global Portfolio`;
+    
+    // Hiệu ứng chuyển cảnh
+    mainContent.style.opacity = 0;
+    setTimeout(() => {
+        route.render();
+        mainContent.style.opacity = 1;
+    }, 150);
 };
 
-// 4. Khởi tạo Event Listeners
+// 4. Khởi chạy hệ thống
 document.addEventListener('DOMContentLoaded', () => {
-    // Chặn load trang khi click vào link có data-link
+    initSecurity(); // Kích hoạt bảo mật Runtime
+    
     document.body.addEventListener('click', e => {
-        if (e.target.matches('[data-link]')) {
+        const link = e.target.closest('[data-link]');
+        if (link) {
             e.preventDefault();
-            navigateTo(e.target.href);
+            history.pushState(null, null, link.href);
+            router();
         }
     });
 
-    // Xử lý nút Back/Forward của trình duyệt
     window.addEventListener('popstate', router);
-
-    router(); // Chạy lần đầu khi load web
+    router();
 });
- 
