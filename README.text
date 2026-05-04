@@ -1,21 +1,26 @@
-portfolio-pro/
-├── index.html              # Entry Point duy nhất
-├── .github/                # Config bảo mật cho GitHub
-├── public/                 # Tài nguyên tĩnh (Images, Favicon)
+portfolio-v2/
+├── .github/                # GitHub Actions (Tự động deploy)
+├── public/                 # Tài nguyên tĩnh
+│   ├── assets/
+│   │   ├── images/         # Logo, Banner (WebP format)
+│   │   ├── fonts/          # Self-hosted fonts
+│   │   └── docs/           # CV, tài liệu download
 ├── src/
-│   ├── core/               # App logic (Router, Loader)
-│   ├── data/               # DB nội bộ (JSON tách biệt)
-│   │   ├── plugins.js
-│   │   ├── resources.js
-│   │   └── youtube.js
-│   ├── modules/            # Component xử lý từng phần
-│   │   ├── header.js
-│   │   ├── plugin-list.js
-│   │   └── downloader.js
-│   └── utils/              # Helper bảo mật, định dạng
-├── styles/                 # CSS tách biệt theo module
-│   ├── main.css            # Base & Layout
-│   ├── components.css      # UI Elements
-│   ├── responsive.css      # Mobile/Tablet fix
-│   └── security.css        # Hiệu ứng chống copy/spam
-└── security-config/        # File cấu hình bảo mật
+│   ├── core/               # Xử lý logic chính (Router, Security)
+│   ├── data/               # DB Nội bộ (Phân tách riêng biệt)
+│   │   ├── plugins.js      # Data Plugins
+│   │   ├── resources.js    # Data Resource Packs
+│   │   └── youtube.js      # Data Youtube Metadata
+│   ├── components/         # Các thành phần giao diện (Header, Footer, Card)
+│   ├── pages/              # Logic của từng Section
+│   ├── styles/             # Hệ thống CSS tách biệt
+│   │   ├── base.css        # Reset & Typography
+│   │   ├── layout.css      # Grid/Flexbox
+│   │   ├── components.css  # UI Elements
+│   │   └── responsive.css  # Media Queries cho mọi thiết bị
+│   ├── utils/              # Helper functions
+│   └── app.js              # Entry point điều hướng SPA
+├── .htaccess               # Cấu hình bảo mật cơ bản
+├── robots.txt              # Cấu hình SEO & Bot
+├── security.txt            # Chính sách bảo mật quốc tế
+└── index.html              # File duy nhất (SPA Entry)
