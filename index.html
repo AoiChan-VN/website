@@ -1,5 +1,19 @@
 <!DOCTYPE html>
 <html lang="vi-VN">
+
+<script type="text/javascript">
+  (function(l) {
+    if (l.search[1] === '/' ) {
+      var decoded = l.search.slice(1).split('&').map(function(s) { 
+        return s.replace(/~and~/g, '&') 
+      }).join('?');
+      window.history.replaceState(null, null,
+          l.pathname.slice(0, -1) + decoded + l.hash
+      );
+    }
+  }(window.location));
+</script>
+
 <head>
     <!-- 1. BẢO MẬT & META CƠ BẢN -->
     <meta charset="UTF-8">
@@ -15,7 +29,7 @@
     <!-- Favicon chuẩn mọi thiết bị -->
     <link rel="icon" type="image/png" href="public/assets/images/favicon.png">
 
-    <!-- 2. HỆ THỐNG STYLES TÁCH BIỆT (Yêu cầu 5) -->
+    <!-- 2. HỆ THỐNG STYLES TÁCH BIỆT -->
     <!-- Load CSS quan trọng trước để tránh tình trạng layout bị giật (CLS) -->
     <link rel="stylesheet" href="src/styles/base.css">
     <link rel="stylesheet" href="src/styles/layout.css">
@@ -27,7 +41,7 @@
 </head>
 <body>
 
-    <!-- 3. CẤU TRÚC LAYOUT (Yêu cầu 2) -->
+    <!-- 3. CẤU TRÚC LAYOUT -->
     <div id="app">
         <!-- Header: Cố định cho SPA -->
         <header class="main-header">
@@ -61,7 +75,7 @@
         </footer>
     </div>
 
-    <!-- 4. KHỞI TẠO SPA ENGINE (Yêu cầu 6, 7) -->
+    <!-- 4. KHỞI TẠO SPA ENGINE -->
     <script type="module" src="src/app.js"></script>
 
     <!-- Noscript Security -->
