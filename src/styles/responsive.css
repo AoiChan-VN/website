@@ -1,5 +1,10 @@
-/* src/styles/responsive.css */
-
+/* Màn hình siêu lớn (4K) */
+@media (min-width: 2000px) {
+    .nav-container, .main-content {
+        max-width: 1600px;
+    }
+}
+ 
 /* Tablet (Dưới 1024px) */
 @media (max-width: 1024px) {
     .grid-container {
@@ -9,10 +14,7 @@
 
 /* Mobile (Dưới 768px) */
 @media (max-width: 768px) {
-    .nav-links {
-        display: none; /* Cần JS để toggle menu mobile */
-    }
-    
+
     .grid-container {
         grid-template-columns: 1fr; /* 1 cột duy nhất trên mobile */
         padding: 20px 0;
@@ -21,12 +23,51 @@
     .hero h1 {
         font-size: 1.8rem;
     }
-}
+    
+    /* Nút Hamburger */
+    .menu-toggle {
+        display: block;
+        cursor: pointer;
+        background: none;
+        border: none;
+        z-index: 1001;
+    }
 
-/* Màn hình siêu lớn (4K) */
-@media (min-width: 2000px) {
-    .nav-container, .main-content {
-        max-width: 1600px;
+    .menu-toggle .bar {
+        display: block;
+        width: 25px;
+        height: 3px;
+        margin: 5px auto;
+        background-color: var(--text-main);
+        transition: var(--transition-smooth);
+    }
+
+    /* Hiệu ứng X khi mở menu */
+    .menu-toggle.active .bar:nth-child(2) { opacity: 0; }
+    .menu-toggle.active .bar:nth-child(1) { transform: translateY(8px) rotate(45deg); }
+    .menu-toggle.active .bar:nth-child(3) { transform: translateY(-8px) rotate(-45deg); }
+
+    /* Overlay Menu */
+    .nav-links {
+        display: flex;
+        flex-direction: column;
+        position: fixed;
+        left: -100%; /* Giấu menu bên trái */
+        top: 70px;
+        background: var(--bg-dark);
+        width: 100%;
+        height: calc(100vh - 70px);
+        gap: 0;
+        text-align: center;
+        transition: 0.3s;
+        border-top: 1px solid var(--border-color);
+    }
+
+    .nav-links.active {
+        left: 0;
+    }
+
+    .nav-links li {
+        margin: 20px 0;
     }
 }
- 
