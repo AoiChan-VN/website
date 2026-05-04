@@ -1,21 +1,16 @@
-import type { Config } from "tailwindcss";
-
-const config: Config = {
-  content: [
-    "./src/pages/**/*.{js,ts,jsx,tsx,mdx}",
-    "./src/components/**/*.{js,ts,jsx,tsx,mdx}",
-    "./src/app/**/*.{js,ts,jsx,tsx,mdx}",
-  ],
+/** @type {import('tailwindcss').Config} */
+export default {
+  content: ["./index.html", "./src/**/*.{js,ts,jsx,tsx}"],
   theme: {
     extend: {
       colors: {
-        background: "var(--background)",
-        foreground: "var(--foreground)",
-        primary: "#0070f3", // Màu chủ đạo có thể thay đổi
+        panel: '#0f172a', // Màu nền Dashboard sâu
+        primary: '#3b82f6', // Xanh chuẩn quốc tế
       },
+      screens: {
+        'xs': '320px', // Hỗ trợ điện thoại siêu nhỏ
+      }
     },
   },
   plugins: [],
-};
-export default config;
- 
+}
