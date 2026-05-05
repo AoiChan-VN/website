@@ -10,16 +10,7 @@
     <link rel="stylesheet" href="assets/css/components.css">
 </head>
 <body>
-    <header style="padding: 40px; display: flex; justify-content: space-between; align-items: center;">
-        <div class="logo">AOI<span style="color: var(--accent);">CHAN</span>™</div>
-        <nav style="background: var(--glass); padding: 10px 30px; border-radius: 100px; border: 1px solid var(--border);">
-            <a href="index.html" style="color:var(--accent); text-decoration: none; margin: 0 15px;">Home</a>
-            <a href="pages/plugins.html" style="color:#fff; text-decoration: none; margin: 0 15px;">Plugins</a>
-            <a href="pages/resource.html" style="color:#fff; text-decoration: none; margin: 0 15px;">Resource</a>
-            <a href="pages/channel.html" style="color:#fff; text-decoration: none; margin: 0 15px;">Youtube</a>
-        </nav>
-        <div class="auth-v">AoiChan System v2.6</div>
-    </header>
+    <header></header>
 
     <main class="bento-container">
         <!-- Hero Box -->
@@ -60,12 +51,11 @@
         </section>
     </main>
 
-    <footer style="padding: 50px; text-align: center; opacity: 0.3; font-size: 12px;">
-        © 2026 AOICHAN INTERNATIONAL | HANDCRAFTED WITH PURE JS
-    </footer>
+    <footer></footer>
 
-    <script src="assets/js/security.js"></script>
     <script type="module">
+        import { renderHeader } from './src/components/header.js';
+        import { renderFooter } from './src/components/footer.js';
         import DATABASE_PLUGINS from './src/db/pl-db.js';
         const plBox = document.getElementById('pl-preview');
         plBox.innerHTML = DATABASE_PLUGINS.data.slice(0, 3).map(p => `
@@ -74,6 +64,9 @@
                 <div style="font-size: 12px; color: #555;">ID: ${p.id} • Ver: ${p.ver}</div>
             </div>
         `).join('');
+        renderHeader(false);
+        renderFooter();
     </script>
+    <script src="assets/js/security.js"></script>
 </body>
 </html>
