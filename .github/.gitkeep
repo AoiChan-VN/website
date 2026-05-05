@@ -4,8 +4,8 @@
 
 • Dùng GitHub Pages để build
 
-• Single Page Application (SPA)
-➨ Trang chủ | Plugins | Resource Packs | Kênh Youtube | Download
+• Multi-Sub Pages
+➨ Trang chủ | Plugins | Resource | Chanel YT 
 
 ## Đảm bảo:
 > 1. Đầy đủ các file bảo mật chống Hack, Chống tấn công,.. 
@@ -13,10 +13,11 @@
 > 3. Phù hợp cho mọi thiết bị hiện nay
 > 4. DB nội bộ (được phân loại chuyên biệt) - (Multi-Data)
 > 5. styles/ tách riêng từng CSS
-> 6. Tự Build mọi thứ, không dùng API, Data bên ngoài
-> 7. luôn rà soát, kiểm tra lại code, tránh lỗi và bug ngầm
+> 6. Tự Build mọi thứ, không dùng API, Data bên ngoài,...
+> 7. Dùng Git tag chuẩn cho version
 
 ## Quan trọng:
 > 1. Chuẩn Senior Full Stack nhiều năm kinh nghiệm
 > 2. Project gọn gàng, Code Sạch - Gọn, Dễ sửa chữa - bảo trì
 > 3. Có thể chạy lâu dài nhiều năm.
+> 4. luôn rà soát, kiểm tra lại code, tránh lỗi và bug ngầm
