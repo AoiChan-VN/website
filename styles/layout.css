@@ -1,0 +1,48 @@
+/* Container Control */
+main {
+    max-width: var(--CONTAINER-MAX);
+    margin: 0 auto;
+    padding: calc(var(--SPACING-UNIT) * 2);
+    min-height: 80vh;
+}
+
+/* Flex Utilities */
+.flex-center {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+/* Senior-level Grid System */
+.grid-container {
+    display: grid;
+    /* Tự động tính toán số cột: tối thiểu 300px, tối đa 1fr */
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: calc(var(--SPACING-UNIT) * 2);
+    margin-top: 2rem;
+}
+
+/* Card Styling (Glassmorphism) */
+.card {
+    background: rgba(255, 255, 255, 0.03);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    padding: 1.5rem;
+    border-radius: 8px;
+    transition: transform 0.3s ease, border-color 0.3s ease;
+}
+
+.card:hover {
+    transform: translateY(-5px);
+    border-color: var(--ACCENT-COLOR);
+}
+
+/* 4K Optimization */
+@media (min-width: 2000px) {
+    :root {
+        --CONTAINER-MAX: 1800px;
+    }
+    .grid-container {
+        grid-template-columns: repeat(4, 1fr);
+    }
+}
+ 
