@@ -9,11 +9,7 @@
     <link rel="stylesheet" href="../assets/css/pl/plugins.css"> 
 </head>
 <body>
-    <header style="padding: 30px 5%;">
-        <div class="logo">AOI<span style="color: var(--accent);">CHAN</span></div>
-        <nav><a href="../index.html" style="color:#fff; text-decoration:none;">← BACK</a></nav>
-    </header>
-
+    <header></header>
     <main class="container" style="max-width: 1400px; margin: 0 auto; padding: 0 20px;">
         <section class="animate" style="border-bottom: 1px solid var(--border); padding-bottom: 40px;">
             <span class="tag-v">REPOSITORY</span>
@@ -23,8 +19,11 @@
 
         <div id="plugin-grid" class="plugin-list"></div>
     </main>
+    <footer></footer>
 
     <script type="module">
+        import { renderHeader } from '../src/components/header.js';
+        import { renderFooter } from '../src/components/footer.js';
         import DATABASE_PLUGINS from '../src/db/pl-db.js';
         const grid = document.getElementById('plugin-grid');
         grid.innerHTML = DATABASE_PLUGINS.data.map(pl => `
@@ -41,6 +40,8 @@
                 </div>
             </div>
         `).join('');
+        renderHeader(true);
+        renderFooter();
     </script>
     <script src="../assets/js/security.js"></script>
 </body>
