@@ -1,13 +1,26 @@
 /**
- * @project Portfolio Chuẩn Quốc Tế
+ * @security Final Protection
  * @author AoiChan
- * @security Anti-Hack & Protection
  */
-document.onkeydown = function(e) {
-    if (e.keyCode == 123 || (e.ctrlKey && e.shiftKey && (e.keyCode == 'I'.charCodeAt(0) || e.keyCode == 'J'.charCodeAt(0) || e.keyCode == 'C'.charCodeAt(0))) || (e.ctrlKey && e.keyCode == 'U'.charCodeAt(0))) {
-        return false;
-    }
-};
-document.addEventListener('contextmenu', event => event.preventDefault());
-console.log('%cProtected by AoiChan System', 'color: red; font-size: 20px; font-weight: bold;');
- 
+(function() {
+    'use strict';
+    // Chặn chuột phải
+    document.addEventListener('contextmenu', e => e.preventDefault());
+    
+    // Chặn phím tắt DevTools
+    document.addEventListener('keydown', e => {
+        if (
+            e.keyCode === 123 || 
+            (e.ctrlKey && e.shiftKey && (e.keyCode === 73 || e.keyCode === 74)) || 
+            (e.ctrlKey && e.keyCode === 85)
+        ) {
+            e.preventDefault();
+            return false;
+        }
+    });
+
+    // Chặn kéo thả hình ảnh/nội dung
+    document.addEventListener('dragstart', e => e.preventDefault());
+    
+    console.log("%cCopyright AoiChan - Website Protected", "color: #00ff88; font-size: 14px; font-weight: bold;");
+})();
