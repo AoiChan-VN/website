@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Resource Library | AoiChan</title>
+    <link rel="stylesheet" href="../assets/css/global.css">
+</head>
+<body>
+    <header class="container">
+        <div class="logo">AOICHAN</div>
+        <nav><a href="../index.html">Trang chủ</a></nav>
+    </header>
+    <main class="container">
+        <h1>Tài nguyên miễn phí</h1>
+        <table class="resource-table">
+            <thead>
+                <tr>
+                    <th>Tên tài nguyên</th>
+                    <th>Định dạng</th>
+                    <th>Dung lượng</th>
+                    <th>Tải về</th>
+                </tr>
+            </thead>
+            <tbody id="render-rs"></tbody>
+        </table>
+    </main>
+    <script type="module">
+        import DATABASE_RESOURCE from '../src/db/rs-db.js';
+        const container = document.getElementById('render-rs');
+        container.innerHTML = DATABASE_RESOURCE.items.map(rs => `
+            <tr id="${rs.id}">
+                <td>${rs.name}</td>
+                <td><span class="badge">${rs.type}</span></td>
+                <td>${rs.size}</td>
+                <td><a href="${rs.link}" class="download-link">Download</a></td>
+            </tr>
+        `).join('');
+    </script>
+    <script src="../assets/js/security.js"></script>
+</body>
+</html>
+ 
