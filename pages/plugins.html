@@ -3,30 +3,50 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Plugins Manager | AoiChan</title>
+    <title>Plugins Library | AoiChan Core</title>
     <link rel="stylesheet" href="../assets/css/global.css">
+    <style>
+        .plugin-list { display: grid; grid-template-columns: repeat(auto-fill, minmax(400px, 1fr)); gap: 20px; padding: 40px 0; }
+        .pl-card { 
+            background: var(--card); border: 1px solid var(--border); border-radius: 20px; 
+            padding: 30px; transition: 0.5s; position: relative; overflow: hidden;
+        }
+        .pl-card:hover { border-color: var(--accent); transform: scale(1.02); background: rgba(0, 242, 255, 0.02); }
+        .pl-card h2 { font-size: 1.8rem; margin-bottom: 10px; letter-spacing: -1px; }
+        .status-dot { width: 8px; height: 8px; border-radius: 50%; display: inline-block; margin-right: 8px; background: var(--accent); }
+    </style>
 </head>
 <body>
-    <header class="container">
-        <div class="logo">AOICHAN</div>
-        <nav><a href="../index.html">Quay lại Trang chủ</a></nav>
+    <header style="padding: 30px 5%;">
+        <div class="logo">AOI<span style="color: var(--accent);">CHAN</span></div>
+        <nav><a href="../index.html" style="color:#fff; text-decoration:none;">← BACK TO CORE</a></nav>
     </header>
-    <main class="container">
-        <div class="page-header">
-            <h1>Plugins System</h1>
-            <p>Danh sách các Plugin được phát triển bởi AoiChan.</p>
-        </div>
-        <div id="render-plugins" class="grid-layout"></div>
+
+    <main class="container" style="max-width: 1400px; margin: 0 auto; padding: 0 20px;">
+        <section class="animate" style="border-bottom: 1px solid var(--border); padding-bottom: 40px;">
+            <span class="tag-v">REPOSITORY</span>
+            <h1 style="margin-top: 15px;">Advanced <span style="color: var(--accent);">Plugins</span></h1>
+            <p style="color: #666; margin-top: 10px;">Hệ thống mã nguồn tối ưu cho các dự án quy mô lớn.</p>
+        </section>
+
+        <div id="plugin-grid" class="plugin-list"></div>
     </main>
+
     <script type="module">
         import DATABASE_PLUGINS from '../src/db/pl-db.js';
-        const container = document.getElementById('render-plugins');
-        container.innerHTML = DATABASE_PLUGINS.data.map(item => `
-            <div class="card shadow" id="${item.id}">
-                <div class="tag">${DATABASE_PLUGINS.tag}</div>
-                <h2>${item.name}</h2>
-                <p>Phiên bản: ${item.ver}</p>
-                <a href="${item.path}" class="btn">Chi tiết</a>
+        const grid = document.getElementById('plugin-grid');
+        grid.innerHTML = DATABASE_PLUGINS.data.map(pl => `
+            <div class="pl-card animate">
+                <div style="display: flex; justify-content: space-between; align-items: flex-start;">
+                    <span class="tag-v">${DATABASE_PLUGINS.tag}</span>
+                    <span style="font-size: 12px; color: #444;">ID: ${pl.id}</span>
+                </div>
+                <h2 style="margin-top: 20px;">${pl.name}</h2>
+                <p style="color: #888; font-size: 14px; margin-bottom: 25px;">Giải pháp ${pl.name} được build chuẩn Senior, chống lỗi logic và tối ưu bộ nhớ.</p>
+                <div style="display: flex; justify-content: space-between; align-items: center; border-top: 1px solid var(--border); padding-top: 20px;">
+                    <div style="font-size: 13px;"><span class="status-dot"></span>Version: ${pl.ver}</div>
+                    <a href="#" class="btn" style="padding: 5px 15px; font-size: 12px;">DOCUMENTATION</a>
+                </div>
             </div>
         `).join('');
     </script>
