@@ -1,76 +1,44 @@
 <!DOCTYPE html>
-<html lang="vi-VN" dir="ltr">
+<html lang="vi">
 <head>
-    <!-- [Bảo mật tầng 1: Meta Headers] -->
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self'; style-src 'self' https://googleapis.com; font-src 'self' https://gstatic.com; img-src 'self' data:;">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Senior Full Stack Engineer | Portfolio</title>
+    
+    <!-- Security Headers -->
+    <meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self'; style-src 'self' 'unsafe-inline'; img-src 'self' data:;">
     <meta http-equiv="X-Content-Type-Options" content="nosniff">
     
-    <title>Portfolio Professional | Senior Full Stack</title>
-    <meta name="description" content="Portfolio chuyên nghiệp, mã nguồn sạch, tối ưu hóa hiệu suất và bảo mật cao.">
-
-    <!-- [Favicon & Icons] -->
-    <link rel="icon" type="image/x-icon" href="/assets/images/favicon.ico">
-    <link rel="apple-touch-icon" href="/assets/images/apple-touch-icon.png">
-
-    <!-- [Stylesheets - Cơ chế @import tập trung tại main.css] -->
-    <link rel="stylesheet" href="/assets/css/main.css">
+    <link rel="stylesheet" href="styles/root.css">
+    <link rel="stylesheet" href="styles/layout.css">
+    
+    <!-- Anti-Clickjacking -->
+    <style id="antiClickjack">body { display: none !important; }</style>
+    <script>
+        if (self === top) {
+            document.getElementById('antiClickjack').parentNode.removeChild(document.getElementById('antiClickjack'));
+        } else {
+            top.location = self.location;
+        }
+    </script>
 </head>
 <body>
-
-    <!-- [Giao diện chính] -->
-    <header id="main-header" role="banner">
-        <nav class="container nav-wrapper" aria-label="Main Navigation">
-            <div class="logo">
-                <a href="/" aria-label="Về trang chủ">AOICHAN<span>.PRO</span></a>
-            </div>
-            <ul class="nav-links" role="list">
-                <li><a href="/" class="active" aria-current="page">Trang chủ</a></li>
-                <li><a href="/plugins/">Plugins</a></li>
-                <li><a href="/resource/">Resource</a></li>
-                <li><a href="/youtube/">Chanel YT</a></li>
-            </ul>
-            <button class="mobile-menu-toggle" aria-label="Mở menu" aria-expanded="false">
-                <span class="bar"></span>
-            </button>
+    <header class="main-header">
+        <nav id="main-nav">
+            <a href="/" data-link>Home</a>
+            <a href="/plugins" data-link>Plugins</a>
+            <a href="/resource" data-link>Resources</a>
         </nav>
     </header>
 
-    <main id="main-content">
-        <!-- Hero Section -->
-        <section class="hero-section container">
-            <div class="hero-content">
-                <h1 class="fade-in">Senior Full Stack Developer</h1>
-                <p class="subtitle fade-in">Xây dựng hệ thống bền bỉ - Mã nguồn sạch - Bảo mật tuyệt đối</p>
-                <div class="cta-group">
-                    <a href="/resource/" class="btn btn-primary">Khám phá Tài nguyên</a>
-                    <a href="#contact" class="btn btn-secondary">Liên hệ</a>
-                </div>
-            </div>
-        </section>
-
-        <!-- Dynamic Data Section (Sẽ load từ home.json) -->
-        <section id="featured-projects" class="container section-padding">
-            <h2 class="section-title">Dự án tiêu biểu</h2>
-            <div id="home-data-container" class="grid-layout">
-                <!-- JS sẽ render data nội bộ vào đây -->
-                <div class="loading-skeleton">Đang tải dữ liệu nội bộ...</div>
-            </div>
-        </section>
+    <main id="app-root">
+        <!-- Content injected by router.js -->
     </main>
 
-    <footer id="main-footer" role="contentinfo">
-        <div class="container footer-grid">
-            <div class="footer-info">
-                <p>&copy; <span id="current-year"></span> AoiChan Portfolio. All rights reserved.</p>
-                <p class="security-note">Môi trường bảo mật tĩnh (Static Secure Environment)</p>
-            </div>
-        </div>
+    <footer class="main-footer">
+        <p>&copy; 2024 Built with Vanilla JS</p>
     </footer>
 
-    <!-- [Scripts - Vanilla JS No API] -->
-    <script src="/assets/js/main.js" type="module"></script>
+    <script type="module" src="scripts/core/router.js"></script>
 </body>
 </html>
