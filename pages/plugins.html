@@ -3,25 +3,33 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Plugins | AoiChan System</title>
-    <link rel="stylesheet" href="../assets/css/style.css">
+    <title>Plugins Manager | AoiChan</title>
+    <link rel="stylesheet" href="../assets/css/global.css">
 </head>
 <body>
-    <header>
-        <div class="logo"><strong>AOICHAN</strong></div>
-        <nav><a href="../index.html">← Quay lại</a></nav>
+    <header class="container">
+        <div class="logo">AOICHAN</div>
+        <nav><a href="../index.html">Quay lại Trang chủ</a></nav>
     </header>
     <main class="container">
-        <h1>Plugins Library</h1>
-        <div class="card-grid" id="plugin-render"></div>
+        <div class="page-header">
+            <h1>Plugins System</h1>
+            <p>Danh sách các Plugin được phát triển bởi AoiChan.</p>
+        </div>
+        <div id="render-plugins" class="grid-layout"></div>
     </main>
-    <script src="../assets/db/pl-db.js"></script>
-    <script>
-        const render = document.getElementById('plugin-render');
-        PL_DATA.items.map(pl => {
-            render.innerHTML += `<div class="card"><h2>${pl.name}</h2><p>${pl.desc}</p></div>`;
-        });
+    <script type="module">
+        import DATABASE_PLUGINS from '../src/db/pl-db.js';
+        const container = document.getElementById('render-plugins');
+        container.innerHTML = DATABASE_PLUGINS.data.map(item => `
+            <div class="card shadow" id="${item.id}">
+                <div class="tag">${DATABASE_PLUGINS.tag}</div>
+                <h2>${item.name}</h2>
+                <p>Phiên bản: ${item.ver}</p>
+                <a href="${item.path}" class="btn">Chi tiết</a>
+            </div>
+        `).join('');
     </script>
+    <script src="../assets/js/security.js"></script>
 </body>
 </html>
- 
