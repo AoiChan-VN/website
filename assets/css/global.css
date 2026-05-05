@@ -1,0 +1,32 @@
+/* Custom Scrollbar cho chuẩn quốc tế */
+::-webkit-scrollbar { width: 8px; }
+::-webkit-scrollbar-thumb { background: #00ff88; border-radius: 10px; }
+
+:root {
+    --bg-dark: #050505;
+    --aoi-accent: #00ff88;
+}
+
+body {
+    background-color: var(--bg-dark);
+    background-image: url('../img/backgrounds/main-pattern.png'); /* File từ Photoshop */
+    background-attachment: fixed;
+    color: #fff;
+    margin: 0;
+}
+
+/* Responsive từ Mobile đến 8K */
+.container {
+    width: 90%;
+    max-width: 3200px; /* Hỗ trợ màn hình cực lớn */
+    margin: 0 auto;
+}
+
+@media (min-width: 3840px) { /* 4K */
+    html { font-size: 24px; }
+}
+
+@media (min-width: 7680px) { /* 8K */
+    html { font-size: 32px; }
+}
+ 
