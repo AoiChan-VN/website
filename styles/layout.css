@@ -1,3 +1,99 @@
+/**
+ * @fileoverview Layout System (Vanilla CSS)
+ * @description Tập trung vào Flexbox, Grid và Fluid Typography
+ */
+
+/* Main Wrapper */
+#app-root {
+    display: block;
+    width: 100%;
+    min-height: 100vh;
+    padding: clamp(2rem, 5vw, 6rem) clamp(1rem, 3vw, 4rem);
+    transition: opacity 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+/* Header & Navigation */
+.main-header {
+    position: fixed;
+    top: 0;
+    width: 100%;
+    z-index: 1000;
+    background: rgba(10, 10, 10, 0.8);
+    backdrop-filter: blur(10px);
+    border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+}
+
+#main-nav {
+    display: flex;
+    justify-content: center;
+    gap: 2.5rem;
+    height: 70px;
+    align-items: center;
+}
+
+#main-nav a {
+    color: var(--TEXT-MAIN);
+    text-decoration: none;
+    font-size: 0.9rem;
+    text-transform: uppercase;
+    letter-spacing: 0.1rem;
+    transition: color 0.3s ease;
+    opacity: 0.7;
+}
+
+#main-nav a:hover {
+    color: var(--ACCENT-COLOR);
+    opacity: 1;
+}
+
+/* Typography Classes */
+.text-accent { color: var(--ACCENT-COLOR); }
+
+.FS-H1 {
+    font-size: var(--FS-H1);
+    font-weight: 800;
+    line-height: 1.1;
+    margin-bottom: 2rem;
+    letter-spacing: -0.02em;
+}
+
+/* UI Components */
+.tag {
+    font-family: monospace;
+    font-size: 0.75rem;
+    color: var(--ACCENT-COLOR);
+    background: rgba(100, 255, 218, 0.1);
+    padding: 0.2rem 0.6rem;
+    border-radius: 4px;
+}
+
+.btn {
+    display: inline-block;
+    padding: 1rem 2rem;
+    border: 1px solid var(--ACCENT-COLOR);
+    color: var(--ACCENT-COLOR);
+    text-decoration: none;
+    font-weight: 600;
+    border-radius: 4px;
+    margin-top: 1.5rem;
+    transition: all 0.3s ease;
+}
+
+.btn:hover {
+    background: rgba(100, 255, 218, 0.1);
+    box-shadow: 0 0 20px rgba(100, 255, 218, 0.2);
+}
+
+/* Animations */
+.fade-in {
+    animation: fadeIn 0.6s ease-out forwards;
+}
+
+@keyframes fadeIn {
+    from { opacity: 0; transform: translateY(10px); }
+    to { opacity: 1; transform: translateY(0); }
+}
+
 /* Container Control */
 main {
     max-width: var(--CONTAINER-MAX);
@@ -13,7 +109,7 @@ main {
     justify-content: center;
 }
 
-/* Senior-level Grid System */
+/* Grid System */
 .grid-container {
     display: grid;
     /* Tự động tính toán số cột: tối thiểu 300px, tối đa 1fr */
