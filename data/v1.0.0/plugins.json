@@ -1,0 +1,15 @@
+[
+  {
+    "name": "Core-Security-Module",
+    "version": "v2.1.0",
+    "description": "Vanilla JS implementation of AES encryption for client-side storage.",
+    "link": "#"
+  },
+  {
+    "name": "State-Engine",
+    "version": "v1.0.5",
+    "description": "Zero-dependency state management using Proxy API.",
+    "link": "#"
+  }
+]
+ 
