@@ -72,6 +72,6 @@ document.addEventListener('DOMContentLoaded', () => {
     window.addEventListener('hashchange', router);
     router();
     
-    //window.addEventListener('popstate', router);
-    //router();
+    window.addEventListener('popstate', router);
+    router();
 });
