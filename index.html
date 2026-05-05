@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="author" content="AoiChan">
+    <title>AoiChan Portfolio | Professional Full Stack</title>
+    <link rel="stylesheet" href="assets/css/global.css">
+</head>
+<body>
+    <div id="app-root" class="container">
+        <header>
+            <img src="assets/img/logo/aoichan-logo.png" alt="AoiChan Logo" width="150">
+            <nav>
+                <a href="index.html">Home</a>
+                <a href="pages/plugins.html">Plugins</a>
+                <a href="pages/resource.html">Resources</a>
+                <a href="pages/channel.html">Youtube</a>
+            </nav>
+        </header>
+
+        <main id="main-content">
+            <h1>Hệ thống danh mục</h1>
+            <div id="plugin-grid" class="grid-layout"></div>
+        </main>
+
+        <footer id="license-footer">
+            <!-- Sẽ được render bởi src/components/license.js -->
+            <p>© 2024 AoiChan. All Rights Reserved.</p>
+        </footer>
+    </div>
+
+    <!-- Script chuẩn Module (Giống Framework hiện đại) -->
+    <script type="module">
+        import { App } from './assets/js/core.js';
+        import DATABASE_PLUGINS from './src/db/pl-db.js';
+        
+        // Render data ngay khi load
+        App.renderList('plugin-grid', DATABASE_PLUGINS);
+    </script>
+</body>
+</html>
+ 
