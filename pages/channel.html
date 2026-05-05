@@ -2,48 +2,114 @@
 <html lang="vi">
 <head>
     <meta charset="UTF-8">
-    <title>Channel | AoiChan Live</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Channel | AoiChan Live Streaming</title>
     <link rel="stylesheet" href="../assets/css/global.css">
     <style>
-        .yt-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(450px, 1fr)); gap: 30px; margin-top: 50px; }
-        .yt-card { position: relative; border-radius: 24px; overflow: hidden; background: #000; border: 1px solid var(--border); }
-        .yt-thumb { width: 100%; aspect-ratio: 16/9; background: #111; display: flex; align-items: center; justify-content: center; }
-        .yt-content { padding: 25px; }
-        .play-btn { 
-            position: absolute; top: 30%; left: 50%; transform: translate(-50%, -50%);
-            width: 60px; height: 60px; background: var(--accent); border-radius: 50%;
-            display: flex; align-items: center; justify-content: center; box-shadow: 0 0 30px var(--accent-glow);
+        :root { --yt-red: #ff0000; --yt-bg: #0f0f0f; }
+        
+        .yt-hero {
+            background: linear-gradient(to bottom, rgba(255,0,0,0.1), transparent);
+            padding: 80px 5%; border-radius: 32px; margin: 20px 0;
+            border: 1px solid var(--border); position: relative; overflow: hidden;
         }
+
+        .yt-grid { 
+            display: grid; 
+            grid-template-columns: repeat(auto-fill, minmax(380px, 1fr)); 
+            gap: 25px; margin-top: 40px; 
+        }
+
+        .yt-card {
+            background: var(--card); border-radius: 16px; overflow: hidden;
+            border: 1px solid var(--border); transition: 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+            position: relative;
+        }
+
+        .yt-card:hover { transform: scale(1.03); border-color: var(--yt-red); box-shadow: 0 15px 30px rgba(0,0,0,0.5); }
+
+        /* Giả lập Thumbnail sinh động thay vì để đen */
+        .thumb-wrap {
+            width: 100%; aspect-ratio: 16/9; background: #1a1a1a;
+            position: relative; overflow: hidden;
+            display: flex; align-items: center; justify-content: center;
+        }
+
+        .thumb-wrap::before {
+            content: ""; position: absolute; width: 100%; height: 100%;
+            background: linear-gradient(45deg, #222, #000); opacity: 0.8;
+        }
+
+        .play-icon {
+            z-index: 2; width: 50px; height: 50px; background: var(--yt-red);
+            border-radius: 50%; display: flex; align-items: center; justify-content: center;
+            box-shadow: 0 0 20px rgba(255,0,0,0.5);
+        }
+
+        .duration {
+            position: absolute; bottom: 10px; right: 10px; z-index: 3;
+            background: rgba(0,0,0,0.8); padding: 2px 6px; font-size: 11px; border-radius: 4px;
+        }
+
+        .yt-info { padding: 20px; }
+        .yt-title { font-size: 1.1rem; font-weight: 700; margin-bottom: 10px; line-height: 1.4; color: #fff; }
+        
+        .channel-meta { display: flex; align-items: center; gap: 10px; margin-top: 15px; }
+        .avatar-mini { width: 30px; height: 30px; background: var(--accent); border-radius: 50%; }
+
+        .btn-watch {
+            display: block; width: 100%; text-align: center; background: #fff; color: #000;
+            padding: 12px; border-radius: 8px; text-decoration: none; font-weight: 800;
+            margin-top: 15px; transition: 0.3s;
+        }
+        .btn-watch:hover { background: var(--yt-red); color: #fff; }
     </style>
 </head>
 <body>
-    <header style="padding: 30px 5%;">
-        <div class="logo">AOI<span style="color: #ff0000;">TUBE</span></div>
+    <header style="padding: 20px 5%; display: flex; justify-content: space-between; align-items: center; border-bottom: 1px solid var(--border);">
+        <div class="logo" style="color: var(--yt-red);">AOI<span style="color: #fff;">TUBE</span></div>
+        <nav><a href="../index.html" style="color: #888; text-decoration: none;">← Exit Channel</a></nav>
     </header>
 
-    <main class="container" style="max-width: 1600px; margin: 0 auto; padding: 0 20px;">
-        <div class="yt-grid" id="yt-render"></div>
+    <main class="container">
+        <section class="yt-hero animate">
+            <span class="tag-v" style="border-color: var(--yt-red); color: var(--yt-red);">LIVE NOW</span>
+            <h1 style="margin: 20px 0;">AoiChan Engineering <br>Official Media Center</h1>
+            <p style="color: #888;">Nơi lưu trữ những kiến thức lập trình Full Stack và Resource độc quyền.</p>
+        </section>
+
+        <div class="yt-grid" id="yt-container">
+            <!-- Loading state sinh động -->
+            <p>Đang đồng bộ dữ liệu từ hệ thống...</p>
+        </div>
     </main>
 
     <script type="module">
         import DATABASE_YOUTUBE from '../src/db/yt-db.js';
-        const grid = document.getElementById('yt-render');
-        grid.innerHTML = DATABASE_YOUTUBE.items.map(yt => `
+        const container = document.getElementById('yt-container');
+
+        // Render dữ liệu thực từ DB
+        container.innerHTML = DATABASE_YOUTUBE.items.map(video => `
             <div class="yt-card animate">
-                <div class="yt-thumb">
-                    <div class="play-btn"><svg width="24" height="24" viewBox="0 0 24 24" fill="black"><path d="M8 5v14l11-7z"/></svg></div>
-                    <span style="color: #222; font-weight: 900; font-size: 40px;">AOI PREVIEW</span>
-                </div>
-                <div class="yt-content">
-                    <span class="tag-v" style="border-color: #ff4d4d; color: #ff4d4d;">YOUTUBE</span>
-                    <h3 style="margin-top: 15px; font-size: 1.4rem;">${yt.title}</h3>
-                    <div style="margin-top: 20px; display: flex; justify-content: space-between; align-items: center;">
-                        <span style="color: #555; font-size: 13px;">${yt.views} Views • Published by AoiChan</span>
-                        <a href="${yt.url}" target="_blank" class="btn">WATCH VIDEO</a>
+                <div class="thumb-wrap">
+                    <div class="play-icon">
+                        <svg width="20" height="20" viewBox="0 0 24 24" fill="white"><path d="M8 5v14l11-7z"/></svg>
                     </div>
+                    <div class="duration">12:45</div>
+                    <div style="position:absolute; z-index:1; font-weight:900; opacity:0.1; font-size:40px; transform:rotate(-15deg)">AOICHAN</div>
+                </div>
+                <div class="yt-info">
+                    <div class="yt-title">${video.title}</div>
+                    <div style="color: #666; font-size: 13px;">${video.views} lượt xem • 2 giờ trước</div>
+                    <div class="channel-meta">
+                        <div class="avatar-mini"></div>
+                        <span style="font-size: 12px; color: #aaa;">AoiChan Official</span>
+                    </div>
+                    <a href="${video.url}" target="_blank" class="btn-watch">XEM VIDEO</a>
                 </div>
             </div>
         `).join('');
     </script>
+    <script src="../assets/js/security.js"></script>
 </body>
 </html>
