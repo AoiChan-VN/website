@@ -2,42 +2,51 @@
 <html lang="vi">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Resource Library | AoiChan</title>
+    <title>Resources | AoiChan Vault</title>
     <link rel="stylesheet" href="../assets/css/global.css">
+    <style>
+        .res-container { background: var(--card); border: 1px solid var(--border); border-radius: 24px; overflow: hidden; margin-top: 40px; }
+        table { width: 100%; border-collapse: collapse; text-align: left; }
+        th { padding: 25px; background: rgba(255,255,255,0.02); color: var(--accent); font-size: 12px; text-transform: uppercase; letter-spacing: 2px; }
+        td { padding: 20px 25px; border-top: 1px solid var(--border); font-size: 14px; }
+        tr:hover td { background: rgba(255,255,255,0.01); color: var(--accent); }
+        .file-type { background: #1a1a1a; padding: 4px 10px; border-radius: 4px; font-weight: bold; }
+    </style>
 </head>
 <body>
-    <header class="container">
-        <div class="logo">AOICHAN</div>
-        <nav><a href="../index.html">Trang chủ</a></nav>
+    <header style="padding: 30px 5%; display: flex; justify-content: space-between;">
+        <div class="logo">AOI<span style="color: var(--accent);">VAULT</span></div>
+        <a href="../index.html" style="color:#fff; text-decoration:none;">CLOSE ACCESS ✕</a>
     </header>
-    <main class="container">
-        <h1>Tài nguyên miễn phí</h1>
-        <table class="resource-table">
-            <thead>
-                <tr>
-                    <th>Tên tài nguyên</th>
-                    <th>Định dạng</th>
-                    <th>Dung lượng</th>
-                    <th>Tải về</th>
-                </tr>
-            </thead>
-            <tbody id="render-rs"></tbody>
-        </table>
+
+    <main class="container" style="max-width: 1200px; margin: 0 auto; padding: 50px 20px;">
+        <h1>System <span style="color: var(--accent);">Resources</span></h1>
+        <div class="res-container animate">
+            <table>
+                <thead>
+                    <tr>
+                        <th>Resource Name</th>
+                        <th>Type</th>
+                        <th>File Size</th>
+                        <th>Action</th>
+                    </tr>
+                </thead>
+                <tbody id="res-list"></tbody>
+            </table>
+        </div>
     </main>
+
     <script type="module">
         import DATABASE_RESOURCE from '../src/db/rs-db.js';
-        const container = document.getElementById('render-rs');
-        container.innerHTML = DATABASE_RESOURCE.items.map(rs => `
-            <tr id="${rs.id}">
-                <td>${rs.name}</td>
-                <td><span class="badge">${rs.type}</span></td>
-                <td>${rs.size}</td>
-                <td><a href="${rs.link}" class="download-link">Download</a></td>
+        const list = document.getElementById('res-list');
+        list.innerHTML = DATABASE_RESOURCE.items.map(rs => `
+            <tr>
+                <td><strong>${rs.name}</strong><br><small style="color:#444">${DATABASE_RESOURCE.tag}</small></td>
+                <td><span class="file-type">${rs.type}</span></td>
+                <td style="font-family: monospace;">${rs.size}</td>
+                <td><a href="${rs.link}" style="color: var(--accent); text-decoration: none; font-weight: 800;">DOWNLOAD_SRC</a></td>
             </tr>
         `).join('');
     </script>
-    <script src="../assets/js/security.js"></script>
 </body>
 </html>
- 
