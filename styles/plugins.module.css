@@ -1,0 +1,49 @@
+/* Scoped for Plugins Page */
+.grid-layout {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
+    gap: 1.5rem;
+    margin-top: 3rem;
+}
+
+.card-module {
+    background: #111;
+    border-radius: 4px;
+    padding: 2rem;
+    position: relative;
+    overflow: hidden;
+    border: 1px solid #222;
+}
+
+.card-module::before {
+    content: "";
+    position: absolute;
+    top: 0; left: 0;
+    width: 2px; height: 0;
+    background: var(--ACCENT-COLOR);
+    transition: height 0.3s ease;
+}
+
+.card-module:hover::before {
+    height: 100%;
+}
+
+.card-title {
+    margin: 1rem 0;
+    font-size: 1.25rem;
+}
+
+.card-desc {
+    font-size: 0.95rem;
+    opacity: 0.7;
+    margin-bottom: 2rem;
+    min-height: 3em;
+}
+
+.link-action {
+    text-decoration: none;
+    color: var(--ACCENT-COLOR);
+    font-weight: bold;
+    font-size: 0.8rem;
+}
+ 
