@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Youtube Chanel | AoiChan</title>
+    <link rel="stylesheet" href="../assets/css/global.css">
+</head>
+<body>
+    <header class="container">
+        <div class="logo">AOICHAN</div>
+        <nav><a href="../index.html">Trang chủ</a></nav>
+    </header>
+    <main class="container">
+        <h1>Youtube Channel</h1>
+        <div id="render-yt" class="grid-layout"></div>
+    </main>
+    <script type="module">
+        import DATABASE_YOUTUBE from '../src/db/yt-db.js';
+        const container = document.getElementById('render-yt');
+        container.innerHTML = DATABASE_YOUTUBE.items.map(video => `
+            <div class="card video-card" id="${video.id}">
+                <div class="thumb-placeholder" style="background:#222; height:180px; border-radius:8px;"></div>
+                <h3>${video.title}</h3>
+                <div class="info">
+                    <span>Views: ${video.views}</span>
+                    <a href="${video.url}" target="_blank">Xem ngay</a>
+                </div>
+            </div>
+        `).join('');
+    </script>
+    <script src="../assets/js/security.js"></script>
+</body>
+</html>
+ 
