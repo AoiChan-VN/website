@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Plugins | AoiChan System</title>
+    <link rel="stylesheet" href="../assets/css/style.css">
+</head>
+<body>
+    <header>
+        <div class="logo"><strong>AOICHAN</strong></div>
+        <nav><a href="../index.html">← Quay lại</a></nav>
+    </header>
+    <main class="container">
+        <h1>Plugins Library</h1>
+        <div class="card-grid" id="plugin-render"></div>
+    </main>
+    <script src="../assets/db/pl-db.js"></script>
+    <script>
+        const render = document.getElementById('plugin-render');
+        PL_DATA.items.map(pl => {
+            render.innerHTML += `<div class="card"><h2>${pl.name}</h2><p>${pl.desc}</p></div>`;
+        });
+    </script>
+</body>
+</html>
+ 
