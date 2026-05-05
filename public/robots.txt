@@ -1,7 +1,7 @@
 User-agent: *
 Allow: /
-Disallow: /src/db/
-Disallow: /assets/js/security.js
+Disallow: /src/db/     # Không cho Bot quét trực tiếp file DB thô
+Disallow: /assets/js/security.js # Bảo mật script chống hack
 
+# Trỏ đường dẫn Sitemap cho Bot
 Sitemap: https://github.io
- 
