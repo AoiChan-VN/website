@@ -7,71 +7,59 @@ import { initMobileMenu } from './core/menu.js';
 
 const mainContent = document.getElementById('main-content');
 
-// 1. Cấu trúc Router
-const routes = {
-    '#/': { title: 'Trang chủ', render: renderHome },
-    '#/plugins': { title: 'Plugins Chuyên Nghiệp', render: renderPlugins },
-    '#/resources': { title: 'Resource Packs', render: renderResources },
-    '#/youtube': { title: 'Kênh Youtube', render: renderYoutube },
-    '#/download': { title: 'Trung tâm Tải về', render: renderDownload },
-    '#/404': { title: 'Không tìm thấy trang', render: render404 }
+// 1. Hàm Render dứt điểm (Viết trực tiếp vào đây để tránh lỗi Import)
+const renderHome = () => {
+    mainContent.innerHTML = `<section class="hero fade-in"><h1>PORTFOLIO CHUẨN QUỐC TẾ</h1><p>Đã kết nối thành công.</p></section>`;
 };
 
-// 2. Các hàm Render chuyên biệt
-function renderResources() {
-    const html = resourcesDB.map(res => `
-        <div class="card resource-card">
-            <h3>${sanitize(res.name)}</h3>
-            <p>Độ phân giải: <strong>${res.resolution}</strong></p>
-            <p>Dung lượng: ${res.fileSize}</p>
-            <a href="${res.downloadPath}" class="btn-sm" download>Tải ngay</a>
+const renderPlugins = () => {
+    const html = pluginsDB.map(item => `
+        <div class="card">
+            <span class="badge">${item.version}</span>
+            <h3>${sanitize(item.title)}</h3>
+            <p>${sanitize(item.desc)}</p>
         </div>
     `).join('');
     mainContent.innerHTML = `<section class="grid-container fade-in">${html}</section>`;
-}
-
-function render404() {
-    mainContent.innerHTML = `
-        <section class="error-page fade-in">
-            <h1>404</h1>
-            <p>Yêu cầu không hợp lệ hoặc trang đã bị gỡ bỏ.</p>
-            <a href="/" data-link class="btn-main">Quay lại trang chủ</a>
-        </section>
-    `;
-}
-
-// 3. SPA Engine - Xử lý điều hướng
-const router = async () => {
-    const path = window.location.pathname;
-    const route = routes[path] || routes['/404']; // Chống bug gõ sai URL
-    
-    document.title = `${route.title} | Global Portfolio`;
-    
-    // Hiệu ứng chuyển cảnh
-    mainContent.style.opacity = 0;
-    setTimeout(() => {
-        route.render();
-        mainContent.style.opacity = 1;
-    }, 150);
 };
 
-// 4. Khởi chạy hệ thống
-document.addEventListener('DOMContentLoaded', () => {
-    initSecurity(); // Kích hoạt bảo mật Runtime
-    initMobileMenu(); // Kích hoạt Mobile Menu
-    
-    document.body.addEventListener('click', e => {
-        const link = e.target.closest('[data-link]');
-        if (link) {
-            e.preventDefault();
-            history.pushState(null, null, link.href);
-            router();
-        }
-    });
+// 2. Router Engine (Fix lỗi so khớp chuỗi)
+const routes = {
+    '': renderHome,
+    '#/': renderHome,
+    '#/plugins': renderPlugins,
+    '#/youtube': () => { mainContent.innerHTML = '<h1 class="fade-in">Youtube Channel</h1>'; },
+    '#/resources': () => { mainContent.innerHTML = '<h1 class="fade-in">Resource Packs</h1>'; },
+    '#/download': () => { mainContent.innerHTML = '<h1 class="fade-in">Download Center</h1>'; }
+};
 
-    window.addEventListener('hashchange', router);
-    router();
+const handleRouting = () => {
+    const hash = window.location.hash || '#/';
+    console.log("Current Hash:", hash); // Kiểm tra xem Hash có nhận đúng không
+
+    const renderFn = routes[hash];
+
+    if (renderFn) {
+        mainContent.style.opacity = 0;
+        setTimeout(() => {
+            renderFn();
+            mainContent.style.opacity = 1;
+            console.log("Render Success for:", hash);
+        }, 50);
+    } else {
+        console.error("Route not found:", hash);
+        mainContent.innerHTML = '<h1>404 - Page Not Found</h1>';
+    }
+};
+
+// 3. Khởi tạo
+document.addEventListener('DOMContentLoaded', () => {
+    initSecurity();
+    initMobileMenu();
+
+    // Lắng nghe thay đổi hash
+    window.addEventListener('hashchange', handleRouting);
     
-    window.addEventListener('popstate', router);
-    router();
+    // Chạy ngay lập tức
+    handleRouting();
 });
