@@ -1,8 +1,0 @@
-User-agent: *
-Allow: /
-Disallow: /src/core/          # Chặn bot quét logic lõi
-Disallow: /src/utils/         # Chặn bot quét công cụ bảo mật
-Disallow: /public/docs/*.pdf  # Chặn bot truy cập trực tiếp tài liệu nhạy
-
-Sitemap: https://aoichan-vn.github.io/Website/
- 
