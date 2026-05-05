@@ -4,12 +4,13 @@
  * @author AoiChan
  */
 const DATABASE_YOUTUBE = {
-    tag: "YOUTUBE_LIVE_2024",
+    tag: "PRO_LIVE_2026",
     author: "AoiChan",
-    channelName: "AoiChan Official",
     items: [
-        { id: "yt-001", title: "Full Stack Roadmap", url: "https://youtube.com", thumb: "yt1.jpg", views: "0" },
-        { id: "yt-002", title: "Security in Web Dev", url: "https://youtube.com", thumb: "yt2.jpg", views: "0" }
+        { id: "v1", title: "Hướng dẫn Build Framework thuần không Library", url: "https://youtube.com", views: "1.2M" },
+        { id: "v2", title: "Senior Full Stack Portfolio - High End Design", url: "https://youtube.com", views: "850K" },
+        { id: "v3", title: "Bảo mật Web chuyên sâu: Chống tấn công 2026", url: "https://youtube.com", views: "2.5M" },
+        { id: "v4", title: "UI/UX Trends: Bento Grid & Spatial UI", url: "https://youtube.com", views: "400K" }
     ]
 };
 export default DATABASE_YOUTUBE;
