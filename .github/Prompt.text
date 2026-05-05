@@ -1,0 +1,68 @@
+ROLE: Senior Full Stack Engineer (10+ years experience)
+
+GOAL: Build a High-End Portfolio Website on GitHub Pages1.
+
+PROJECT STRUCTURE (No Framework - Vanilla Everything)
+
+/
+├── public/                  # System-level static files
+│   ├── favicon.ico
+│   ├── robots.txt           # SEO & Bot control
+│   ├── sitemap.xml          # Search Engine indexing
+│   └── .htaccess            # Security headers (Env compatibility)
+├── assets/                  # Design assets (Optimized)
+│   ├── icons/               # Photoshop-exported UI icons
+│   ├── bg/                  # Custom backgrounds
+│   └── docs/                # Professional PDF Resume
+├── data/                    # Specialized Internal DB
+│   └── v1.0.0/              # Versioning
+│       ├── plugins.json
+│       ├── resources.json
+│       └── channel.json
+├── pages/                   # Sub Pages (Clean routing)
+│   ├── plugins.html
+│   ├── resource.html
+│   └── channel.html
+├── styles/                  # CSS Modules (Pure CSS)
+│   ├── root.css             # Design Tokens (Colors, Spacing)
+│   ├── layout.css           # Grid & Flex system
+│   ├── home.module.css      # Scoped for index
+│   └── plugins.module.css   # Scoped for plugins page
+├── scripts/                 # Core Logic
+│   ├── core/
+│   │   ├── router.js        # Custom SPA-like navigation logic
+│   │   ├── security.js      # XSS protection & CSP
+│   │   └── data-engine.js   # Fetching & caching data
+│   └── components/          # Reusable UI renderers
+└── index.html               # Main Entry
+
+2. TECHNICAL REQUIREMENTS (STRICT)
+
+1. Security First:
+   1. Tích hợp anti-clickjacking script.
+   2. Sử dụng Content Security Policy (CSP) Meta Tags.
+   3. Viết hàm sanitizeHTML() để xử lý mọi dữ liệu từ JSON trước khi render (chống XSS).
+
+2. No Libraries/APIs: Tuyệt đối không dùng jQuery, Bootstrap, Tailwind, hay Google Fonts API. 
+   Mọi thứ phải được viết tay bằng Vanilla JS và CSS thuần.
+
+3. Local Database: Data được phân loại chuyên biệt (plugins, resources...). Phải load theo cơ chế Async/Await và có         handling lỗi chuyên nghiệp.
+
+4. Responsive Design: Tự viết Media Queries cho Mobile, Tablet, Desktop (2K/4K). Ưu tiên tính toán bằng clamp() và rem.
+
+5. Clean Code:
+   1. Dùng Module Pattern hoặc ES6 Modules.
+   2. Biến đặt tên theo quy tắc camelCase, hằng số dùng UPPER_SNAKE_CASE.
+   3. Ghi chú JSDoc cho mọi function.
+
+3. DESIGN GUIDELINES
+• Sử dụng CSS Variables (:root) để dễ dàng thay đổi theme.
+• Background và Icons phải được thiết kế tối ưu (WebP hoặc SVG).
+• Đảm bảo hiệu suất (Lighthouse Score 100/100).
+
+4. EXECUTION STEP-BY-STEP
+1. Khởi tạo file index.html với đầy đủ thẻ Meta Security và cấu trúc Layout (Header, Main, Footer).
+2. Xây dựng file root.css chứa Design Tokens.
+3. Viết data-engine.js để fetch JSON từ folder data/v1.0.0/.
+4. Implement logic chuyển trang thủ công nhưng vẫn giữ được URL sạch (History API).
+5. Rà soát Bug ngầm (Memory leak, Race conditions).
