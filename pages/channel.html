@@ -2,34 +2,48 @@
 <html lang="vi">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Youtube Chanel | AoiChan</title>
+    <title>Channel | AoiChan Live</title>
     <link rel="stylesheet" href="../assets/css/global.css">
+    <style>
+        .yt-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(450px, 1fr)); gap: 30px; margin-top: 50px; }
+        .yt-card { position: relative; border-radius: 24px; overflow: hidden; background: #000; border: 1px solid var(--border); }
+        .yt-thumb { width: 100%; aspect-ratio: 16/9; background: #111; display: flex; align-items: center; justify-content: center; }
+        .yt-content { padding: 25px; }
+        .play-btn { 
+            position: absolute; top: 30%; left: 50%; transform: translate(-50%, -50%);
+            width: 60px; height: 60px; background: var(--accent); border-radius: 50%;
+            display: flex; align-items: center; justify-content: center; box-shadow: 0 0 30px var(--accent-glow);
+        }
+    </style>
 </head>
 <body>
-    <header class="container">
-        <div class="logo">AOICHAN</div>
-        <nav><a href="../index.html">Trang chủ</a></nav>
+    <header style="padding: 30px 5%;">
+        <div class="logo">AOI<span style="color: #ff0000;">TUBE</span></div>
     </header>
-    <main class="container">
-        <h1>Youtube Channel</h1>
-        <div id="render-yt" class="grid-layout"></div>
+
+    <main class="container" style="max-width: 1600px; margin: 0 auto; padding: 0 20px;">
+        <div class="yt-grid" id="yt-render"></div>
     </main>
+
     <script type="module">
         import DATABASE_YOUTUBE from '../src/db/yt-db.js';
-        const container = document.getElementById('render-yt');
-        container.innerHTML = DATABASE_YOUTUBE.items.map(video => `
-            <div class="card video-card" id="${video.id}">
-                <div class="thumb-placeholder" style="background:#222; height:180px; border-radius:8px;"></div>
-                <h3>${video.title}</h3>
-                <div class="info">
-                    <span>Views: ${video.views}</span>
-                    <a href="${video.url}" target="_blank">Xem ngay</a>
+        const grid = document.getElementById('yt-render');
+        grid.innerHTML = DATABASE_YOUTUBE.items.map(yt => `
+            <div class="yt-card animate">
+                <div class="yt-thumb">
+                    <div class="play-btn"><svg width="24" height="24" viewBox="0 0 24 24" fill="black"><path d="M8 5v14l11-7z"/></svg></div>
+                    <span style="color: #222; font-weight: 900; font-size: 40px;">AOI PREVIEW</span>
+                </div>
+                <div class="yt-content">
+                    <span class="tag-v" style="border-color: #ff4d4d; color: #ff4d4d;">YOUTUBE</span>
+                    <h3 style="margin-top: 15px; font-size: 1.4rem;">${yt.title}</h3>
+                    <div style="margin-top: 20px; display: flex; justify-content: space-between; align-items: center;">
+                        <span style="color: #555; font-size: 13px;">${yt.views} Views • Published by AoiChan</span>
+                        <a href="${yt.url}" target="_blank" class="btn">WATCH VIDEO</a>
+                    </div>
                 </div>
             </div>
         `).join('');
     </script>
-    <script src="../assets/js/security.js"></script>
 </body>
 </html>
- 
