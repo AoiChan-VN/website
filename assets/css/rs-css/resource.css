@@ -1,0 +1,26 @@
+/* Data Table Module */
+.res-container { 
+    background: var(--card); 
+    border: 1px solid var(--border); 
+    border-radius: 30px; 
+    overflow: hidden; 
+}
+
+.res-table { width: 100%; border-collapse: collapse; }
+.res-table th { 
+    padding: 30px; 
+    text-align: left; 
+    background: rgba(255,255,255,0.01);
+    font-size: 11px;
+    letter-spacing: 3px;
+    color: var(--accent);
+}
+
+.res-table td { 
+    padding: 25px 30px; 
+    border-top: 1px solid var(--border); 
+    font-size: 15px;
+}
+
+.res-table tr:hover td { background: rgba(0,242,255,0.02); }
+ 
