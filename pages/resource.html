@@ -2,20 +2,27 @@
 <html lang="vi">
 <head>
     <meta charset="UTF-8">
-    <title>Resources | AoiChan Vault</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Resource Library | AoiChan Vault</title>
     <link rel="stylesheet" href="../assets/css/global.css">
     <link rel="stylesheet" href="../assets/css/components.css">
     <link rel="stylesheet" href="../assets/css/rs/resource.css">
 </head>
 <body>
-    <header style="padding: 30px 5%; display: flex; justify-content: space-between;">
-        <div class="logo">AOI<span style="color: var(--accent);">VAULT</span></div>
-        <a href="../index.html" style="color:#fff; text-decoration:none;">CLOSE ACCESS ✕</a>
+    <header class="container main-header">
+        <div class="logo">AOI<span>VAULT</span></div>
+        <nav>
+            <a href="../index.html">← CORE_SYSTEM</a>
+        </nav>
     </header>
 
-    <main class="container" style="max-width: 1200px; margin: 0 auto; padding: 50px 20px;">
-        <h1>System <span style="color: var(--accent);">Resources</span></h1>
-        <div class="res-container animate">
+    <main class="container animate">
+        <div style="padding: 40px 0;">
+            <span class="tag-v">STORAGE v2.6</span>
+            <h1 style="margin-top: 15px;">System <span style="color: var(--accent);">Resources</span></h1>
+        </div>
+
+        <div class="res-container">
             <table>
                 <thead>
                     <tr>
@@ -25,20 +32,24 @@
                         <th>Action</th>
                     </tr>
                 </thead>
-                <tbody id="res-list"></tbody>
+                <tbody id="render-rs">
+                    <!-- Dữ liệu đổ từ rs-db.js -->
+                </tbody>
             </table>
         </div>
     </main>
 
+    <script src="../assets/js/security.js"></script>
     <script type="module">
         import DATABASE_RESOURCE from '../src/db/rs-db.js';
-        const list = document.getElementById('res-list');
-        list.innerHTML = DATABASE_RESOURCE.items.map(rs => `
-            <tr>
-                <td><strong>${rs.name}</strong><br><small style="color:#444">${DATABASE_RESOURCE.tag}</small></td>
+        const container = document.getElementById('render-rs');
+        
+        container.innerHTML = DATABASE_RESOURCE.items.map(rs => `
+            <tr id="${rs.id}">
+                <td><strong>${rs.name}</strong></td>
                 <td><span class="file-type">${rs.type}</span></td>
-                <td style="font-family: monospace;">${rs.size}</td>
-                <td><a href="${rs.link}" style="color: var(--accent); text-decoration: none; font-weight: 800;">DOWNLOAD_SRC</a></td>
+                <td style="font-family: monospace; color: #666;">${rs.size}</td>
+                <td><a href="${rs.link}" class="download-link">DOWNLOAD_SRC</a></td>
             </tr>
         `).join('');
     </script>
