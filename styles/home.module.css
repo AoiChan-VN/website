@@ -1,0 +1,40 @@
+/* Scoped for Index Page */
+.hero-container {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    min-height: 70vh;
+}
+
+.hero-meta {
+    font-family: monospace;
+    color: var(--ACCENT-COLOR);
+    margin-bottom: 1rem;
+    display: block;
+}
+
+.hero-title {
+    max-width: 900px;
+    margin-bottom: 2.5rem;
+}
+
+.experience-list {
+    display: flex;
+    gap: 3rem;
+    margin-top: 4rem;
+    border-top: 1px solid rgba(255,255,255,0.1);
+    padding-top: 2rem;
+}
+
+.exp-item b {
+    display: block;
+    font-size: 1.5rem;
+    color: var(--ACCENT-COLOR);
+}
+
+.exp-item span {
+    font-size: 0.8rem;
+    text-transform: uppercase;
+    opacity: 0.6;
+}
+ 
