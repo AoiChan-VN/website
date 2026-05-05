@@ -1,0 +1,28 @@
+:root {
+    /* Color Palette */
+    --BG-PRIMARY: #0a0a0a;
+    --TEXT-MAIN: #e0e0e0;
+    --ACCENT-COLOR: #64ffda;
+    
+    /* Typography - Fluid Scaling */
+    --FS-BASE: clamp(1rem, 0.9rem + 0.5vw, 1.25rem);
+    --FS-H1: clamp(2rem, 1.5rem + 4vw, 4.5rem);
+    
+    /* Spacing */
+    --SPACING-UNIT: 1rem;
+    --CONTAINER-MAX: 1440px;
+}
+
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+body {
+    background-color: var(--BG-PRIMARY);
+    color: var(--TEXT-MAIN);
+    font-family: 'Segoe UI', system-ui, -apple-system, sans-serif;
+    font-size: var(--FS-BASE);
+    line-height: 1.6;
+}
