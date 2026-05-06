@@ -1,23 +1,16 @@
 export const renderHeader = (isSub = false) => {
     const prefix = isSub ? '../' : './';
     const loc = window.location.pathname;
-    const navs = [
-        { n: 'Home', h: 'index.html' },
-        { n: 'Plugins', h: 'pages/plugins.html' },
-        { n: 'Resource', h: 'pages/resource.html' },
-        { n: 'Channel', h: 'pages/channel.html' }
-    ];
-
-    document.querySelector('header').innerHTML = `
-        <div class="container" style="padding: clamp(30px, 5vh, 60px) 0; display: flex; justify-content: space-between; align-items: center;">
-            <div class="logo" style="font-weight: 900; letter-spacing: -1px; font-size: 1.2rem;">AOI<span>CHAN</span></div>
-            <nav style="display: flex; gap: clamp(20px, 3vw, 50px);">
-                ${navs.map(item => `
-                    <a href="${prefix}${item.h}" style="text-decoration:none; font-size: 12px; letter-spacing: 2px; color: ${loc.includes(item.h.split('/')[1] || 'index') ? 'var(--accent)' : '#444'}; transition: 0.3s;">
-                        ${item.n.toUpperCase()}
-                    </a>
-                `).join('')}
+    const headerHTML = `
+        <div class="container" style="padding: 40px 0; display: flex; justify-content: space-between; align-items: center;">
+            <div class="logo" style="font-weight: 900; font-size: 1.5rem;">AOI<span>CHAN</span></div>
+            <nav style="display: flex; gap: 30px;">
+                <a href="${prefix}index.html" style="text-decoration:none; color:${loc.includes('index') || loc.endsWith('/') ? 'var(--accent)' : '#888'}; font-size:12px; font-weight:700;">HOME</a>
+                <a href="${prefix}pages/plugins.html" style="text-decoration:none; color:${loc.includes('plugins') ? 'var(--accent)' : '#888'}; font-size:12px; font-weight:700;">PLUGINS</a>
+                <a href="${prefix}pages/resource.html" style="text-decoration:none; color:${loc.includes('resource') ? 'var(--accent)' : '#888'}; font-size:12px; font-weight:700;">RESOURCE</a>
+                <a href="${prefix}pages/channel.html" style="text-decoration:none; color:${loc.includes('channel') ? 'var(--accent)' : '#888'}; font-size:12px; font-weight:700;">CHANNEL</a>
             </nav>
         </div>
     `;
+    document.querySelector('header').innerHTML = headerHTML;
 };
