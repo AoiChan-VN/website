@@ -7,10 +7,10 @@ export const renderHeader = () => {
             </div>
             <nav>
                 <ul>
-                    <li><a href="/">Trang chủ</a></li>
-                    <li><a href="/pages/plugins.html">Plugins</a></li>
-                    <li><a href="/pages/resource.html">Resources</a></li>
-                    <li><a href="/pages/channel.html">YouTube</a></li>
+                    <li><a href="/index.html">Trang chủ</a></li>
+                    <li><a href="../pages/plugins.html">Plugins</a></li>
+                    <li><a href="../pages/resource.html">Resources</a></li>
+                    <li><a href="../pages/channel.html">YouTube</a></li>
                     <li><div class="theme-switch">🌓 Toggle Theme</div></li>
                 </ul>
             </nav>
