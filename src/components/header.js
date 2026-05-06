@@ -1,63 +1,23 @@
-/**
- * @component Global Header Engine
- * @author AoiChan
- * @description Xử lý Render Header đồng bộ và tự động xác định Active Link
- */
+export const renderHeader = (isSub = false) => {
+    const prefix = isSub ? '../' : './';
+    const loc = window.location.pathname;
+    const navs = [
+        { n: 'Home', h: 'index.html' },
+        { n: 'Plugins', h: 'pages/plugins.html' },
+        { n: 'Resource', h: 'pages/resource.html' },
+        { n: 'Channel', h: 'pages/channel.html' }
+    ];
 
-export const renderHeader = (isSubPage = false) => {
-    // 1. Xác định tiền tố đường dẫn dựa trên vị trí file gọi
-    const pathPrefix = isSubPage ? '../' : './';
-    
-    // 2. Lấy tên file hiện tại từ URL để đánh dấu class 'active'
-    const currentUrl = window.location.pathname;
-    
-    /**
-     * Hàm kiểm tra xem link có đang active hay không
-     * @param {string} fileName 
-     */
-    const isActive = (fileName) => {
-        if (currentUrl.endsWith('/') && fileName === 'index.html') return 'active';
-        return currentUrl.includes(fileName) ? 'active' : '';
-    };
-
-    // 3. Khởi tạo cấu trúc HTML
-    const headerHTML = `
-        <div class="container main-header">
-            <div class="logo">
-                AOI<span>CHAN</span>.SYS
-            </div>
-            
-            <nav class="nav-pill">
-                <a href="${pathPrefix}index.html" class="${isActive('index.html')}">
-                    Home
-                </a>
-                <a href="${pathPrefix}pages/plugins.html" class="${isActive('plugins.html')}">
-                    Plugins
-                </a>
-                <a href="${pathPrefix}pages/resource.html" class="${isActive('resource.html')}">
-                    Resource
-                </a>
-                <a href="${pathPrefix}pages/channel.html" class="${isActive('channel.html')}">
-                    Channel
-                </a>
+    document.querySelector('header').innerHTML = `
+        <div class="container" style="padding: clamp(30px, 5vh, 60px) 0; display: flex; justify-content: space-between; align-items: center;">
+            <div class="logo" style="font-weight: 900; letter-spacing: -1px; font-size: 1.2rem;">AOI<span>CHAN</span></div>
+            <nav style="display: flex; gap: clamp(20px, 3vw, 50px);">
+                ${navs.map(item => `
+                    <a href="${prefix}${item.h}" style="text-decoration:none; font-size: 12px; letter-spacing: 2px; color: ${loc.includes(item.h.split('/')[1] || 'index') ? 'var(--accent)' : '#444'}; transition: 0.3s;">
+                        ${item.n.toUpperCase()}
+                    </a>
+                `).join('')}
             </nav>
-
-            <div class="header-auth" style="font-size: 10px; color: var(--border); letter-spacing: 1px;">
-                V2.6_STABLE
-            </div>
         </div>
     `;
-
-    // 4. Tìm thẻ header và đổ dữ liệu vào
-    const headerElement = document.querySelector('header');
-    if (headerElement) {
-        headerElement.innerHTML = headerHTML;
-    } else {
-        console.error("AoiChan Error: Không tìm thấy thẻ <header> trong HTML để render.");
-    }
 };
-
-/**
- * Xuất dữ liệu phiên bản Header để kiểm soát tag version
- */
-export const HEADER_VERSION = "1.2.0-Production";
