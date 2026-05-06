@@ -1,92 +1,42 @@
-/* AoiChan System 2026 - High-End Architecture */
 :root {
-    /* Fluid Typography: Tự động co giãn từ 14px đến 20px tùy màn hình */
-    --font-size-base: clamp(0.875rem, 0.5vw + 0.75rem, 1.25rem);
+    --bg: #000; --accent: #00f2ff; --border: rgba(255,255,255,0.05);
+    --font-main: 'Inter Tight', sans-serif;
     --bezier: cubic-bezier(0.2, 1, 0.3, 1);
 }
 
+* { margin: 0; padding: 0; box-sizing: border-box; }
+
 body {
-    font-size: var(--font-size-base);
-    min-height: 100vh;
-    display: flex;
-    flex-direction: column; /* Đẩy footer xuống đáy */
+    background: var(--bg); color: #fff; font-family: var(--font-main);
+    min-height: 100vh; display: flex; flex-direction: column;
+    overflow-x: hidden; font-size: clamp(14px, 1vw, 18px);
 }
 
-main {
-    flex: 1; /* Tự chiếm toàn bộ không gian còn lại */
-    transition: opacity 0.4s var(--bezier);
+main { flex: 1; opacity: 1; transition: opacity 0.5s var(--bezier); }
+
+.container {
+    max-width: 1800px; margin: 0 auto;
+    padding: 0 clamp(20px, 5vw, 100px);
 }
 
-/* Bento Grid 2026: Tự thích ứng thông minh */
+/* Grid tự động thích ứng 2026 */
 .grid-layout {
     display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(clamp(280px, 30vw, 450px), 1fr));
-    gap: clamp(15px, 2vw, 30px);
+    grid-template-columns: repeat(auto-fit, minmax(clamp(300px, 25vw, 500px), 1fr));
+    gap: clamp(20px, 3vw, 40px);
 }
 
-/* Card Tinh Tế: Không còn thô kệch */
-.card {
+/* Card thiết kế tinh gọn */
+.card, .pl-card, .yt-card {
     background: rgba(255,255,255,0.01);
-    border: 1px solid rgba(255,255,255,0.05);
-    padding: clamp(20px, 3vw, 40px);
-    border-radius: 20px;
-    backdrop-filter: blur(10px);
-}
-
-/* Bento Grid System 2026 */
-.bento-container {
-    display: grid;
-    grid-template-columns: repeat(12, 1fr);
-    grid-auto-rows: minmax(180px, auto);
-    gap: 15px;
-    padding: 20px;
-    max-width: 2800px;
-    margin: 0 auto;
-}
-
-.bento-item {
-    background: var(--card);
     border: 1px solid var(--border);
-    border-radius: 24px;
-    position: relative;
-    overflow: hidden;
-    transition: all 0.6s cubic-bezier(0.16, 1, 0.3, 1);
-    display: flex;
-    flex-direction: column;
-    padding: 30px;
+    border-radius: clamp(16px, 2vw, 32px);
+    padding: clamp(25px, 4vw, 50px);
+    transition: all 0.5s var(--bezier);
 }
 
-.bento-item:hover {
-    border-color: var(--accent);
-    background: rgba(255,255,255,0.01);
-    box-shadow: 0 0 50px -15px var(--accent);
-}
+.card:hover { border-color: var(--accent); background: rgba(255,255,255,0.03); }
 
-/* Kích thước Bento cho các thiết bị lớn */
-.span-6 { grid-column: span 6; }
-.span-4 { grid-column: span 4; }
-.span-8 { grid-column: span 8; }
-.span-12 { grid-column: span 12; }
-.row-2 { grid-row: span 2; }
-
-/* Hiệu ứng mờ ảo Photoshop trên nền tảng Web */
-.glow-blur {
-    position: absolute;
-    width: 200px; height: 200px;
-    background: var(--accent);
-    filter: blur(120px);
-    opacity: 0.1;
-    pointer-events: none;
-    top: -50px; right: -50px;
-}
-
-/* Typography chuẩn 2026 */
-h1 { font-size: clamp(2.5rem, 8vw, 6rem); font-weight: 800; letter-spacing: -2px; }
-.tag-v { font-size: 10px; padding: 4px 10px; border: 1px solid var(--accent); border-radius: 100px; color: var(--accent); }
-
-/* Animation mượt mà */
-@keyframes fadeIn { from { opacity: 0; transform: translateY(20px); } to { opacity: 1; transform: translateY(0); } }
-.animate { animation: fadeIn 0.8s forwards; }
-
-/* Responsive 8K */
-@media (min-width: 3840px) { .bento-container { gap: 40px; padding: 100px; } }
+/* Typography Co Giãn */
+h1 { font-size: clamp(2.5rem, 6vw, 5rem); font-weight: 800; letter-spacing: -3px; }
+p { color: #666; line-height: 1.6; }
