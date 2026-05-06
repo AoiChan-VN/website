@@ -1,35 +1,47 @@
 /**
- * @core System Logic
- * Chuẩn Senior: Tự động hóa render và quản lý ID
+ * @engine AoiChan SPA Lite
+ * @description Chuyển trang không reload + Hiệu ứng chuyển cảnh
  */
-class AoiSystem {
+class AoiEngine {
     constructor() {
-        this.initSecurity();
-        console.log("AoiChan Framework Initialized...");
+        this.initSPA();
     }
 
-    initSecurity() {
-        // Chống chuột phải, F12, copy
-        document.addEventListener('contextmenu', e => e.preventDefault());
-        document.onkeydown = e => {
-            if (e.keyCode == 123 || (e.ctrlKey && e.shiftKey && [73, 74, 67].includes(e.keyCode))) return false;
-        };
-    }
-
-    // Render Database ra giao diện theo chuẩn ID/Name SEO
-    renderList(containerId, db) {
-        const container = document.getElementById(containerId);
-        if (!container) return;
+    async navigate(url) {
+        const main = document.querySelector('main');
+        main.style.opacity = '0'; // Hiệu ứng mờ dần trước khi load
         
-        const html = db.data.map(item => `
-            <div class="item-card" id="${item.id}" data-version="${db.tag}">
-                <h3>${item.name}</h3>
-                <span>Ver: ${item.ver}</span>
-                <p>Auth: ${db.author}</p>
-            </div>
-        `).join('');
-        container.innerHTML = html;
+        const response = await fetch(url);
+        const html = await response.text();
+        const parser = new DOMParser();
+        const doc = parser.parseFromString(html, 'text/html');
+        
+        document.title = doc.title;
+        main.innerHTML = doc.querySelector('main').innerHTML;
+        window.history.pushState({}, '', url);
+        
+        // Re-run scripts của trang mới
+        this.executeScripts(main);
+        setTimeout(() => main.style.opacity = '1', 100);
+    }
+
+    initSPA() {
+        document.addEventListener('click', e => {
+            const link = e.target.closest('nav a');
+            if (link && link.href.includes(window.location.origin)) {
+                e.preventDefault();
+                this.navigate(link.href);
+            }
+        });
+    }
+
+    executeScripts(container) {
+        container.querySelectorAll('script').forEach(oldScript => {
+            const newScript = document.createElement('script');
+            Array.from(oldScript.attributes).forEach(attr => newScript.setAttribute(attr.name, attr.value));
+            newScript.appendChild(document.createTextNode(oldScript.innerHTML));
+            oldScript.parentNode.replaceChild(newScript, oldScript);
+        });
     }
 }
-export const App = new AoiSystem();
- 
+export const Engine = new AoiEngine();
