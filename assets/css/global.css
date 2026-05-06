@@ -1,24 +1,36 @@
 /* AoiChan System 2026 - High-End Architecture */
 :root {
-    --bg: #000000;
-    --card: #0a0a0c;
-    --accent: #00f2ff; /* Cyan Neon */
-    --accent-dark: #004e52;
-    --border: rgba(255, 255, 255, 0.06);
-    --glass: rgba(255, 255, 255, 0.02);
-    --font: 'Inter Tight', system-ui, sans-serif;
+    /* Fluid Typography: Tự động co giãn từ 14px đến 20px tùy màn hình */
+    --font-size-base: clamp(0.875rem, 0.5vw + 0.75rem, 1.25rem);
+    --bezier: cubic-bezier(0.2, 1, 0.3, 1);
 }
 
-* { margin: 0; padding: 0; box-sizing: border-box; cursor: crosshair; }
-
 body {
-    background: var(--bg);
-    color: #fff;
-    font-family: var(--font);
-    overflow-x: hidden;
-    /* Noise Texture hiệu ứng ảnh Photoshop */
-    background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://w3.org id='noiseFilter'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.65' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noiseFilter)'/%3E%3C/svg%3E");
-    background-size: 150px;
+    font-size: var(--font-size-base);
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column; /* Đẩy footer xuống đáy */
+}
+
+main {
+    flex: 1; /* Tự chiếm toàn bộ không gian còn lại */
+    transition: opacity 0.4s var(--bezier);
+}
+
+/* Bento Grid 2026: Tự thích ứng thông minh */
+.grid-layout {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(clamp(280px, 30vw, 450px), 1fr));
+    gap: clamp(15px, 2vw, 30px);
+}
+
+/* Card Tinh Tế: Không còn thô kệch */
+.card {
+    background: rgba(255,255,255,0.01);
+    border: 1px solid rgba(255,255,255,0.05);
+    padding: clamp(20px, 3vw, 40px);
+    border-radius: 20px;
+    backdrop-filter: blur(10px);
 }
 
 /* Bento Grid System 2026 */
