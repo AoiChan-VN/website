@@ -1,16 +1,19 @@
-export const renderHeader = (isSub = false) => {
-    const prefix = isSub ? '../' : './';
-    const loc = window.location.pathname;
-    const headerHTML = `
-        <div class="container" style="padding: 40px 0; display: flex; justify-content: space-between; align-items: center;">
-            <div class="logo" style="font-weight: 900; font-size: 1.5rem;">AOI<span>CHAN</span></div>
-            <nav style="display: flex; gap: 30px;">
-                <a href="${prefix}index.html" style="text-decoration:none; color:${loc.includes('index') || loc.endsWith('/') ? 'var(--accent)' : '#888'}; font-size:12px; font-weight:700;">HOME</a>
-                <a href="${prefix}pages/plugins.html" style="text-decoration:none; color:${loc.includes('plugins') ? 'var(--accent)' : '#888'}; font-size:12px; font-weight:700;">PLUGINS</a>
-                <a href="${prefix}pages/resource.html" style="text-decoration:none; color:${loc.includes('resource') ? 'var(--accent)' : '#888'}; font-size:12px; font-weight:700;">RESOURCE</a>
-                <a href="${prefix}pages/channel.html" style="text-decoration:none; color:${loc.includes('channel') ? 'var(--accent)' : '#888'}; font-size:12px; font-weight:700;">CHANNEL</a>
+export const renderHeader = () => {
+    return `
+    <header>
+        <div class="container" style="display:flex; justify-content:space-between; align-items:center;">
+            <div class="logo">
+                <img src="/assets/img/logo/logo.png" alt="AoiChan Logo" height="40">
+            </div>
+            <nav>
+                <ul>
+                    <li><a href="/">Trang chủ</a></li>
+                    <li><a href="/pages/plugins.html">Plugins</a></li>
+                    <li><a href="/pages/resource.html">Resources</a></li>
+                    <li><a href="/pages/channel.html">YouTube</a></li>
+                    <li><div class="theme-switch">🌓 Toggle Theme</div></li>
+                </ul>
             </nav>
         </div>
-    `;
-    document.querySelector('header').innerHTML = headerHTML;
+    </header>`;
 };
