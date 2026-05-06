@@ -2,29 +2,36 @@
 <html lang="vi">
 <head>
     <meta charset="UTF-8">
-    <title>Plugins | AoiChan Vault</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Plugins List | AoiChan</title>
     <link rel="stylesheet" href="../assets/css/global.css">
+    <link rel="stylesheet" href="../assets/css/res/rs.css">
 </head>
-<body>
-    <header></header>
+<body data-theme="dark">
+    <div id="header-root"></div>
+
     <main class="container">
-        <h1 style="padding-top: 60px;">System <span style="color: var(--accent);">Plugins</span></h1>
-        <div id="plugin-grid" class="grid-layout"></div>
+        <h2 style="margin-top:2rem">Danh sách Plugins</h2>
+        <div id="plugin-list" class="grid">
+            <!-- Data render từ pl-db.js thông qua core.js -->
+        </div>
     </main>
-    <footer></footer>
+
+    <div id="footer-root"></div>
     <script type="module">
-        import { renderHeader } from '../src/components/header.js';
-        import { renderFooter } from '../src/components/footer.js';
-        import DATABASE_PLUGINS from '../src/db/pl-db.js';
-        renderHeader(true);
-        renderFooter();
-        document.getElementById('plugin-grid').innerHTML = DATABASE_PLUGINS.data.map(pl => `
-            <div class="card animate">
-                <span class="tag-v">${pl.ver}</span>
-                <h2 style="margin: 20px 0;">${pl.name}</h2>
-                <a href="#" class="btn">DOCUMENTATION</a>
+        import { PLUGIN_DATA } from '../src/db/pl-db.js';
+        const list = document.getElementById('plugin-list');
+        list.innerHTML = PLUGIN_DATA.map(item => `
+            <div class="card" id="${item.id}">
+                <span class="tag-${item.tag}">${item.tag.toUpperCase()}</span>
+                <h3>${item.name}</h3>
+                <p>${item.description}</p>
+                <small>Version: ${item.version}</small>
+                <br><br>
+                <a href="${item.link}" class="btn">Tải xuống</a>
             </div>
         `).join('');
     </script>
+    <script type="module" src="../assets/js/core.js"></script>
 </body>
 </html>
