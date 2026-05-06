@@ -1,12 +1,17 @@
 export const renderFooter = () => {
-    const footerHTML = `
-        <div class="container" style="padding: 30px 0; border-top: 1px solid var(--border); display: flex; justify-content: space-between; align-items: center; opacity: 0.5;">
-            <div style="font-size: 10px; letter-spacing: 2px;">© 2026 AOICHAN INTERNATIONAL</div>
-            <div style="display: flex; gap: 20px; font-size: 10px;">
-                <a href="#" style="color:#fff; text-decoration:none;">GITHUB</a>
-                <a href="#" style="color:#fff; text-decoration:none;">YOUTUBE</a>
+    const year = new Date().getFullYear();
+    return `
+    <footer style="margin-top: 5rem; padding: 2rem 0; border-top: 1px solid rgba(255,255,255,0.05); text-align: center;">
+        <div class="container">
+            <p>&copy; ${year} <strong>AoiChan</strong>. All Rights Reserved.</p>
+            <p style="font-size: 0.8rem; opacity: 0.6; margin-top: 10px;">
+                Designed & Built with High-End Performance by Senior Developer.
+            </p>
+            <div class="social-links" style="margin-top: 15px;">
+                <a href="#" style="margin: 0 10px;">GitHub</a>
+                <a href="#" style="margin: 0 10px;">YouTube</a>
+                <a href="#" style="margin: 0 10px;">Discord</a>
             </div>
         </div>
-    `;
-    document.querySelector('footer').innerHTML = footerHTML;
+    </footer>`;
 };
