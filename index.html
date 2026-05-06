@@ -3,36 +3,30 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>AoiChan | Professional Portfolio</title>
+    <meta name="description" content="AoiChan - Chuyên Plugins và Resource Packs">
+    <meta name="author" content="AoiChan">
+    <title>AoiChan | Portfolio</title>
     <link rel="stylesheet" href="assets/css/global.css">
+    <link rel="icon" href="public/favicon.ico">
 </head>
-<body>
-    <header></header>
-    <main class="container">
-        <section style="padding: 10vh 0;">
-            <h1 class="animate">Clean Code. <br><span style="color: var(--accent);">Pure Design.</span></h1>
-            <p style="margin-top: 20px; color: #666; max-width: 500px;">Hệ thống Portfolio tối giản, đạt chuẩn quốc tế dành riêng cho AoiChan.</p>
-        </section>
-        <div id="index-grid" class="grid-layout"></div>
-    </main>
-    <footer></footer>
+<body data-theme="dark">
+    <div id="header-root"></div>
 
-    <script type="module">
-        import { renderHeader } from './src/components/header.js';
-        import { renderFooter } from './src/components/footer.js';
-        import DATABASE_PLUGINS from './src/db/pl-db.js';
-        
-        renderHeader(false);
-        renderFooter();
-
-        const grid = document.getElementById('index-grid');
-        grid.innerHTML = DATABASE_PLUGINS.data.map(p => `
-            <div class="card animate">
-                <span class="tag-v">${p.ver}</span>
-                <h3 style="margin: 20px 0 10px 0;">${p.name}</h3>
-                <p style="font-size: 14px; color: #555;">Dữ liệu chuyên biệt được nạp trực tiếp từ Database nội bộ.</p>
+    <main id="app">
+        <section class="hero-section">
+            <div class="container">
+                <h1 id="hero-title">Chào mừng đến với Thế giới của AoiChan</h1>
+                <p>Chuyên cung cấp các giải pháp tối ưu cho Minecraft Plugins và Resources.</p>
+                <div class="cta-group">
+                    <a href="pages/plugins.html" class="btn btn-primary">Xem Plugins</a>
+                    <a href="pages/resource.html" class="btn btn-secondary">Resource Packs</a>
+                </div>
             </div>
-        `).join('');
-    </script>
+        </section>
+    </main>
+
+    <div id="footer-root"></div>
+
+    <script type="module" src="assets/js/core.js"></script>
 </body>
 </html>
