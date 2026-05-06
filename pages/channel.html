@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>YouTube Channel | AoiChan</title>
+    <link rel="stylesheet" href="../assets/css/global.css">
+    <link rel="stylesheet" href="../assets/css/res/rs.css">
+</head>
+<body data-theme="dark">
+    <div id="header-root"></div>
+
+    <main class="container">
+        <section class="page-header" style="text-align:center; padding: 4rem 0;">
+            <h1 style="color: #ff0000;">My YouTube Channel</h1>
+            <p>Chia sẻ kiến thức, hướng dẫn và giới thiệu sản phẩm mới nhất.</p>
+        </section>
+
+        <div id="yt-grid" class="grid">
+            <!-- Render từ yt-db.js -->
+        </div>
+    </main>
+
+    <div id="footer-root"></div>
+
+    <script type="module">
+        import { YOUTUBE_DATA } from '../src/db/yt-db.js';
+        const grid = document.getElementById('yt-grid');
+        
+        grid.innerHTML = YOUTUBE_DATA.map(video => `
+            <div class="card yt-card" id="${video.id}">
+                <div class="video-container">
+                    <iframe 
+                        width="100%" 
+                        height="200" 
+                        data-src="https://youtube.com{video.videoId}" 
+                        title="${video.title}" 
+                        frameborder="0" 
+                        allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" 
+                        allowfullscreen>
+                    </iframe>
+                </div>
+                <div class="card-body" style="padding-top:15px;">
+                    <span class="tag-new">${video.tag.toUpperCase()}</span>
+                    <h3 style="margin-top:10px; font-size:1.1rem;">${video.title}</h3>
+                    <p style="font-size:0.8rem; opacity:0.7;">Ngày đăng: ${video.date}</p>
+                </div>
+            </div>
+        `).join('');
+    </script>
+    <script type="module" src="../assets/js/core.js"></script>
+</body>
+</html>
+ 
