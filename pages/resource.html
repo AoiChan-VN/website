@@ -2,6 +2,7 @@
 <html lang="vi">
 <head>
     <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Resource | AoiChan Vault</title>
     <link rel="stylesheet" href="../assets/css/global.css">
     <link rel="stylesheet" href="../assets/css/rs/resource.css">
@@ -9,7 +10,10 @@
 <body>
     <header></header>
     <main class="container">
-        <h1 style="padding: 60px 0 20px 0;">System <span style="color: var(--accent);">Resources</span></h1>
+        <section style="padding: 60px 0 20px 0;">
+            <span class="tag-v">STORAGE</span>
+            <h1 style="margin-top: 15px;">System <span style="color: var(--accent);">Resources</span></h1>
+        </section>
         <div class="res-container animate">
             <table class="res-table">
                 <thead>
@@ -20,20 +24,18 @@
         </div>
     </main>
     <footer></footer>
-
     <script type="module">
-        import { App } from '../assets/js/core.js';
+        import { renderHeader } from '../src/components/header.js';
+        import { renderFooter } from '../src/components/footer.js';
         import DATABASE_RESOURCE from '../src/db/rs-db.js';
-        
-        App.reinitPage();
-        
-        const container = document.getElementById('render-rs');
-        container.innerHTML = DATABASE_RESOURCE.items.map(rs => `
+        renderHeader(true);
+        renderFooter();
+        document.getElementById('render-rs').innerHTML = DATABASE_RESOURCE.items.map(rs => `
             <tr>
                 <td><strong>${rs.name}</strong></td>
                 <td><span class="file-type">${rs.type}</span></td>
-                <td style="font-family: monospace; color: #444;">${rs.size}</td>
-                <td><a href="${rs.link}" style="color: var(--accent); font-size: 12px; font-weight: 800; text-decoration: none;">DOWNLOAD</a></td>
+                <td style="color:#666">${rs.size}</td>
+                <td><a href="${rs.link}" class="btn" style="font-size:10px;">DOWNLOAD</a></td>
             </tr>
         `).join('');
     </script>
