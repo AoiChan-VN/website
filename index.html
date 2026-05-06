@@ -3,70 +3,36 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>AoiChan | Matrix Interface</title>
-    <link rel="icon" href="public/favicon.ico">
-    <link rel="manifest" href="public/manifest.json">
+    <title>AoiChan | Matrix 2026</title>
     <link rel="stylesheet" href="assets/css/global.css">
     <link rel="stylesheet" href="assets/css/components.css">
 </head>
 <body>
     <header></header>
-
-    <main class="bento-container">
-        <!-- Hero Box -->
-        <section class="bento-item span-8 row-2 animate">
-            <div class="glow-blur"></div>
-            <span class="tag-v">FULL-STACK CORE</span>
-            <h1 style="margin-top: 20px;">The Next Era of <br><span style="color: var(--accent);">Web Engineering.</span></h1>
-            <p style="margin-top: auto; color: #666; max-width: 500px;">Project Portfolio chuẩn Senior được tối ưu hóa cho tốc độ ánh sáng và khả năng mở rộng đa chiều.</p>
+    <main class="container">
+        <section style="padding: 10vh 0;">
+            <h1 class="animate">Engineering <br><span style="color: var(--accent);">Excellence.</span></h1>
+            <p style="margin-top: 20px; max-width: 600px;">Hệ thống Portfolio tối giản, mượt mà và tự thích ứng tuyệt đối.</p>
         </section>
-
-        <!-- Stats Box -->
-        <section class="bento-item span-4 animate" style="justify-content: center; align-items: center;">
-            <div style="font-size: 4rem; font-weight: 900;">100<span style="color: var(--accent);">%</span></div>
-            <p>Code Clean & Secure</p>
-        </section>
-
-        <!-- Plugins Preview Box -->
-        <section class="bento-item span-4 row-2 animate" style="background: linear-gradient(to bottom, #0a0a0c, #001a1b);">
-            <h3>Latest Plugins</h3>
-            <div id="pl-preview" style="margin-top: 20px;"></div>
-            <a href="pages/plugins.html" style="margin-top: auto; color: var(--accent); text-decoration: none;">View All Library →</a>
-        </section>
-
-        <!-- Resource Box -->
-        <section class="bento-item span-4 animate">
-            <span class="tag-v">ASSETS</span>
-            <h3 style="margin-top: 10px;">Resources</h3>
-            <p style="font-size: 13px; color: #555;">Tải về các file thiết kế Photoshop và bộ Icon chuẩn AoiChan.</p>
-        </section>
-
-        <!-- Youtube Box -->
-        <section class="bento-item span-4 animate">
-            <h3 style="color: #ff4d4d;">Live Channel</h3>
-            <div style="display: flex; align-items: center; margin-top: 15px;">
-                <div style="width: 10px; height: 10px; background: red; border-radius: 50%; margin-right: 10px; box-shadow: 0 0 10px red;"></div>
-                <span id="yt-latest">Connecting...</span>
-            </div>
-        </section>
+        <div class="grid-layout" id="index-grid"></div>
     </main>
-
     <footer></footer>
 
     <script type="module">
-        import { renderHeader } from './src/components/header.js';
-        import { renderFooter } from './src/components/footer.js';
+        import { App } from './assets/js/core.js';
         import DATABASE_PLUGINS from './src/db/pl-db.js';
-        const plBox = document.getElementById('pl-preview');
-        plBox.innerHTML = DATABASE_PLUGINS.data.slice(0, 3).map(p => `
-            <div style="padding: 15px 0; border-bottom: 1px solid var(--border);">
-                <div style="font-weight: bold; color: var(--accent);">${p.name}</div>
-                <div style="font-size: 12px; color: #555;">ID: ${p.id} • Ver: ${p.ver}</div>
+        
+        // Khởi tạo render ban đầu
+        App.reinitPage();
+        
+        const grid = document.getElementById('index-grid');
+        grid.innerHTML = DATABASE_PLUGINS.data.map(p => `
+            <div class="card animate">
+                <span style="font-size: 10px; color: var(--accent); border: 1px solid; padding: 2px 8px; border-radius: 10px;">${p.ver}</span>
+                <h3 style="margin: 20px 0 10px 0;">${p.name}</h3>
+                <p>Advanced system module for high-end performance.</p>
             </div>
         `).join('');
-        renderHeader(false);
-        renderFooter();
     </script>
-    <script src="assets/js/security.js"></script>
 </body>
 </html>
