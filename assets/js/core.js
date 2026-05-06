@@ -36,18 +36,32 @@ const Core = {
     },
 
     lazyLoadMedia() {
-        // Tối ưu load ảnh/video bằng Intersection Observer
-        const media = document.querySelectorAll('img, video');
         const observer = new IntersectionObserver((entries) => {
             entries.forEach(entry => {
                 if (entry.isIntersecting) {
                     const el = entry.target;
-                    if(el.dataset.src) el.src = el.dataset.src;
+                    // Xử lý ảnh
+                    if (el.tagName === 'IMG' && el.dataset.src) {
+                        el.src = el.dataset.src;
+                    }
+                    // Xử lý Iframe YouTube
+                    if (el.tagName === 'IFRAME' && el.dataset.src) {
+                        el.src = el.dataset.src;
+                    }
                     observer.unobserve(el);
                 }
             });
-        });
-        media.forEach(m => observer.observe(m));
+        }, { threshold: 0.1 });
+
+        document.querySelectorAll('img[data-src], iframe[data-src]').forEach(el => observer.observe(el));
+    },
+
+    // Cache dữ liệu nhỏ vào LocalStorage để truy cập offline nhanh
+    setLocalCache(key, data) {
+        localStorage.setItem(`aoichan_cache_${key}`, JSON.stringify({
+            timestamp: Date.now(),
+            content: data
+        }));
     }
 };
 
