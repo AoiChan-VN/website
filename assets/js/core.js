@@ -1,50 +1,54 @@
-/**
- * @engine SPA-Lite 2026
- * @author AoiChan
- */
-class AoiEngine {
-    constructor() {
-        this.init();
-    }
+import { renderHeader } from '../../src/components/header.js';
+import { renderFooter } from '../../src/components/footer.js';
 
-    async navigate(url, push = true) {
-        try {
-            const response = await fetch(url);
-            const html = await response.text();
-            const parser = new DOMParser();
-            const doc = parser.parseFromString(html, 'text/html');
-            
-            // Cập nhật Content & Title
-            document.title = doc.title;
-            document.querySelector('main').innerHTML = doc.querySelector('main').innerHTML;
-            
-            if (push) window.history.pushState({}, '', url);
-            
-            // Khởi tạo lại Component & Logic trang mới
-            this.reinitPage();
-            window.scrollTo({ top: 0, behavior: 'smooth' });
-        } catch (err) {
-            console.error("Navigation failed:", err);
-            window.location.href = url; // Fallback
-        }
-    }
-
-    reinitPage() {
-        // Tự động nhận diện folder để import đúng
-        const isSub = window.location.pathname.includes('/pages/');
-        import(isSub ? '../src/components/header.js' : './src/components/header.js').then(m => m.renderHeader(isSub));
-        import(isSub ? '../src/components/footer.js' : './src/components/footer.js').then(m => m.renderFooter());
-    }
-
+const Core = {
     init() {
-        document.addEventListener('click', e => {
-            const a = e.target.closest('nav a');
-            if (a && a.href.startsWith(window.location.origin)) {
-                e.preventDefault();
-                this.navigate(a.href);
-            }
+        this.loadComponents();
+        this.setupTheme();
+        this.lazyLoadMedia();
+    },
+
+    loadComponents() {
+        const headerRoot = document.getElementById('header-root');
+        const footerRoot = document.getElementById('footer-root');
+        
+        if(headerRoot) headerRoot.innerHTML = renderHeader();
+        if(footerRoot) footerRoot.innerHTML = renderFooter();
+        
+        this.attachEvents();
+    },
+
+    setupTheme() {
+        const savedTheme = localStorage.getItem('aoichan-theme') || 'dark';
+        document.body.setAttribute('data-theme', savedTheme);
+    },
+
+    toggleTheme() {
+        const current = document.body.getAttribute('data-theme');
+        const next = current === 'dark' ? 'light' : 'dark';
+        document.body.setAttribute('data-theme', next);
+        localStorage.setItem('aoichan-theme', next);
+    },
+
+    attachEvents() {
+        const btn = document.querySelector('.theme-switch');
+        if(btn) btn.onclick = () => this.toggleTheme();
+    },
+
+    lazyLoadMedia() {
+        // Tối ưu load ảnh/video bằng Intersection Observer
+        const media = document.querySelectorAll('img, video');
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    const el = entry.target;
+                    if(el.dataset.src) el.src = el.dataset.src;
+                    observer.unobserve(el);
+                }
+            });
         });
-        window.addEventListener('popstate', () => this.navigate(window.location.href, false));
+        media.forEach(m => observer.observe(m));
     }
-}
-export const App = new AoiEngine();
+};
+
+window.onload = () => Core.init();
