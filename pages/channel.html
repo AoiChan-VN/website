@@ -2,57 +2,43 @@
 <html lang="vi">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Channel | AoiChan Live Streaming</title>
+    <title>Channel | AoiChan Live</title>
     <link rel="stylesheet" href="../assets/css/global.css">
-    <link rel="stylesheet" href="../assets/css/components.css">
-    <link rel="stylesheet" href="../assets/css/yt/channel.css"> 
+    <link rel="stylesheet" href="../assets/css/yt/channel.css">
 </head>
 <body>
-    <header style="padding: 20px 5%; display: flex; justify-content: space-between; align-items: center; border-bottom: 1px solid var(--border);">
-        <div class="logo" style="color: var(--yt-red);">AOI<span style="color: #fff;">TUBE</span></div>
-        <nav><a href="../index.html" style="color: #888; text-decoration: none;">← Exit Channel</a></nav>
-    </header>
-
+    <header></header>
     <main class="container">
-        <section class="yt-hero animate">
-            <span class="tag-v" style="border-color: var(--yt-red); color: var(--yt-red);">LIVE NOW</span>
-            <h1 style="margin: 20px 0;">AoiChan Engineering <br>Official Media Center</h1>
-            <p style="color: #888;">Nơi lưu trữ những kiến thức lập trình Full Stack và Resource độc quyền.</p>
-        </section>
-
-        <div class="yt-grid" id="yt-container">
-            <!-- Loading state sinh động -->
-            <p>Đang đồng bộ dữ liệu từ hệ thống...</p>
+        <div style="padding: 60px 0;">
+            <h1><span style="color: #ff0000;">Live</span> Channel</h1>
         </div>
+        <div id="yt-render" class="grid-layout"></div>
     </main>
+    <footer></footer>
 
     <script type="module">
+        import { App } from '../assets/js/core.js';
         import DATABASE_YOUTUBE from '../src/db/yt-db.js';
-        const container = document.getElementById('yt-container');
-
-        // Render dữ liệu thực từ DB
-        container.innerHTML = DATABASE_YOUTUBE.items.map(video => `
-            <div class="yt-card animate">
-                <div class="thumb-wrap">
-                    <div class="play-icon">
+        
+        App.reinitPage();
+        
+        const grid = document.getElementById('yt-render');
+        grid.innerHTML = DATABASE_YOUTUBE.items.map(yt => `
+            <div class="card animate" style="padding:0; overflow:hidden;">
+                <div style="width:100%; aspect-ratio:16/9; background:#111; display:flex; align-items:center; justify-content:center; position:relative;">
+                    <div style="width:50px; height:50px; background:#ff0000; border-radius:50%; display:flex; align-items:center; justify-content:center;">
                         <svg width="20" height="20" viewBox="0 0 24 24" fill="white"><path d="M8 5v14l11-7z"/></svg>
                     </div>
-                    <div class="duration">12:45</div>
-                    <div style="position:absolute; z-index:1; font-weight:900; opacity:0.1; font-size:40px; transform:rotate(-15deg)">AOICHAN</div>
                 </div>
-                <div class="yt-info">
-                    <div class="yt-title">${video.title}</div>
-                    <div style="color: #666; font-size: 13px;">${video.views} lượt xem • 2 giờ trước</div>
-                    <div class="channel-meta">
-                        <div class="avatar-mini"></div>
-                        <span style="font-size: 12px; color: #aaa;">AoiChan Official</span>
+                <div style="padding:20px;">
+                    <h3 style="font-size: 1rem; margin-bottom: 10px;">${yt.title}</h3>
+                    <div style="display:flex; justify-content:space-between; align-items:center;">
+                        <span style="font-size: 12px; color:#444;">${yt.views} Views</span>
+                        <a href="${yt.url}" target="_blank" style="color:var(--accent); font-size:12px; text-decoration:none; font-weight:800;">WATCH</a>
                     </div>
-                    <a href="${video.url}" target="_blank" class="btn-watch">XEM VIDEO</a>
                 </div>
             </div>
         `).join('');
     </script>
-    <script src="../assets/js/security.js"></script>
 </body>
 </html>
