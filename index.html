@@ -2,76 +2,25 @@
 <html lang="vi">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-    <title>AoiChan | Premium Portfolio System</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AoiChan | Framework-Like Portfolio</title>
     <link rel="stylesheet" href="./assets/css/global.css">
 </head>
 <body data-theme="dark">
+    <!-- Các Component sẽ tự động inject vào đây -->
+    <div id="header-root"></div>
 
-    <header class="glass-header">
-        <div class="container flex-between">
-            <div class="logo-area">
-                <div class="logo-hex">A</div>
-                <span class="logo-text">AOICHAN</span>
-            </div>
-            <div class="header-controls">
-                <button onclick="Core.toggleSettings()" class="btn-settings">⚙️</button>
-                <button onclick="Core.openPanel('menu')" class="btn-menu">MENU</button>
-            </div>
-        </div>
-    </header>
+    <main id="hero-root"></main>
 
-    <main class="hero">
-        <div class="hero-bg-glow"></div>
-        <div class="container text-center">
-            <h1 data-i18n="hero_title" class="fade-in">AoiChan Project</h1>
-            <p data-i18n="hero_desc" class="fade-in-2">Premium Minecraft Solutions & Resources.</p>
-            <div class="hero-btns fade-in-3">
-                <button onclick="Core.openPanel('plugins')" class="btn-primary" data-i18n="btn_plugins">Plugins</button>
-                <button onclick="Core.openPanel('resource')" class="btn-secondary" data-i18n="btn_res">Resources</button>
-            </div>
-        </div>
-    </main>
-
-    <!-- SETTINGS OVERLAY -->
-    <div id="settings-panel" class="settings-overlay" onclick="Core.toggleSettings(event)">
-        <div class="settings-card" onclick="event.stopPropagation()">
-            <div class="settings-header">
-                <h3 data-i18n="settings">Settings</h3>
-                <span class="close-btn" onclick="Core.toggleSettings()">×</span>
-            </div>
-            <div class="settings-body">
-                <div class="s-item">
-                    <span data-i18n="theme_select">Theme</span>
-                    <select id="theme-select" onchange="Core.changeTheme(this.value)">
-                        <option value="dark">Dark Ocean</option>
-                        <option value="amoled">Amoled Black</option>
-                        <option value="light">Pure Light</option>
-                    </select>
-                </div>
-                <div class="s-item">
-                    <span data-i18n="lang_select">Language</span>
-                    <select id="lang-select" onchange="Core.changeLang(this.value)">
-                        <option value="vi">Tiếng Việt</option>
-                        <option value="en">English</option>
-                    </select>
-                </div>
-            </div>
-        </div>
-    </div>
-
-    <!-- MAIN CONTENT PANEL (SPA) -->
     <div id="app-panel" class="panel-overlay">
-        <div class="panel-nav">
-            <div class="container flex-between">
-                <h2 id="panel-title">SYSTEM</h2>
-                <div class="close-circle" onclick="Core.closePanel()">×</div>
-            </div>
-        </div>
+        <div id="panel-nav-root"></div>
         <div class="panel-body">
             <div id="panel-content" class="container grid-layout"></div>
         </div>
     </div>
+
+    <div id="settings-root"></div>
+    <footer id="footer-root"></footer>
 
     <script type="module" src="./assets/js/core.js"></script>
 </body>
