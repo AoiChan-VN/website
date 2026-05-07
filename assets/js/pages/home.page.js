@@ -1,7 +1,21 @@
-import { pluginsDatabase }
-from "../database/plugins.db.js";
+/**
+ * Project: AoiChan Portfolio
+ * Author: AoiChan
+ * License: MIT
+ */
 
-export function renderHomePage(root) {
+import { getFeaturedPlugins }
+from "../services/plugin.service.js";
+
+import { renderPlugins }
+from "../renderers/plugin.renderer.js";
+
+import { renderSearch }
+from "../modules/search/search.js";
+
+export async function renderHomePage(
+  root
+) {
 
   root.innerHTML = `
 
@@ -10,7 +24,7 @@ export function renderHomePage(root) {
       <div class="hero-content">
 
         <span class="hero-badge">
-          Minecraft Developer
+          Minecraft Infrastructure
         </span>
 
         <h1 class="hero-title">
@@ -18,52 +32,40 @@ export function renderHomePage(root) {
         </h1>
 
         <p class="hero-description">
-          High performance Minecraft systems,
-          plugins and infrastructures.
+          Advanced Minecraft plugin
+          ecosystems and infrastructures.
         </p>
+
+        <div id="search-slot"></div>
 
       </div>
 
     </section>
 
-    <section class="plugin-grid" id="plugin-grid"></section>
+    <section>
+
+      <div
+        class="plugin-grid"
+        id="plugin-grid"
+      ></div>
+
+    </section>
 
   `;
 
-  const grid =
-    document.getElementById("plugin-grid");
+  renderSearch();
 
-  pluginsDatabase.forEach(plugin => {
+  const plugins =
+    await getFeaturedPlugins();
 
-    grid.innerHTML += `
+  const target =
+    document.getElementById(
+      "plugin-grid"
+    );
 
-      <article
-        class="plugin-card"
-        id="plugin-card-${plugin.id}"
-      >
+  renderPlugins(
+    target,
+    plugins
+  );
 
-        <img
-          src="${plugin.thumbnail}"
-          alt="${plugin.name}"
-          class="plugin-card-image"
-        />
-
-        <div class="plugin-card-content">
-
-          <h2 class="plugin-card-title">
-            ${plugin.name}
-          </h2>
-
-          <p class="plugin-card-description">
-            ${plugin.description}
-          </p>
-
-        </div>
-
-      </article>
-
-    `;
-
-  });
-
-} 
+}
