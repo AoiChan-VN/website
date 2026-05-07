@@ -10,7 +10,10 @@ from "../services/plugin.service.js";
 import { renderPlugins }
 from "../renderers/plugin.renderer.js";
 
-export function renderPluginsPage(
+import { renderSearch }
+from "../modules/search/search.js";
+
+export async function renderPluginsPage(
   root
 ) {
 
@@ -29,9 +32,10 @@ export function renderPluginsPage(
         </h1>
 
         <p class="page-description">
-          High performance Minecraft
-          infrastructures and systems.
+          Advanced Minecraft server systems.
         </p>
+
+        <div id="search-slot"></div>
 
       </div>
 
@@ -48,8 +52,10 @@ export function renderPluginsPage(
 
   `;
 
+  renderSearch();
+
   const plugins =
-    getPlugins();
+    await getPlugins();
 
   const target =
     document.getElementById(
@@ -61,4 +67,4 @@ export function renderPluginsPage(
     plugins
   );
 
-} 
+}
