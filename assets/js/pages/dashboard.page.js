@@ -12,7 +12,7 @@ import {
 }
 from "../renderers/dashboard.renderer.js";
 
-export function renderDashboardPage(
+export async function renderDashboardPage(
   root
 ) {
 
@@ -42,7 +42,7 @@ export function renderDashboardPage(
   `;
 
   const repositories =
-    getRepositories();
+    await getRepositories();
 
   const target =
     document.getElementById(
