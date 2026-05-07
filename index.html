@@ -3,30 +3,45 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="description" content="AoiChan - Chuyên Plugins và Resource Packs">
-    <meta name="author" content="AoiChan">
     <title>AoiChan | Portfolio</title>
     <link rel="stylesheet" href="assets/css/global.css">
-    <link rel="icon" href="public/favicon.ico">
 </head>
 <body data-theme="dark">
-    <div id="header-root"></div>
-
-    <main id="app">
-        <section class="hero-section">
-            <div class="container">
-                <h1 id="hero-title">Chào mừng đến với Thế giới của AoiChan</h1>
-                <p>Chuyên cung cấp các giải pháp tối ưu cho Minecraft Plugins và Resources.</p>
-                <div class="cta-group">
-                    <a href="pages/plugins.html" class="btn btn-primary">Xem Plugins</a>
-                    <a href="pages/resource.html" class="btn btn-secondary">Resource Packs</a>
-                </div>
+    <!-- Header tối giản -->
+    <header class="glass-header">
+        <div class="container flex-between">
+            <img src="assets/img/logo/logo.png" alt="AoiChan" class="logo">
+            <div class="header-controls">
+                <button id="theme-toggle" class="btn-icon">🌓</button>
+                <button id="menu-open" class="btn-menu">MENU</button>
             </div>
-        </section>
+        </div>
+    </header>
+
+    <!-- Main Content -->
+    <main id="hero">
+        <div class="hero-content">
+            <h1>Chào mừng đến với thế giới của AoiChan</h1>
+            <p>Giải pháp Minecraft chuyên sâu và tối ưu.</p>
+            <div class="hero-btns">
+                <button onclick="Core.openPanel('plugins')" class="btn-primary">Khám phá Plugins</button>
+                <button onclick="Core.openPanel('resource')" class="btn-secondary">Resource Packs</button>
+            </div>
+        </div>
     </main>
 
-    <div id="footer-root"></div>
+    <!-- SPA PANEL (Cực quan trọng) -->
+    <div id="app-panel" class="panel-overlay">
+        <div class="panel-header">
+            <button id="panel-close" class="btn-close">&times;</button>
+            <h2 id="panel-title">Tiêu đề</h2>
+        </div>
+        <div id="panel-content" class="panel-body container">
+            <!-- Nội dung các trang con sẽ render vào đây -->
+        </div>
+    </div>
 
+    <div id="footer-root"></div>
     <script type="module" src="assets/js/core.js"></script>
 </body>
 </html>
