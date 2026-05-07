@@ -2,6 +2,7 @@
 
   margin: 0;
   padding: 0;
+
   box-sizing: border-box;
 
 }
@@ -14,8 +15,14 @@ html {
 
 body {
 
+  min-height: 100vh;
+
   background:
-    var(--color-background);
+    radial-gradient(
+      circle at top,
+      #111827,
+      #050507 70%
+    );
 
   color:
     var(--color-text);
@@ -23,5 +30,29 @@ body {
   font-family:
     Inter,
     sans-serif;
+
+  overflow-x: hidden;
+
+}
+
+img {
+
+  display: block;
+
+  max-width: 100%;
+
+}
+
+button,
+input {
+
+  font:
+    inherit;
+
+}
+
+a {
+
+  color: inherit;
 
 }
