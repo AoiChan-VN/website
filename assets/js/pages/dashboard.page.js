@@ -7,22 +7,14 @@
 import { getRepositories }
 from "../services/repository.service.js";
 
+import {
+  renderDashboardCards
+}
+from "../renderers/dashboard.renderer.js";
+
 export function renderDashboardPage(
   root
 ) {
-
-  const repositories =
-    getRepositories();
-
-  const totalRepositories =
-    repositories.length;
-
-  const totalStars =
-    repositories.reduce(
-      (total, repository) =>
-        total + repository.stars,
-      0
-    );
 
   root.innerHTML = `
 
@@ -30,42 +22,36 @@ export function renderDashboardPage(
 
       <div class="dashboard-header">
 
+        <span class="page-label">
+          Development Metrics
+        </span>
+
         <h1 class="dashboard-title">
-          Development Dashboard
+          Project Dashboard
         </h1>
 
       </div>
 
-      <div class="dashboard-grid">
-
-        <article class="dashboard-card">
-
-          <span class="dashboard-card-label">
-            Total Repositories
-          </span>
-
-          <h2 class="dashboard-card-value">
-            ${totalRepositories}
-          </h2>
-
-        </article>
-
-        <article class="dashboard-card">
-
-          <span class="dashboard-card-label">
-            Total Stars
-          </span>
-
-          <h2 class="dashboard-card-value">
-            ${totalStars}
-          </h2>
-
-        </article>
-
-      </div>
+      <div
+        class="dashboard-grid"
+        id="dashboard-grid"
+      ></div>
 
     </section>
 
   `;
 
-} 
+  const repositories =
+    getRepositories();
+
+  const target =
+    document.getElementById(
+      "dashboard-grid"
+    );
+
+  renderDashboardCards(
+    target,
+    repositories
+  );
+
+}
