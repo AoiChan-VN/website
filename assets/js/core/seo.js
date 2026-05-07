@@ -4,6 +4,19 @@
  * License: MIT
  */
 
+import { updateMetaTag }
+from "./meta.js";
+
+import {
+  injectStructuredData
+}
+from "./structured-data.js";
+
+import {
+  updateCanonicalURL
+}
+from "./meta.js";
+
 export function initializeSEO() {
 
   updateSEO({
@@ -12,43 +25,74 @@ export function initializeSEO() {
       "AoiChan Portfolio",
 
     description:
-      "Minecraft Plugins Portfolio"
+      "Minecraft plugin infrastructure portfolio.",
+
+    path:
+      "/"
 
   });
 
 }
 
 export function updateSEO({
-  title,
-  description
+
+  title = "",
+
+  description = "",
+
+  path = "/"
+
 }) {
 
-  document.title = title;
+  document.title =
+    title;
 
-  updateMeta(
-    "description",
+  updateMetaTag(
+    'meta[name="description"]',
     description
   );
 
-}
-
-function updateMeta(
-  name,
-  content
-) {
-
-  const target =
-    document.querySelector(
-      `meta[name="${name}"]`
-    );
-
-  if (!target) {
-    return;
-  }
-
-  target.setAttribute(
-    "content",
-    content
+  updateMetaTag(
+    'meta[property="og:title"]',
+    title
   );
 
-} 
+  updateMetaTag(
+    'meta[property="og:description"]',
+    description
+  );
+
+  updateMetaTag(
+    'meta[property="twitter:title"]',
+    title
+  );
+
+  updateMetaTag(
+    'meta[property="twitter:description"]',
+    description
+  );
+
+  updateCanonicalURL(
+    path
+  );
+
+  injectStructuredData({
+
+    "@context":
+      "https://schema.org",
+
+    "@type":
+      "WebSite",
+
+    name:
+      title,
+
+    description:
+      description,
+
+    url:
+      `${location.origin}${path}`
+
+  });
+
+}
