@@ -7,14 +7,19 @@ export function pluginCardTemplate(
     <article
       class="plugin-card"
       id="plugin-card-${plugin.id}"
+      data-reveal
     >
 
-      <img
-        src="${plugin.thumbnail}"
-        alt="${plugin.name}"
-        class="plugin-card-image"
-        loading="lazy"
-      />
+      <div class="plugin-image-wrapper">
+
+        <img
+          data-src="${plugin.thumbnail}"
+          alt="${plugin.name}"
+          class="plugin-card-image"
+          loading="lazy"
+        />
+
+      </div>
 
       <div class="plugin-card-content">
 
@@ -46,4 +51,4 @@ export function pluginCardTemplate(
 
   `;
 
-} 
+}
