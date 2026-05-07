@@ -1,68 +1,74 @@
-import { renderHeader } from '../../src/components/header.js';
+import { PLUGIN_DATA } from '../../src/db/pl-db.js';
+import { RESOURCE_DATA } from '../../src/db/rs-db.js';
+import { YOUTUBE_DATA } from '../../src/db/yt-db.js';
 import { renderFooter } from '../../src/components/footer.js';
 
 const Core = {
     init() {
-        this.loadComponents();
-        this.setupTheme();
-        this.lazyLoadMedia();
+        this.dom = {
+            panel: document.getElementById('app-panel'),
+            content: document.getElementById('panel-content'),
+            title: document.getElementById('panel-title'),
+            close: document.getElementById('panel-close'),
+            menuBtn: document.getElementById('menu-open')
+        };
+        this.setupEvents();
+        document.getElementById('footer-root').innerHTML = renderFooter();
     },
 
-    loadComponents() {
-        const headerRoot = document.getElementById('header-root');
-        const footerRoot = document.getElementById('footer-root');
+    setupEvents() {
+        this.dom.close.onclick = () => this.closePanel();
+        this.dom.menuBtn.onclick = () => this.openPanel('menu');
         
-        if(headerRoot) headerRoot.innerHTML = renderHeader();
-        if(footerRoot) footerRoot.innerHTML = renderFooter();
-        
-        this.attachEvents();
+        // Đóng panel khi nhấn phím Esc
+        window.onkeydown = (e) => { if(e.key === "Escape") this.closePanel(); };
     },
 
-    setupTheme() {
-        const savedTheme = localStorage.getItem('aoichan-theme') || 'dark';
-        document.body.setAttribute('data-theme', savedTheme);
+    openPanel(type) {
+        this.dom.panel.classList.add('active');
+        document.body.style.overflow = 'hidden'; // Chặn scroll trang chủ
+        this.renderContent(type);
     },
 
-    toggleTheme() {
-        const current = document.body.getAttribute('data-theme');
-        const next = current === 'dark' ? 'light' : 'dark';
-        document.body.setAttribute('data-theme', next);
-        localStorage.setItem('aoichan-theme', next);
+    closePanel() {
+        this.dom.panel.classList.remove('active');
+        document.body.style.overflow = 'auto';
     },
 
-    attachEvents() {
-        const btn = document.querySelector('.theme-switch');
-        if(btn) btn.onclick = () => this.toggleTheme();
+    renderContent(type) {
+        let html = '';
+        switch(type) {
+            case 'plugins':
+                this.dom.title.innerText = 'Minecraft Plugins';
+                html = PLUGIN_DATA.map(item => this.templateCard(item)).join('');
+                break;
+            case 'resource':
+                this.dom.title.innerText = 'Resource Packs';
+                html = RESOURCE_DATA.map(item => this.templateCard(item)).join('');
+                break;
+            case 'menu':
+                this.dom.title.innerText = 'Danh Mục';
+                html = `<div class="menu-list">
+                    <button onclick="Core.openPanel('plugins')">Plugins</button>
+                    <button onclick="Core.openPanel('resource')">Resources</button>
+                    <button onclick="Core.openPanel('youtube')">YouTube</button>
+                </div>`;
+                break;
+        }
+        this.dom.content.innerHTML = `<div class="grid">${html}</div>`;
     },
 
-    lazyLoadMedia() {
-        const observer = new IntersectionObserver((entries) => {
-            entries.forEach(entry => {
-                if (entry.isIntersecting) {
-                    const el = entry.target;
-                    // Xử lý ảnh
-                    if (el.tagName === 'IMG' && el.dataset.src) {
-                        el.src = el.dataset.src;
-                    }
-                    // Xử lý Iframe YouTube
-                    if (el.tagName === 'IFRAME' && el.dataset.src) {
-                        el.src = el.dataset.src;
-                    }
-                    observer.unobserve(el);
-                }
-            });
-        }, { threshold: 0.1 });
-
-        document.querySelectorAll('img[data-src], iframe[data-src]').forEach(el => observer.observe(el));
-    },
-
-    // Cache dữ liệu nhỏ vào LocalStorage để truy cập offline nhanh
-    setLocalCache(key, data) {
-        localStorage.setItem(`aoichan_cache_${key}`, JSON.stringify({
-            timestamp: Date.now(),
-            content: data
-        }));
+    templateCard(item) {
+        return `
+            <div class="card fade-in">
+                <span class="tag-${item.tag}">${item.tag.toUpperCase()}</span>
+                <h3>${item.name}</h3>
+                <p>${item.description || item.size}</p>
+                <a href="${item.link}" class="btn-card">Chi tiết</a>
+            </div>
+        `;
     }
 };
 
-window.onload = () => Core.init();
+window.Core = Core; // Global access cho onclick
+Core.init();
