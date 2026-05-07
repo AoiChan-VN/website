@@ -1,6 +1,0 @@
-User-agent: *
-Allow: /
-Disallow: /src/db/
-Disallow: /assets/js/security.js
-
-Sitemap: https://github.io
