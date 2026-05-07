@@ -5,31 +5,47 @@
   grid-template-columns:
     repeat(auto-fit, minmax(320px, 1fr));
 
-  gap: 2rem;
+  gap:
+    2rem;
 
-  padding: 4rem;
+  padding:
+    4rem 2rem;
 
 }
 
 .plugin-card {
 
   background:
-    var(--color-surface);
+    linear-gradient(
+      180deg,
+      rgba(255,255,255,0.04),
+      rgba(255,255,255,0.02)
+    );
+
+  border:
+    1px solid rgba(255,255,255,0.08);
 
   border-radius:
-    var(--radius-large);
+    28px;
 
   overflow: hidden;
 
+  backdrop-filter:
+    blur(14px);
+
   transition:
-    transform var(--transition-normal);
+    transform 0.25s ease,
+    border-color 0.25s ease;
 
 }
 
 .plugin-card:hover {
 
   transform:
-    translateY(-8px);
+    translateY(-10px);
+
+  border-color:
+    rgba(124,58,237,0.6);
 
 }
 
@@ -44,6 +60,81 @@
 
 .plugin-card-content {
 
-  padding: 1.5rem;
+  padding:
+    1.6rem;
 
-} 
+}
+
+.plugin-card-version {
+
+  display: inline-flex;
+
+  margin-bottom:
+    1rem;
+
+  padding:
+    0.4rem 0.8rem;
+
+  border-radius:
+    999px;
+
+  background:
+    rgba(124,58,237,0.18);
+
+  color:
+    #c4b5fd;
+
+  font-size:
+    0.85rem;
+
+}
+
+.plugin-card-title {
+
+  font-size:
+    1.5rem;
+
+  margin-bottom:
+    0.8rem;
+
+}
+
+.plugin-card-description {
+
+  color:
+    var(--color-muted);
+
+  margin-bottom:
+    1.5rem;
+
+}
+
+.plugin-card-tags {
+
+  display: flex;
+
+  flex-wrap: wrap;
+
+  gap:
+    0.6rem;
+
+}
+
+.plugin-tag {
+
+  padding:
+    0.4rem 0.8rem;
+
+  border-radius:
+    999px;
+
+  background:
+    rgba(255,255,255,0.06);
+
+  color:
+    white;
+
+  font-size:
+    0.8rem;
+
+}
