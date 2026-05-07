@@ -3,24 +3,23 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>AoiChan | Framework-Like Portfolio</title>
+    <title>AoiChan | Modern OS Interface</title>
     <link rel="stylesheet" href="./assets/css/global.css">
 </head>
 <body data-theme="dark">
-    <!-- Các Component sẽ tự động inject vào đây -->
-    <div id="header-root"></div>
+    <!-- Sidebar Component -->
+    <aside id="sidebar-root"></aside>
 
-    <main id="hero-root"></main>
+    <!-- Main Content Area -->
+    <main class="main-wrapper">
+        <header id="header-root"></header>
+        
+        <section id="content-view" class="content-container">
+            <!-- Dynamic Content Injected Here -->
+        </section>
 
-    <div id="app-panel" class="panel-overlay">
-        <div id="panel-nav-root"></div>
-        <div class="panel-body">
-            <div id="panel-content" class="container grid-layout"></div>
-        </div>
-    </div>
-
-    <div id="settings-root"></div>
-    <footer id="footer-root"></footer>
+        <footer id="footer-root"></footer>
+    </main>
 
     <script type="module" src="./assets/js/core.js"></script>
 </body>
