@@ -39,22 +39,31 @@
     </main>
 
     <!-- SPA SYSTEM: PANEL OVERLAY -->
-    <div id="app-panel" class="panel-overlay">
-        <div class="panel-nav">
-            <div class="container flex-between">
-                <h2 id="panel-title">SYSTEM</h2>
-                <div class="close-circle" onclick="Core.closePanel()">×</div>
-            </div>
+    <div id="settings-panel" class="settings-overlay">
+    <div class="settings-content">
+        <div class="settings-header">
+            <h3>Configuration</h3>
+            <button onclick="Core.toggleSettings()" class="close-btn">&times;</button>
         </div>
-        <div class="panel-body">
-            <div class="container">
-                <div id="panel-content" class="grid-layout">
-                    <!-- Data Injected Here -->
-                </div>
+        <div class="settings-body">
+            <div class="setting-item">
+                <span>Giao diện (Theme)</span>
+                <select id="theme-select" onchange="Core.changeTheme(this.value)">
+                    <option value="dark">Dark Ocean</option>
+                    <option value="light">Pure Light</option>
+                    <option value="amoled">Amoled Black</option>
+                </select>
+            </div>
+            <div class="setting-item">
+                <span>Ngôn ngữ (Language)</span>
+                <select id="lang-select" onchange="Core.changeLang(this.value)">
+                    <option value="vi">Tiếng Việt</option>
+                    <option value="en">English</option>
+                </select>
             </div>
         </div>
     </div>
-
+    </div>
     <footer id="footer-root"></footer>
 
     <!-- Khởi tạo Logic -->
