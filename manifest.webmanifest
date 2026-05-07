@@ -1,15 +1,41 @@
 {
   "name": "AoiChan Portfolio",
+
   "short_name": "AoiChan",
-  "display": "standalone",
-  "background_color": "#050507",
-  "theme_color": "#050507",
+
   "start_url": "/",
+
+  "display": "standalone",
+
+  "background_color": "#050507",
+
+  "theme_color": "#7c3aed",
+
+  "orientation": "portrait-primary",
+
   "icons": [
+
     {
-      "src": "/assets/media/logos/icon-512.webp",
-      "sizes": "512x512",
-      "type": "image/webp"
+      "src":
+        "/assets/media/icons/icon-192.png",
+
+      "sizes":
+        "192x192",
+
+      "type":
+        "image/png"
+    },
+
+    {
+      "src":
+        "/assets/media/icons/icon-512.png",
+
+      "sizes":
+        "512x512",
+
+      "type":
+        "image/png"
     }
+
   ]
-} 
+}
