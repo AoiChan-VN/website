@@ -16,6 +16,9 @@ from "../pages/repositories.page.js";
 import { renderDashboardPage }
 from "../pages/dashboard.page.js";
 
+import { renderDocsPage }
+from "../pages/docs.page.js";
+
 import { renderNavbar }
 from "../modules/navbar/navbar.js";
 
@@ -108,6 +111,26 @@ const routes = {
 
       path:
         "/dashboard"
+
+    }
+
+  },
+
+  "/docs": {
+
+    render:
+      renderDocsPage,
+
+    seo: {
+
+      title:
+        "Documentation | AoiChan",
+
+      description:
+        "Project documentation and infrastructure guides.",
+
+      path:
+        "/docs"
 
     }
 
