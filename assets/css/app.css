@@ -8,10 +8,13 @@
 @import url("./layouts/navbar.css");
 @import url("./layouts/footer.css");
 @import url("./layouts/hero.css");
+@import url("./layouts/grid.css");
 
 @import url("./components/buttons.css");
 @import url("./components/cards.css");
 @import url("./components/theme-toggle.css");
+@import url("./components/search.css");
+@import url("./components/notification.css");
 
 @import url("./pages/home.css");
 @import url("./pages/plugins.css");
