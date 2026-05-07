@@ -4,6 +4,7 @@
 @import url("./core/typography.css");
 @import url("./core/utilities.css");
 @import url("./core/animations.css");
+@import url("./core/transitions.css");
 
 @import url("./layouts/navbar.css");
 @import url("./layouts/footer.css");
