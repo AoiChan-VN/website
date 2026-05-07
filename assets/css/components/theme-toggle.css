@@ -5,17 +5,32 @@
   cursor: pointer;
 
   padding:
-    0.8rem 1.2rem;
+    0.85rem 1.2rem;
 
   border-radius:
     999px;
 
   background:
-    var(--color-primary);
+    rgba(255,255,255,0.08);
 
   color:
     white;
 
-  font-weight: 600;
+  font-weight:
+    700;
 
-} 
+  transition:
+    transform 0.25s ease,
+    background 0.25s ease;
+
+}
+
+.theme-toggle:hover {
+
+  transform:
+    translateY(-2px);
+
+  background:
+    var(--color-primary);
+
+}
