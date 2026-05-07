@@ -38,6 +38,14 @@ export function navbarTemplate() {
           Dashboard
         </a>
 
+        <a
+          href="/docs"
+          data-route
+          class="navbar-link"
+        >
+          Docs
+        </a>
+
       </div>
 
       <button
@@ -51,4 +59,4 @@ export function navbarTemplate() {
 
   `;
 
-} 
+}
