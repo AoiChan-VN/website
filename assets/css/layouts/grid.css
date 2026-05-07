@@ -1,0 +1,10 @@
+.grid-layout {
+
+  width: 100%;
+
+  display: grid;
+
+  gap:
+    2rem;
+
+} 
