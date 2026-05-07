@@ -25,6 +25,12 @@ from "../modules/footer/footer.js";
 import { updateSEO }
 from "./seo.js";
 
+import { transitionPage }
+from "./page-transition.js";
+
+import { initializeLazyImages }
+from "./lazy-image.js";
+
 const routes = {
 
   "/": {
@@ -183,19 +189,6 @@ async function renderRoute() {
 
     `;
 
-    updateSEO({
-
-      title:
-        "404 | AoiChan",
-
-      description:
-        "Page not found.",
-
-      path:
-        location.pathname
-
-    });
-
     return;
 
   }
@@ -204,6 +197,14 @@ async function renderRoute() {
     route.seo
   );
 
-  await route.render(root);
+  await transitionPage(
+    async () => {
+
+      await route.render(root);
+
+      initializeLazyImages();
+
+    }
+  );
 
 }
