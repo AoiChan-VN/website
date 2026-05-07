@@ -22,19 +22,90 @@ from "../modules/navbar/navbar.js";
 import { renderFooter }
 from "../modules/footer/footer.js";
 
+import { updateSEO }
+from "./seo.js";
+
 const routes = {
 
-  "/":
-    renderHomePage,
+  "/": {
 
-  "/plugins":
-    renderPluginsPage,
+    render:
+      renderHomePage,
 
-  "/repositories":
-    renderRepositoriesPage,
+    seo: {
 
-  "/dashboard":
-    renderDashboardPage
+      title:
+        "AoiChan Portfolio",
+
+      description:
+        "Minecraft plugin ecosystems and infrastructures.",
+
+      path:
+        "/"
+
+    }
+
+  },
+
+  "/plugins": {
+
+    render:
+      renderPluginsPage,
+
+    seo: {
+
+      title:
+        "Plugins | AoiChan",
+
+      description:
+        "Minecraft plugin systems and infrastructures.",
+
+      path:
+        "/plugins"
+
+    }
+
+  },
+
+  "/repositories": {
+
+    render:
+      renderRepositoriesPage,
+
+    seo: {
+
+      title:
+        "Repositories | AoiChan",
+
+      description:
+        "GitHub repository infrastructure dashboard.",
+
+      path:
+        "/repositories"
+
+    }
+
+  },
+
+  "/dashboard": {
+
+    render:
+      renderDashboardPage,
+
+    seo: {
+
+      title:
+        "Dashboard | AoiChan",
+
+      description:
+        "Development metrics and repository analytics.",
+
+      path:
+        "/dashboard"
+
+    }
+
+  }
 
 };
 
@@ -58,7 +129,9 @@ export function initializeRouter() {
 
 }
 
-function handleNavigation(event) {
+function handleNavigation(
+  event
+) {
 
   const target =
     event.target.closest(
@@ -86,17 +159,17 @@ function handleNavigation(event) {
 
 }
 
-function renderRoute() {
+async function renderRoute() {
 
   const root =
     document.getElementById(
       "app-root"
     );
 
-  const renderer =
+  const route =
     routes[location.pathname];
 
-  if (!renderer) {
+  if (!route) {
 
     root.innerHTML = `
 
@@ -110,10 +183,27 @@ function renderRoute() {
 
     `;
 
+    updateSEO({
+
+      title:
+        "404 | AoiChan",
+
+      description:
+        "Page not found.",
+
+      path:
+        location.pathname
+
+    });
+
     return;
 
   }
 
-  renderer(root);
+  updateSEO(
+    route.seo
+  );
+
+  await route.render(root);
 
 }
