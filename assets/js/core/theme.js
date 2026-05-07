@@ -1,39 +1,114 @@
-const STORAGE_KEY = "aoichan-theme";
+/**
+ * Project: AoiChan Portfolio
+ * Author: AoiChan
+ * License: MIT
+ */
+
+import { StorageManager }
+from "./storage.js";
+
+const STORAGE_KEY =
+  "aoichan-theme";
+
+const THEMES = {
+
+  obsidian:
+    "theme-obsidian",
+
+  nebula:
+    "theme-nebula",
+
+  eclipse:
+    "theme-eclipse"
+
+};
 
 export function initializeTheme() {
 
   const savedTheme =
-    localStorage.getItem(STORAGE_KEY);
+    StorageManager.get(
+      STORAGE_KEY,
+      "obsidian"
+    );
 
-  const theme =
-    savedTheme || "obsidian";
-
-  applyTheme(theme);
+  applyTheme(
+    savedTheme
+  );
 
 }
 
 export function toggleTheme() {
 
   const currentTheme =
-    document.documentElement.dataset.theme;
+    getCurrentTheme();
 
   const nextTheme =
-    currentTheme === "obsidian"
-      ? "light"
-      : "obsidian";
+    getNextTheme(
+      currentTheme
+    );
 
-  applyTheme(nextTheme);
+  applyTheme(
+    nextTheme
+  );
 
 }
 
-function applyTheme(theme) {
+export function applyTheme(
+  theme
+) {
 
-  document.documentElement.dataset.theme =
-    theme;
+  removeThemeClasses();
 
-  localStorage.setItem(
+  const themeClass =
+    THEMES[theme];
+
+  document.body.classList.add(
+    themeClass
+  );
+
+  StorageManager.set(
     STORAGE_KEY,
     theme
   );
 
-} 
+}
+
+function getCurrentTheme() {
+
+  return StorageManager.get(
+    STORAGE_KEY,
+    "obsidian"
+  );
+
+}
+
+function getNextTheme(
+  current
+) {
+
+  const keys =
+    Object.keys(THEMES);
+
+  const currentIndex =
+    keys.indexOf(current);
+
+  const nextIndex =
+    (currentIndex + 1)
+    % keys.length;
+
+  return keys[nextIndex];
+
+}
+
+function removeThemeClasses() {
+
+  Object.values(THEMES)
+    .forEach(theme => {
+
+      document.body.classList.remove(
+        theme
+      );
+
+    });
+
+}
