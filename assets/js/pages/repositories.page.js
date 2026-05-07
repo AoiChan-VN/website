@@ -10,7 +10,10 @@ from "../services/repository.service.js";
 import { renderRepositories }
 from "../renderers/repository.renderer.js";
 
-export function renderRepositoriesPage(
+import { renderSearch }
+from "../modules/search/search.js";
+
+export async function renderRepositoriesPage(
   root
 ) {
 
@@ -21,12 +24,14 @@ export function renderRepositoriesPage(
       <div class="page-hero-content">
 
         <span class="page-label">
-          GitHub Infrastructure
+          Repository Systems
         </span>
 
         <h1 class="page-title">
-          Repository Systems
+          GitHub Infrastructure
         </h1>
+
+        <div id="search-slot"></div>
 
       </div>
 
@@ -43,8 +48,10 @@ export function renderRepositoriesPage(
 
   `;
 
+  renderSearch();
+
   const repositories =
-    getRepositories();
+    await getRepositories();
 
   const target =
     document.getElementById(
@@ -56,4 +63,4 @@ export function renderRepositoriesPage(
     repositories
   );
 
-} 
+}
