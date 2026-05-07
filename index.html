@@ -3,18 +3,18 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-    <title>AoiChan | Premium SPA System</title>
+    <title>AoiChan | The Ultimate Portfolio</title>
     <link rel="stylesheet" href="./assets/css/global.css">
 </head>
-<body>
-    <!-- Hệ thống tự động đổ dữ liệu vào các Root này -->
-    <div id="header-root"></div>
-    <div id="sidebar-root"></div>
-    <div id="settings-root"></div>
-    
-    <main id="app-viewport" class="container"></main>
+<body data-theme="dark">
+    <!-- UI Layout Roots -->
+    <div id="navigation-portal"></div>
+    <div id="settings-portal"></div>
 
-    <footer id="footer-root"></footer>
+    <!-- Main Viewport -->
+    <main id="app-core" class="app-viewport">
+        <div id="view-transition-wrapper"></div>
+    </main>
 
     <script type="module" src="./assets/js/core.js"></script>
 </body>
