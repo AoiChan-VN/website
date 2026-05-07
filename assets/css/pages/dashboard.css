@@ -1,0 +1,56 @@
+.dashboard-section {
+
+  padding:
+    5rem 2rem;
+
+}
+
+.dashboard-grid {
+
+  display: grid;
+
+  grid-template-columns:
+    repeat(auto-fit, minmax(260px, 1fr));
+
+  gap:
+    2rem;
+
+  margin-top:
+    3rem;
+
+}
+
+.dashboard-card {
+
+  background:
+    var(--color-surface);
+
+  border-radius:
+    24px;
+
+  padding:
+    2rem;
+
+  border:
+    1px solid rgba(255,255,255,0.08);
+
+}
+
+.dashboard-card-label {
+
+  display: block;
+
+  color:
+    var(--color-muted);
+
+  margin-bottom:
+    1rem;
+
+}
+
+.dashboard-card-value {
+
+  font-size:
+    3rem;
+
+} 
