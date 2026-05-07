@@ -1,0 +1,22 @@
+{
+  "schema_version": "2.0",
+  "data_version": "2026.05.08",
+
+  "id": "nebula-engine",
+
+  "name": "NebulaEngine",
+
+  "description":
+    "Minecraft backend infrastructure.",
+
+  "stars": 182,
+
+  "language": "Java",
+
+  "visibility": "Public",
+
+  "updated_at": "2026-05-08",
+
+  "repository":
+    "https://github.com/AoiChan/NebulaEngine"
+} 
