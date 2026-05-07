@@ -2,24 +2,19 @@
 <html lang="vi">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>AoiChan | Modern OS Interface</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>AoiChan | Premium SPA System</title>
     <link rel="stylesheet" href="./assets/css/global.css">
 </head>
-<body data-theme="dark">
-    <!-- Sidebar Component -->
-    <aside id="sidebar-root"></aside>
+<body>
+    <!-- Hệ thống tự động đổ dữ liệu vào các Root này -->
+    <div id="header-root"></div>
+    <div id="sidebar-root"></div>
+    <div id="settings-root"></div>
+    
+    <main id="app-viewport" class="container"></main>
 
-    <!-- Main Content Area -->
-    <main class="main-wrapper">
-        <header id="header-root"></header>
-        
-        <section id="content-view" class="content-container">
-            <!-- Dynamic Content Injected Here -->
-        </section>
-
-        <footer id="footer-root"></footer>
-    </main>
+    <footer id="footer-root"></footer>
 
     <script type="module" src="./assets/js/core.js"></script>
 </body>
