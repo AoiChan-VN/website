@@ -4,6 +4,33 @@
  * License: MIT
  */
 
-import { bootApplication } from "./core/app.boot.js";
+import { initializeRouter }
+from "./core/router.js";
 
-bootApplication(); 
+import { initializeTheme }
+from "./core/theme.js";
+
+import { initializeSEO }
+from "./core/seo.js";
+
+import { preloadAssets }
+from "./core/preloader.js";
+
+import { initializeCache }
+from "./core/cache.js";
+
+async function bootstrap() {
+
+  initializeTheme();
+
+  initializeSEO();
+
+  initializeCache();
+
+  preloadAssets();
+
+  initializeRouter();
+
+}
+
+bootstrap();
