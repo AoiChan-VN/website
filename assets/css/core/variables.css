@@ -1,0 +1,17 @@
+:root {
+
+  --color-background: #050507;
+  --color-surface: #111114;
+
+  --color-text: #ffffff;
+  --color-muted: #9ca3af;
+
+  --color-primary: #7c3aed;
+
+  --radius-large: 24px;
+
+  --container-width: 1440px;
+
+  --transition-normal: 0.25s ease;
+
+} 
