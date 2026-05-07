@@ -1,0 +1,15 @@
+{
+  "name": "AoiChan Portfolio",
+  "short_name": "AoiChan",
+  "display": "standalone",
+  "background_color": "#050507",
+  "theme_color": "#050507",
+  "start_url": "/",
+  "icons": [
+    {
+      "src": "/assets/media/logos/icon-512.webp",
+      "sizes": "512x512",
+      "type": "image/webp"
+    }
+  ]
+} 
