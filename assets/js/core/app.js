@@ -1,12 +1,15 @@
-import { loadPosts } from '../modules/loader.js';
-import { renderPosts } from '../modules/renderer.js';
+import { router } from './router.js';
 
-export async function initApp() {
+export function initApp() {
 
-    const app = document.querySelector('#app');
+    window.addEventListener(
+        'hashchange',
+        router
+    );
 
-    const posts = await loadPosts();
+    window.addEventListener(
+        'load',
+        router
+    );
 
-    renderPosts(app, posts);
-
-} 
+}
