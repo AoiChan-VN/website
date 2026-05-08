@@ -1,8 +1,6 @@
-import { createNavigation }
-from './navigation.js';
+import { createNavigation } from './navigation.js';
 
-import { createThemeToggle }
-from './theme-toggle.js';
+import { createThemeToggle } from './theme-toggle.js';
 
 export function createHeader() {
 
