@@ -1,4 +1,11 @@
+let postsCache =
+    null;
+
 export async function loadPosts() {
+
+    if (postsCache) {
+        return postsCache;
+    }
 
     try {
 
@@ -45,7 +52,10 @@ export async function loadPosts() {
         const results =
             await Promise.all(requests);
 
-        return results.filter(Boolean);
+        postsCache =
+            results.filter(Boolean);
+
+        return postsCache;
 
     } catch (error) {
 
