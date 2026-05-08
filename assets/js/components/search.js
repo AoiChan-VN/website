@@ -1,5 +1,4 @@
-import { debounce }
-from '../modules/debounce.js';
+import { debounce } from '../modules/debounce.js';
 
 export function createSearch(
     onSearch
