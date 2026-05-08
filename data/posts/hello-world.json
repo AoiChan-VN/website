@@ -1,0 +1,17 @@
+{
+    "id": "hello-world",
+
+    "title": "Hello World",
+
+    "description": "First article.",
+
+    "thumbnail":
+        "./assets/images/content/hello.jpg",
+
+    "tags": [
+        "new",
+        "featured"
+    ],
+
+    "date": "2026-05-08"
+} 
