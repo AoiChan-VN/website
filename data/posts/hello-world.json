@@ -3,15 +3,20 @@
 
     "title": "Hello World",
 
-    "description": "First article.",
+    "description":
+        "First article.",
 
     "thumbnail":
         "./assets/images/content/hello.jpg",
+
+    "content":
+        "This is the first article page.",
 
     "tags": [
         "new",
         "featured"
     ],
 
-    "date": "2026-05-08"
-} 
+    "date":
+        "2026-05-08"
+}
