@@ -1,0 +1,23 @@
+.site-navigation {
+
+    display: flex;
+
+    align-items: center;
+
+    gap: 24px;
+}
+
+.site-navigation a {
+
+    color:
+        var(--muted);
+
+    transition:
+        var(--transition);
+}
+
+.site-navigation a:hover {
+
+    color:
+        var(--text);
+} 
