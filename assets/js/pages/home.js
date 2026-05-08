@@ -1,10 +1,32 @@
 import { loadPosts } from '../modules/loader.js';
-import { createPostCard } from '../components/cards.js';
+
+import { createHeader }
+from '../components/header.js';
+
+import { createHero }
+from '../components/hero.js';
+
+import { createPostCard }
+from '../components/cards.js';
 
 export async function renderHomePage(root) {
 
     const posts =
         await loadPosts();
+
+    root.append(
+        createHeader()
+    );
+
+    root.append(
+        createHero()
+    );
+
+    const section =
+        document.createElement('section');
+
+    section.className =
+        'posts-section';
 
     const container =
         document.createElement('div');
@@ -20,15 +42,16 @@ export async function renderHomePage(root) {
 
     posts.forEach(post => {
 
-        const card =
-            createPostCard(post);
-
-        grid.append(card);
+        grid.append(
+            createPostCard(post)
+        );
 
     });
 
     container.append(grid);
 
-    root.append(container);
+    section.append(container);
 
-} 
+    root.append(section);
+
+}
