@@ -1,8 +1,5 @@
-import { loadPosts }
-from '../modules/loader.js';
-
-import { createHeader }
-from '../components/header.js';
+import { loadPosts } from '../modules/loader.js';
+import { createHeader } from '../components/header.js';
 
 export async function renderPostPage(root, slug) {
 
