@@ -1,0 +1,17 @@
+:root {
+
+    --bg: #0f1115;
+    --surface: #171923;
+
+    --text: #f5f7fa;
+    --muted: #9ca3af;
+
+    --primary: #5eead4;
+
+    --radius: 18px;
+
+    --container: 1400px;
+
+    --transition:
+        200ms ease;
+} 
