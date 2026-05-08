@@ -1,0 +1,68 @@
+project/
+│
+├── index.html
+│
+├── assets/
+│   ├── css/
+│   │   ├── core/
+│   │   │   ├── reset.css
+│   │   │   ├── variables.css
+│   │   │   ├── base.css
+│   │   │   └── layout.css
+│   │   │
+│   │   ├── components/
+│   │   │   ├── header.css
+│   │   │   ├── card.css
+│   │   │   ├── tags.css
+│   │   │   └── footer.css
+│   │   │
+│   │   └── main.css
+│   │
+│   ├── js/
+│   │   ├── core/
+│   │   │   ├── app.js
+│   │   │   ├── router.js
+│   │   │   ├── store.js
+│   │   │   └── config.js
+│   │   │
+│   │   ├── modules/
+│   │   │   ├── loader.js
+│   │   │   ├── renderer.js
+│   │   │   ├── tags.js
+│   │   │   ├── filter.js
+│   │   │   └── responsive.js
+│   │   │
+│   │   ├── components/
+│   │   │   ├── header.js
+│   │   │   ├── cards.js
+│   │   │   └── footer.js
+│   │   │
+│   │   └── main.js
+│   │
+│   ├── images/
+│   │   ├── logo/
+│   │   ├── backgrounds/
+│   │   ├── icons/
+│   │   └── content/
+│   │
+│   └── fonts/
+│
+├── data/
+│   ├── posts/
+│   │   ├── hello-world.json
+│   │   ├── music-news.json
+│   │   └── update-2026.json
+│   │
+│   ├── projects/
+│   │   ├── app-one.json
+│   │   └── synth-engine.json
+│   │
+│   ├── tags/
+│   │   └── tags.json
+│   │
+│   └── manifest.json
+│
+└── pages/
+    ├── home.html
+    ├── post.html
+    └── project.html 
