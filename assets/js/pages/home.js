@@ -7,6 +7,9 @@ from '../modules/tags.js';
 import { filterPostsByTag }
 from '../modules/filter.js';
 
+import { searchPosts }
+from '../modules/search.js';
+
 import { createHeader }
 from '../components/header.js';
 
@@ -19,6 +22,9 @@ from '../components/cards.js';
 import { createTags }
 from '../components/tags.js';
 
+import { createSearch }
+from '../components/search.js';
+
 export async function renderHomePage(root) {
 
     const posts =
@@ -26,6 +32,12 @@ export async function renderHomePage(root) {
 
     const tags =
         extractTags(posts);
+
+    let currentTag =
+        null;
+
+    let currentQuery =
+        '';
 
     root.append(
         createHeader()
@@ -47,8 +59,25 @@ export async function renderHomePage(root) {
     container.className =
         'container';
 
+    const search =
+        createSearch(query => {
+
+            currentQuery =
+                query;
+
+            renderGrid();
+
+        });
+
     const tagsComponent =
-        createTags(tags, renderGrid);
+        createTags(tags, tag => {
+
+            currentTag =
+                tag;
+
+            renderGrid();
+
+        });
 
     const grid =
         document.createElement('div');
@@ -56,15 +85,31 @@ export async function renderHomePage(root) {
     grid.className =
         'grid';
 
-    function renderGrid(tag = null) {
+    function renderGrid() {
 
         grid.innerHTML = '';
 
-        const filtered =
+        let filtered =
             filterPostsByTag(
                 posts,
-                tag
+                currentTag
             );
+
+        filtered =
+            searchPosts(
+                filtered,
+                currentQuery
+            );
+
+        if (!filtered.length) {
+
+            grid.innerHTML = `
+                <p>No results found.</p>
+            `;
+
+            return;
+
+        }
 
         filtered.forEach(post => {
 
@@ -79,6 +124,7 @@ export async function renderHomePage(root) {
     renderGrid();
 
     container.append(
+        search,
         tagsComponent,
         grid
     );
