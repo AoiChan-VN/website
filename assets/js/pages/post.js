@@ -1,6 +1,14 @@
-import { loadPosts } from '../modules/loader.js';
+import { loadPosts }
+from '../modules/loader.js';
+
+import { createHeader }
+from '../components/header.js';
 
 export async function renderPostPage(root, slug) {
+
+    root.append(
+        createHeader()
+    );
 
     const posts =
         await loadPosts();
@@ -24,28 +32,32 @@ export async function renderPostPage(root, slug) {
 
     }
 
-    root.innerHTML = `
-        <section class="post-page">
+    const page =
+        document.createElement('section');
 
-            <div class="container">
+    page.className =
+        'post-page';
 
-                <img
-                    class="post-cover"
-                    src="${post.thumbnail}"
-                    alt="${post.title}"
-                >
+    page.innerHTML = `
+        <div class="container">
 
-                <div class="post-content">
+            <img
+                class="post-cover"
+                src="${post.thumbnail}"
+                alt="${post.title}"
+            >
 
-                    <h1>${post.title}</h1>
+            <div class="post-content">
 
-                    <p>${post.content}</p>
+                <h1>${post.title}</h1>
 
-                </div>
+                <p>${post.content}</p>
 
             </div>
 
-        </section>
+        </div>
     `;
 
-} 
+    root.append(page);
+
+}
