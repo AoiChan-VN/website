@@ -1,21 +1,58 @@
 export async function loadPosts() {
 
-    const manifestRequest =
-        await fetch('./data/manifest.json');
+    try {
 
-    const manifest =
-        await manifestRequest.json();
+        const manifestRequest =
+            await fetch(
+                './data/manifest.json'
+            );
 
-    const requests =
-        manifest.posts.map(async file => {
+        if (!manifestRequest.ok) {
+            throw new Error(
+                'Manifest load failed'
+            );
+        }
 
-            const response =
-                await fetch(`./data/posts/${file}`);
+        const manifest =
+            await manifestRequest.json();
 
-            return response.json();
+        const requests =
+            manifest.posts.map(
+                async file => {
 
-        });
+                    try {
 
-    return Promise.all(requests);
+                        const response =
+                            await fetch(
+                                `./data/posts/${file}`
+                            );
+
+                        if (!response.ok) {
+                            return null;
+                        }
+
+                        return response.json();
+
+                    } catch {
+
+                        return null;
+
+                    }
+
+                }
+            );
+
+        const results =
+            await Promise.all(requests);
+
+        return results.filter(Boolean);
+
+    } catch (error) {
+
+        console.error(error);
+
+        return [];
+
+    }
 
 }
