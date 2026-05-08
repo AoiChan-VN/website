@@ -1,5 +1,7 @@
 export const state = {
+    
+    theme: 'dark',
 
-    theme: 'dark'
+    cleanup: []
 
 }; 
