@@ -45,7 +45,7 @@ export function createPostCard(post) {
         'mouseenter',
         () => {
 
-            prefetchPost(post.id);
+            prefetchPost(post);
 
         },
         {
