@@ -1,12 +1,6 @@
-import {
-    lazyLoadImage
-}
-from '../modules/image.js';
+import { lazyLoadImage } from '../modules/image.js';
 
-import {
-    prefetchPost
-}
-from '../modules/prefetch.js';
+import { prefetchPost } from '../modules/prefetch.js';
 
 export function createPostCard(post) {
 
