@@ -10,6 +10,9 @@ from '../modules/filter.js';
 import { searchPosts }
 from '../modules/search.js';
 
+import { createFragment }
+from '../modules/batch.js';
+
 import { createHeader }
 from '../components/header.js';
 
@@ -27,6 +30,8 @@ from '../components/search.js';
 
 export async function renderHomePage(root) {
 
+    root.innerHTML = '';
+
     const posts =
         await loadPosts();
 
@@ -39,13 +44,11 @@ export async function renderHomePage(root) {
     let currentQuery =
         '';
 
-    root.append(
-        createHeader()
-    );
+    const header =
+        createHeader();
 
-    root.append(
-        createHero()
-    );
+    const hero =
+        createHero();
 
     const section =
         document.createElement('section');
@@ -89,35 +92,47 @@ export async function renderHomePage(root) {
 
         grid.innerHTML = '';
 
-        let filtered =
+        let filteredPosts =
             filterPostsByTag(
                 posts,
                 currentTag
             );
 
-        filtered =
+        filteredPosts =
             searchPosts(
-                filtered,
+                filteredPosts,
                 currentQuery
             );
 
-        if (!filtered.length) {
+        if (!filteredPosts.length) {
 
-            grid.innerHTML = `
-                <p>No results found.</p>
+            const empty =
+                document.createElement('div');
+
+            empty.className =
+                'empty-state';
+
+            empty.innerHTML = `
+                <p>
+                    No results found.
+                </p>
             `;
+
+            grid.append(empty);
 
             return;
 
         }
 
-        filtered.forEach(post => {
-
-            grid.append(
+        const cards =
+            filteredPosts.map(post =>
                 createPostCard(post)
             );
 
-        });
+        const fragment =
+            createFragment(cards);
+
+        grid.append(fragment);
 
     }
 
@@ -129,8 +144,14 @@ export async function renderHomePage(root) {
         grid
     );
 
-    section.append(container);
+    section.append(
+        container
+    );
 
-    root.append(section);
+    root.append(
+        header,
+        hero,
+        section
+    );
 
-}
+} 
