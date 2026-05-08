@@ -1,0 +1,22 @@
+{
+    "id": "music-news",
+
+    "title": "Music News",
+
+    "description":
+        "Latest studio update.",
+
+    "thumbnail":
+        "./assets/images/content/music.jpg",
+
+    "content":
+        "New music production workflow.",
+
+    "tags": [
+        "music",
+        "new"
+    ],
+
+    "date":
+        "2026-05-09"
+} 
