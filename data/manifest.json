@@ -1,6 +1,13 @@
 {
     "posts": [
-        "hello-world.json",
-        "music-news.json"
+        {
+            "id": "hello-world",
+            "file": "hello-world.json"
+        },
+
+        {
+            "id": "music-news",
+            "file": "music-news.json"
+        }
     ]
-} 
+}
