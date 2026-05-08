@@ -15,9 +15,11 @@ export async function loadPosts() {
             );
 
         if (!manifestRequest.ok) {
+
             throw new Error(
                 'Manifest load failed'
             );
+
         }
 
         const manifest =
@@ -25,20 +27,26 @@ export async function loadPosts() {
 
         const requests =
             manifest.posts.map(
-                async file => {
+                async entry => {
 
                     try {
 
                         const response =
                             await fetch(
-                                `./data/posts/${file}`
+                                `./data/posts/${entry.file}`
                             );
 
                         if (!response.ok) {
                             return null;
                         }
 
-                        return response.json();
+                        const data =
+                            await response.json();
+
+                        data.__file =
+                            entry.file;
+
+                        return data;
 
                     } catch {
 
