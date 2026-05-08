@@ -1,3 +1,8 @@
+import {
+    lazyLoadImage
+}
+from '../modules/image.js';
+
 export function createPostCard(post) {
 
     const article =
@@ -10,9 +15,9 @@ export function createPostCard(post) {
         <a href="#/post/${post.id}">
 
             <img
-                src="${post.thumbnail}"
+                class="lazy-image"
+                data-src="${post.thumbnail}"
                 alt="${post.title}"
-                loading="lazy"
             >
 
             <div class="card-content">
@@ -26,6 +31,11 @@ export function createPostCard(post) {
         </a>
     `;
 
+    const image =
+        article.querySelector('img');
+
+    lazyLoadImage(image);
+
     return article;
 
-} 
+}
