@@ -1,4 +1,8 @@
-import { createNavigation } from './navigation.js';
+import { createNavigation }
+from './navigation.js';
+
+import { createThemeToggle }
+from './theme-toggle.js';
 
 export function createHeader() {
 
@@ -29,13 +33,19 @@ export function createHeader() {
     const navigation =
         createNavigation();
 
+    const themeToggle =
+        createThemeToggle();
+
     container.append(
         logo,
-        navigation
+        navigation,
+        themeToggle
     );
 
-    header.append(container);
+    header.append(
+        container
+    );
 
     return header;
 
-} 
+}
