@@ -1,4 +1,11 @@
-import { loadPosts } from '../modules/loader.js';
+import { loadPosts }
+from '../modules/loader.js';
+
+import { extractTags }
+from '../modules/tags.js';
+
+import { filterPostsByTag }
+from '../modules/filter.js';
 
 import { createHeader }
 from '../components/header.js';
@@ -9,10 +16,16 @@ from '../components/hero.js';
 import { createPostCard }
 from '../components/cards.js';
 
+import { createTags }
+from '../components/tags.js';
+
 export async function renderHomePage(root) {
 
     const posts =
         await loadPosts();
+
+    const tags =
+        extractTags(posts);
 
     root.append(
         createHeader()
@@ -34,21 +47,41 @@ export async function renderHomePage(root) {
     container.className =
         'container';
 
+    const tagsComponent =
+        createTags(tags, renderGrid);
+
     const grid =
         document.createElement('div');
 
     grid.className =
         'grid';
 
-    posts.forEach(post => {
+    function renderGrid(tag = null) {
 
-        grid.append(
-            createPostCard(post)
-        );
+        grid.innerHTML = '';
 
-    });
+        const filtered =
+            filterPostsByTag(
+                posts,
+                tag
+            );
 
-    container.append(grid);
+        filtered.forEach(post => {
+
+            grid.append(
+                createPostCard(post)
+            );
+
+        });
+
+    }
+
+    renderGrid();
+
+    container.append(
+        tagsComponent,
+        grid
+    );
 
     section.append(container);
 
