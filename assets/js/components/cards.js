@@ -3,6 +3,11 @@ import {
 }
 from '../modules/image.js';
 
+import {
+    prefetchPost
+}
+from '../modules/prefetch.js';
+
 export function createPostCard(post) {
 
     const article =
@@ -12,7 +17,10 @@ export function createPostCard(post) {
         'card';
 
     article.innerHTML = `
-        <a href="#/post/${post.id}">
+        <a
+            class="post-link"
+            href="#/post/${post.id}"
+        >
 
             <img
                 class="lazy-image"
@@ -35,6 +43,21 @@ export function createPostCard(post) {
         article.querySelector('img');
 
     lazyLoadImage(image);
+
+    const link =
+        article.querySelector('.post-link');
+
+    link.addEventListener(
+        'mouseenter',
+        () => {
+
+            prefetchPost(post.id);
+
+        },
+        {
+            passive: true
+        }
+    );
 
     return article;
 
