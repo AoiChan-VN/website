@@ -1,20 +1,28 @@
 const prefetched =
     new Set();
 
-export async function prefetchPost(id) {
+export async function prefetchPost(post) {
 
-    if (prefetched.has(id)) {
+    if (!post?.__file) {
+        return;
+    }
+
+    if (
+        prefetched.has(post.__file)
+    ) {
         return;
     }
 
     try {
 
         await fetch(
-            `./data/posts/${id}.json`
+            `./data/posts/${post.__file}`
         );
 
-        prefetched.add(id);
+        prefetched.add(
+            post.__file
+        );
 
     } catch {}
 
-} 
+}
