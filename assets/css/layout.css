@@ -1,0 +1,21 @@
+body {
+
+    background: var(--color-background);
+    color: var(--color-text);
+
+    font-family: var(--font-main);
+
+    min-height: 100vh;
+
+}
+
+.container {
+
+    width: min(
+        calc(100% - 32px),
+        var(--container-width)
+    );
+
+    margin-inline: auto;
+
+} 
