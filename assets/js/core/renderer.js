@@ -1,19 +1,25 @@
-import { HeroSection } from '../modules/hero.js'
-import { ProjectsSection } from '../modules/projects.js'
-import { FooterSection } from '../modules/footer.js'
+import { createDOM } from './dom.js'
+import { clearDOM } from './dom.js'
 
-export function renderApp(state) {
+import { createRevealObserver }
+from './observer.js'
 
-    const app = document.querySelector('#app')
+const app =
+    document.querySelector('#app')
 
-    app.innerHTML = `
+export function render(html) {
 
-        ${HeroSection(state.site)}
+    clearDOM(app)
 
-        ${ProjectsSection(state.projects)}
+    app.append(
+        createDOM(html)
+    )
 
-        ${FooterSection(state.site)}
+    createRevealObserver()
 
-    `
+    window.scrollTo({
+        top: 0,
+        behavior: 'instant'
+    })
 
-} 
+}
