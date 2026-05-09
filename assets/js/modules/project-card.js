@@ -1,3 +1,6 @@
+import { safeHTML }
+from '../core/utils.js'
+
 export function ProjectCard(project) {
 
     return `
@@ -8,25 +11,27 @@ export function ProjectCard(project) {
         >
 
             <a
-                href="/project/${project.slug}"
+                href="#/project/${safeHTML(project.slug)}"
                 data-link
+                aria-label="${safeHTML(project.title)}"
             >
 
                 <img
                     class="project-card__image"
-                    src="${project.thumbnail}"
-                    alt="${project.title}"
+                    src="${safeHTML(project.thumbnail)}"
+                    alt="${safeHTML(project.title)}"
                     loading="lazy"
+                    decoding="async"
                 >
 
                 <div class="project-card__content">
 
                     <h3>
-                        ${project.title}
+                        ${safeHTML(project.title)}
                     </h3>
 
                     <p>
-                        ${project.description}
+                        ${safeHTML(project.description)}
                     </p>
 
                 </div>
@@ -37,4 +42,4 @@ export function ProjectCard(project) {
 
     `
 
-} 
+}
