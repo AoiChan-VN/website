@@ -1,32 +1,20 @@
-import { fetchJSON }
-from './core/loader.js'
+import { fetchJSON } from './core/loader.js'
 
-import { discoverProjects }
-from './core/discovery.js'
+import { discoverProjects } from './core/discovery.js'
 
-import { updateState }
-from './core/store.js'
+import { updateState } from './core/store.js'
 
-import {
-    registerRoute,
-    resolveRoute
-}
-from './core/router.js'
+import { registerRoute, resolveRoute } from './core/router.js'
 
-import { render }
-from './core/renderer.js'
+import { render } from './core/renderer.js'
 
-import { bindRouterLinks }
-from './core/events.js'
+import { bindRouterLinks } from './core/events.js'
 
-import { HomePage }
-from './pages/home.js'
+import { HomePage } from './pages/home.js'
 
-import { ProjectPage }
-from './pages/project.js'
+import { ProjectPage } from './pages/project.js'
 
-import { NotFoundPage }
-from './pages/not-found.js'
+import { NotFoundPage } from './pages/not-found.js'
 
 async function bootstrap() {
 
