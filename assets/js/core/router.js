@@ -1,5 +1,13 @@
 const routes = new Map()
 
+function getCurrentPath() {
+
+    const hash = window.location.hash || '#/'
+
+    return hash.slice(1)
+
+}
+
 export function registerRoute(path, handler) {
 
     routes.set(path, handler)
@@ -8,23 +16,24 @@ export function registerRoute(path, handler) {
 
 export function navigate(path) {
 
-    history.pushState({}, '', path)
-
-    resolveRoute()
+    window.location.hash = path
 
 }
 
 export async function resolveRoute() {
 
-    const pathname = window.location.pathname
+    const pathname = getCurrentPath()
 
-    const dynamicProject = pathname.startsWith('/project/')
+    const dynamicProject =
+        pathname.startsWith('/project/')
 
     if (dynamicProject) {
 
-        const slug = pathname.split('/project/')[1]
+        const slug =
+            pathname.split('/project/')[1]
 
-        const handler = routes.get('/project/:slug')
+        const handler =
+            routes.get('/project/:slug')
 
         if (handler) {
 
@@ -57,6 +66,6 @@ export async function resolveRoute() {
 }
 
 window.addEventListener(
-    'popstate',
+    'hashchange',
     resolveRoute
-) 
+)
