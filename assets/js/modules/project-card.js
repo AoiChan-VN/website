@@ -1,5 +1,4 @@
-import { safeHTML }
-from '../core/utils.js'
+import { safeHTML } from '../core/utils.js'
 
 export function ProjectCard(project) {
 
