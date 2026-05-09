@@ -1,14 +1,8 @@
-import { state }
-from '../core/state.js';
+import { state } from '../core/state.js';
 
-import {
-    getStorage,
-    setStorage
-}
-from './storage.js';
+import { getStorage, setStorage } from './storage.js';
 
-const STORAGE_KEY =
-    'app-theme';
+const STORAGE_KEY = 'app-theme';
 
 export function initializeTheme() {
 
