@@ -10,6 +10,7 @@ const App = {
 
             // 2. Điều phối Render dữ liệu vào DOM
             this.buildSite(data);
+            this.initReveal();
         } catch (error) {
             console.error('Lỗi hệ thống:', error);
             document.getElementById('app').innerHTML = `<p>Lỗi tải dữ liệu. Vui lòng kiểm tra file JSON.</p>`;
@@ -26,4 +27,15 @@ const App = {
 };
 
 document.addEventListener('DOMContentLoaded', () => App.init());
- 
+
+initReveal() {
+    const observer = new IntersectionObserver((entries) => {
+        entries.forEach(entry => {
+            if (entry.isIntersecting) {
+                entry.target.classList.add('visible');
+            }
+        });
+    }, { threshold: 0.1 });
+
+    document.querySelectorAll('.section, .card').forEach(el => observer.observe(el));
+}
