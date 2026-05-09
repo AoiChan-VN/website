@@ -1,0 +1,13 @@
+{
+    "personal": {
+        "name": "Senior Developer",
+        "role": "Full Stack Engineer",
+        "bio": "50 năm kinh nghiệm thực chiến, chuyên gia hệ thống bền vững.",
+        "socials": {
+            "github": "https://github.com",
+            "linkedin": "#"
+        }
+    },
+    "skills": ["Vanilla JS", "Architecture", "Clean Code", "Performance"]
+}
+ 
