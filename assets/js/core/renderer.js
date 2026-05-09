@@ -1,8 +1,7 @@
 import { createDOM } from './dom.js'
 import { clearDOM } from './dom.js'
 
-import { createRevealObserver }
-from './observer.js'
+import { createRevealObserver } from './observer.js'
 
 const app =
     document.querySelector('#app')
