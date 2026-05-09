@@ -1,13 +1,22 @@
 {
-    "personal": {
+    "config": {
         "name": "Senior Developer",
         "role": "Full Stack Engineer",
-        "bio": "50 năm kinh nghiệm thực chiến, chuyên gia hệ thống bền vững.",
-        "socials": {
-            "github": "https://github.com",
-            "linkedin": "#"
-        }
+        "contact": "contact@domain.com"
     },
-    "skills": ["Vanilla JS", "Architecture", "Clean Code", "Performance"]
+    "projects": [
+        {
+            "title": "E-Commerce OS",
+            "desc": "High performance static engine.",
+            "tech": ["Vanilla JS", "CSS3"],
+            "link": "#"
+        },
+        {
+            "title": "Neural Interface",
+            "desc": "Web-based AI visualizer.",
+            "tech": ["ES6", "Canvas"],
+            "link": "#"
+        }
+    ],
+    "skills": ["Architecture", "Performance", "Scalability"]
 }
- 
