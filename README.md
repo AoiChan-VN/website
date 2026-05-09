@@ -12,7 +12,7 @@
 > 1. Tối Ưu Chuyên sâu và Hoàn thiện Web 100%
 > 2. Tự động phù hợp co dãn và căn chỉnh Web với mọi loại thiết bị điện tử hiện nay.
 > 3. Data-Driver ( Json )
-> 4. Design System ( CSS )
+> 4. Modules Design System ( CSS ) tách file rõ ràng
 > 5. Web tự động load và nhận diện dữ liệu, chỉ cần tạo file là tự động nhận mà không cần chỉnh sửa phức tạp khắp nơi.
 > 6. Tự Build mọi thứ, không dùng API, Data, Thư viện, Build tools,...
 > 7. Logo, Icons, Background, và các thứ khác có thể làm bằng Photoshop.
