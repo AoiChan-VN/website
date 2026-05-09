@@ -1,5 +1,4 @@
-import { ProjectCard }
-from './project-card.js'
+import { ProjectCard } from './project-card.js'
 
 export function ProjectGrid(projects) {
 
