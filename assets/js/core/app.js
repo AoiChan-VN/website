@@ -16,9 +16,6 @@ export function initApp() {
         router
     );
 
-    window.addEventListener(
-        'load',
-        router
-    );
+    router();
 
 }
