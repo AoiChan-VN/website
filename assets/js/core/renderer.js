@@ -19,7 +19,7 @@ export function render(html) {
 
     window.scrollTo({
         top: 0,
-        behavior: 'instant'
+        behavior: 'auto'
     })
 
 }
