@@ -7,9 +7,12 @@ export function NotFoundPage() {
             <div class="container">
 
                 <h1 align="center">
-                ︵»404 👻 Error«︵
-                <p>🍒 Hiện tại đang bảo trì...</p>
+                    ︵»404 👻 Error«︵
                 </h1>
+
+                <p>
+                    ${error}
+                </p>
 
             </div>
 
