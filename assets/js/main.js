@@ -1,41 +1,17 @@
-import { renderHero, renderProjects, renderSkills } from './render.js';
+import { Renderer } from './renderer.js';
 
-const App = {
-    async init() {
-        try {
-            // 1. Tự động load dữ liệu từ file JSON
-            const response = await fetch('./assets/data/profile.json');
-            if (!response.ok) throw new Error('Không thể tải dữ liệu');
-            const data = await response.json();
+document.addEventListener('DOMContentLoaded', async () => {
+    // 1. Load dữ liệu từ JSON
+    const profileData = await Renderer.fetchData('./data/profile.json');
 
-            // 2. Điều phối Render dữ liệu vào DOM
-            this.buildSite(data);
-            this.initReveal();
-        } catch (error) {
-            console.error('Lỗi hệ thống:', error);
-            document.getElementById('app').innerHTML = `<p>Lỗi tải dữ liệu. Vui lòng kiểm tra file JSON.</p>`;
-        }
-    },
-
-    buildSite(data) {
-        if (data.hero) renderHero(data.hero);
-        if (data.projects) renderProjects(data.projects);
-        if (data.skills) renderSkills(data.skills);
+    if (profileData) {
+        // 2. Thực hiện render tự động
+        Renderer.renderHero(profileData.personal);
+        Renderer.renderSkills(profileData.skills);
         
-        console.log("Web Loaded: 100% Optimized");
+        // 3. Xóa loader sau khi hoàn tất
+        const loader = document.getElementById('loader');
+        loader.style.opacity = '0';
+        setTimeout(() => loader.style.display = 'none', 500);
     }
-};
-
-document.addEventListener('DOMContentLoaded', () => App.init());
-
-initReveal() {
-    const observer = new IntersectionObserver((entries) => {
-        entries.forEach(entry => {
-            if (entry.isIntersecting) {
-                entry.target.classList.add('visible');
-            }
-        });
-    }, { threshold: 0.1 });
-
-    document.querySelectorAll('.section, .card').forEach(el => observer.observe(el));
-}
+});
