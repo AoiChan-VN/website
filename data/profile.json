@@ -1,0 +1,18 @@
+{
+  "hero": {
+    "name": "Senior Developer",
+    "role": "Full Stack Engineer",
+    "bio": "50 năm kinh nghiệm thực chiến. Chuyên trị các hệ thống khó.",
+    "avatar": "assets/img/avatar.webp"
+  },
+  "projects": [
+    {
+      "title": "Quantum System",
+      "desc": "Hệ thống quản lý dữ liệu đa tầng.",
+      "tech": ["Vanilla JS", "HTML5", "CSS3"],
+      "link": "#"
+    }
+  ],
+  "skills": ["JavaScript (ESM)", "UI/UX Design", "Performance Optimization"]
+}
+ 
