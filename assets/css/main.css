@@ -1,0 +1,15 @@
+html {
+
+    scroll-behavior: smooth;
+
+}
+
+body {
+
+    overflow-x: hidden;
+
+    text-rendering: optimizeLegibility;
+
+    -webkit-font-smoothing: antialiased;
+
+} 
