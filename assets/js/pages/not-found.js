@@ -10,10 +10,6 @@ export function NotFoundPage() {
                     ︵»404 👻 Error«︵
                 </h1>
 
-                <p>
-                    ${error}
-                </p>
-
             </div>
 
         </section>
