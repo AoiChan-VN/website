@@ -3,25 +3,34 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>High-End Portfolio</title>
+    <meta name="description" content="Portfolio của Senior Full Stack Developer - 50 năm kinh nghiệm">
+    <title>Senior Portfolio</title>
     <link rel="stylesheet" href="assets/css/style.css">
 </head>
 <body>
     <div id="app">
-        <!-- Header & Nav -->
-        <header id="header"></header>
+        <header id="header">
+            <nav class="container">
+                <div class="logo">AoiChan.VN</div>
+                <ul class="nav-links">
+                    <li><a href="#hero">Home</a></li>
+                    <li><a href="#projects">Work</a></li>
+                    <li><a href="#skills">Skills</a></li>
+                </ul>
+            </nav>
+        </header>
 
-        <!-- Dynamic Sections -->
-        <main id="content">
+        <main class="container">
             <section id="hero" class="section"></section>
             <section id="projects" class="section"></section>
             <section id="skills" class="section"></section>
         </main>
 
-        <footer id="footer"></footer>
+        <footer class="container">
+            <p>&copy; 2024 Handcrafted with Pure JavaScript</p>
+        </footer>
     </div>
 
-    <!-- Khởi chạy ứng dụng bằng Module -->
     <script type="module" src="assets/js/main.js"></script>
 </body>
 </html>
