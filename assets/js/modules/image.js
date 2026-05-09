@@ -1,5 +1,4 @@
-import { observe }
-from './observer.js';
+import { observe } from './observer.js';
 
 export function lazyLoadImage(image) {
 
