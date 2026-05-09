@@ -1,16 +1,30 @@
+let observer = null
+
 export function createRevealObserver() {
 
-    const observer = new IntersectionObserver(
+    if (observer) {
+
+        observer.disconnect()
+
+    }
+
+    observer = new IntersectionObserver(
 
         entries => {
 
             entries.forEach(entry => {
 
-                if (entry.isIntersecting) {
+                if (!entry.isIntersecting) {
 
-                    entry.target.classList.add('is-visible')
+                    return
 
                 }
+
+                entry.target.classList.add(
+                    'is-visible'
+                )
+
+                observer.unobserve(entry.target)
 
             })
 
@@ -30,4 +44,4 @@ export function createRevealObserver() {
 
         })
 
-} 
+}
