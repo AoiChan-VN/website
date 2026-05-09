@@ -1,8 +1,4 @@
-import {
-    hasCache,
-    getCache,
-    setCache
-} from './cache.js'
+import { hasCache, getCache, setCache } from './cache.js'
 
 export async function fetchJSON(path) {
 
