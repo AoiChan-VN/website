@@ -1,5 +1,4 @@
-import { sanitize }
-from './sanitize.js';
+import { sanitize } from './sanitize.js';
 
 export function buildSearchIndex(
     posts
