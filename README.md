@@ -2,7 +2,7 @@
 
 • Build Website tĩnh tốt nhất cho GitHub-Pages
 
-> 1. Dùng: Vanilla JS, HTML5, CSS3, ESM.
+> 1. Dùng: Vanilla JS, HTML5, CSS3 System, ES Modules,
 > 2. Chuẩn Senior Full Stack với 50năm kinh nghiệm.
 > 3. Project gọn, Code Sạch - Gọn, Dễ sửa chữa và Bảo trì.
 > 4. Web chạy lâu dài nhiều năm.
@@ -21,7 +21,7 @@
 > 1. CODE - File cấm dựng Skeleton, Test,...
 > 2. Không gửi Code kiểu ghép từng đoạn, mà phải 100% hoàn thành file.
 > 3. Làm và gửi File đầy đủ, không thiếu sót file,...
-> 4. Không gửi kiểu (thêm vào chỗ này chỗ kia,...)
+> 4. Không gửi kiểu (thêm vào chỗ này chỗ kia,...) mà phải file hoàn chỉnh.
 > 5. Cấm sai lệch Cấu trúc Code và Project.
 
 Bắt đầu build từ những file cơ bản trước, chia từng phase để làm.
