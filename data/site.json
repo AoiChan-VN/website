@@ -1,0 +1,9 @@
+{
+    "title": "Aoi Portfolio",
+    "description": "Creative Developer & Composer",
+    "author": "Aoi",
+    "projects": [
+        "project-01.json",
+        "project-02.json"
+    ]
+} 
