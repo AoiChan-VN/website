@@ -1,13 +1,10 @@
 import { getState } from '../core/store.js'
 
-import { HeroSection }
-from '../modules/hero.js'
+import { HeroSection } from '../modules/hero.js'
 
-import { ProjectGrid }
-from '../modules/project-grid.js'
+import { ProjectGrid } from '../modules/project-grid.js'
 
-import { FooterSection }
-from '../modules/footer.js'
+import { FooterSection } from '../modules/footer.js'
 
 export function HomePage() {
 
