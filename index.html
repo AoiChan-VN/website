@@ -1,54 +1,27 @@
 <!DOCTYPE html>
-<html lang="en">
-
+<html lang="vi">
 <head>
     <meta charset="UTF-8">
-    <meta
-        name="viewport"
-        content="width=device-width, initial-scale=1.0"
-    >
-    <meta
-        http-equiv="X-UA-Compatible"
-        content="IE=edge"
-    >
-    <title>Portfolio</title>
-    <meta
-        name="description"
-        content="High-End Static Portfolio"
-    >
-
-    <link
-        rel="stylesheet"
-        href="./assets/css/reset.css"
-    >
-    <link
-        rel="stylesheet"
-        href="./assets/css/variables.css"
-    >
-    <link
-        rel="stylesheet"
-        href="./assets/css/layout.css"
-    >
-    <link
-        rel="stylesheet"
-        href="./assets/css/components.css"
-    >
-    <link
-        rel="stylesheet"
-        href="./assets/css/main.css"
-    >
-    <link
-        rel="stylesheet"
-        href="./assets/css/animations.css"
-    >
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>High-End Portfolio</title>
+    <link rel="stylesheet" href="assets/css/style.css">
 </head>
-    
 <body>
-    <div id="app"></div>
-    <script
-        type="module"
-        src="./assets/js/app.js"
-    ></script>
-</body>
+    <div id="app">
+        <!-- Header & Nav -->
+        <header id="header"></header>
 
+        <!-- Dynamic Sections -->
+        <main id="content">
+            <section id="hero" class="section"></section>
+            <section id="projects" class="section"></section>
+            <section id="skills" class="section"></section>
+        </main>
+
+        <footer id="footer"></footer>
+    </div>
+
+    <!-- Khởi chạy ứng dụng bằng Module -->
+    <script type="module" src="assets/js/main.js"></script>
+</body>
 </html>
