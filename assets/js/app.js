@@ -1,151 +1,125 @@
 import {
-    create
+    loadProfile,
+    loadItem
+}
+from './loader.js';
+
+import {
+    renderCard
+}
+from './renderer.js';
+
+import {
+    clear
 }
 from './dom.js';
 
-export function renderMedia(file){
+import {
+    initLightbox
+}
+from './modules/lightbox.js';
 
-    switch(file.type){
+const grid =
+    document.getElementById('grid');
 
-        case 'image':
-        case 'gif':
-        case 'webp':
+const search =
+    document.getElementById(
+        'searchInput'
+    );
 
-            return image(file);
+let items = [];
 
-        case 'video':
+boot();
 
-            return video(file);
+async function boot(){
 
-        case 'audio':
+    initLightbox();
 
-            return audio(file);
+    const profile =
+        await loadProfile();
 
-        case 'pdf':
+    const jobs =
+        profile.items.map(loadItem);
 
-            return pdf(file);
+    items =
+        (await Promise.all(jobs))
+        .filter(Boolean);
 
-        case 'iframe':
+    render(items);
+}
 
-            return iframe(file);
+function render(list){
 
-        case 'link':
+    clear(grid);
 
-            return link(file);
+    if(!list.length){
 
-        default:
+        renderEmpty();
 
-            return unknown(file);
+        return;
     }
+
+    const frag =
+        document.createDocumentFragment();
+
+    for(const item of list){
+
+        frag.append(
+            renderCard(item)
+        );
+    }
+
+    grid.append(frag);
 }
 
-function image(file){
+function renderEmpty(){
 
-    const img =
-        create('img');
+    const empty =
+        document.createElement('div');
 
-    img.loading = 'lazy';
+    empty.className =
+        'empty-state';
 
-    img.decoding = 'async';
+    empty.textContent =
+        'No content found';
 
-    img.src = file.src;
-
-    img.alt = '';
-
-    img.referrerPolicy =
-        'no-referrer';
-
-    return img;
+    grid.append(empty);
 }
 
-function video(file){
+search.addEventListener(
+    'input',
+    e=>{
 
-    const video =
-        create('video');
+        const q =
+            e.target.value
+            .trim()
+            .toLowerCase();
 
-    video.controls = true;
+        if(!q){
 
-    video.preload = 'metadata';
+            render(items);
 
-    video.playsInline = true;
+            return;
+        }
 
-    video.src = file.src;
+        const filtered =
+            items.filter(item=>{
 
-    return video;
-}
+                const text = [
 
-function audio(file){
+                    item.name,
 
-    const audio =
-        create('audio');
+                    item.description,
 
-    audio.controls = true;
+                    ...(item.tags || [])
 
-    audio.preload = 'none';
+                ]
+                .join(' ')
+                .toLowerCase();
 
-    audio.src = file.src;
+                return text.includes(q);
+            });
 
-    return audio;
-}
-
-function pdf(file){
-
-    const iframe =
-        create('iframe');
-
-    iframe.loading = 'lazy';
-
-    iframe.src = file.src;
-
-    iframe.sandbox =
-        'allow-same-origin';
-
-    return iframe;
-}
-
-function iframe(file){
-
-    const iframe =
-        create('iframe');
-
-    iframe.loading = 'lazy';
-
-    iframe.src = file.src;
-
-    iframe.referrerPolicy =
-        'no-referrer';
-
-    iframe.sandbox =
-        'allow-scripts allow-same-origin';
-
-    return iframe;
-}
-
-function link(file){
-
-    const a =
-        create('a');
-
-    a.href = file.src;
-
-    a.target = '_blank';
-
-    a.rel =
-        'noopener noreferrer';
-
-    a.textContent =
-        file.src;
-
-    return a;
-}
-
-function unknown(file){
-
-    const div =
-        create('div');
-
-    div.textContent =
-        `Unsupported: ${file.type}`;
-
-    return div;
-}
+        render(filtered);
+    }
+);
