@@ -3,30 +3,54 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>︵»AoiChan«︵</title>
-    <meta name="description" content="High-end Static Portfolio built with Vanilla JS">
-    
-    <!-- Design System Modules -->
-    <link rel="stylesheet" href="css/main.css">
-    <link rel="stylesheet" href="css/layout.css">
-    <link rel="stylesheet" href="css/components.css">
+    <title>VSG Animation Dynamic Dashboard</title>
+    <link rel="stylesheet" href="style.css">
 </head>
 <body>
+    <div class="container">
+        <!-- Sidebar -->
+        <nav class="sidebar">
+            <div class="logo">VSG</div>
+            <ul class="nav-links">
+                <li class="active">Dashboard</li>
+                <li>Analytics</li>
+                <li>Projects</li>
+                <li>Settings</li>
+            </ul>
+        </nav>
 
-    <!-- Main Navigation -->
-    <nav id="main-nav" class="glass-effect"></nav>
+        <!-- Main Content -->
+        <main class="main-content">
+            <header>
+                <h1>Dynamic Overview</h1>
+                <div class="user-profile">Admin</div>
+            </header>
 
-    <!-- Content Slots -->
-    <main id="app">
-        <section id="hero" class="container"></section>
-        <section id="projects" class="container"></section>
-        <section id="about" class="container"></section>
-    </main>
+            <!-- Stats Cards -->
+            <section class="stats-grid">
+                <div class="card pulse">
+                    <h3>Traffic</h3>
+                    <p id="traffic-count">0</p>
+                </div>
+                <div class="card pulse">
+                    <h3>Performance</h3>
+                    <p>98%</p>
+                </div>
+                <div class="card pulse">
+                    <h3>Uptime</h3>
+                    <p>24/7</p>
+                </div>
+            </section>
 
-    <!-- Footer -->
-    <footer id="main-footer"></footer>
-
-    <!-- Core Engine -->
-    <script type="module" src="js/app.js"></script>
+            <!-- Chart Section (SVG Vanilla) -->
+            <section class="chart-container">
+                <h3>Live Activity (Vanilla SVG)</h3>
+                <svg viewBox="0 0 500 100" class="chart-svg">
+                    <polyline fill="none" stroke="#00ff88" stroke-width="3" points="" id="dynamic-line"/>
+                </svg>
+            </section>
+        </main>
+    </div>
+    <script src="script.js"></script>
 </body>
 </html>
