@@ -1,8 +1,22 @@
-export function el(tag,cls=''){
+export function create(tag,cls){
 
-    const node = document.createElement(tag);
+    const node =
+        document.createElement(tag);
 
-    node.className = cls;
+    if(cls){
+
+        node.className = cls;
+    }
 
     return node;
-} 
+}
+
+export function clear(node){
+
+    while(node.firstChild){
+
+        node.removeChild(
+            node.firstChild
+        );
+    }
+}
