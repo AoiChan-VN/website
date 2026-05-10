@@ -1,40 +1,26 @@
-// 1. Tạo số liệu nhảy liên tục (Dynamic Numbers)
-const trafficEl = document.getElementById('traffic-count');
-let count = 0;
+const linePath = document.getElementById('visual-line');
+const areaPath = document.getElementById('visual-area');
 
-setInterval(() => {
-    count += Math.floor(Math.random() * 10);
-    trafficEl.innerText = count.toLocaleString();
-}, 1000);
+let offset = 0;
 
-// 2. Vẽ Chart bằng SVG (Vanilla JS)
-const polyline = document.getElementById('dynamic-line');
-let points = [];
-const maxPoints = 20;
+function animate() {
+    let points = [];
+    // Tạo 20 điểm dữ liệu dựa trên hàm Sin
+    for (let x = 0; x <= 200; x += 10) {
+        // Tạo độ cao ngẫu nhiên nhưng có nhịp điệu
+        const y = 50 + Math.sin((x + offset) * 0.05) * 20 + Math.random() * 5;
+        points.push(`${x},${y}`);
+    }
 
-function updateChart() {
-    const xStep = 500 / (maxPoints - 1);
-    const newY = Math.floor(Math.random() * 80) + 10;
+    const d = `M ${points.join(' L ')}`;
+    linePath.setAttribute('d', d);
     
-    points.push(newY);
-    if (points.length > maxPoints) points.shift();
+    // Tạo vùng fill (nối điểm cuối xuống đáy SVG)
+    const areaD = `${d} L 200,100 L 0,100 Z`;
+    areaPath.setAttribute('d', areaD);
 
-    const pointString = points.map((y, i) => `${i * xStep},${100 - y}`).join(' ');
-    polyline.setAttribute('points', pointString);
+    offset -= 2; // Tốc độ chạy của sóng
+    requestAnimationFrame(animate);
 }
 
-setInterval(updateChart, 500);
-
-// 3. Hiệu ứng Hover chuột làm sáng Card
-document.querySelectorAll('.card').forEach(card => {
-    card.addEventListener('mousemove', (e) => {
-        const rect = card.getBoundingClientRect();
-        const x = e.clientX - rect.left;
-        const y = e.clientY - rect.top;
-        card.style.background = `radial-gradient(circle at ${x}px ${y}px, rgba(0,242,254,0.15), var(--card-bg))`;
-    });
-    card.addEventListener('mouseleave', () => {
-        card.style.background = 'var(--card-bg)';
-    });
-});
- 
+animate();
