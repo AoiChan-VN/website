@@ -62,3 +62,51 @@
     color: var(--text-secondary);
 }
  
+/* About Section */
+.about-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 4rem;
+    align-items: center;
+}
+
+.skill-tags {
+    display: flex;
+    gap: 10px;
+    flex-wrap: wrap;
+    margin-top: 20px;
+}
+
+.skill-badge {
+    padding: 8px 16px;
+    border: 1px solid var(--accent);
+    color: var(--accent);
+    border-radius: 50px;
+    font-size: 0.85rem;
+}
+
+/* Footer */
+footer {
+    border-top: 1px solid var(--border);
+    padding: 60px 0;
+    text-align: center;
+}
+
+.contact-link {
+    font-size: 2rem;
+    color: var(--text-primary);
+    text-decoration: none;
+    font-weight: 700;
+    transition: var(--transition);
+}
+
+.contact-link:hover {
+    color: var(--accent);
+    letter-spacing: 2px;
+}
+
+.copyright {
+    margin-top: 40px;
+    color: var(--text-secondary);
+    font-size: 0.8rem;
+}
