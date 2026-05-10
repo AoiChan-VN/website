@@ -43,5 +43,34 @@ export const Renderer = {
                 ${projects.map(p => Renderer.projectCard(p)).join('')}
             </div>
         `;
+    },
+
+    about: (data) => {
+        const skillHtml = data.skills.map(s => `<span class="skill-badge">${s}</span>`).join('');
+        return `
+            <div class="about-grid fade-in">
+                <div>
+                    <h2 class="section-title">Philosophy</h2>
+                    <p>${data.about}</p>
+                </div>
+                <div>
+                    <h3>Expertise</h3>
+                    <div class="skill-tags">${skillHtml}</div>
+                </div>
+            </div>
+        `;
+    },
+
+    footer: (data) => {
+        return `
+            <div class="container">
+                <p>Have a grand idea?</p>
+                <a href="mailto:${data.socials.email}" class="contact-link">Let's Talk.</a>
+                <div class="social-icons" style="margin-top: 30px;">
+                    <a href="${data.socials.github}">GitHub</a> / <a href="${data.socials.linkedin}">LinkedIn</a>
+                </div>
+                <p class="copyright">© 2026 Crafted by ${data.name}. No libraries, just pure code.</p>
+            </div>
+        `;
     }
 };
