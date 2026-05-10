@@ -135,6 +135,47 @@
         skeleton 1.4s linear infinite;
 }
 
+.lightbox{
+
+    position:fixed;
+
+    inset:0;
+
+    z-index:9999;
+
+    display:flex;
+
+    align-items:center;
+
+    justify-content:center;
+
+    background:
+        rgba(0,0,0,.88);
+
+    opacity:0;
+
+    pointer-events:none;
+
+    transition:
+        opacity .3s ease;
+}
+
+.lightbox.open{
+
+    opacity:1;
+
+    pointer-events:auto;
+}
+
+.lightbox-image{
+
+    max-width:92vw;
+
+    max-height:92vh;
+
+    border-radius:20px;
+}
+
 @keyframes skeleton{
 
     from{
