@@ -1,8 +1,5 @@
-export function sanitize(text=''){
+export function text(node,value){
 
-    const div = document.createElement('div');
-
-    div.textContent = text;
-
-    return div.innerHTML;
-} 
+    node.textContent =
+        value ?? '';
+}
