@@ -30,8 +30,8 @@
 │   │   ├── viewer-engine.js ✅
 │   │   └── modules/
 │   │       ├── card.js
-│   │       ├── modal.js
-│   │       ├── gallery.js
+│   │       ├── viewer-modal.js
+│   │       ├── lightbox.js
 │   │       └── masonry.js
 │   │
 │   └── icons/
