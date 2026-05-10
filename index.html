@@ -1,56 +1,34 @@
-<!DOCTYPE html>
-<html lang="vi">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>VSG Animation Dynamic Dashboard</title>
-    <link rel="stylesheet" href="style.css">
-</head>
-<body>
-    <div class="container">
-        <!-- Sidebar -->
-        <nav class="sidebar">
-            <div class="logo">VSG</div>
-            <ul class="nav-links">
-                <li class="active">Dashboard</li>
-                <li>Analytics</li>
-                <li>Projects</li>
-                <li>Settings</li>
-            </ul>
-        </nav>
-
-        <!-- Main Content -->
-        <main class="main-content">
-            <header>
-                <h1>Dynamic Overview</h1>
-                <div class="user-profile">Admin</div>
-            </header>
-
-            <!-- Stats Cards -->
-            <section class="stats-grid">
-                <div class="card pulse">
-                    <h3>Traffic</h3>
-                    <p id="traffic-count">0</p>
-                </div>
-                <div class="card pulse">
-                    <h3>Performance</h3>
-                    <p>98%</p>
-                </div>
-                <div class="card pulse">
-                    <h3>Uptime</h3>
-                    <p>24/7</p>
-                </div>
-            </section>
-
-            <!-- Chart Section (SVG Vanilla) -->
-            <section class="chart-container">
-                <h3>Live Activity (Vanilla SVG)</h3>
-                <svg viewBox="0 0 500 100" class="chart-svg">
-                    <polyline fill="none" stroke="#00ff88" stroke-width="3" points="" id="dynamic-line"/>
-                </svg>
-            </section>
-        </main>
+<div class="dashboard-card">
+    <div class="card-header">
+        <span>Network Activity</span>
+        <div class="status-dot"></div>
     </div>
-    <script src="script.js"></script>
-</body>
-</html>
+    
+    <!-- Area dành cho SVG Animation -->
+    <div class="svg-container">
+        <svg viewBox="0 0 200 100" preserveAspectRatio="none">
+            <!-- Lớp phủ màu Gradient -->
+            <defs>
+                <linearGradient id="gradient" x1="0%" y1="0%" x2="0%" y2="100%">
+                    <stop offset="0%" style="stop-color:rgba(0, 242, 254, 0.2)" />
+                    <stop offset="100%" style="stop-color:transparent" />
+                </linearGradient>
+            </defs>
+            <!-- Vùng đổ màu phía dưới đồ thị -->
+            <path id="visual-area" fill="url(#gradient)" d=""></path>
+            <!-- Đường line đồ thị chính -->
+            <path id="visual-line" fill="none" stroke="#00f2fe" stroke-width="2" d=""></path>
+        </svg>
+    </div>
+
+    <div class="card-footer">
+        <div class="stat-item">
+            <small>Uplink</small>
+            <strong>24.5 Mbps</strong>
+        </div>
+        <div class="stat-item">
+            <small>Delay</small>
+            <strong>12 ms</strong>
+        </div>
+    </div>
+</div>
