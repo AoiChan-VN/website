@@ -1,54 +1,46 @@
-import { el } from './dom.js';
+import { create }
+from './dom.js';
 
 export function renderMedia(file){
 
     switch(file.type){
 
         case 'image':
-        case 'gif':
         case 'webp':
+        case 'gif':
 
-            return image(file);
+            return renderImage(file);
 
         case 'video':
 
-            return video(file);
+            return renderVideo(file);
 
         case 'audio':
 
-            return audio(file);
+            return renderAudio(file);
 
         case 'pdf':
 
-            return pdf(file);
-
-        case 'iframe':
-
-            return iframe(file);
-
-        case 'markdown':
-
-            return markdown(file);
+            return renderPDF(file);
 
         case 'link':
 
-            return link(file);
+            return renderLink(file);
 
-        case 'file':
-        case 'zip':
-        case 'download':
+        case 'iframe':
 
-            return download(file);
+            return renderIframe(file);
 
         default:
 
-            return unsupported(file);
+            return renderUnknown(file);
     }
 }
 
-function image(file){
+function renderImage(file){
 
-    const img = el('img');
+    const img =
+        create('img');
 
     img.loading = 'lazy';
 
@@ -56,102 +48,100 @@ function image(file){
 
     img.src = file.src;
 
+    img.alt = '';
+
+    img.referrerPolicy =
+        'no-referrer';
+
     return img;
 }
 
-function video(file){
+function renderVideo(file){
 
-    const v = el('video');
+    const video =
+        create('video');
 
-    v.controls = true;
+    video.controls = true;
 
-    v.preload = 'none';
+    video.preload = 'metadata';
 
-    v.src = file.src;
+    video.src = file.src;
 
-    return v;
+    return video;
 }
 
-function audio(file){
+function renderAudio(file){
 
-    const a = el('audio');
+    const audio =
+        create('audio');
 
-    a.controls = true;
+    audio.controls = true;
 
-    a.preload = 'none';
+    audio.preload = 'none';
 
-    a.src = file.src;
+    audio.src = file.src;
 
-    return a;
+    return audio;
 }
 
-function pdf(file){
+function renderPDF(file){
 
-    const iframe = el('iframe');
+    const iframe =
+        create('iframe');
+
+    iframe.loading = 'lazy';
 
     iframe.src = file.src;
 
-    iframe.loading = 'lazy';
+    iframe.sandbox =
+        'allow-same-origin';
 
     return iframe;
 }
 
-function iframe(file){
+function renderIframe(file){
 
-    const iframe = el('iframe');
-
-    iframe.src = file.src;
+    const iframe =
+        create('iframe');
 
     iframe.loading = 'lazy';
 
-    iframe.referrerPolicy = 'no-referrer';
+    iframe.src = file.src;
+
+    iframe.sandbox =
+        'allow-scripts allow-same-origin';
+
+    iframe.referrerPolicy =
+        'no-referrer';
 
     return iframe;
 }
 
-function markdown(file){
+function renderLink(file){
 
-    const pre = el('pre');
-
-    pre.textContent = file.content || '';
-
-    return pre;
-}
-
-function link(file){
-
-    const a = el('a');
+    const a =
+        create('a');
 
     a.href = file.src;
 
     a.target = '_blank';
 
-    a.rel = 'noopener noreferrer';
+    a.rel =
+        'noopener noreferrer';
 
-    a.textContent = file.src;
-
-    return a;
-}
-
-function download(file){
-
-    const a = el('a');
-
-    a.href = file.src;
-
-    a.download = '';
-
-    a.textContent = 'Download';
+    a.textContent =
+        file.src;
 
     return a;
 }
 
-function unsupported(file){
+function renderUnknown(file){
 
-    const div = el('div');
+    const div =
+        create('div');
 
     div.textContent =
-        `Unsupported type: ${file.type}`;
+        `Unsupported: ${file.type}`;
 
     return div;
-      } 
+}
