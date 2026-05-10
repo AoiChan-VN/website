@@ -1,13 +1,21 @@
-const memory = new Map();
+const cache = new Map();
 
 export function getCache(key){
 
-    return memory.get(key);
+    return cache.get(key);
 }
 
 export function setCache(key,value){
 
-    memory.set(key,value);
+    if(cache.size > 200){
+
+        const first =
+            cache.keys().next().value;
+
+        cache.delete(first);
+    }
+
+    cache.set(key,value);
 
     return value;
-} 
+}
