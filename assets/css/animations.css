@@ -1,15 +1,25 @@
 .card{
+
     opacity:0;
-    transform:translateY(40px);
+
+    transform:
+        translateY(30px)
+        scale(.98);
 }
 
 .card.visible{
+
     opacity:1;
-    transform:translateY(0);
+
+    transform:
+        translateY(0)
+        scale(1);
 }
 
 .fade-in{
-    animation:fade .6s ease forwards;
+
+    animation:
+        fade .5s ease forwards;
 }
 
 @keyframes fade{
@@ -21,4 +31,4 @@
     to{
         opacity:1;
     }
-} 
+}
