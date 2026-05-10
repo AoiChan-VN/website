@@ -1,16 +1,18 @@
-import { loadProfile,loadItem } from './loader.js';
+import { loadProfile, loadItem } from './loader.js';
 
 import { renderCard } from './renderer.js';
 
-import { idle } from './util.js';
+import { searchItems } from './search-engine.js';
+
+import { setState, getState } from './state.js';
 
 const grid =
     document.getElementById('grid');
 
-const searchInput =
-    document.getElementById('searchInput');
-
-let allItems = [];
+const search =
+    document.getElementById(
+        'searchInput'
+    );
 
 boot();
 
@@ -19,15 +21,24 @@ async function boot(){
     const profile =
         await loadProfile();
 
-    await idle();
+    setState(
+        'profile',
+        profile
+    );
 
     const jobs =
         profile.items.map(loadItem);
 
-    allItems =
-        await Promise.all(jobs);
+    const items =
+        (await Promise.all(jobs))
+        .filter(Boolean);
 
-    render(allItems);
+    setState(
+        'items',
+        items
+    );
+
+    render(items);
 }
 
 function render(items){
@@ -47,40 +58,19 @@ function render(items){
     grid.append(frag);
 }
 
-searchInput.addEventListener(
+search.addEventListener(
     'input',
     e=>{
 
-        const q =
-            e.target.value
-                .trim()
-                .toLowerCase();
+        const items =
+            getState().items;
 
-        if(!q){
+        const result =
+            searchItems(
+                items,
+                e.target.value
+            );
 
-            render(allItems);
-
-            return;
-        }
-
-        const filtered =
-            allItems.filter(item=>{
-
-                const text = [
-
-                    item.name,
-
-                    item.description,
-
-                    ...(item.tags || [])
-
-                ]
-                .join(' ')
-                .toLowerCase();
-
-                return text.includes(q);
-            });
-
-        render(filtered);
+        render(result);
     }
-); 
+);
