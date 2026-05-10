@@ -1,35 +1,24 @@
 .container {
-    max-width: var(--container-width);
+    max-width: 1200px;
     margin: 0 auto;
-    padding: 0 40px;
+    padding: 0 5%;
 }
 
-header, section, footer { padding: 120px 0; }
-
-#main-nav {
-    position: fixed; top: 0; left: 0; right: 0; height: 80px;
-    display: flex; justify-content: space-between; align-items: center;
-    padding: 0 5%; z-index: 1000;
+section { 
+    padding: 100px 0; 
+    min-height: 20vh; /* Đảm bảo khoảng cách giữa các phần */
 }
 
-#main-nav .links { display: flex; gap: 40px; }
-
+/* Fix Grid dự án không bị méo */
 .project-grid {
-    display: grid; grid-template-columns: repeat(2, 1fr);
-    gap: 40px; margin-top: 60px;
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+    gap: 30px;
+    margin-top: 40px;
 }
 
-.about-grid {
-    display: grid; grid-template-columns: 1.2fr 0.8fr;
-    gap: 100px;
-}
-
-@media (max-width: 1024px) {
-    .about-grid { grid-template-columns: 1fr; gap: 60px; }
-}
-
+/* Mobile responsive */
 @media (max-width: 768px) {
     .project-grid { grid-template-columns: 1fr; }
-    header, section { padding: 80px 0; }
-    .container { padding: 0 24px; }
+    .about-grid { display: block; }
 }
