@@ -46,6 +46,27 @@ async function boot(){
     render(items);
 }
 
+function image(file){
+
+    const img =
+        create('img');
+
+    img.loading = 'lazy';
+
+    img.decoding = 'async';
+
+    img.src = file.src;
+
+    img.alt = '';
+
+    img.onclick = ()=>{
+
+        openLightbox(file.src);
+    };
+
+    return img;
+}
+
 function render(list){
 
     clear(grid);
