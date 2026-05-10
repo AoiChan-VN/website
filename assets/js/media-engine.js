@@ -1,49 +1,53 @@
 import {
-    loadProfile,
-    loadItem
+    create
 }
-from './loader.js';
-
-import {
-    renderCard
-}
-from './renderer.js';
+from './dom.js';
 
 import {
     openLightbox
 }
 from './modules/lightbox.js';
 
-import {
-    clear
-}
-from './dom.js';
+export function renderMedia(file){
 
-const grid =
-    document.getElementById('grid');
+    switch(file.type){
 
-const search =
-    document.getElementById(
-        'searchInput'
-    );
+        case 'image':
+        case 'gif':
+        case 'webp':
 
-let items = [];
+            return image(file);
 
-boot();
+        case 'video':
 
-async function boot(){
+            return video(file);
 
-    const profile =
-        await loadProfile();
+        case 'audio':
 
-    const jobs =
-        profile.items.map(loadItem);
+            return audio(file);
 
-    items =
-        (await Promise.all(jobs))
-        .filter(Boolean);
+        case 'pdf':
 
-    render(items);
+            return pdf(file);
+
+        case 'iframe':
+
+            return iframe(file);
+
+        case 'link':
+
+            return link(file);
+
+        case 'file':
+        case 'zip':
+        case 'download':
+
+            return download(file);
+
+        default:
+
+            return unknown(file);
+    }
 }
 
 function image(file){
@@ -59,6 +63,18 @@ function image(file){
 
     img.alt = '';
 
+    img.referrerPolicy =
+        'no-referrer';
+
+    img.className =
+        'runtime-image';
+
+    img.onerror = ()=>{
+
+        img.src =
+            './assets/fallback.webp';
+    };
+
     img.onclick = ()=>{
 
         openLightbox(file.src);
@@ -67,57 +83,130 @@ function image(file){
     return img;
 }
 
-function render(list){
+function video(file){
 
-    clear(grid);
+    const video =
+        create('video');
 
-    const frag =
-        document.createDocumentFragment();
+    video.controls = true;
 
-    for(const item of list){
+    video.preload = 'metadata';
 
-        frag.append(
-            renderCard(item)
-        );
-    }
+    video.playsInline = true;
 
-    grid.append(frag);
+    video.src = file.src;
+
+    video.className =
+        'runtime-video';
+
+    return video;
 }
 
-search.addEventListener(
-    'input',
-    e=>{
+function audio(file){
 
-        const q =
-            e.target.value
-            .trim()
-            .toLowerCase();
+    const audio =
+        create('audio');
 
-        if(!q){
+    audio.controls = true;
 
-            render(items);
+    audio.preload = 'none';
 
-            return;
-        }
+    audio.src = file.src;
 
-        const filtered =
-            items.filter(item=>{
+    audio.className =
+        'runtime-audio';
 
-                const text = [
+    return audio;
+}
 
-                    item.name,
+function pdf(file){
 
-                    item.description,
+    const iframe =
+        create('iframe');
 
-                    ...(item.tags || [])
+    iframe.loading = 'lazy';
 
-                ]
-                .join(' ')
-                .toLowerCase();
+    iframe.src = file.src;
 
-                return text.includes(q);
-            });
+    iframe.sandbox =
+        'allow-same-origin';
 
-        render(filtered);
-    }
-);
+    iframe.className =
+        'runtime-pdf';
+
+    return iframe;
+}
+
+function iframe(file){
+
+    const iframe =
+        create('iframe');
+
+    iframe.loading = 'lazy';
+
+    iframe.src = file.src;
+
+    iframe.referrerPolicy =
+        'no-referrer';
+
+    iframe.sandbox =
+        'allow-scripts allow-same-origin';
+
+    iframe.className =
+        'runtime-iframe';
+
+    return iframe;
+}
+
+function link(file){
+
+    const a =
+        create('a');
+
+    a.href = file.src;
+
+    a.target = '_blank';
+
+    a.rel =
+        'noopener noreferrer';
+
+    a.textContent =
+        file.src;
+
+    a.className =
+        'runtime-link';
+
+    return a;
+}
+
+function download(file){
+
+    const a =
+        create('a');
+
+    a.href = file.src;
+
+    a.download = '';
+
+    a.textContent =
+        'Download File';
+
+    a.className =
+        'runtime-download';
+
+    return a;
+}
+
+function unknown(file){
+
+    const div =
+        create('div');
+
+    div.className =
+        'runtime-unknown';
+
+    div.textContent =
+        `Unsupported type: ${file.type}`;
+
+    return div;
+}
