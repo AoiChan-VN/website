@@ -1,76 +1,151 @@
-import { loadProfile, loadItem } from './loader.js';
+import {
+    create
+}
+from './dom.js';
 
-import { renderCard } from './renderer.js';
+export function renderMedia(file){
 
-import { searchItems } from './search-engine.js';
+    switch(file.type){
 
-import { setState, getState } from './state.js';
+        case 'image':
+        case 'gif':
+        case 'webp':
 
-const grid =
-    document.getElementById('grid');
+            return image(file);
 
-const search =
-    document.getElementById(
-        'searchInput'
-    );
+        case 'video':
 
-boot();
+            return video(file);
 
-async function boot(){
+        case 'audio':
 
-    const profile =
-        await loadProfile();
+            return audio(file);
 
-    setState(
-        'profile',
-        profile
-    );
+        case 'pdf':
 
-    const jobs =
-        profile.items.map(loadItem);
+            return pdf(file);
 
-    const items =
-        (await Promise.all(jobs))
-        .filter(Boolean);
+        case 'iframe':
 
-    setState(
-        'items',
-        items
-    );
+            return iframe(file);
 
-    render(items);
+        case 'link':
+
+            return link(file);
+
+        default:
+
+            return unknown(file);
+    }
 }
 
-function render(items){
+function image(file){
 
-    grid.innerHTML = '';
+    const img =
+        create('img');
 
-    const frag =
-        document.createDocumentFragment();
+    img.loading = 'lazy';
 
-    for(const item of items){
+    img.decoding = 'async';
 
-        frag.append(
-            renderCard(item)
-        );
-    }
+    img.src = file.src;
 
-    grid.append(frag);
+    img.alt = '';
+
+    img.referrerPolicy =
+        'no-referrer';
+
+    return img;
 }
 
-search.addEventListener(
-    'input',
-    e=>{
+function video(file){
 
-        const items =
-            getState().items;
+    const video =
+        create('video');
 
-        const result =
-            searchItems(
-                items,
-                e.target.value
-            );
+    video.controls = true;
 
-        render(result);
-    }
-);
+    video.preload = 'metadata';
+
+    video.playsInline = true;
+
+    video.src = file.src;
+
+    return video;
+}
+
+function audio(file){
+
+    const audio =
+        create('audio');
+
+    audio.controls = true;
+
+    audio.preload = 'none';
+
+    audio.src = file.src;
+
+    return audio;
+}
+
+function pdf(file){
+
+    const iframe =
+        create('iframe');
+
+    iframe.loading = 'lazy';
+
+    iframe.src = file.src;
+
+    iframe.sandbox =
+        'allow-same-origin';
+
+    return iframe;
+}
+
+function iframe(file){
+
+    const iframe =
+        create('iframe');
+
+    iframe.loading = 'lazy';
+
+    iframe.src = file.src;
+
+    iframe.referrerPolicy =
+        'no-referrer';
+
+    iframe.sandbox =
+        'allow-scripts allow-same-origin';
+
+    return iframe;
+}
+
+function link(file){
+
+    const a =
+        create('a');
+
+    a.href = file.src;
+
+    a.target = '_blank';
+
+    a.rel =
+        'noopener noreferrer';
+
+    a.textContent =
+        file.src;
+
+    return a;
+}
+
+function unknown(file){
+
+    const div =
+        create('div');
+
+    div.textContent =
+        `Unsupported: ${file.type}`;
+
+    return div;
+}
