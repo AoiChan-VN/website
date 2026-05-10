@@ -1,4 +1,7 @@
-import { create } from './dom.js';
+import { 
+    create 
+} 
+from './dom.js';
 
 import { text } from './sanitizer.js';
 
