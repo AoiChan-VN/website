@@ -1,26 +1,33 @@
-import { CONFIG } from './config.js';
+const observer =
+    new IntersectionObserver(
 
-const observer = new IntersectionObserver(
+        entries=>{
 
-    entries=>{
+            for(const entry of entries){
 
-        entries.forEach(entry=>{
+                if(
+                    !entry.isIntersecting
+                ){
+                    continue;
+                }
 
-            if(!entry.isIntersecting) return;
+                entry.target
+                    .classList
+                    .add('visible');
 
-            entry.target.classList.add('visible');
+                observer.unobserve(
+                    entry.target
+                );
+            }
 
-            observer.unobserve(entry.target);
-        });
+        },
 
-    },
-
-    {
-        rootMargin:CONFIG.OBSERVER_ROOT_MARGIN
-    }
-);
+        {
+            rootMargin:'300px'
+        }
+    );
 
 export function observe(node){
 
     observer.observe(node);
-} 
+}
