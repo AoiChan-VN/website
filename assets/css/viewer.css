@@ -1,0 +1,53 @@
+body{
+    padding:40px;
+}
+
+#viewer{
+
+    width:min(1400px,100%);
+
+    margin:auto;
+}
+
+.viewer-hero{
+
+    margin-bottom:40px;
+}
+
+.viewer-hero h1{
+
+    font-size:3rem;
+
+    margin-bottom:20px;
+}
+
+.viewer-hero p{
+
+    color:#a0a0a0;
+
+    line-height:1.7;
+}
+
+.media-block{
+
+    margin-bottom:30px;
+
+    border-radius:24px;
+
+    overflow:hidden;
+
+    background:rgba(255,255,255,.04);
+
+    border:1px solid rgba(255,255,255,.08);
+
+    padding:20px;
+}
+
+.media-block img,
+.media-block video,
+.media-block iframe{
+
+    width:100%;
+
+    border-radius:20px;
+} 
