@@ -1,147 +1,97 @@
-import { create }
+import {
+    loadProfile,
+    loadItem
+}
+from './loader.js';
+
+import {
+    renderCard
+}
+from './renderer.js';
+
+import {
+    clear
+}
 from './dom.js';
 
-export function renderMedia(file){
+const grid =
+    document.getElementById('grid');
 
-    switch(file.type){
+const search =
+    document.getElementById(
+        'searchInput'
+    );
 
-        case 'image':
-        case 'webp':
-        case 'gif':
+let items = [];
 
-            return renderImage(file);
+boot();
 
-        case 'video':
+async function boot(){
 
-            return renderVideo(file);
+    const profile =
+        await loadProfile();
 
-        case 'audio':
+    const jobs =
+        profile.items.map(loadItem);
 
-            return renderAudio(file);
+    items =
+        (await Promise.all(jobs))
+        .filter(Boolean);
 
-        case 'pdf':
+    render(items);
+}
 
-            return renderPDF(file);
+function render(list){
 
-        case 'link':
+    clear(grid);
 
-            return renderLink(file);
+    const frag =
+        document.createDocumentFragment();
 
-        case 'iframe':
+    for(const item of list){
 
-            return renderIframe(file);
-
-        default:
-
-            return renderUnknown(file);
+        frag.append(
+            renderCard(item)
+        );
     }
+
+    grid.append(frag);
 }
 
-function renderImage(file){
+search.addEventListener(
+    'input',
+    e=>{
 
-    const img =
-        create('img');
+        const q =
+            e.target.value
+            .trim()
+            .toLowerCase();
 
-    img.loading = 'lazy';
+        if(!q){
 
-    img.decoding = 'async';
+            render(items);
 
-    img.src = file.src;
+            return;
+        }
 
-    img.alt = '';
+        const filtered =
+            items.filter(item=>{
 
-    img.referrerPolicy =
-        'no-referrer';
+                const text = [
 
-    return img;
-}
+                    item.name,
 
-function renderVideo(file){
+                    item.description,
 
-    const video =
-        create('video');
+                    ...(item.tags || [])
 
-    video.controls = true;
+                ]
+                .join(' ')
+                .toLowerCase();
 
-    video.preload = 'metadata';
+                return text.includes(q);
+            });
 
-    video.src = file.src;
-
-    return video;
-}
-
-function renderAudio(file){
-
-    const audio =
-        create('audio');
-
-    audio.controls = true;
-
-    audio.preload = 'none';
-
-    audio.src = file.src;
-
-    return audio;
-}
-
-function renderPDF(file){
-
-    const iframe =
-        create('iframe');
-
-    iframe.loading = 'lazy';
-
-    iframe.src = file.src;
-
-    iframe.sandbox =
-        'allow-same-origin';
-
-    return iframe;
-}
-
-function renderIframe(file){
-
-    const iframe =
-        create('iframe');
-
-    iframe.loading = 'lazy';
-
-    iframe.src = file.src;
-
-    iframe.sandbox =
-        'allow-scripts allow-same-origin';
-
-    iframe.referrerPolicy =
-        'no-referrer';
-
-    return iframe;
-}
-
-function renderLink(file){
-
-    const a =
-        create('a');
-
-    a.href = file.src;
-
-    a.target = '_blank';
-
-    a.rel =
-        'noopener noreferrer';
-
-    a.textContent =
-        file.src;
-
-    return a;
-}
-
-function renderUnknown(file){
-
-    const div =
-        create('div');
-
-    div.textContent =
-        `Unsupported: ${file.type}`;
-
-    return div;
-}
+        render(filtered);
+    }
+);
