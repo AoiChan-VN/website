@@ -1,55 +1,91 @@
-import { sanitize } from './sanitizer.js';
+import {
+    create
+}
+from './dom.js';
 
-import { el } from './dom.js';
+import {
+    text
+}
+from './sanitizer.js';
 
-import { renderMedia } from './media-engine.js';
+import {
+    observe
+}
+from './lazy.js';
 
-import { observe } from './lazy.js';
+import {
+    openItem
+}
+from './router.js';
 
 export function renderCard(data){
 
-    const card = el('article','card');
+    const card =
+        create('article','card');
 
     card.onclick = ()=>{
 
-        location.href =
-            `viewer.html?id=${data.id}`;
+        openItem(data.id);
     };
 
-    const cover = el('img','card-cover');
+    const cover =
+        create('img','card-cover');
 
     cover.loading = 'lazy';
 
+    cover.decoding = 'async';
+
     cover.src = data.cover;
 
-    const body = el('div','card-body');
+    cover.alt = data.name || '';
 
-    const title = el('h2','card-title');
+    cover.onerror = ()=>{
 
-    title.innerHTML = sanitize(data.name);
+        cover.src =
+            './assets/fallback.webp';
+    };
 
-    const desc = el('p','card-desc');
+    const body =
+        create('div','card-body');
 
-    desc.innerHTML = sanitize(
+    const title =
+        create('h2','card-title');
+
+    text(
+        title,
+        data.name
+    );
+
+    const desc =
+        create('p','card-desc');
+
+    text(
+        desc,
         data.description
     );
 
-    const tags = el('div','tags');
-
-    for(const tag of data.tags || []){
-
-        const node = el('span','tag');
-
-        node.innerHTML = sanitize(tag);
-
-        tags.append(node);
-    }
-
     body.append(
         title,
-        desc,
-        tags
+        desc
     );
+
+    if(data.tags?.length){
+
+        const tags =
+            create('div','tags');
+
+        for(const tag of data.tags){
+
+            const node =
+                create('span','tag');
+
+            text(node,tag);
+
+            tags.append(node);
+        }
+
+        body.append(tags);
+    }
 
     card.append(
         cover,
@@ -60,37 +96,3 @@ export function renderCard(data){
 
     return card;
 }
-
-export function renderViewer(data){
-
-    const root =
-        document.getElementById('viewer');
-
-    const hero = el('section','viewer-hero');
-
-    const title = el('h1');
-
-    title.textContent = data.name;
-
-    const desc = el('p');
-
-    desc.textContent = data.description;
-
-    hero.append(
-        title,
-        desc
-    );
-
-    root.append(hero);
-
-    for(const file of data.files){
-
-        const wrap = el('section','media-block');
-
-        const media = renderMedia(file);
-
-        wrap.append(media);
-
-        root.append(wrap);
-    }
-} 
