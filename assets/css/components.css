@@ -135,13 +135,23 @@
         skeleton 1.4s linear infinite;
 }
 
-.lightbox{
+@keyframes skeleton{
+
+    from{
+        background-position:200% 0;
+    }
+
+    to{
+        background-position:-200% 0;
+    }
+
+    .lightbox{
 
     position:fixed;
 
     inset:0;
 
-    z-index:9999;
+    z-index:99999;
 
     display:flex;
 
@@ -150,7 +160,7 @@
     justify-content:center;
 
     background:
-        rgba(0,0,0,.88);
+        rgba(0,0,0,.92);
 
     opacity:0;
 
@@ -169,20 +179,104 @@
 
 .lightbox-image{
 
-    max-width:92vw;
+    max-width:94vw;
 
-    max-height:92vh;
+    max-height:94vh;
+
+    border-radius:24px;
+
+    object-fit:contain;
+}
+
+.runtime-image{
+
+    cursor:pointer;
+}
+
+.runtime-video,
+.runtime-image,
+.runtime-pdf,
+.runtime-iframe{
+
+    width:100%;
 
     border-radius:20px;
 }
 
-@keyframes skeleton{
+.runtime-pdf,
+.runtime-iframe{
 
-    from{
-        background-position:200% 0;
-    }
+    min-height:70vh;
 
-    to{
-        background-position:-200% 0;
-    }
+    border:none;
+
+    background:#111;
+}
+
+.runtime-audio{
+
+    width:100%;
+}
+
+.runtime-link,
+.runtime-download{
+
+    display:inline-flex;
+
+    align-items:center;
+
+    justify-content:center;
+
+    padding:14px 18px;
+
+    border-radius:16px;
+
+    background:
+        rgba(255,255,255,.08);
+
+    color:white;
+
+    text-decoration:none;
+
+    transition:
+        background .3s ease;
+}
+
+.runtime-link:hover,
+.runtime-download:hover{
+
+    background:
+        rgba(255,255,255,.14);
+}
+
+.runtime-unknown{
+
+    padding:20px;
+
+    border-radius:18px;
+
+    background:
+        rgba(255,0,0,.08);
+
+    color:#ffb4b4;
+}
+
+.empty-state{
+
+    display:flex;
+
+    align-items:center;
+
+    justify-content:center;
+
+    min-height:240px;
+
+    border-radius:24px;
+
+    background:
+        rgba(255,255,255,.04);
+
+    color:#9ca3af;
+
+    font-size:1rem;
 }
