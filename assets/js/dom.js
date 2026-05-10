@@ -1,4 +1,4 @@
-export function create(tag,cls){
+export function create(tag,cls=''){
 
     const node =
         document.createElement(tag);
