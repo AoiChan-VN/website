@@ -10,6 +10,11 @@ import {
 from './renderer.js';
 
 import {
+    openLightbox
+}
+from './modules/lightbox.js';
+
+import {
     clear
 }
 from './dom.js';
