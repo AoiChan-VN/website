@@ -1,28 +1,26 @@
-.container {
-    max-width: 1100px;
-    margin: 0 auto;
-    padding: 0 2rem;
-}
-
-section {
+header, section, footer {
     padding: 80px 0;
-    opacity: 0;
-    transform: translateY(20px);
-    transition: all 0.6s ease-out;
 }
 
-section.visible {
-    opacity: 1;
-    transform: translateY(0);
+#main-nav {
+    position: fixed;
+    top: 0;
+    width: 100%;
+    z-index: 1000;
+    height: 70px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 0 5%;
 }
 
-.grid {
+.grid-auto {
     display: grid;
     grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
     gap: 2rem;
 }
 
 @media (max-width: 768px) {
-    .container { padding: 0 1.2rem; }
-    section { padding: 50px 0; }
+    :root { --container-width: 100%; }
+    header, section { padding: 40px 0; }
 }
