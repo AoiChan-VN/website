@@ -1,22 +1,9 @@
 {
-    "config": {
-        "name": "Senior Developer",
-        "role": "Full Stack Engineer",
-        "contact": "contact@domain.com"
-    },
-    "projects": [
-        {
-            "title": "E-Commerce OS",
-            "desc": "High performance static engine.",
-            "tech": ["Vanilla JS", "CSS3"],
-            "link": "#"
-        },
-        {
-            "title": "Neural Interface",
-            "desc": "Web-based AI visualizer.",
-            "tech": ["ES6", "Canvas"],
-            "link": "#"
-        }
-    ],
-    "skills": ["Architecture", "Performance", "Scalability"]
+    "name": "Senior Full Stack",
+    "role": "Architect & Software Engineer",
+    "bio": "50 years of experience in crafting digital excellence.",
+    "socials": {
+        "github": "https://github.com",
+        "linkedin": "#"
+    }
 }
