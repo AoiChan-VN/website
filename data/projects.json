@@ -1,0 +1,19 @@
+[
+    {
+        "id": 1,
+        "title": "Quantum Interface",
+        "category": "Web Architecture",
+        "image": "assets/project1.jpg",
+        "tech": ["Vanilla JS", "CSS Grid", "GLSL"],
+        "link": "#"
+    },
+    {
+        "id": 2,
+        "title": "Neural Dashboard",
+        "category": "Data Visualization",
+        "image": "assets/project2.jpg",
+        "tech": ["ES Modules", "SVG Engine"],
+        "link": "#"
+    }
+]
+ 
