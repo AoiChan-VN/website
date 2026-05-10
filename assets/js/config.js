@@ -2,9 +2,20 @@ export const CONFIG = {
 
     DATA_DIR: './data/',
 
-    CACHE_LIMIT: 100,
+    VIEWER_URL: './viewer.html',
 
-    OBSERVER_ROOT_MARGIN: '300px',
+    IMAGE_FALLBACK:
+        './assets/fallback.webp',
 
-    THUMBNAIL_QUALITY: 0.8
-}; 
+    OBSERVER_ROOT_MARGIN: '400px',
+
+    CARD_BATCH_SIZE: 24,
+
+    SEARCH_DEBOUNCE: 120,
+
+    MAX_CACHE_ITEMS: 200,
+
+    ENABLE_HASH_ROUTING: false,
+
+    DEBUG: false
+};
