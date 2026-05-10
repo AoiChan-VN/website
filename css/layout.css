@@ -1,52 +1,35 @@
-/* ==========================================================================
-   LAYOUT SYSTEM - GRID & POSITIONING ONLY
-   ========================================================================== */
-
 .container {
     max-width: var(--container-width);
     margin: 0 auto;
-    padding: 0 2rem;
+    padding: 0 40px;
 }
 
-/* Section Spacing */
-header, section, footer {
-    padding: 100px 0;
-    width: 100%;
-}
+header, section, footer { padding: 120px 0; }
 
-/* Navigation Layout */
 #main-nav {
-    position: fixed;
-    top: 0;
-    left: 0;
-    right: 0;
-    height: 80px;
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    padding: 0 5%;
-    z-index: 1000;
+    position: fixed; top: 0; left: 0; right: 0; height: 80px;
+    display: flex; justify-content: space-between; align-items: center;
+    padding: 0 5%; z-index: 1000;
 }
 
-/* Grid System */
+#main-nav .links { display: flex; gap: 40px; }
+
 .project-grid {
-    display: grid;
-    grid-template-columns: repeat(auto-fill, minmax(400px, 1fr));
-    gap: 2.5rem;
+    display: grid; grid-template-columns: repeat(2, 1fr);
+    gap: 40px; margin-top: 60px;
 }
 
 .about-grid {
-    display: grid;
-    grid-template-columns: 1fr 1fr;
-    gap: 80px;
+    display: grid; grid-template-columns: 1.2fr 0.8fr;
+    gap: 100px;
 }
 
-/* Responsive Logic */
-@media (max-width: 992px) {
-    .about-grid { grid-template-columns: 1fr; gap: 40px; }
+@media (max-width: 1024px) {
+    .about-grid { grid-template-columns: 1fr; gap: 60px; }
 }
 
 @media (max-width: 768px) {
     .project-grid { grid-template-columns: 1fr; }
-    header, section { padding: 60px 0; }
+    header, section { padding: 80px 0; }
+    .container { padding: 0 24px; }
 }
