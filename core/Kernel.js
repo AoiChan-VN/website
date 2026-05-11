@@ -1,5 +1,5 @@
-import { registry } from '../runtime/Registry.js';
-import { store } from '../reactivity/Store.js';
+import { Registry } from '../runtime/Registry.js';
+import { Store } from '../reactivity/Store.js';
 import { PluginLoader } from './Plugin.js';
 import { LoggerPlugin } from '../plugins/LoggerPlugin.js';
 import { AppShell } from '../components/AppShell/AppShell.js';
