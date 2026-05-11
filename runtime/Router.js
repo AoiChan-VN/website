@@ -1,6 +1,6 @@
-import { vfs } from '../system/VFS.js';
-import { registry } from './Registry.js';
-import { eventBus } from '../system/EventBus.js';
+import { VFS } from '../system/VFS.js';
+import { Registr } from './Registry.js';
+import { EventBus } from '../system/EventBus.js';
 
 /**
  * OS Router: Chuyển đổi VFS path thành UI View.
