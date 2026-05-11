@@ -1,5 +1,5 @@
 import { BaseService } from './BaseService.js';
-import { EventBus } from '../system/EventBus.js';
+import { eventBus } from '../system/EventBus.js';
 
 /**
  * AppService: Cung cấp danh sách ứng dụng và trạng thái hệ thống.
