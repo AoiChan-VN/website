@@ -1,4 +1,4 @@
-import { Registry } from '../runtime/Registry.js';
+import { registry } from '../runtime/Registry.js';
 import { Router } from '../runtime/Router.js';
 import { DesktopPage } from '../pages/DesktopPage.js';
 import { SettingsPage } from '../pages/SettingsPage.js'; // Giả định đã tạo tương tự DesktopPage
