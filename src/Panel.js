@@ -17,12 +17,26 @@ export class Panel {
         this.overlay.classList.add('active');
         document.body.style.overflow = 'hidden'; // Chặn scroll trang chính
         this.body.innerHTML = `<div class="shimmer-loader"></div>`; 
-
+        
         try {
-            // 2. Chỉ lúc này mới tốn tài nguyên fetch data chi tiết
             const res = await fetch(path);
+        
+            // Kiểm tra nếu fetch không thành công (404)
+            if (!res.ok) throw new Error(`Server returned status ${res.status}`);
+          
+            const contentType = res.headers.get("content-type");
+            if (!contentType || !contentType.includes("application/json")) {
+                const text = await res.text();
+                console.error("Nhận được HTML thay vì JSON:", text.substring(0, 100));
+                throw new Error("Tệp không tồn tại hoặc sai định dạng JSON.");
+            }
+            
             const data = await res.json();
-
+            // ... render data ...
+        } catch (err) {
+            this.body.innerHTML = `<p class="error">System Leak: ${err.message}</p>`;
+        }
+    }
             // 3. Render template chuyên sâu (High-End Visualization)
             this.body.innerHTML = `
                 <div class="panel-header">
