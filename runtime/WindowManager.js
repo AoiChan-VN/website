@@ -12,15 +12,19 @@ class WindowManager {
         const win = new WinClass({ id: appId, title, content: new ContentClass() });
         
         const layer = document.getElementById('aoi-window-layer');
+        if (!layer) return;
+
         win.mount(layer);
-        
         this.#windows.set(appId, win);
         this.focus(appId);
     }
 
     focus(appId) {
         this.#topZ++;
-        eventBus.emit('WINDOW_FOCUS', { id: appId, zIndex: this.#topZ });
+        const win = this.#windows.get(appId);
+        if (win) {
+            eventBus.emit('WINDOW_FOCUS', { id: appId, zIndex: this.#topZ });
+        }
     }
 
     close(appId) {
@@ -28,6 +32,7 @@ class WindowManager {
         if (win) {
             win.destroy();
             this.#windows.delete(appId);
+            eventBus.emit('WINDOW_CLOSED', appId);
         }
     }
 }
