@@ -8,29 +8,45 @@ export class Window extends Component {
         eventBus.on('WINDOW_FOCUS', (d) => {
             if (d.id === this.props.id) this.element.style.zIndex = d.zIndex;
         });
-        this.#initDrag();
+        this.#setupDrag();
     }
 
-    #initDrag() {
-        const h = this.element.querySelector('.win-header');
-        h.onmousedown = (e) => {
+    #setupDrag() {
+        const header = this.element.querySelector('.win-header');
+        header.onmousedown = (e) => {
             windowManager.focus(this.props.id);
             let x = e.clientX, y = e.clientY;
-            document.onmousemove = (ev) => {
-                this.element.style.left = (this.element.offsetLeft + (ev.clientX - x)) + "px";
-                this.element.style.top = (this.element.offsetTop + (ev.clientY - y)) + "px";
+            const move = (ev) => {
+                this.element.style.left = `${this.element.offsetLeft + (ev.clientX - x)}px`;
+                this.element.style.top = `${this.element.offsetTop + (ev.clientY - y)}px`;
                 x = ev.clientX; y = ev.clientY;
             };
-            document.onmouseup = () => document.onmousemove = null;
+            const stop = () => document.removeEventListener('mousemove', move);
+            document.addEventListener('mousemove', move);
+            document.addEventListener('mouseup', stop, { once: true });
         };
     }
 
-    destroy() { this.element.remove(); }
+    destroy() {
+        this.onDestroy();
+        this.element.remove();
+    }
 
     render() {
-        return Renderer.createElement('div', { className: 'aoi-window', style: 'top:100px;left:100px;' },
-            Renderer.createElement('div', { className: 'win-header' }, this.props.title),
-            Renderer.createElement('div', { className: 'win-body' }, this.props.content.render())
+        return Renderer.createElement('div', { 
+            className: 'aoi-window',
+            onMouseDown: () => windowManager.focus(this.props.id)
+        },
+            Renderer.createElement('div', { className: 'win-header' },
+                Renderer.createElement('span', {}, this.props.title),
+                Renderer.createElement('button', { 
+                    className: 'win-close',
+                    onClick: (e) => { e.stopPropagation(); windowManager.close(this.props.id); }
+                }, '×')
+            ),
+            Renderer.createElement('div', { className: 'win-body' }, 
+                this.props.content.render()
+            )
         );
     }
 }
