@@ -1,0 +1,59 @@
+:root {
+
+  --bg-primary:
+    rgba(12, 18, 28, 0.78);
+
+  --bg-secondary:
+    rgba(255, 255, 255, 0.08);
+
+  --border-color:
+    rgba(255, 255, 255, 0.12);
+
+  --text-primary:
+    #ffffff;
+
+  --text-secondary:
+    rgba(255,255,255,0.72);
+
+  --blur:
+    18px;
+
+  --radius:
+    28px;
+
+  --shadow:
+    0 20px 60px rgba(0,0,0,0.45);
+
+  --transition:
+    240ms cubic-bezier(.2,.8,.2,1);
+}
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+
+  min-height: 100vh;
+
+  color: var(--text-primary);
+
+  background:
+    linear-gradient(
+      rgba(0,0,0,0.45),
+      rgba(0,0,0,0.72)
+    ),
+    url('../images/bg.webp');
+
+  background-size: cover;
+  background-position: center;
+
+  font-family:
+    Inter,
+    system-ui,
+    sans-serif;
+
+  overflow-x: hidden;
+}
