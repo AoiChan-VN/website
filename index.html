@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>High-End Data Driven Portfolio</title>
+    <link rel="stylesheet" href="assets/css/main.css">
+    <link rel="stylesheet" href="assets/css/cards.css">
+    <link rel="stylesheet" href="assets/css/panel.css">
+</head>
+<body>
+    <div id="app">
+        <header>
+            <h1 class="glitch">CORE SYSTEM</h1>
+        </header>
+        
+        <!-- Grid tự động render -->
+        <main id="card-grid" class="grid-container"></main>
+    </div>
+
+    <!-- Panel Viewer Layer -->
+    <aside id="panel-viewer" class="panel-overlay hidden">
+        <div class="panel-content glass">
+            <button class="close-btn">&times;</button>
+            <div id="panel-data-body"></div>
+        </div>
+    </aside>
+
+    <script type="module" src="src/app.js"></script>
+</body>
+</html>
+ 
