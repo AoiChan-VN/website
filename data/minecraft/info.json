@@ -1,0 +1,21 @@
+{
+  "banner": "./assets/images/minecraft.webp",
+  "title": "Minecraft Network",
+
+  "content": [
+    {
+      "label": "Version",
+      "value": "1.21.x"
+    },
+
+    {
+      "label": "Mode",
+      "value": "Survival + Economy"
+    },
+
+    {
+      "label": "Status",
+      "value": "Online"
+    }
+  ]
+} 
