@@ -3,29 +3,24 @@ import { eventBus } from '../system/EventBus.js';
 
 class WindowManager {
     #windows = new Map();
-    #topZIndex = 100;
+    #topZ = 1000;
 
     open(appId, title, ContentClass) {
-        if (this.#windows.has(appId)) {
-            this.focus(appId);
-            return;
-        }
-        const WindowWrapper = registry.resolveComponent('Window');
-        const win = new WindowWrapper({ id: appId, title, content: new ContentClass() });
+        if (this.#windows.has(appId)) return this.focus(appId);
+
+        const WinClass = registry.resolveComponent('Window');
+        const win = new WinClass({ id: appId, title, content: new ContentClass() });
         
-        const container = document.getElementById('aoi-window-layer');
-        win.mount(container);
+        const layer = document.getElementById('aoi-window-layer');
+        win.mount(layer);
         
         this.#windows.set(appId, win);
         this.focus(appId);
     }
 
     focus(appId) {
-        this.#topZIndex++;
-        const win = this.#windows.get(appId);
-        if (win) {
-            eventBus.emit('WINDOW_FOCUS', { id: appId, zIndex: this.#topZIndex });
-        }
+        this.#topZ++;
+        eventBus.emit('WINDOW_FOCUS', { id: appId, zIndex: this.#topZ });
     }
 
     close(appId) {
