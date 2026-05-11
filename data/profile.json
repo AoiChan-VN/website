@@ -4,6 +4,6 @@
     "title": "Hyperion Server",
     "type": "Infrastructure",
     "thumbnail": "assets/img/sv-thumb.jpg",
-    "dataPath": "data/details/hyperion.json" 
+    "dataPath": "./data/details/hyperion.json" 
   }
 ]
