@@ -1,0 +1,17 @@
+:root {
+    --aoi-sys-bg: #0f172a;
+    --aoi-sys-surface: #1e293b;
+    --aoi-sys-primary: #38bdf8;
+    --aoi-sys-text: #f8fafc;
+    --aoi-font-main: 'Inter', system-ui, sans-serif;
+    --aoi-spacing-unit: 4px;
+}
+
+body, html {
+    margin: 0;
+    padding: 0;
+    background: var(--aoi-sys-bg);
+    color: var(--aoi-sys-text);
+    font-family: var(--aoi-font-main);
+}
+ 
