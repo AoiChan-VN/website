@@ -1,9 +1,17 @@
 [
   {
-    "id": "sv-01",
-    "title": "Hyperion Server",
-    "type": "Infrastructure",
-    "thumbnail": "assets/img/sv-thumb.jpg",
-    "detailPath": "data/details/hyperion.json" 
+    "id": "minecraft",
+    "title": "Minecraft Network",
+    "description": "Hệ thống máy chủ game Data-Driven.",
+    "thumbnail": "./assets/images/minecraft.webp",
+    "panel": "./data/minecraft/info.json"
+  },
+
+  {
+    "id": "server",
+    "title": "Server Monitor",
+    "description": "Realtime status infrastructure.",
+    "thumbnail": "./assets/images/server.webp",
+    "panel": "./data/server/status.json"
   }
 ]
