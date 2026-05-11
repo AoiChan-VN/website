@@ -1,0 +1,21 @@
+{
+  "banner": "./assets/images/server.webp",
+  "title": "Infrastructure Monitor",
+
+  "content": [
+    {
+      "label": "CPU",
+      "value": "37%"
+    },
+
+    {
+      "label": "RAM",
+      "value": "64%"
+    },
+
+    {
+      "label": "Latency",
+      "value": "12ms"
+    }
+  ]
+} 
