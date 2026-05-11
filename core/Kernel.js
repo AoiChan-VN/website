@@ -6,25 +6,18 @@ import { windowManager } from '../runtime/WindowManager.js';
 
 class Kernel {
     async boot() {
-        console.info("Aoi OS: Initializing Kernel...");
-
-        // 1. Đăng ký toàn bộ Component hệ thống
+        // 1. Registry Setup
         registry.registerComponent('AppShell', AppShell);
         registry.registerComponent('Window', Window);
         registry.registerComponent('Taskbar', Taskbar);
 
-        // 2. Render Shell
-        const root = document.getElementById('aoi-root');
+        // 2. UI Bootstrapping
+        const root = document.getElementById('aoi-runtime-root');
         const ShellClass = registry.resolveComponent('AppShell');
-        const shell = new ShellClass();
+        const shell = new ShellClass({ title: 'AOI RUNTIME OS' });
         shell.mount(root);
 
-        // 3. Demo: Mở một cửa sổ mặc định
-        setTimeout(() => {
-            windowManager.open('welcome', 'Welcome App', class extends AppShell {
-                render() { return Renderer.createElement('p', {}, 'Hello from Virtual App!'); }
-            });
-        }, 1000);
+        console.info('Aoi OS: Kernel Booted.');
     }
 }
 export const kernel = new Kernel();
