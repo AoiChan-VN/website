@@ -1,40 +1,30 @@
 import { registry } from './Registry.js';
 import { eventBus } from '../system/EventBus.js';
 
-/**
- * WindowManager: Quản lý danh sách các cửa sổ đang mở.
- */
 class WindowManager {
     #windows = new Map();
     #topZIndex = 100;
 
-    open(appId, ComponentClass, props = {}) {
+    open(appId, title, ContentClass) {
         if (this.#windows.has(appId)) {
             this.focus(appId);
             return;
         }
-
-        const windowId = `win-${appId}`;
         const WindowWrapper = registry.resolveComponent('Window');
-        const winInstance = new WindowWrapper({
-            id: windowId,
-            title: props.title || appId,
-            content: new ComponentClass(props)
-        });
-
-        const container = document.getElementById('aoi-window-layer');
-        winInstance.mount(container);
+        const win = new WindowWrapper({ id: appId, title, content: new ContentClass() });
         
-        this.#windows.set(appId, winInstance);
+        const container = document.getElementById('aoi-window-layer');
+        win.mount(container);
+        
+        this.#windows.set(appId, win);
         this.focus(appId);
     }
 
     focus(appId) {
+        this.#topZIndex++;
         const win = this.#windows.get(appId);
         if (win) {
-            this.#topZIndex++;
-            win.setZIndex(this.#topZIndex);
-            eventBus.emit('WINDOW_FOCUS', appId);
+            eventBus.emit('WINDOW_FOCUS', { id: appId, zIndex: this.#topZIndex });
         }
     }
 
@@ -46,6 +36,4 @@ class WindowManager {
         }
     }
 }
-
 export const windowManager = new WindowManager();
- 
