@@ -1,6 +1,6 @@
 import { Component } from '../../core/Component.js';
 import { TaskbarTemplate } from './Taskbar.template.js';
-import { EventBus } from '../../system/EventBus.js';
+import { eventBus } from '../../system/EventBus.js';
 import { windowManager } from '../../runtime/WindowManager.js';
 
 export class Taskbar extends Component {
