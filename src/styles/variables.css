@@ -1,0 +1,32 @@
+:root {
+  --bg:
+    #060816;
+
+  --surface:
+    rgba(255,255,255,0.06);
+
+  --border:
+    rgba(255,255,255,0.12);
+
+  --text:
+    #ffffff;
+
+  --muted:
+    rgba(255,255,255,0.7);
+
+  --radius:
+    28px;
+
+  --blur:
+    24px;
+
+  --transition:
+    cubic-bezier(0.19, 1, 0.22, 1);
+
+  --gradient:
+    linear-gradient(
+      135deg,
+      #7f5af0,
+      #2cb67d
+    );
+} 
