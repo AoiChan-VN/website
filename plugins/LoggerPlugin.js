@@ -1,5 +1,5 @@
 import { Plugin } from '../core/Plugin.js';
-import { EventBus } from '../system/EventBus.js';
+import { eventBus } from '../system/EventBus.js';
 
 /**
  * LoggerPlugin: Tự động ghi lại mọi EventBus activity vào System Log.
