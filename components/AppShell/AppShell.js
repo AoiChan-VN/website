@@ -1,6 +1,6 @@
 import { Component } from '../../core/Component.js';
 import { AppShellTemplate } from './AppShell.template.js';
-import { EventBus } from '../../system/EventBus.js';
+import { eventBus } from '../../system/EventBus.js';
 import { Renderer } from '../../runtime/Renderer.js';
 
 export class AppShell extends Component {
