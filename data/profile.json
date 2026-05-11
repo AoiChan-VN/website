@@ -1,0 +1,23 @@
+[
+  {
+    "id": 1,
+    "title": "Minecraft Systems",
+    "desc": "Custom gameplay systems and immersive mechanics.",
+    "image": "https://images.unsplash.com/photo-1627856013091-fed6e4e30025?q=80&w=1200&auto=format&fit=crop",
+    "dataPath": "./data/modules/minecraft.json"
+  },
+  {
+    "id": 2,
+    "title": "Music Production",
+    "desc": "Experimental sound design and composition.",
+    "image": "https://images.unsplash.com/photo-1511379938547-c1f69419868d?q=80&w=1200&auto=format&fit=crop",
+    "dataPath": "./data/modules/music.json"
+  },
+  {
+    "id": 3,
+    "title": "AI Tooling",
+    "desc": "Creative AI workflows and automation pipelines.",
+    "image": "https://images.unsplash.com/photo-1677442136019-21780ecad995?q=80&w=1200&auto=format&fit=crop",
+    "dataPath": "./data/modules/ai-tools.json"
+  }
+] 
