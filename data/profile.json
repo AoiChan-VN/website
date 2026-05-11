@@ -1,0 +1,17 @@
+[
+  {
+    "id": "project-1",
+    "title": "Aura System",
+    "desc": "High-end data visualization dashboard",
+    "image": "https://picsum.photos",
+    "detailPath": "data/details/project-1.json"
+  },
+  {
+    "id": "project-2",
+    "title": "Neural Link",
+    "desc": "Advanced server management interface",
+    "image": "https://picsum.photos",
+    "detailPath": "data/details/project-2.json"
+  }
+]
+ 
