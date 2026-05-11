@@ -1,26 +1,24 @@
 import { registry } from '../runtime/Registry.js';
-import { Scheduler } from '../scheduler/Scheduler.js';
+import { LayoutManager } from '../runtime/LayoutManager.js';
+import { AppShell } from '../components/AppShell/AppShell.js';
 
 class Kernel {
     async boot() {
-        console.info('Aoi OS: Phase 2 Initializing...');
-        
         try {
-            // Register Scheduler as a System Service
-            registry.registerService('scheduler', Scheduler);
-            
-            this.#launchInitialUI();
-        } catch (error) {
-            console.error('Aoi OS: Kernel Panic', error);
-        }
-    }
+            // 1. Register Components
+            registry.registerComponent('AppShell', AppShell);
 
-    #launchInitialUI() {
-        const root = document.getElementById('aoi-runtime-root');
-        // UI giờ đây sẽ được gọi thông qua Registry và Component Class ở Phase 3.
-        root.innerHTML = `<div style="padding: 20px; color: #38bdf8;">
-            [Kernel] Reactivity & Scheduler Engine: ONLINE
-        </div>`;
+            // 2. Resolve và Khởi tạo Root UI
+            const rootContainer = document.getElementById('aoi-runtime-root');
+            const ShellClass = registry.resolveComponent('AppShell');
+            
+            const shell = new ShellClass({ title: 'AOI RUNTIME v1.0.0' });
+            shell.mount(rootContainer);
+
+            console.log('Aoi OS: Shell Loaded.');
+        } catch (error) {
+            console.error('Kernel Panic:', error);
+        }
     }
 }
 
