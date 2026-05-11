@@ -1,5 +1,5 @@
-import { Registry } from './Registry.js';
-import { EventBus } from '../system/EventBus.js';
+import { registry } from './Registry.js';
+import { eventBus } from '../system/EventBus.js';
 
 /**
  * WindowManager: Quản lý danh sách các cửa sổ đang mở.
