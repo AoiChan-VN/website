@@ -8,10 +8,12 @@ class Kernel {
     async boot() {
         try {
             // 1. Đăng ký Pages vào Registry
+            registry.registryComponent('Taskbar', Taskbar);
+            registry.registryComponent('Window', Window);
             registry.registerComponent('DesktopPage', DesktopPage);
             registry.registerComponent('SettingsPage', SettingsPage);
             registry.registerComponent('AppShell', AppShell);
-
+            
             // 2. Khởi tạo UI Shell
             this.#launchUI();
 
