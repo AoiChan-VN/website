@@ -1,0 +1,49 @@
+.panel-overlay {
+    position: fixed;
+    inset: 0;
+    background: rgba(0, 0, 0, 0.4);
+    backdrop-filter: blur(0px); /* Animation start */
+    z-index: 1000;
+    opacity: 0;
+    visibility: hidden;
+    transition: all 0.4s ease;
+    display: flex;
+    justify-content: flex-end; /* Panel trượt từ phải sang */
+}
+
+.panel-overlay.active {
+    opacity: 1;
+    visibility: visible;
+    backdrop-filter: blur(12px);
+}
+
+.panel-content {
+    width: 100%;
+    max-width: 500px;
+    background: rgba(15, 15, 20, 0.85);
+    border-left: 1px solid var(--glass-border);
+    padding: 40px;
+    transform: translateX(100%);
+    transition: transform 0.5s cubic-bezier(0.16, 1, 0.3, 1);
+    position: relative;
+    overflow-y: auto;
+}
+
+.panel-overlay.active .panel-content {
+    transform: translateX(0);
+}
+
+/* Hiệu ứng loading giả lập high-tech */
+.shimmer-loader {
+    width: 100%;
+    height: 200px;
+    background: linear-gradient(90deg, transparent, var(--glass-border), transparent);
+    background-size: 200% 100%;
+    animation: loading 1.5s infinite;
+}
+
+@keyframes loading {
+    0% { background-position: 200% 0; }
+    100% { background-position: -200% 0; }
+}
+ 
