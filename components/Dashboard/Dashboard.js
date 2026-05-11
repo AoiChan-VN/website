@@ -1,6 +1,6 @@
 import { Component } from '../../core/Component.js';
 import { Renderer } from '../../runtime/Renderer.js';
-import { Registry } from '../../runtime/Registry.js';
+import { registry } from '../../runtime/Registry.js';
 
 export class Dashboard extends Component {
     #apps = [];
