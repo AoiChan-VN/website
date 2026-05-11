@@ -14,3 +14,11 @@ export const AppShellTemplate = (props, state) => {
     );
 };
  
+// Thêm layer chứa cửa sổ riêng biệt
+export const AppShellTemplate = (props, state) => {
+    return Renderer.createElement('div', { className: 'aoi-app-shell' },
+        Renderer.createElement('header', { className: 'aoi-shell-header' }, 'Aoi OS'),
+        Renderer.createElement('div', { id: 'aoi-window-layer', className: 'aoi-window-container' }), // Window Layer
+        Renderer.createElement('main', { id: 'aoi-main-viewport' })
+    );
+};
