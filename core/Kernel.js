@@ -3,6 +3,8 @@ import { Router } from '../runtime/Router.js';
 import { DesktopPage } from '../pages/DesktopPage.js';
 import { SettingsPage } from '../pages/SettingsPage.js'; // Giả định đã tạo tương tự DesktopPage
 import { AppShell } from '../components/AppShell/AppShell.js';
+import { Taskbar } from '../components/Taskbar/Taskbar.js';
+import { Window } from '../components/Window/Window.js';
 
 class Kernel {
     async boot() {
