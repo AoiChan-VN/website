@@ -1,43 +1,41 @@
 import { registry } from '../runtime/Registry.js';
-import { eventBus } from '../system/EventBus.js';
-import { AppService } from '../services/AppService.js';
-import { Dashboard } from '../components/Dashboard/Dashboard.js';
+import { store } from '../reactivity/Store.js';
+import { PluginLoader } from './Plugin.js';
+import { LoggerPlugin } from '../plugins/LoggerPlugin.js';
 import { AppShell } from '../components/AppShell/AppShell.js';
 
 class Kernel {
     async boot() {
         try {
-            // 1. Register Services
-            registry.registerService('AppService', new AppService());
+            // 1. Khởi tạo Global State
+            this.#initGlobalState();
 
-            // 2. Register Components
-            registry.registerComponent('Dashboard', Dashboard);
+            // 2. Load Plugins
+            await PluginLoader.load(this, registry, [LoggerPlugin]);
+
+            // 3. Register Core Components
             registry.registerComponent('AppShell', AppShell);
 
-            // 3. Listen System Events
-            eventBus.on('SYS_NOTIFICATION', (data) => {
-                console.log(`[OS Notification]: ${data.message}`);
-            });
-
-            // 4. Initial Render
             this.#launchUI();
         } catch (error) {
             console.error('Kernel Panic:', error);
         }
     }
 
+    #initGlobalState() {
+        store.define('user', { name: 'Guest', role: 'admin' });
+        store.define('theme', 'dark');
+        store.define('isSidebarOpen', true);
+        
+        // Debug mode
+        window.__AOI_DEBUG_STATE__ = store; 
+    }
+
     #launchUI() {
-        const rootContainer = document.getElementById('aoi-runtime-root');
+        const root = document.getElementById('aoi-runtime-root');
         const ShellClass = registry.resolveComponent('AppShell');
-        const shell = new ShellClass({ title: 'AOI RUNTIME OS' });
-        
-        shell.mount(rootContainer);
-        
-        // Mount Dashboard vào viewport chính
-        const viewport = document.getElementById('aoi-main-viewport');
-        const DashClass = registry.resolveComponent('Dashboard');
-        const dash = new DashClass();
-        dash.mount(viewport);
+        const shell = new ShellClass({ title: 'AOI OS PRO' });
+        shell.mount(root);
     }
 }
 
