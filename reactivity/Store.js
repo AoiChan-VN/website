@@ -1,4 +1,4 @@
-import { CreateSignal } from './Signal.js';
+import { createSignal } from './Signal.js';
 
 /**
  * Global Store: Quản lý trạng thái tập trung dựa trên Signals.
