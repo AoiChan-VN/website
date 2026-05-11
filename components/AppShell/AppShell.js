@@ -1,4 +1,5 @@
 import { Component } from '../../core/Component.js';
+import { registry } from '../../runtime/Registry.js';
 import { AppShellTemplate } from './AppShell.template.js';
 import { eventBus } from '../../system/EventBus.js';
 import { Renderer } from '../../runtime/Renderer.js';
