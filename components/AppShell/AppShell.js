@@ -1,33 +1,18 @@
 import { Component } from '../../core/Component.js';
-import { registry } from '../../runtime/Registry.js';
-import { AppShellTemplate } from './AppShell.template.js';
-import { eventBus } from '../../system/EventBus.js';
 import { Renderer } from '../../runtime/Renderer.js';
+import { registry } from '../../runtime/Registry.js';
 
 export class AppShell extends Component {
     onMount() {
-        // Mount Taskbar vào Shell
+        // Mount Taskbar khi Shell sẵn sàng
         const TaskbarClass = registry.resolveComponent('Taskbar');
-        const taskbar = new TaskbarClass();
-        taskbar.mount(this.getElement()); // Mount trực tiếp vào container của Shell
+        new TaskbarClass().mount(this.element);
     }
-
-    // Helper để lấy element của chính component
-    getElement() {
-        return document.querySelector('.aoi-app-shell');
-    }
-}
-    
-        // Lắng nghe sự kiện chuyển trang nội bộ
-        eventBus.on('ROUTER_CHANGE', ({ component: PageClass }) => {
-            const viewport = document.getElementById('aoi-main-viewport');
-            viewport.innerHTML = '';
-            const page = new PageClass();
-            page.mount(viewport);
-        });
-    }
-
     render() {
-        return AppShellTemplate(this.props, this.state);
+        return Renderer.createElement('div', { className: 'aoi-app-shell' },
+            Renderer.createElement('header', { className: 'aoi-shell-header' }, 'Aoi Runtime OS'),
+            Renderer.createElement('div', { id: 'aoi-window-layer', className: 'aoi-window-container' }),
+            Renderer.createElement('main', { id: 'aoi-viewport' }, 'System Desktop Ready.')
+        );
     }
 }
