@@ -1,0 +1,101 @@
+.package-manager{
+  height:100%;
+
+  display:flex;
+  flex-direction:column;
+
+  background:
+    rgba(12,14,20,.92);
+}
+
+.package-header{
+  padding:22px;
+
+  border-bottom:
+    1px solid rgba(255,255,255,.06);
+
+  font-size:20px;
+  font-weight:700;
+}
+
+.package-grid{
+  flex:1;
+
+  overflow:auto;
+
+  display:grid;
+
+  grid-template-columns:
+    repeat(auto-fill,minmax(280px,1fr));
+
+  gap:20px;
+
+  padding:24px;
+}
+
+.package-card{
+  background:
+    rgba(255,255,255,.04);
+
+  border:
+    1px solid rgba(255,255,255,.06);
+
+  border-radius:24px;
+
+  overflow:hidden;
+}
+
+.package-cover{
+  height:180px;
+
+  display:flex;
+  align-items:center;
+  justify-content:center;
+}
+
+.package-cover img{
+  width:88px;
+  height:88px;
+
+  object-fit:contain;
+}
+
+.package-body{
+  padding:18px;
+}
+
+.package-title{
+  font-size:16px;
+  font-weight:700;
+
+  margin-bottom:10px;
+}
+
+.package-description{
+  font-size:13px;
+
+  color:var(--sys-text-soft);
+
+  line-height:1.7;
+}
+
+.package-actions{
+  margin-top:18px;
+}
+
+.package-install{
+  width:100%;
+
+  height:42px;
+
+  border:none;
+
+  border-radius:14px;
+
+  background:
+    rgba(124,92,255,.18);
+
+  color:#fff;
+
+  cursor:pointer;
+} 
