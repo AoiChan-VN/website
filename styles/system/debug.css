@@ -1,0 +1,39 @@
+.system-debug{
+  position:absolute;
+
+  right:18px;
+  bottom:110px;
+
+  width:240px;
+
+  padding:16px;
+
+  border-radius:18px;
+
+  background:
+    rgba(10,12,16,.82);
+
+  border:
+    1px solid rgba(255,255,255,.06);
+
+  backdrop-filter:blur(20px);
+
+  z-index:1500;
+
+  font-size:12px;
+
+  line-height:1.8;
+}
+
+.debug-title{
+  font-weight:700;
+
+  margin-bottom:10px;
+}
+
+.debug-item{
+  display:flex;
+  justify-content:space-between;
+
+  color:var(--sys-text-soft);
+} 
