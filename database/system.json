@@ -1,0 +1,10 @@
+{
+  "id": "nova-system",
+  "name": "Nova OS",
+
+  "wallpaper": "./assets/wallpapers/main.webp",
+
+  "language": "en",
+
+  "theme": "dark"
+} 
