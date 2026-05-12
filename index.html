@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+  <meta charset="UTF-8" />
+
+  <meta
+    name="viewport"
+    content="width=device-width, initial-scale=1.0"
+  />
+
+  <meta
+    http-equiv="X-UA-Compatible"
+    content="IE=edge"
+  />
+
+  <title>Nova System</title>
+
+  <meta
+    name="description"
+    content="Vanilla Web Operating System"
+  />
+
+  <link
+    rel="icon"
+    href="./favicon.ico"
+  />
+
+  <link
+    rel="stylesheet"
+    href="./styles/main.css"
+  />
+
+</head>
+
+<body>
+
+  <div id="system-shell">
+
+    <div id="boot-screen">
+
+      <div class="boot-center">
+
+        <div class="boot-logo">
+          NOVA
+        </div>
+
+        <div class="boot-loader">
+          <span></span>
+          <span></span>
+          <span></span>
+        </div>
+
+      </div>
+
+    </div>
+
+    <div id="desktop-layer"></div>
+
+    <div id="window-layer"></div>
+
+    <div id="overlay-layer"></div>
+
+  </div>
+
+  <script
+    type="module"
+    src="./system/boot/boot.js"
+  ></script>
+
+</body>
+
+</html> 
