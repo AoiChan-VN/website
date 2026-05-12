@@ -28,6 +28,12 @@ from "../services/theme.js";
 import { WallpaperService }
 from "../services/wallpaper.js";
 
+import { MetricsService }
+from "../services/metrics.js";
+
+import { DebugConsole }
+from "../ui/console.js";
+
 export const Runtime = {
 
   desktop:null,
@@ -69,6 +75,10 @@ export const Runtime = {
     WallpaperService.initialize();
 
     Router.initialize();
+
+    MetricsService.initialize();
+
+    DebugConsole.initialize();
 
     NotificationCenter.push({
       title:"Nova OS",
