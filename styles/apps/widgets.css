@@ -1,0 +1,41 @@
+.desktop-widget-layer{
+  position:absolute;
+
+  top:62px;
+  right:18px;
+
+  width:320px;
+
+  display:flex;
+  flex-direction:column;
+  gap:16px;
+
+  z-index:70;
+}
+
+.desktop-widget{
+  padding:18px;
+
+  border-radius:22px;
+
+  background:
+    rgba(18,20,28,.72);
+
+  border:
+    1px solid rgba(255,255,255,.06);
+
+  backdrop-filter:blur(22px);
+}
+
+.widget-title{
+  font-size:13px;
+  font-weight:700;
+
+  margin-bottom:12px;
+}
+
+.widget-content{
+  color:var(--sys-text-soft);
+
+  line-height:1.7;
+} 
