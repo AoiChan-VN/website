@@ -1,3 +1,12 @@
+import { renderHome }
+from "./views/home.js";
+
+import { renderArticle }
+from "./views/article.js";
+
+import { Fetcher }
+from "../../system/utils/fetcher.js";
+
 export async function createApp(){
 
   const root =
@@ -6,45 +15,69 @@ export async function createApp(){
   root.className =
     "profile-app";
 
-  root.innerHTML = `
-    <div class="profile-home">
+  const home =
+    await renderHome();
 
-      <div class="profile-banner">
+  root.appendChild(home);
 
-        <h1>
-          Fantasy Profiles
-        </h1>
-
-      </div>
-
-      <div class="profile-list">
-
-        <article class="profile-card">
-
-          <img
-            src="./assets/images/frieren.webp"
-            alt="Frieren"
-          >
-
-          <h2>
-            Frieren
-          </h2>
-
-        </article>
-
-      </div>
-
-    </div>
-  `;
+  bindProfileEvents(root);
 
   return {
 
     id:"profile",
 
-    title:"Profile Viewer",
+    title:"Fantasy Profiles",
 
     element:root
 
   };
 
-} 
+}
+
+function bindProfileEvents(
+  root
+){
+
+  const cards =
+    root.querySelectorAll(
+      ".profile-card"
+    );
+
+  for(const card of cards){
+
+    card.addEventListener(
+      "click",
+      async () => {
+
+        const profileId =
+          card.dataset.profile;
+
+        const profile =
+          await Fetcher.json(
+            `./database/fantasy/${profileId}.json`
+          );
+
+        if(
+          !profile.articles?.length
+        ){
+          return;
+        }
+
+        const article =
+          profile.articles[0];
+
+        const view =
+          await renderArticle(
+            article.file
+          );
+
+        root.innerHTML = "";
+
+        root.appendChild(view);
+
+      }
+    );
+
+  }
+
+}
