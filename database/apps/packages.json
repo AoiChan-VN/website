@@ -1,0 +1,11 @@
+{
+  "id": "packages",
+
+  "title": "Packages",
+
+  "icon":
+    "./assets/icons/packages.png",
+
+  "entry":
+    "./system/apps/packages.js"
+} 
