@@ -1,0 +1,27 @@
+{
+  "system": {
+    "id": "nova-core"
+  },
+
+  "apps": {
+
+    "profile": {
+      "id": "profile",
+      "route": "/profile",
+      "entry": "./apps/profile/app.js"
+    },
+
+    "viewer": {
+      "id": "viewer",
+      "route": "/viewer",
+      "entry": "./apps/viewer/app.js"
+    },
+
+    "explorer": {
+      "id": "explorer",
+      "route": "/explorer",
+      "entry": "./apps/explorer/app.js"
+    }
+
+  }
+}
