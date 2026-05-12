@@ -1,5 +1,14 @@
-import { Registry } from "../core/registry.js";
-import { WindowManager } from "../ui/window.js";
+import { Registry }
+from "../core/registry.js";
+
+import { WindowManager }
+from "../ui/window.js";
+
+import { lazyImport }
+from "../core/lazy.js";
+
+import { NotificationCenter }
+from "../ui/notification.js";
 
 export const Mount = {
 
@@ -16,8 +25,17 @@ export const Mount = {
 
     }
 
+    NotificationCenter.push({
+
+      title:"Launching App",
+
+      description:
+        `Loading ${appId}...`
+
+    });
+
     const module =
-      await import(
+      await lazyImport(
         config.entry
       );
 
@@ -36,4 +54,4 @@ export const Mount = {
 
   }
 
-}; 
+};
