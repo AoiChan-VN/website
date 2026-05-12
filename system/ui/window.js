@@ -200,6 +200,10 @@ export const WindowManager = {
       "mouseup",
       () => {
 
+        if (active) {
+          SnapManager.apply(win);
+        }
+
         active = false;
 
       }
