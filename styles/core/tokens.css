@@ -1,0 +1,38 @@
+:root{
+
+  --sys-bg:#08090c;
+
+  --sys-panel:#11131a;
+
+  --sys-panel-2:#181b24;
+
+  --sys-border:#262a35;
+
+  --sys-text:#f5f7ff;
+
+  --sys-text-soft:#9ca3b7;
+
+  --sys-accent:#7c5cff;
+
+  --sys-danger:#ff4d67;
+
+  --sys-radius:18px;
+
+  --sys-shadow:
+    0 10px 30px rgba(0,0,0,.35);
+
+  --sys-blur:blur(18px);
+
+  --dock-height:72px;
+
+  --window-header:54px;
+
+  --anim-fast:.18s;
+
+  --anim-slow:.35s;
+
+  --font-main:
+    Inter,
+    system-ui,
+    sans-serif;
+} 
