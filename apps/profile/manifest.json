@@ -1,0 +1,9 @@
+{
+  "id": "profile",
+
+  "name": "Profile Viewer",
+
+  "icon": "./assets/icons/profile.png",
+
+  "version": "1.0.0"
+} 
