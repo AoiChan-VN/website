@@ -1,6 +1,9 @@
 import { Fetcher }
 from "../../system/utils/fetcher.js";
 
+import { VirtualList }
+from "../../system/components/virtual-list.js";
+
 export async function createApp(){
 
   const root =
@@ -41,6 +44,7 @@ export async function createApp(){
 
         <div
           class="explorer-item active"
+          data-collection="fantasy"
         >
           Fantasy
         </div>
@@ -59,47 +63,81 @@ export async function createApp(){
 
       </div>
 
-      <div class="explorer-grid">
-
-        ${
-          profiles.map(
-            profile => `
-              <article
-                class="explorer-card"
-              >
-
-                <div
-                  class="explorer-card-cover"
-                >
-
-                  <img
-                    src="${profile.avatar}"
-                    alt="${profile.name}"
-                  >
-
-                </div>
-
-                <div
-                  class="explorer-card-body"
-                >
-
-                  <div
-                    class="explorer-card-title"
-                  >
-                    ${profile.name}
-                  </div>
-
-                </div>
-
-              </article>
-            `
-          ).join("")
-        }
-
-      </div>
+      <div
+        class="explorer-grid virtual-grid"
+      ></div>
 
     </section>
   `;
+
+  const grid =
+    root.querySelector(
+      ".virtual-grid"
+    );
+
+  new VirtualList({
+
+    container:grid,
+
+    items:profiles,
+
+    itemHeight:260,
+
+    renderItem(profile){
+
+      const node =
+        document.createElement("article");
+
+      node.className =
+        "explorer-card";
+
+      node.dataset.profile =
+        profile.id;
+
+      node.innerHTML = `
+        <div
+          class="explorer-card-cover"
+        >
+
+          <img
+            src="${profile.avatar}"
+            alt="${profile.name}"
+          >
+
+        </div>
+
+        <div
+          class="explorer-card-body"
+        >
+
+          <div
+            class="explorer-card-title"
+          >
+            ${profile.name}
+          </div>
+
+        </div>
+      `;
+
+      node.addEventListener(
+        "click",
+        () => {
+
+          console.log(
+            "[EXPLORER OPEN]",
+            profile.id
+          );
+
+        }
+      );
+
+      return node;
+
+    }
+
+  });
+
+  bindSidebar(root);
 
   return {
 
@@ -111,4 +149,38 @@ export async function createApp(){
 
   };
 
-} 
+}
+
+function bindSidebar(root){
+
+  const items =
+    root.querySelectorAll(
+      ".explorer-item"
+    );
+
+  for(const item of items){
+
+    item.addEventListener(
+      "click",
+      () => {
+
+        items.forEach(
+          nav => {
+
+            nav.classList.remove(
+              "active"
+            );
+
+          }
+        );
+
+        item.classList.add(
+          "active"
+        );
+
+      }
+    );
+
+  }
+
+}
