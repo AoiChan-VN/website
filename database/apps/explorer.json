@@ -1,0 +1,11 @@
+{
+  "id": "explorer",
+
+  "title": "Explorer",
+
+  "root": "/database",
+
+  "collections": [
+    "fantasy"
+  ]
+} 
