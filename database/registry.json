@@ -6,21 +6,33 @@
   "apps": {
 
     "profile": {
+
       "id": "profile",
+
       "route": "/profile",
-      "entry": "./apps/profile/app.js"
+
+      "entry":
+        "./apps/profile/app.js"
     },
 
     "viewer": {
+
       "id": "viewer",
+
       "route": "/viewer",
-      "entry": "./apps/viewer/app.js"
+
+      "entry":
+        "./apps/viewer/app.js"
     },
 
     "explorer": {
+
       "id": "explorer",
+
       "route": "/explorer",
-      "entry": "./apps/explorer/app.js"
+
+      "entry":
+        "./apps/explorer/app.js"
     }
 
   }
