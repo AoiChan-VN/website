@@ -10,7 +10,9 @@
 @import "./system/dock.css";
 @import "./system/taskbar.css";
 @import "./system/menu.css";
+@import "./system/notification.css";
 
+@import "./apps/search.css";
 @import "./apps/viewer.css";
 @import "./apps/explorer.css";
 @import "./apps/profile.css";
