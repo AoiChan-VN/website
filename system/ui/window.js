@@ -106,6 +106,16 @@ export const WindowManager = {
       }
     );
 
+    ProcessManager.create({
+
+      pid:windowId,
+
+      app:id,
+
+      window:win
+
+    });
+
     return win;
 
   },
