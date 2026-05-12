@@ -1,6 +1,9 @@
 import { ProcessManager }
 from "../core/process.js";
 
+import { SnapManager }
+from "./snap.js";
+
 export const WindowManager = {
 
   zIndex:300,
