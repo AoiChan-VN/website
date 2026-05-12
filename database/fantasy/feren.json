@@ -1,0 +1,31 @@
+{
+  "id": "fern",
+
+  "name": "Fern",
+
+  "title": "Disciple Mage",
+
+  "avatar": "./assets/images/fern.webp",
+
+  "description":
+    "Calm and disciplined mage trained by Frieren.",
+
+  "tags": [
+    "mage",
+    "disciple",
+    "fantasy"
+  ],
+
+  "articles": [
+
+    {
+      "id": "profile",
+
+      "title": "Fern Profile",
+
+      "file":
+        "./content/docs/fern/profile.md"
+    }
+
+  ]
+} 
