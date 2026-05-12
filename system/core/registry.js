@@ -1,36 +1,38 @@
 export const Registry = {
 
-  data:null,
+  data:{
+    apps:{}
+  },
 
   async load(){
 
-    const response =
-      await fetch(
-        "./database/registry.json"
-      );
+    const manifests = [
 
-    if(!response.ok){
+      "./database/apps/explorer.json",
+      "./database/apps/packages.json",
+      "./database/apps/terminal.json"
+    ];
 
-      throw new Error(
-        "registry load failed"
-      );
+    for(const path of manifests){
+
+      const response =
+        await fetch(path);
+
+      const app =
+        await response.json();
+
+      this.data.apps[
+        app.id
+      ] = app;
 
     }
 
-    this.data =
-      await response.json();
-
-    console.log(
-      "[REGISTRY LOADED]",
-      this.data
-    );
-
   },
 
-  get(appId){
+  get(id){
 
-    return this.data?.apps?.[appId];
+    return this.data.apps[id];
 
   }
 
-}; 
+};
