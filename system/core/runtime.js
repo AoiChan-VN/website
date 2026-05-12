@@ -1,3 +1,6 @@
+import { Desktop } from "../ui/desktop.js";
+import { Router } from "./router.js";
+
 export const Runtime = {
 
   desktop:null,
@@ -18,6 +21,8 @@ export const Runtime = {
 
     this.renderDesktop();
 
+    Router.initialize();
+
   },
 
   renderDesktop(){
@@ -26,8 +31,14 @@ export const Runtime = {
       <div class="desktop-wallpaper"></div>
 
       <div class="desktop-grid"></div>
+
+      <div class="system-dock"></div>
     `;
+
+    Desktop.render(
+      this.desktop
+    );
 
   }
 
-}; 
+};
