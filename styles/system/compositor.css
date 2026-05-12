@@ -1,0 +1,44 @@
+.system-window{
+  transform-origin:center;
+
+  will-change:
+    transform,
+    opacity;
+
+  transition:
+    box-shadow .18s ease,
+    transform .18s ease;
+}
+
+.system-window.focused{
+  box-shadow:
+    0 28px 80px rgba(0,0,0,.45);
+}
+
+.system-window.minimized{
+  opacity:0;
+
+  pointer-events:none;
+
+  transform:
+    scale(.82)
+    translateY(120px);
+}
+
+.system-window.maximized{
+  top:42px !important;
+  left:0 !important;
+
+  width:100vw !important;
+
+  height:
+    calc(100vh - 42px) !important;
+
+  border-radius:0 !important;
+
+  transform:none !important;
+}
+
+.window-body{
+  contain:layout style paint;
+} 
