@@ -1,0 +1,31 @@
+body{
+  font-family:var(--font-main);
+  background:var(--sys-bg);
+  color:var(--sys-text);
+}
+
+#system-shell{
+  position:relative;
+  width:100vw;
+  height:100vh;
+  overflow:hidden;
+}
+
+#desktop-layer,
+#window-layer,
+#overlay-layer{
+  position:absolute;
+  inset:0;
+}
+
+#desktop-layer{
+  z-index:1;
+}
+
+#window-layer{
+  z-index:20;
+}
+
+#overlay-layer{
+  z-index:100;
+} 
