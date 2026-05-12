@@ -17,3 +17,5 @@
 @import "./apps/explorer.css";
 @import "./apps/profile.css";
 @import "./apps/article.css"; 
+
+@import "./system/debug.css";
