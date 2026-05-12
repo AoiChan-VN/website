@@ -1,0 +1,10 @@
+{
+  "id": "terminal",
+
+  "title": "Terminal",
+
+  "icon": "./assets/icons/terminal.png",
+
+  "entry":
+    "./system/apps/terminal.js"
+} 
