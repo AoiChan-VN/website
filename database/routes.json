@@ -1,0 +1,20 @@
+{
+  "routes": [
+
+    {
+      "path": "/",
+      "app": "desktop"
+    },
+
+    {
+      "path": "/profile/:id",
+      "app": "profile"
+    },
+
+    {
+      "path": "/viewer/:id",
+      "app": "viewer"
+    }
+
+  ]
+} 
