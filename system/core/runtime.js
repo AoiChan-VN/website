@@ -1,5 +1,14 @@
-import { Desktop } from "../ui/desktop.js";
-import { Router } from "./router.js";
+import { Desktop }
+from "../ui/desktop.js";
+
+import { Router }
+from "./router.js";
+
+import { Dock }
+from "../ui/dock.js";
+
+import { Taskbar }
+from "../ui/taskbar.js";
 
 export const Runtime = {
 
@@ -21,6 +30,8 @@ export const Runtime = {
 
     this.renderDesktop();
 
+    Taskbar.initialize();
+
     Router.initialize();
 
   },
@@ -37,6 +48,12 @@ export const Runtime = {
 
     Desktop.render(
       this.desktop
+    );
+
+    Dock.render(
+      this.desktop.querySelector(
+        ".system-dock"
+      )
     );
 
   }
