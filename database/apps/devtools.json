@@ -1,0 +1,19 @@
+{
+  "id": "devtools",
+
+  "title": "DevTools",
+
+  "icon":
+    "./assets/icons/devtools.png",
+
+  "entry":
+    "./system/apps/devtools.js",
+
+  "capabilities": [
+    "filesystem",
+    "system"
+  ],
+
+  "signature":
+    "nova:devtools:trusted"
+} 
