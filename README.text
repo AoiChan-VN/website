@@ -1,0 +1,349 @@
+Aoi-runtime/
+│
+├── index.html
+├── boot.js
+├── sw.js
+├── manifest.webmanifest
+│
+├── assets/
+│   │
+│   ├── icons/
+│   │   ├── cloud.png
+│   │   ├── devtools.png
+│   │   ├── explorer.png
+│   │   ├── packages.png
+│   │   ├── terminal.png
+│   │   ├── wiki.png
+│   │   └── ...
+│   │
+│   ├── wallpapers/
+│   │   ├── default.webp
+│   │   └── ...
+│   │
+│   ├── audio/
+│   │
+│   ├── video/
+│   │
+│   ├── fonts/
+│   │
+│   └── pwa/
+│       ├── icon-192.png
+│       └── icon-512.png
+│
+├── styles/
+│   │
+│   ├── base/
+│   │   ├── reset.css
+│   │   ├── variables.css
+│   │   ├── typography.css
+│   │   └── global.css
+│   │
+│   ├── layout/
+│   │   ├── desktop.css
+│   │   ├── workspace.css
+│   │   ├── taskbar.css
+│   │   └── grid.css
+│   │
+│   ├── components/
+│   │   ├── buttons.css
+│   │   ├── inputs.css
+│   │   ├── menus.css
+│   │   ├── cards.css
+│   │   ├── overlays.css
+│   │   ├── modals.css
+│   │   ├── notifications.css
+│   │   └── widgets.css
+│   │
+│   ├── system/
+│   │   ├── compositor.css
+│   │   ├── dock.css
+│   │   ├── motion.css
+│   │   ├── release.css
+│   │   ├── security.css
+│   │   ├── spaces.css
+│   │   ├── terminal.css
+│   │   ├── window.css
+│   │   └── desktop-effects.css
+│   │
+│   └── apps/
+│       ├── cloud.css
+│       ├── devtools.css
+│       ├── explorer.css
+│       ├── knowledge.css
+│       ├── media.css
+│       ├── packages.css
+│       ├── reader.css
+│       ├── settings.css
+│       ├── terminal.css
+│       ├── wiki.css
+│       └── ...
+│
+├── database/
+│   │
+│   ├── apps/
+│   │   ├── cloud.json
+│   │   ├── devtools.json
+│   │   ├── explorer.json
+│   │   ├── packages.json
+│   │   ├── terminal.json
+│   │   ├── wiki.json
+│   │   └── ...
+│   │
+│   ├── security/
+│   │   └── trusted.json
+│   │
+│   ├── profiles/
+│   │   ├── fantasy/
+│   │   │   ├── frieren.json
+│   │   │   └── ...
+│   │   │
+│   │   ├── music/
+│   │   │   └── ...
+│   │   │
+│   │   └── users/
+│   │       └── ...
+│   │
+│   ├── wiki/
+│   │   ├── index.json
+│   │   ├── nova-runtime.md
+│   │   ├── terminal-engine.md
+│   │   └── ...
+│   │
+│   ├── registry/
+│   │   ├── packages.json
+│   │   ├── extensions.json
+│   │   └── themes.json
+│   │
+│   ├── settings/
+│   │   ├── desktop.json
+│   │   ├── runtime.json
+│   │   ├── ui.json
+│   │   └── system.json
+│   │
+│   └── cache/
+│
+├── docs/
+│   │
+│   ├── guides/
+│   │
+│   ├── sdk/
+│   │
+│   ├── api/
+│   │
+│   └── architecture/
+│
+├── packages/
+│   │
+│   ├── official/
+│   │
+│   ├── community/
+│   │
+│   └── local/
+│
+├── plugins/
+│   │
+│   ├── official/
+│   │
+│   ├── community/
+│   │
+│   └── runtime/
+│
+├── workspace/
+│   │
+│   ├── desktop/
+│   │
+│   ├── downloads/
+│   │
+│   ├── documents/
+│   │
+│   ├── projects/
+│   │
+│   ├── notes/
+│   │
+│   ├── media/
+│   │
+│   └── trash/
+│
+├── system/
+│   │
+│   ├── apps/
+│   │   ├── cloud.js
+│   │   ├── devtools.js
+│   │   ├── explorer.js
+│   │   ├── media.js
+│   │   ├── packages.js
+│   │   ├── reader.js
+│   │   ├── settings.js
+│   │   ├── terminal.js
+│   │   ├── wiki.js
+│   │   └── ...
+│   │
+│   ├── boot/
+│   │   ├── boot.js
+│   │   ├── loader.js
+│   │   ├── mount.js
+│   │   ├── preload.js
+│   │   └── sequence.js
+│   │
+│   ├── cloud/
+│   │   ├── backup.js
+│   │   ├── export.js
+│   │   ├── github.js
+│   │   ├── import.js
+│   │   ├── persistence.js
+│   │   ├── session.js
+│   │   ├── sync.js
+│   │   └── updates.js
+│   │
+│   ├── core/
+│   │   ├── app.js
+│   │   ├── config.js
+│   │   ├── events.js
+│   │   ├── filesystem.js
+│   │   ├── kernel.js
+│   │   ├── packages.js
+│   │   ├── process.js
+│   │   ├── registry.js
+│   │   ├── runtime.js
+│   │   ├── secure-boot.js
+│   │   ├── services.js
+│   │   ├── state.js
+│   │   ├── storage.js
+│   │   ├── threads.js
+│   │   ├── window.js
+│   │   └── workspace.js
+│   │
+│   ├── data/
+│   │   ├── graph.js
+│   │   ├── indexer.js
+│   │   ├── markdown.js
+│   │   ├── parser.js
+│   │   ├── search-engine.js
+│   │   ├── semantic.js
+│   │   ├── tags.js
+│   │   └── wiki-engine.js
+│   │
+│   ├── kernel/
+│   │   ├── cache.js
+│   │   ├── ipc.js
+│   │   ├── memory.js
+│   │   ├── offline.js
+│   │   ├── scheduler.js
+│   │   ├── services.js
+│   │   ├── signals.js
+│   │   ├── tasks.js
+│   │   └── threads.js
+│   │
+│   ├── release/
+│   │   ├── assets.js
+│   │   ├── boot-profiler.js
+│   │   ├── cache.js
+│   │   ├── deployment.js
+│   │   ├── install-runtime.js
+│   │   ├── memory.js
+│   │   ├── optimize.js
+│   │   ├── portable-runtime.js
+│   │   ├── production.js
+│   │   ├── release.js
+│   │   └── runtime-cleaner.js
+│   │
+│   ├── sdk/
+│   │   ├── debugger.js
+│   │   ├── developer-console.js
+│   │   ├── extension-sdk.js
+│   │   ├── manifest-validator.js
+│   │   ├── package-builder.js
+│   │   ├── profiler.js
+│   │   ├── runtime-inspector.js
+│   │   ├── sdk-package-format.json
+│   │   └── sdk.js
+│   │
+│   ├── security/
+│   │   ├── capability.js
+│   │   ├── filesystem-guard.js
+│   │   ├── isolation.js
+│   │   ├── package-signature.js
+│   │   ├── permission-ui.js
+│   │   ├── runtime-security.js
+│   │   ├── secure-storage.js
+│   │   ├── token.js
+│   │   ├── trust.js
+│   │   └── worker-runtime.js
+│   │
+│   ├── services/
+│   │   ├── audio.js
+│   │   ├── clipboard.js
+│   │   ├── media.js
+│   │   ├── metrics.js
+│   │   ├── network.js
+│   │   ├── notification.js
+│   │   ├── search.js
+│   │   ├── settings.js
+│   │   ├── theme.js
+│   │   └── wallpaper.js
+│   │
+│   ├── ui/
+│   │   ├── blur.js
+│   │   ├── cinematic.js
+│   │   ├── compositor-advanced.js
+│   │   ├── console.js
+│   │   ├── desktop.js
+│   │   ├── dock.js
+│   │   ├── gestures-advanced.js
+│   │   ├── gestures.js
+│   │   ├── monitor.js
+│   │   ├── native-runtime.js
+│   │   ├── navigation.js
+│   │   ├── physics.js
+│   │   ├── previews.js
+│   │   ├── spaces.js
+│   │   ├── spring.js
+│   │   ├── widgets.js
+│   │   ├── window-effects.js
+│   │   ├── window-manager.js
+│   │   └── workspace-ui.js
+│   │
+│   ├── utils/
+│   │   ├── array.js
+│   │   ├── crypto.js
+│   │   ├── dom.js
+│   │   ├── fetcher.js
+│   │   ├── format.js
+│   │   ├── path.js
+│   │   ├── storage.js
+│   │   ├── string.js
+│   │   ├── time.js
+│   │   └── uuid.js
+│   │
+│   └── workers/
+│       ├── indexer.worker.js
+│       ├── runtime.worker.js
+│       ├── search.worker.js
+│       └── sync.worker.js
+│
+├── themes/
+│   │
+│   ├── default/
+│   │   ├── theme.css
+│   │   ├── wallpaper.webp
+│   │   └── manifest.json
+│   │
+│   ├── neon/
+│   │
+│   ├── glass/
+│   │
+│   └── midnight/
+│
+└── user/
+    │
+    ├── cache/
+    │
+    ├── config/
+    │
+    ├── data/
+    │
+    ├── logs/
+    │
+    ├── sessions/
+    │
+    └── temp/ 
