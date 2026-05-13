@@ -1,74 +1,114 @@
 <!DOCTYPE html>
+
 <html lang="en">
 
 <head>
 
-  <meta charset="UTF-8" />
+  <meta charset="UTF-8">
 
   <meta
     name="viewport"
-    content="width=device-width, initial-scale=1.0"
-  />
+    content="
+      width=device-width,
+      initial-scale=1.0,
+      viewport-fit=cover
+    "
+  >
+
+  <title>
+    Aoi APP
+  </title>
 
   <meta
-    http-equiv="X-UA-Compatible"
-    content="IE=edge"
-  />
-
-  <title>Aoi System</title>
+    name="theme-color"
+    content="#0b0d12"
+  >
 
   <meta
-    name="description"
-    content="Vanilla Web Operating System"
-  />
+    name="apple-mobile-web-app-capable"
+    content="yes"
+  >
+
+  <meta
+    name="mobile-web-app-capable"
+    content="yes"
+  >
+
+  <meta
+    name="apple-mobile-web-app-status-bar-style"
+    content="black-translucent"
+  >
+
+  <link
+    rel="manifest"
+    href="./manifest.webmanifest"
+  >
 
   <link
     rel="icon"
-    href="./favicon.ico"
-  />
+    href="./assets/icons/favicon.png"
+  >
+
+  <!-- SYSTEM -->
 
   <link
     rel="stylesheet"
-    href="./styles/main.css"
-  />
+    href="./styles/system/release.css"
+  >
+
+  <link
+    rel="stylesheet"
+    href="./styles/system/motion.css"
+  >
+
+  <link
+    rel="stylesheet"
+    href="./styles/system/dock.css"
+  >
+
+  <link
+    rel="stylesheet"
+    href="./styles/system/spaces.css"
+  >
+
+  <link
+    rel="stylesheet"
+    href="./styles/system/security.css"
+  >
+
+  <!-- APPS -->
+
+  <link
+    rel="stylesheet"
+    href="./styles/apps/reader.css"
+  >
+
+  <link
+    rel="stylesheet"
+    href="./styles/apps/knowledge.css"
+  >
+
+  <link
+    rel="stylesheet"
+    href="./styles/apps/cloud.css"
+  >
+
+  <link
+    rel="stylesheet"
+    href="./styles/apps/devtools.css"
+  >
 
 </head>
 
 <body>
 
-  <div id="system-shell">
-
-    <div id="boot-screen">
-
-      <div class="boot-center">
-
-        <div class="boot-logo">
-          AoiChan
-        </div>
-
-        <div class="boot-loader">
-          <span></span>
-          <span></span>
-          <span></span>
-        </div>
-
-      </div>
-
-    </div>
-
-    <div id="desktop-layer"></div>
-
-    <div id="window-layer"></div>
-
-    <div id="overlay-layer"></div>
-
-  </div>
+  <div id="nova-runtime"></div>
 
   <script
     type="module"
-    src="./system/boot/boot.js"
+    src="./boot.js"
   ></script>
 
 </body>
 
-</html> 
+</html>
