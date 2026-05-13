@@ -21,7 +21,15 @@ from "../release/install-runtime.js";
 
 export const Runtime = {
 
+  initialized:false,
+
   async initialize(){
+
+    if(this.initialized){
+      return;
+    }
+
+    this.initialized = true;
 
     MetricsService.initialize();
 
@@ -36,6 +44,10 @@ export const Runtime = {
     await ReleaseRuntime.initialize();
 
     InstallRuntime.initialize();
+
+    console.log(
+      "[Aoi] Runtime initialized"
+    );
 
   }
 
