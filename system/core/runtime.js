@@ -34,6 +34,21 @@ from "../services/metrics.js";
 import { DebugConsole }
 from "../ui/console.js";
 
+import { MetricsService }
+from "../services/metrics.js";
+
+import { DebugConsole }
+from "../ui/console.js";
+
+import { KeyboardNavigation }
+from "../ui/navigation.js";
+
+import { WidgetEngine }
+from "../ui/widgets.js";
+
+import { NativeRuntime }
+from "../ui/native-runtime.js";
+
 export const Runtime = {
 
   desktop:null,
@@ -79,6 +94,16 @@ export const Runtime = {
     MetricsService.initialize();
 
     DebugConsole.initialize();
+
+    MetricsService.initialize();
+
+    DebugConsole.initialize();
+
+    KeyboardNavigation.initialize();
+
+    WidgetEngine.initialize();
+
+    await NativeRuntime.initialize();
 
     NotificationCenter.push({
       title:"Nova OS",
