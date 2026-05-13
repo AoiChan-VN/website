@@ -3,8 +3,17 @@
 
   "title": "Terminal",
 
-  "icon": "./assets/icons/terminal.png",
+  "icon":
+    "./assets/icons/terminal.png",
 
   "entry":
-    "./system/apps/terminal.js"
-} 
+    "./system/apps/terminal.js",
+
+  "capabilities": [
+    "filesystem",
+    "notifications"
+  ],
+
+  "signature":
+    "nova:terminal:trusted"
+}
