@@ -1,61 +1,54 @@
-import { Mount } from "../boot/mount.js";
+import { Registry }
+from "../core/registry.js";
 
-export const Dock = {
+import { Mount }
+from "../boot/mount.js";
 
-  render(container){
+export const DockRuntime = {
 
-    container.innerHTML = `
-      <div
-        class="dock-item"
-        data-app="profile"
-      >
+  async initialize(){
+
+    const dock =
+      document.createElement("div");
+
+    dock.className =
+      "system-dock";
+
+    const apps =
+      Registry.all();
+
+    for(const app of apps){
+
+      const item =
+        document.createElement("button");
+
+      item.className =
+        "dock-item";
+
+      item.innerHTML = `
         <img
-          src="./assets/icons/profile.png"
-          alt="profile"
+          src="${app.icon}"
+          alt="${app.title}"
         >
-      </div>
-
-      <div
-        class="dock-item"
-        data-app="explorer"
-      >
-        <img
-          src="./assets/icons/explorer.png"
-          alt="explorer"
-        >
-      </div>
-
-      <div
-        class="dock-item"
-        data-app="viewer"
-      >
-        <img
-          src="./assets/icons/viewer.png"
-          alt="viewer"
-        >
-      </div>
-    `;
-
-    const items =
-      container.querySelectorAll(
-        ".dock-item"
-      );
-
-    for(const item of items){
+      `;
 
       item.addEventListener(
         "click",
         () => {
 
-          Mount.open(
-            item.dataset.app
-          );
+          Mount.open(app.id);
 
         }
       );
 
+      dock.appendChild(item);
+
     }
+
+    document.body.appendChild(
+      dock
+    );
 
   }
 
-}; 
+};
