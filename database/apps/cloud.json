@@ -1,0 +1,19 @@
+{
+  "id": "cloud",
+
+  "title": "Cloud Runtime",
+
+  "icon":
+    "./assets/icons/cloud.png",
+
+  "entry":
+    "./system/apps/cloud.js",
+
+  "capabilities": [
+    "filesystem",
+    "network"
+  ],
+
+  "signature":
+    "nova:cloud:trusted"
+} 
