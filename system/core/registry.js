@@ -12,7 +12,8 @@ export const Registry = {
       "./database/apps/packages.json",
       "./database/apps/terminal.json",
       "./database/apps/wiki.json",
-      "./database/apps/cloud.json"
+      "./database/apps/cloud.json",
+      "./database/apps/devtools.json"
     ];
 
     for(const path of manifests){
