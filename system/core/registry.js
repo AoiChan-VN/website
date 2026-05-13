@@ -21,6 +21,9 @@ export const Registry = {
       const app =
         await response.json();
 
+      app.capabilities =
+        app.capabilities || [];
+
       this.data.apps[
         app.id
       ] = app;
@@ -32,6 +35,14 @@ export const Registry = {
   get(id){
 
     return this.data.apps[id];
+
+  },
+
+  all(){
+
+    return Object.values(
+      this.data.apps
+    );
 
   }
 
