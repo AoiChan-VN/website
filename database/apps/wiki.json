@@ -1,0 +1,18 @@
+{
+  "id": "wiki",
+
+  "title": "Knowledge Wiki",
+
+  "icon":
+    "./assets/icons/wiki.png",
+
+  "entry":
+    "./system/apps/wiki.js",
+
+  "capabilities": [
+    "filesystem"
+  ],
+
+  "signature":
+    "nova:wiki:trusted"
+} 
