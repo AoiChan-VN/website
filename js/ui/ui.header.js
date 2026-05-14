@@ -1,16 +1,20 @@
 'use strict';
 
-export function createHeader() {
+export function renderHeader() {
 
-    return `
-        <div class="aoi-header-left">
-            <h1>AoiChan Browser Engine</h1>
+    const header = document.getElementById('aoi-header');
+
+    if (!header) {
+        return;
+    }
+
+    header.innerHTML = `
+        <div class="aoi-header-title">
+            AOI Browser
         </div>
 
-        <div class="aoi-header-right">
-            <button id="aoi-settings-button">
-                Settings
-            </button>
+        <div class="aoi-header-actions">
+            <button class="aoi-sidebar-button">+</button>
         </div>
     `;
-} 
+}
