@@ -1,20 +1,18 @@
 'use strict';
 
-export const AOI_CONFIG = {
+export const AOI_CONFIG = Object.freeze({
 
     appName: 'AoiChan Browser Engine',
     version: '1.0.0',
+    theme: 'dark',
 
     cache: {
-        shell: 'aoi-shell-cache-v1',
-        browser: 'aoi-browser-cache-v1'
+        enabled: true,
+        version: 'aoi-shell-cache-v1'
     },
 
     tabs: {
-        limit: 12
-    },
-
-    browser: {
-        homepage: 'https://example.com'
+        max: 20,
+        defaultURL: 'https://example.com'
     }
-}; 
+});
