@@ -1,48 +1,18 @@
 'use strict';
 
 import { bootApplication } from './core/app.boot.js';
-import { createHeader } from './ui/ui.header.js';
-import { createSidebar } from './ui/ui.sidebar.js';
 
-const headerElement = document.getElementById('aoi-header');
-const sidebarElement = document.getElementById('aoi-sidebar');
+import { renderHeader } from './ui/ui.header.js';
+import { renderSidebar } from './ui/ui.sidebar.js';
+import { renderTabs } from './ui/ui.tabs.js';
+import { renderBrowserView } from './ui/ui.browser.js';
 
-initializeApplication();
-
-async function initializeApplication() {
+window.addEventListener('DOMContentLoaded', () => {
 
     bootApplication();
 
-    renderShell();
-
-    await registerServiceWorker();
-}
-
-function renderShell() {
-
-    if (headerElement) {
-        headerElement.innerHTML = createHeader();
-    }
-
-    if (sidebarElement) {
-        sidebarElement.innerHTML = createSidebar();
-    }
-}
-
-async function registerServiceWorker() {
-
-    if (!('serviceWorker' in navigator)) {
-        return;
-    }
-
-    try {
-
-        await navigator.serviceWorker.register('./sw.js');
-
-        console.info('[AOI] Service Worker Registered');
-
-    } catch (error) {
-
-        console.error('[AOI] Service Worker Error', error);
-    }
-} 
+    renderHeader();
+    renderSidebar();
+    renderTabs();
+    renderBrowserView();
+});
