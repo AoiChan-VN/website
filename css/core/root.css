@@ -9,15 +9,6 @@
     --aoi-shadow: 0 8px 24px rgba(0,0,0,.35);
     --aoi-transition: .25s ease;
 
-    --aoi-sidebar-width: 260px;
+    --aoi-sidebar-width: 84px;
     --aoi-header-height: 72px;
-    --aoi-tab-height: 52px;
-
-    --aoi-font: Inter, Arial, sans-serif;
 }
-
-body {
-    background: var(--aoi-bg);
-    color: var(--aoi-text);
-    font-family: var(--aoi-font);
-} 
