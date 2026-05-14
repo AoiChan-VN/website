@@ -1,0 +1,36 @@
+:root {
+  --aoi-sys-bg: #0f1115;
+  --aoi-sys-surface: #181b22;
+  --aoi-sys-surface-alt: #20242d;
+
+  --aoi-sys-primary: #4c8dff;
+  --aoi-sys-secondary: #67e8f9;
+
+  --aoi-sys-text: #f5f7fa;
+  --aoi-sys-text-muted: #9aa4b2;
+
+  --aoi-sys-border: rgba(255,255,255,0.08);
+
+  --aoi-sys-shadow:
+    0 8px 24px rgba(0,0,0,0.28);
+
+  --aoi-sys-radius-sm: 8px;
+  --aoi-sys-radius-md: 14px;
+  --aoi-sys-radius-lg: 20px;
+
+  --aoi-sys-font:
+    Inter,
+    system-ui,
+    sans-serif;
+
+  --aoi-sys-transition:
+    160ms cubic-bezier(.2,.8,.2,1);
+
+  --aoi-sys-topbar-height: 52px;
+  --aoi-sys-tabs-height: 42px;
+  --aoi-sys-sidebar-width: 280px;
+
+  --aoi-sys-z-topbar: 100;
+  --aoi-sys-z-sidebar: 90;
+  --aoi-sys-z-overlay: 999;
+} 
