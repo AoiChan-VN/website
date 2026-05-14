@@ -1,22 +1,16 @@
 'use strict';
 
-export function createSidebar() {
+export function renderSidebar() {
 
-    return `
-        <nav class="aoi-sidebar-nav">
+    const sidebar = document.getElementById('aoi-sidebar');
 
-            <button class="aoi-sidebar-button">
-                Home
-            </button>
+    if (!sidebar) {
+        return;
+    }
 
-            <button class="aoi-sidebar-button">
-                Extensions
-            </button>
-
-            <button class="aoi-sidebar-button">
-                Cookies
-            </button>
-
-        </nav>
+    sidebar.innerHTML = `
+        <button class="aoi-sidebar-button">🏠</button>
+        <button class="aoi-sidebar-button">🧩</button>
+        <button class="aoi-sidebar-button">⚙️</button>
     `;
-} 
+}
