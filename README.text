@@ -1,349 +1,267 @@
-Aoi-runtime/
+/aoi-browser-shell
 │
 ├── index.html
-├── boot.js
-├── sw.js
 ├── manifest.webmanifest
+├── service-worker.js
+├── robots.txt
+├── favicon.ico
+├── README.md
 │
-├── assets/
-│   │
-│   ├── icons/
-│   │   ├── cloud.png
-│   │   ├── devtools.png
-│   │   ├── explorer.png
-│   │   ├── packages.png
-│   │   ├── terminal.png
-│   │   ├── wiki.png
-│   │   └── ...
-│   │
-│   ├── wallpapers/
-│   │   ├── default.webp
-│   │   └── ...
-│   │
-│   ├── audio/
-│   │
-│   ├── video/
-│   │
-│   ├── fonts/
-│   │
-│   └── pwa/
-│       ├── icon-192.png
-│       └── icon-512.png
+├── .nojekyll
 │
-├── styles/
-│   │
-│   ├── base/
-│   │   ├── reset.css
-│   │   ├── variables.css
-│   │   ├── typography.css
-│   │   └── global.css
-│   │
-│   ├── layout/
-│   │   ├── desktop.css
-│   │   ├── workspace.css
-│   │   ├── taskbar.css
-│   │   └── grid.css
-│   │
-│   ├── components/
-│   │   ├── buttons.css
-│   │   ├── inputs.css
-│   │   ├── menus.css
-│   │   ├── cards.css
-│   │   ├── overlays.css
-│   │   ├── modals.css
-│   │   ├── notifications.css
-│   │   └── widgets.css
-│   │
-│   ├── system/
-│   │   ├── compositor.css
-│   │   ├── dock.css
-│   │   ├── motion.css
-│   │   ├── release.css
-│   │   ├── security.css
-│   │   ├── spaces.css
-│   │   ├── terminal.css
-│   │   ├── window.css
-│   │   └── desktop-effects.css
-│   │
-│   └── apps/
-│       ├── cloud.css
-│       ├── devtools.css
-│       ├── explorer.css
-│       ├── knowledge.css
-│       ├── media.css
-│       ├── packages.css
-│       ├── reader.css
-│       ├── settings.css
-│       ├── terminal.css
-│       ├── wiki.css
-│       └── ...
+├── .github
+│   └── workflows
+│       └── deploy.yml
 │
-├── database/
+├── /app
 │   │
-│   ├── apps/
-│   │   ├── cloud.json
-│   │   ├── devtools.json
-│   │   ├── explorer.json
-│   │   ├── packages.json
-│   │   ├── terminal.json
-│   │   ├── wiki.json
-│   │   └── ...
+│   ├── /bootstrap
+│   │   ├── app.bootstrap.js
+│   │   ├── app.environment.js
+│   │   ├── app.lifecycle.js
+│   │   └── app.ready.js
 │   │
-│   ├── security/
-│   │   └── trusted.json
-│   │
-│   ├── profiles/
-│   │   ├── fantasy/
-│   │   │   ├── frieren.json
-│   │   │   └── ...
+│   ├── /core
+│   │   ├── /engine
+│   │   │   ├── browser.engine.js
+│   │   │   ├── renderer.engine.js
+│   │   │   ├── sandbox.engine.js
+│   │   │   ├── security.engine.js
+│   │   │   ├── performance.engine.js
+│   │   │   └── lifecycle.engine.js
 │   │   │
-│   │   ├── music/
-│   │   │   └── ...
+│   │   ├── /router
+│   │   │   ├── route.engine.js
+│   │   │   ├── navigation.engine.js
+│   │   │   └── history.engine.js
 │   │   │
-│   │   └── users/
-│   │       └── ...
+│   │   ├── /tabs
+│   │   │   ├── tab.engine.js
+│   │   │   ├── tab.state.js
+│   │   │   ├── tab.session.js
+│   │   │   └── tab.renderer.js
+│   │   │
+│   │   ├── /storage
+│   │   │   ├── storage.engine.js
+│   │   │   ├── indexeddb.engine.js
+│   │   │   ├── localstorage.engine.js
+│   │   │   ├── sessionstorage.engine.js
+│   │   │   └── cache.engine.js
+│   │   │
+│   │   ├── /cookies
+│   │   │   ├── cookie.engine.js
+│   │   │   ├── cookie.policy.js
+│   │   │   ├── cookie.storage.js
+│   │   │   └── cookie.cleanup.js
+│   │   │
+│   │   ├── /permissions
+│   │   │   ├── permission.engine.js
+│   │   │   ├── permission.policy.js
+│   │   │   └── permission.state.js
+│   │   │
+│   │   ├── /extensions
+│   │   │   ├── extension.engine.js
+│   │   │   ├── extension.loader.js
+│   │   │   ├── extension.runtime.js
+│   │   │   ├── extension.sandbox.js
+│   │   │   ├── extension.storage.js
+│   │   │   ├── extension.api.js
+│   │   │   ├── extension.lifecycle.js
+│   │   │   └── extension.registry.js
+│   │   │
+│   │   ├── /network
+│   │   │   ├── network.engine.js
+│   │   │   ├── request.interceptor.js
+│   │   │   ├── response.interceptor.js
+│   │   │   └── connectivity.engine.js
+│   │   │
+│   │   ├── /rendering
+│   │   │   ├── iframe.renderer.js
+│   │   │   ├── reader.renderer.js
+│   │   │   ├── fullscreen.renderer.js
+│   │   │   ├── virtual.renderer.js
+│   │   │   └── rendering.pipeline.js
+│   │   │
+│   │   ├── /events
+│   │   │   ├── event.bus.js
+│   │   │   ├── event.dispatcher.js
+│   │   │   ├── event.registry.js
+│   │   │   └── passive.events.js
+│   │   │
+│   │   ├── /security
+│   │   │   ├── sanitizer.js
+│   │   │   ├── csp.policy.js
+│   │   │   ├── iframe.policy.js
+│   │   │   ├── permission.guard.js
+│   │   │   └── storage.guard.js
+│   │   │
+│   │   ├── /utils
+│   │   │   ├── uuid.js
+│   │   │   ├── deepclone.js
+│   │   │   ├── debounce.js
+│   │   │   ├── throttle.js
+│   │   │   ├── validator.js
+│   │   │   ├── dom.js
+│   │   │   ├── logger.js
+│   │   │   ├── device.js
+│   │   │   ├── platform.js
+│   │   │   └── constants.js
+│   │   │
+│   │   └── /config
+│   │       ├── app.config.js
+│   │       ├── security.config.js
+│   │       ├── rendering.config.js
+│   │       ├── extension.config.js
+│   │       ├── storage.config.js
+│   │       └── router.config.js
 │   │
-│   ├── wiki/
-│   │   ├── index.json
-│   │   ├── nova-runtime.md
-│   │   ├── terminal-engine.md
-│   │   └── ...
+│   ├── /ui
+│   │   ├── /layouts
+│   │   │   ├── shell.layout.js
+│   │   │   ├── sidebar.layout.js
+│   │   │   ├── toolbar.layout.js
+│   │   │   └── tabbar.layout.js
+│   │   │
+│   │   ├── /components
+│   │   │   ├── addressbar.component.js
+│   │   │   ├── navigation.component.js
+│   │   │   ├── tab.component.js
+│   │   │   ├── tablist.component.js
+│   │   │   ├── browserview.component.js
+│   │   │   ├── cookiepanel.component.js
+│   │   │   ├── extensionpanel.component.js
+│   │   │   ├── settings.component.js
+│   │   │   ├── modal.component.js
+│   │   │   ├── dropdown.component.js
+│   │   │   ├── toast.component.js
+│   │   │   └── permission.component.js
+│   │   │
+│   │   ├── /views
+│   │   │   ├── browser.view.js
+│   │   │   ├── settings.view.js
+│   │   │   ├── extensions.view.js
+│   │   │   ├── cookies.view.js
+│   │   │   ├── history.view.js
+│   │   │   └── permissions.view.js
+│   │   │
+│   │   └── /state
+│   │       ├── ui.state.js
+│   │       ├── theme.state.js
+│   │       └── responsive.state.js
 │   │
-│   ├── registry/
-│   │   ├── packages.json
-│   │   ├── extensions.json
-│   │   └── themes.json
+│   ├── /styles
+│   │   ├── main.css
+│   │   │
+│   │   ├── /tokens
+│   │   │   ├── colors.css
+│   │   │   ├── spacing.css
+│   │   │   ├── typography.css
+│   │   │   ├── shadows.css
+│   │   │   ├── radius.css
+│   │   │   ├── transitions.css
+│   │   │   └── zindex.css
+│   │   │
+│   │   ├── /core
+│   │   │   ├── reset.css
+│   │   │   ├── root.css
+│   │   │   ├── base.css
+│   │   │   ├── scrollbars.css
+│   │   │   ├── animations.css
+│   │   │   └── accessibility.css
+│   │   │
+│   │   ├── /layout
+│   │   │   ├── shell.css
+│   │   │   ├── toolbar.css
+│   │   │   ├── sidebar.css
+│   │   │   ├── tabbar.css
+│   │   │   └── browserview.css
+│   │   │
+│   │   ├── /components
+│   │   │   ├── addressbar.css
+│   │   │   ├── buttons.css
+│   │   │   ├── dropdown.css
+│   │   │   ├── modal.css
+│   │   │   ├── tabs.css
+│   │   │   ├── toast.css
+│   │   │   ├── forms.css
+│   │   │   ├── settings.css
+│   │   │   └── permissions.css
+│   │   │
+│   │   ├── /views
+│   │   │   ├── browser.css
+│   │   │   ├── extensions.css
+│   │   │   ├── cookies.css
+│   │   │   ├── history.css
+│   │   │   └── settings.css
+│   │   │
+│   │   └── /responsive
+│   │       ├── mobile.css
+│   │       ├── tablet.css
+│   │       ├── desktop.css
+│   │       └── touch.css
 │   │
-│   ├── settings/
-│   │   ├── desktop.json
-│   │   ├── runtime.json
-│   │   ├── ui.json
-│   │   └── system.json
+│   ├── /database
+│   │   ├── profile.json
+│   │   │
+│   │   ├── /fantasy
+│   │   │   └── /frieren
+│   │   │       └── frieren.json
+│   │   │
+│   │   ├── /extensions
+│   │   │   ├── registry.json
+│   │   │   └── permissions.json
+│   │   │
+│   │   ├── /settings
+│   │   │   ├── defaults.json
+│   │   │   └── permissions.json
+│   │   │
+│   │   └── /cookies
+│   │       └── policies.json
 │   │
-│   └── cache/
+│   ├── /content
+│   │   └── /fantasy
+│   │       └── /frieren
+│   │           └── frieren.md
+│   │
+│   ├── /assets
+│   │   ├── /icons
+│   │   ├── /images
+│   │   ├── /logos
+│   │   ├── /fonts
+│   │   ├── /extensions
+│   │   └── /fantasy
+│   │       └── /frieren
+│   │           └── frieren.webp
+│   │
+│   ├── /extensions
+│   │   ├── /adblock
+│   │   │   ├── manifest.json
+│   │   │   ├── background.js
+│   │   │   ├── content.js
+│   │   │   ├── rules.json
+│   │   │   └── styles.css
+│   │   │
+│   │   ├── /darkmode
+│   │   │   ├── manifest.json
+│   │   │   ├── background.js
+│   │   │   ├── content.js
+│   │   │   └── styles.css
+│   │   │
+│   │   └── /privacy
+│   │       ├── manifest.json
+│   │       ├── background.js
+│   │       ├── content.js
+│   │       └── rules.json
+│   │
+│   └── /workers
+│       ├── render.worker.js
+│       ├── storage.worker.js
+│       ├── extension.worker.js
+│       └── cleanup.worker.js
 │
-├── docs/
-│   │
-│   ├── guides/
-│   │
-│   ├── sdk/
-│   │
-│   ├── api/
-│   │
-│   └── architecture/
-│
-├── packages/
-│   │
-│   ├── official/
-│   │
-│   ├── community/
-│   │
-│   └── local/
-│
-├── plugins/
-│   │
-│   ├── official/
-│   │
-│   ├── community/
-│   │
-│   └── runtime/
-│
-├── workspace/
-│   │
-│   ├── desktop/
-│   │
-│   ├── downloads/
-│   │
-│   ├── documents/
-│   │
-│   ├── projects/
-│   │
-│   ├── notes/
-│   │
-│   ├── media/
-│   │
-│   └── trash/
-│
-├── system/
-│   │
-│   ├── apps/
-│   │   ├── cloud.js
-│   │   ├── devtools.js
-│   │   ├── explorer.js
-│   │   ├── media.js
-│   │   ├── packages.js
-│   │   ├── reader.js
-│   │   ├── settings.js
-│   │   ├── terminal.js
-│   │   ├── wiki.js
-│   │   └── ...
-│   │
-│   ├── boot/
-│   │   ├── boot.js
-│   │   ├── loader.js
-│   │   ├── mount.js
-│   │   ├── preload.js
-│   │   └── sequence.js
-│   │
-│   ├── cloud/
-│   │   ├── backup.js
-│   │   ├── export.js
-│   │   ├── github.js
-│   │   ├── import.js
-│   │   ├── persistence.js
-│   │   ├── session.js
-│   │   ├── sync.js
-│   │   └── updates.js
-│   │
-│   ├── core/
-│   │   ├── app.js
-│   │   ├── config.js
-│   │   ├── events.js
-│   │   ├── filesystem.js
-│   │   ├── kernel.js
-│   │   ├── packages.js
-│   │   ├── process.js
-│   │   ├── registry.js
-│   │   ├── runtime.js
-│   │   ├── secure-boot.js
-│   │   ├── services.js
-│   │   ├── state.js
-│   │   ├── storage.js
-│   │   ├── threads.js
-│   │   ├── window.js
-│   │   └── workspace.js
-│   │
-│   ├── data/
-│   │   ├── graph.js
-│   │   ├── indexer.js
-│   │   ├── markdown.js
-│   │   ├── parser.js
-│   │   ├── search-engine.js
-│   │   ├── semantic.js
-│   │   ├── tags.js
-│   │   └── wiki-engine.js
-│   │
-│   ├── kernel/
-│   │   ├── cache.js
-│   │   ├── ipc.js
-│   │   ├── memory.js
-│   │   ├── offline.js
-│   │   ├── scheduler.js
-│   │   ├── services.js
-│   │   ├── signals.js
-│   │   ├── tasks.js
-│   │   └── threads.js
-│   │
-│   ├── release/
-│   │   ├── assets.js
-│   │   ├── boot-profiler.js
-│   │   ├── cache.js
-│   │   ├── deployment.js
-│   │   ├── install-runtime.js
-│   │   ├── memory.js
-│   │   ├── optimize.js
-│   │   ├── portable-runtime.js
-│   │   ├── production.js
-│   │   ├── release.js
-│   │   └── runtime-cleaner.js
-│   │
-│   ├── sdk/
-│   │   ├── debugger.js
-│   │   ├── developer-console.js
-│   │   ├── extension-sdk.js
-│   │   ├── manifest-validator.js
-│   │   ├── package-builder.js
-│   │   ├── profiler.js
-│   │   ├── runtime-inspector.js
-│   │   ├── sdk-package-format.json
-│   │   └── sdk.js
-│   │
-│   ├── security/
-│   │   ├── capability.js
-│   │   ├── filesystem-guard.js
-│   │   ├── isolation.js
-│   │   ├── package-signature.js
-│   │   ├── permission-ui.js
-│   │   ├── runtime-security.js
-│   │   ├── secure-storage.js
-│   │   ├── token.js
-│   │   ├── trust.js
-│   │   └── worker-runtime.js
-│   │
-│   ├── services/
-│   │   ├── audio.js
-│   │   ├── clipboard.js
-│   │   ├── media.js
-│   │   ├── metrics.js
-│   │   ├── network.js
-│   │   ├── notification.js
-│   │   ├── search.js
-│   │   ├── settings.js
-│   │   ├── theme.js
-│   │   └── wallpaper.js
-│   │
-│   ├── ui/
-│   │   ├── blur.js
-│   │   ├── cinematic.js
-│   │   ├── compositor-advanced.js
-│   │   ├── console.js
-│   │   ├── desktop.js
-│   │   ├── dock.js
-│   │   ├── gestures-advanced.js
-│   │   ├── gestures.js
-│   │   ├── monitor.js
-│   │   ├── native-runtime.js
-│   │   ├── navigation.js
-│   │   ├── physics.js
-│   │   ├── previews.js
-│   │   ├── spaces.js
-│   │   ├── spring.js
-│   │   ├── widgets.js
-│   │   ├── window-effects.js
-│   │   ├── window-manager.js
-│   │   └── workspace-ui.js
-│   │
-│   ├── utils/
-│   │   ├── array.js
-│   │   ├── crypto.js
-│   │   ├── dom.js
-│   │   ├── fetcher.js
-│   │   ├── format.js
-│   │   ├── path.js
-│   │   ├── storage.js
-│   │   ├── string.js
-│   │   ├── time.js
-│   │   └── uuid.js
-│   │
-│   └── workers/
-│       ├── indexer.worker.js
-│       ├── runtime.worker.js
-│       ├── search.worker.js
-│       └── sync.worker.js
-│
-├── themes/
-│   │
-│   ├── default/
-│   │   ├── theme.css
-│   │   ├── wallpaper.webp
-│   │   └── manifest.json
-│   │
-│   ├── neon/
-│   │
-│   ├── glass/
-│   │
-│   └── midnight/
-│
-└── user/
-    │
-    ├── cache/
-    │
-    ├── config/
-    │
-    ├── data/
-    │
-    ├── logs/
-    │
-    ├── sessions/
-    │
-    └── temp/ 
+└── /docs
+    ├── architecture.md
+    ├── dependency-map.md
+    ├── extension-api.md
+    ├── rendering-pipeline.md
+    └── security-model.md
