@@ -1,8 +1,8 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
+
     <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
     <title>AoiChan Browser Engine</title>
@@ -19,43 +19,36 @@
     <link rel="stylesheet" href="./css/core/layout.css">
 
     <link rel="stylesheet" href="./css/themes/dark.css">
-    <link rel="stylesheet" href="./css/themes/light.css">
 
     <link rel="stylesheet" href="./css/components/header.css">
     <link rel="stylesheet" href="./css/components/sidebar.css">
     <link rel="stylesheet" href="./css/components/browser.css">
     <link rel="stylesheet" href="./css/components/tabs.css">
-    <link rel="stylesheet" href="./css/components/extension.css">
     <link rel="stylesheet" href="./css/components/settings.css">
+    <link rel="stylesheet" href="./css/components/extension.css">
 
     <link rel="stylesheet" href="./css/pages/home.css">
-    <link rel="stylesheet" href="./css/pages/dashboard.css">
 
     <link rel="stylesheet" href="./css/utilities/spacing.css">
     <link rel="stylesheet" href="./css/utilities/flex.css">
     <link rel="stylesheet" href="./css/utilities/visibility.css">
+
 </head>
 <body>
 
     <div id="aoi-app" class="aoi-app">
 
-        <header id="aoi-header" class="aoi-header"></header>
-
         <aside id="aoi-sidebar" class="aoi-sidebar"></aside>
 
-        <main id="aoi-browser" class="aoi-browser">
+        <main id="aoi-main" class="aoi-main">
 
-            <section id="aoi-tabs" class="aoi-tabs"></section>
+            <header id="aoi-header" class="aoi-header"></header>
 
-            <section id="aoi-render" class="aoi-render">
+            <section id="aoi-browser-shell" class="aoi-browser-shell">
 
-                <iframe
-                    id="aoi-webview"
-                    class="aoi-webview"
-                    title="AOI Browser View"
-                    loading="lazy"
-                    referrerpolicy="strict-origin-when-cross-origin">
-                </iframe>
+                <div id="aoi-tabs" class="aoi-tabs"></div>
+
+                <div id="aoi-browser-view" class="aoi-browser-view"></div>
 
             </section>
 
