@@ -1,0 +1,49 @@
+.aoi-app {
+    display: grid;
+    grid-template-columns: var(--aoi-sidebar-width) 1fr;
+    grid-template-rows: var(--aoi-header-height) 1fr;
+    width: 100vw;
+    height: 100vh;
+    overflow: hidden;
+}
+
+.aoi-header {
+    grid-column: 1 / 3;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 0 20px;
+    border-bottom: 1px solid var(--aoi-border);
+    background: rgba(0,0,0,.45);
+    backdrop-filter: blur(14px);
+}
+
+.aoi-sidebar {
+    border-right: 1px solid var(--aoi-border);
+    background: rgba(255,255,255,.02);
+    overflow-y: auto;
+}
+
+.aoi-browser {
+    display: flex;
+    flex-direction: column;
+    overflow: hidden;
+}
+
+.aoi-tabs {
+    height: var(--aoi-tab-height);
+    border-bottom: 1px solid var(--aoi-border);
+    background: rgba(255,255,255,.03);
+}
+
+.aoi-render {
+    flex: 1;
+    overflow: hidden;
+}
+
+.aoi-webview {
+    width: 100%;
+    height: 100%;
+    border: none;
+    background: #ffffff;
+} 
