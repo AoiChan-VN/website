@@ -1,114 +1,69 @@
 <!DOCTYPE html>
-
 <html lang="en">
-
 <head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-  <meta charset="UTF-8">
+    <title>AoiChan Browser Engine</title>
 
-  <meta
-    name="viewport"
-    content="
-      width=device-width,
-      initial-scale=1.0,
-      viewport-fit=cover
-    "
-  >
+    <meta name="theme-color" content="#050505">
+    <meta name="description" content="AoiChan Browser Engine Vanilla Static Shell">
 
-  <title>
-    Aoi APP
-  </title>
+    <link rel="manifest" href="./manifest.json">
 
-  <meta
-    name="theme-color"
-    content="#0b0d12"
-  >
+    <link rel="stylesheet" href="./css/core/reset.css">
+    <link rel="stylesheet" href="./css/core/root.css">
+    <link rel="stylesheet" href="./css/core/typography.css">
+    <link rel="stylesheet" href="./css/core/animation.css">
+    <link rel="stylesheet" href="./css/core/layout.css">
 
-  <meta
-    name="apple-mobile-web-app-capable"
-    content="yes"
-  >
+    <link rel="stylesheet" href="./css/themes/dark.css">
+    <link rel="stylesheet" href="./css/themes/light.css">
 
-  <meta
-    name="mobile-web-app-capable"
-    content="yes"
-  >
+    <link rel="stylesheet" href="./css/components/header.css">
+    <link rel="stylesheet" href="./css/components/sidebar.css">
+    <link rel="stylesheet" href="./css/components/browser.css">
+    <link rel="stylesheet" href="./css/components/tabs.css">
+    <link rel="stylesheet" href="./css/components/extension.css">
+    <link rel="stylesheet" href="./css/components/settings.css">
 
-  <meta
-    name="apple-mobile-web-app-status-bar-style"
-    content="black-translucent"
-  >
+    <link rel="stylesheet" href="./css/pages/home.css">
+    <link rel="stylesheet" href="./css/pages/dashboard.css">
 
-  <link
-    rel="manifest"
-    href="./manifest.webmanifest"
-  >
-
-  <link
-    rel="icon"
-    href="./assets/icons/favicon.png"
-  >
-
-  <!-- SYSTEM -->
-
-  <link
-    rel="stylesheet"
-    href="./styles/system/release.css"
-  >
-
-  <link
-    rel="stylesheet"
-    href="./styles/system/motion.css"
-  >
-
-  <link
-    rel="stylesheet"
-    href="./styles/system/dock.css"
-  >
-
-  <link
-    rel="stylesheet"
-    href="./styles/system/spaces.css"
-  >
-
-  <link
-    rel="stylesheet"
-    href="./styles/system/security.css"
-  >
-
-  <!-- APPS -->
-
-  <link
-    rel="stylesheet"
-    href="./styles/apps/reader.css"
-  >
-
-  <link
-    rel="stylesheet"
-    href="./styles/apps/knowledge.css"
-  >
-
-  <link
-    rel="stylesheet"
-    href="./styles/apps/cloud.css"
-  >
-
-  <link
-    rel="stylesheet"
-    href="./styles/apps/devtools.css"
-  >
-
+    <link rel="stylesheet" href="./css/utilities/spacing.css">
+    <link rel="stylesheet" href="./css/utilities/flex.css">
+    <link rel="stylesheet" href="./css/utilities/visibility.css">
 </head>
-
 <body>
 
-  <div id="nova-runtime"></div>
+    <div id="aoi-app" class="aoi-app">
 
-  <script
-    type="module"
-    src="./boot.js"
-  ></script>
+        <header id="aoi-header" class="aoi-header"></header>
+
+        <aside id="aoi-sidebar" class="aoi-sidebar"></aside>
+
+        <main id="aoi-browser" class="aoi-browser">
+
+            <section id="aoi-tabs" class="aoi-tabs"></section>
+
+            <section id="aoi-render" class="aoi-render">
+
+                <iframe
+                    id="aoi-webview"
+                    class="aoi-webview"
+                    title="AOI Browser View"
+                    loading="lazy"
+                    referrerpolicy="strict-origin-when-cross-origin">
+                </iframe>
+
+            </section>
+
+        </main>
+
+    </div>
+
+    <script type="module" src="./js/main.js"></script>
 
 </body>
-
 </html>
