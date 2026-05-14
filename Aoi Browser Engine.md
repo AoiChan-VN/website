@@ -1,4 +1,4 @@
-# AOI Browser Shell Engine
+# AOI Browser Engine
 
 ## Core Mission
 
@@ -652,7 +652,7 @@ AI đọc blueprint phải hiểu:
 # SYSTEM IDENTITY
 
 Tên hệ thống:
-AOI Browser Shell Engine
+AoiChan Browser Engine
 
 Engine Type:
 Vanilla Static Browser Shell
