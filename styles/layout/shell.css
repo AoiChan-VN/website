@@ -5,11 +5,11 @@
   display: grid;
 
   grid-template-columns:
-    var(--aoi-sys-sidebar-width)
+    var(--aoi-sidebar-width)
     1fr;
 
   grid-template-rows:
-    var(--aoi-sys-topbar-height)
+    var(--aoi-topbar-height)
     1fr;
 
   grid-template-areas:
@@ -18,5 +18,5 @@
 
   overflow: hidden;
 
-  background: var(--aoi-sys-bg);
+  background: var(--aoi-bg);
 } 
