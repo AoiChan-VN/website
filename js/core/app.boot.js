@@ -2,7 +2,25 @@
 
 export function bootApplication() {
 
-    document.documentElement.setAttribute('data-engine', 'aoi-browser-engine');
+    console.log('[AOI] Boot Engine');
 
-    console.info('[AOI] Application Booted');
-} 
+    registerServiceWorker();
+}
+
+async function registerServiceWorker() {
+
+    if (!('serviceWorker' in navigator)) {
+        return;
+    }
+
+    try {
+
+        await navigator.serviceWorker.register('./sw.js');
+
+        console.log('[AOI] Service Worker Registered');
+
+    } catch (error) {
+
+        console.error('[AOI] Service Worker Error', error);
+    }
+}
