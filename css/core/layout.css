@@ -1,0 +1,93 @@
+/* css/core/layout.css */
+
+.aoi-app {
+    display: grid;
+
+    grid-template-columns:
+        var(--aoi-sidebar-width)
+        1fr;
+
+    min-height: 100vh;
+}
+
+.aoi-sidebar {
+    position: fixed;
+
+    inset: 0 auto 0 0;
+
+    width:
+        var(--aoi-sidebar-width);
+
+    background:
+        var(--aoi-color-surface);
+
+    border-right:
+        1px solid var(--aoi-color-border);
+
+    z-index:
+        var(--aoi-z-sidebar);
+}
+
+.aoi-main {
+    margin-left:
+        var(--aoi-sidebar-width);
+
+    min-height: 100vh;
+
+    display: flex;
+    flex-direction: column;
+}
+
+.aoi-topbar {
+    height:
+        var(--aoi-topbar-height);
+
+    display: flex;
+    align-items: center;
+
+    padding:
+        0 var(--aoi-space-4);
+
+    border-bottom:
+        1px solid var(--aoi-color-border);
+
+    background:
+        var(--aoi-color-surface);
+}
+
+.aoi-content {
+    flex: 1;
+
+    padding:
+        var(--aoi-space-5);
+}
+
+.aoi-page {
+    width: 100%;
+    min-height: 100%;
+}
+
+@media (max-width: 960px) {
+
+    .aoi-app {
+        grid-template-columns:
+            1fr;
+    }
+
+    .aoi-sidebar {
+        transform:
+            translateX(-100%);
+
+        transition:
+            transform var(--aoi-transition-normal);
+    }
+
+    .aoi-sidebar.is-open {
+        transform:
+            translateX(0);
+    }
+
+    .aoi-main {
+        margin-left: 0;
+    }
+} 
