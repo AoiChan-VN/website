@@ -1,0 +1,559 @@
+
+```
+
+---
+
+# CORE.md
+
+```md
+# AOI CORE SOURCE
+
+## SOURCE ROLE
+
+Source này chỉ build:
+
+- js/core/
+- js/services/
+- workers/
+- sw.js
+
+CẤM build:
+
+- css/components/
+- database/
+- content/
+- extensions/
+
+---
+
+# CORE RESPONSIBILITY
+
+Source này chịu trách nhiệm:
+
+- app boot
+- router
+- storage
+- worker system
+- browser runtime
+- cache system
+- cookie system
+- fetch system
+- service worker
+
+---
+
+# BUILD ORDER
+
+1. js/core/
+2. js/services/
+3. workers/
+4. sw.js
+
+Không được nhảy phase.
+
+---
+
+# RULE
+
+CẤM:
+
+- rewrite architecture
+- đổi event type
+- đổi cache key
+- đổi import path
+- đổi file structure
+
+Chỉ được:
+
+- extend module
+- thêm runtime logic
+- optimize system
+
+---
+
+# OUTPUT FORMAT
+
+CURRENT FOLDER:
+CURRENT FILE:
+BUILD STATUS:
+NEXT TARGET:
+
+END OF CORE SOURCE
+```
+
+---
+
+# UI.md
+
+```md
+# AOI UI SOURCE
+
+## SOURCE ROLE
+
+Source này chỉ build:
+
+- js/ui/
+- css/core/
+- css/themes/
+- css/components/
+- css/pages/
+- assets/images/
+
+CẤM build:
+
+- workers/
+- database/
+- extensions/
+- js/core/
+
+---
+
+# UI RESPONSIBILITY
+
+Source này chịu trách nhiệm:
+
+- layout
+- responsive system
+- typography
+- animation
+- sidebar UI
+- tabs UI
+- browser UI
+- settings UI
+- theme system
+
+---
+
+# UI SYSTEM LAW
+
+CẤM:
+
+- đổi class name
+- đổi id
+- đổi data-key
+- đổi CSS variable
+- merge CSS lung tung
+
+Phải:
+
+- build theo file
+- finalize từng file
+- giữ đồng bộ naming
+
+---
+
+# UI COMMUNICATION RULE
+
+UI source được phép:
+
+- thêm DOM hook
+- thêm data-key
+- thêm class structure
+
+để source JS hoặc Extension sử dụng.
+
+NHƯNG:
+
+UI source KHÔNG được:
+
+- viết extension runtime
+- viết browser logic
+- viết database logic
+
+---
+
+# BUILD ORDER
+
+1. css/core/
+2. css/themes/
+3. css/components/
+4. css/pages/
+5. js/ui/
+
+END OF UI SOURCE
+```
+
+---
+
+# MODULES.md
+
+```md
+# AOI MODULE SOURCE
+
+## SOURCE ROLE
+
+Source này chỉ build:
+
+- js/modules/browser/
+- js/modules/tabs/
+- js/modules/cookie/
+- js/modules/settings/
+- js/modules/render/
+
+CẤM build:
+
+- css/
+- database/
+- workers/
+- sw.js
+
+---
+
+# MODULE RESPONSIBILITY
+
+Source này chịu trách nhiệm:
+
+- browser feature
+- tabs manager
+- render runtime
+- settings manager
+- cookie manager
+- runtime module logic
+
+---
+
+# MODULE LAW
+
+Modules phải:
+
+- hoạt động độc lập
+- không rewrite core
+- không sửa worker system
+- không phá storage system
+
+---
+
+# MODULE CONNECTION
+
+Modules được phép dùng:
+
+- DOM hook từ UI source
+- API từ CORE source
+- data schema từ DATA source
+
+Nhưng KHÔNG được sửa source gốc.
+
+END OF MODULE SOURCE
+```
+
+---
+
+# EXTENSION.md
+
+```md
+# AOI EXTENSION SOURCE
+
+## SOURCE ROLE
+
+Source này chỉ build:
+
+- extensions/
+- js/modules/extensions/
+- js/core/app.extension.js
+
+CẤM build:
+
+- css/core/
+- database/
+- workers/
+
+---
+
+# EXTENSION RESPONSIBILITY
+
+Source này chịu trách nhiệm:
+
+- extension runtime
+- extension install
+- extension enable
+- extension disable
+- extension uninstall
+- extension manifest
+
+---
+
+# EXTENSION LAW
+
+Mọi extension phải:
+
+- đúng manifest schema
+- không sửa core system
+- không inject hidden tracking
+- không dùng eval()
+- không dùng remote executable script
+
+---
+
+# EXTENSION TREE LAW
+
+Mọi extension bắt buộc:
+
+extensions/
+└── extension-name/
+    ├── manifest.json
+    ├── extension.js
+    ├── extension.css
+    ├── rules.json
+    └── icon.webp
+
+---
+
+# EXTENSION ISOLATION
+
+Extension chỉ được:
+
+- hook vào API system
+- dùng DOM hook
+- dùng extension loader
+
+CẤM:
+
+- rewrite app core
+- overwrite runtime
+- sửa worker event
+
+END OF EXTENSION SOURCE
+```
+
+---
+
+# DATA.md
+
+```md
+# AOI DATA SOURCE
+
+## SOURCE ROLE
+
+Source này chỉ build:
+
+- database/
+- content/
+
+CẤM build:
+
+- js/core/
+- workers/
+- css/
+- extensions/
+
+---
+
+# DATA RESPONSIBILITY
+
+Source này chịu trách nhiệm:
+
+- database schema
+- content structure
+- json content
+- markdown content
+- profile system
+- fantasy/science content
+
+---
+
+# DATABASE LAW
+
+CẤM:
+
+- đổi JSON structure
+- đổi schema key
+- rewrite folder tree
+
+Chỉ được:
+
+- append data
+- thêm content
+- thêm database entry
+
+---
+
+# CONTENT LAW
+
+Content phải:
+
+- portable
+- static hosting compatible
+- GitHub Pages compatible
+- UTF-8 safe
+
+---
+
+# BUILD ORDER
+
+1. database/
+2. content/
+
+END OF DATA SOURCE
+```
+
+---
+
+# GAME.md
+
+```md
+# AOI GAME SOURCE
+
+## SOURCE ROLE
+
+Source này chỉ build:
+
+- content/game/
+- assets/game/
+- js/modules/render/
+
+CẤM build:
+
+- js/core/
+- workers/
+- css/core/
+
+---
+
+# GAME RESPONSIBILITY
+
+Source này chịu trách nhiệm:
+
+- game render layer
+- game UI asset
+- interaction system
+- scene content
+- game database content
+
+---
+
+# GAME LAW
+
+Game system phải:
+
+- chạy bằng Vanilla JS
+- không framework
+- không build tool
+- không fake SPA
+- portable runtime
+
+---
+
+# PERFORMANCE LAW
+
+Game source bắt buộc:
+
+- optimize asset size
+- tránh memory leak
+- không preload vô hạn
+- không spam render loop
+
+---
+
+# GAME CONNECTION
+
+Game source được phép:
+
+- dùng render module
+- dùng UI hook
+- dùng database content
+
+Nhưng KHÔNG được:
+
+- rewrite browser engine
+- rewrite worker system
+- rewrite extension system
+
+END OF GAME SOURCE
+```
+
+---
+
+# FLOW.md
+
+```md
+# AOI BUILD FLOW
+
+## BUILD PIPELINE
+
+PHASE 1
+
+SYSTEM CORE
+
+- js/core/
+- js/services/
+- workers/
+- sw.js
+
+---
+
+PHASE 2
+
+UI SYSTEM
+
+- css/core/
+- css/themes/
+- css/components/
+- css/pages/
+- js/ui/
+
+---
+
+PHASE 3
+
+MODULE SYSTEM
+
+- js/modules/browser/
+- js/modules/tabs/
+- js/modules/settings/
+- js/modules/render/
+
+---
+
+PHASE 4
+
+EXTENSION SYSTEM
+
+- extensions/
+- app.extension.js
+
+---
+
+PHASE 5
+
+DATABASE + CONTENT
+
+- database/
+- content/
+
+---
+
+# EXECUTION RULE
+
+Khi build:
+
+1. Build đúng folder hiện tại
+2. Hoàn thiện toàn bộ file trong folder
+3. Lock folder
+4. Chuyển folder tiếp theo
+
+CẤM:
+
+- build nhảy folder
+- regenerate structure
+- rewrite source khác
+
+---
+
+# CHATGPT FREE OPTIMIZATION
+
+AI bắt buộc:
+
+- build incremental
+- output tối thiểu cần thiết
+- không dump toàn source
+- không lặp code cũ
+- không explain dư thừa
+
+Mục tiêu:
+
+- tránh rate limit
+- tránh token overflow
+- giữ ổn định context
+
+END OF BUILD FLOW
+```
