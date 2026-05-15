@@ -1,0 +1,20 @@
+[
+  {
+    "id": "solaris_order",
+    "type": "faction",
+    "alignment": "lawful",
+    "influence": 92,
+    "territories": [
+      "neo_elysium"
+    ]
+  },
+  {
+    "id": "void_syndicate",
+    "type": "faction",
+    "alignment": "chaotic",
+    "influence": 77,
+    "territories": [
+      "ash_vale"
+    ]
+  }
+] 
