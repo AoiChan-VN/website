@@ -1,0 +1,31 @@
+/* css/themes/light.css */
+
+:root[data-theme='light'] {
+
+    --aoi-color-bg:
+        #f3f5f9;
+
+    --aoi-color-surface:
+        #ffffff;
+
+    --aoi-color-surface-alt:
+        #e8edf5;
+
+    --aoi-color-text:
+        #10131a;
+
+    --aoi-color-text-muted:
+        #5f6b81;
+
+    --aoi-color-border:
+        #d6dce7;
+
+    --aoi-color-primary:
+        #3b6df6;
+
+    --aoi-color-danger:
+        #e54868;
+
+    --aoi-shadow-md:
+        0 10px 24px rgba(15, 23, 42, 0.08);
+} 
