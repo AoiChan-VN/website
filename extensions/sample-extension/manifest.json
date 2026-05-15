@@ -1,0 +1,14 @@
+{
+    "id": "sample-extension",
+    "name": "Sample Extension",
+    "version": "1.0.0",
+    "description": "Aoi runtime sample extension",
+    "author": "Aoi",
+    "entry": "extension.js",
+    "style": "extension.css",
+    "enabled": true,
+    "permissions": [
+        "tabs",
+        "browser"
+    ]
+}
