@@ -1,0 +1,95 @@
+/* css/components/sidebar.css */
+
+.aoi-sidebar {
+    display: flex;
+    flex-direction: column;
+
+    overflow: hidden;
+}
+
+.aoi-sidebar__header {
+    height:
+        var(--aoi-topbar-height);
+
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+
+    padding:
+        0 var(--aoi-space-4);
+
+    border-bottom:
+        1px solid var(--aoi-color-border);
+}
+
+.aoi-sidebar__logo {
+    font-size:
+        var(--aoi-font-size-lg);
+
+    font-weight: 700;
+
+    letter-spacing: 0.04em;
+}
+
+.aoi-sidebar__nav {
+    flex: 1;
+
+    overflow-y: auto;
+
+    padding:
+        var(--aoi-space-3);
+}
+
+.aoi-sidebar__group {
+    display: flex;
+    flex-direction: column;
+    gap: var(--aoi-space-2);
+
+    margin-bottom:
+        var(--aoi-space-4);
+}
+
+.aoi-sidebar__item {
+    display: flex;
+    align-items: center;
+    gap: var(--aoi-space-3);
+
+    min-height: 42px;
+
+    padding:
+        0 var(--aoi-space-3);
+
+    border-radius:
+        var(--aoi-radius);
+
+    color:
+        var(--aoi-color-text-muted);
+
+    transition:
+        background var(--aoi-transition-fast),
+        color var(--aoi-transition-fast);
+}
+
+.aoi-sidebar__item:hover {
+    background:
+        var(--aoi-color-surface-alt);
+
+    color:
+        var(--aoi-color-text);
+}
+
+.aoi-sidebar__item.is-active {
+    background:
+        var(--aoi-color-primary);
+
+    color:
+        #ffffff;
+}
+
+.aoi-sidebar__footer {
+    padding:
+        var(--aoi-space-4);
+
+    border-top:
+        1px solid var(--aoi-color-border);
+}
