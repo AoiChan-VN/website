@@ -1,0 +1,18 @@
+{
+    "runtime": {
+        "autoload": true,
+        "sandbox": true
+    },
+
+    "hooks": [
+        "tabs:create",
+        "tabs:close",
+        "browser:navigated"
+    ],
+
+    "permissions": {
+        "storage": false,
+        "network": false,
+        "worker": false
+    }
+} 
