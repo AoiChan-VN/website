@@ -1,0 +1,11 @@
+/* extensions/sample-extension/extension.css */
+
+[data-extension-sample='enabled'] .aoi-browser {
+    outline:
+        1px solid var(--aoi-color-primary);
+}
+
+[data-extension-sample='enabled'] .aoi-topbar {
+    backdrop-filter:
+        blur(12px);
+} 
