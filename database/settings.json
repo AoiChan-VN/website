@@ -1,0 +1,27 @@
+{
+    "settings": {
+        "theme": {
+            "default": "dark",
+            "available": [
+                "dark",
+                "light"
+            ]
+        },
+
+        "runtime": {
+            "animations": true,
+            "cache": true,
+            "restoreSession": true
+        },
+
+        "browser": {
+            "homepage": "/",
+            "searchEngine": "https://www.google.com/search?q="
+        },
+
+        "tabs": {
+            "max": 20,
+            "restoreOnBoot": true
+        }
+    }
+} 
