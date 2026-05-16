@@ -1,0 +1,16 @@
+{
+    "profiles": [
+        {
+            "id": "default",
+            "name": "Default Profile",
+            "theme": "dark",
+            "createdAt": 1747353600000,
+            "updatedAt": 1747353600000,
+            "preferences": {
+                "animations": true,
+                "sidebarCollapsed": false,
+                "homepage": "/"
+            }
+        }
+    ]
+} 
