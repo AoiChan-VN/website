@@ -5,87 +5,86 @@ import { AppEvents } from './app.events.js';
 class AppPerformance {
 
     constructor() {
-        this.metrics = new Map();
+        this.metrics = {
+            fps: 0,
+            frameTime: 0,
+            frames: 0
+        };
+
+        this.lastFrame = performance.now();
+
+        this.running = false;
     }
 
     initialize() {
+
+        this.running = true;
+
+        this.loop();
 
         AppEvents.emit(
             'performance:ready'
         );
     }
 
-    start(label) {
+    loop() {
 
-        if (!label) {
+        if (!this.running) {
             return;
         }
 
-        this.metrics.set(label, {
-            start:
-                performance.now()
+        requestAnimationFrame((time) => {
+
+            const delta =
+                time - this.lastFrame;
+
+            this.lastFrame = time;
+
+            this.metrics.frameTime =
+                delta;
+
+            this.metrics.fps =
+                Math.round(1000 / delta);
+
+            this.metrics.frames += 1;
+
+            AppEvents.emit(
+                'performance:update',
+                {
+                    metrics: this.metrics
+                }
+            );
+
+            this.loop();
         });
+    }
+
+    stop() {
+
+        this.running = false;
 
         AppEvents.emit(
-            'performance:start',
-            {
-                label
-            }
+            'performance:stop'
         );
     }
 
-    end(label) {
+    getMetrics() {
 
-        const metric =
-            this.metrics.get(label);
+        return {
+            ...this.metrics
+        };
+    }
 
-        if (!metric) {
-            return null;
-        }
+    reset() {
 
-        const duration =
-            performance.now() -
-            metric.start;
-
-        const result = {
-            label,
-            duration,
-            completedAt:
-                Date.now()
+        this.metrics = {
+            fps: 0,
+            frameTime: 0,
+            frames: 0
         };
 
-        this.metrics.set(
-            label,
-            result
-        );
-
         AppEvents.emit(
-            'performance:end',
-            result
-        );
-
-        return result;
-    }
-
-    get(label) {
-
-        return this.metrics.get(label)
-            || null;
-    }
-
-    getAll() {
-
-        return Object.fromEntries(
-            this.metrics.entries()
-        );
-    }
-
-    clear() {
-
-        this.metrics.clear();
-
-        AppEvents.emit(
-            'performance:clear'
+            'performance:reset'
         );
     }
 }
@@ -95,4 +94,4 @@ const AppPerformanceRuntime =
 
 export {
     AppPerformanceRuntime
-}; 
+};
