@@ -6,58 +6,92 @@ class UIBrowser {
 
     constructor() {
         this.viewport = null;
+        this.addressInput = null;
+        this.iframe = null;
     }
 
     initialize() {
 
-        this.viewport =
-            document.querySelector(
-                '[data-browser-viewport]'
-            );
-
-        AppEvents.emit(
-            'ui_browser:ready'
+        this.viewport = document.querySelector('.aoi-browser');
+        this.addressInput = document.querySelector(
+            '.aoi-browser__address-input'
         );
-    }
 
-    render(url = '') {
+        this.iframe = document.querySelector(
+            '.aoi-browser__iframe'
+        );
 
         if (!this.viewport) {
             return;
         }
 
-        this.viewport.innerHTML = `
-            <iframe
-                class="browser-frame"
-                src="${url}">
-            </iframe>
-        `;
-
-        AppEvents.emit(
-            'ui_browser:render',
-            {
-                url
-            }
-        );
+        this.bindEvents();
     }
 
-    clear() {
+    bindEvents() {
 
-        if (!this.viewport) {
+        if (this.addressInput) {
+
+            this.addressInput.addEventListener('keydown', (event) => {
+
+                if (event.key !== 'Enter') {
+                    return;
+                }
+
+                this.navigate(
+                    this.addressInput.value
+                );
+            });
+        }
+
+        AppEvents.on('browser:navigate', ({ url }) => {
+            this.load(url);
+        });
+    }
+
+    navigate(url = '') {
+
+        const normalized = this.normalizeUrl(url);
+
+        this.load(normalized);
+
+        AppEvents.emit('browser:navigated', {
+            url: normalized
+        });
+    }
+
+    load(url) {
+
+        if (!this.iframe) {
             return;
         }
 
-        this.viewport.innerHTML = '';
+        this.iframe.src = url;
 
-        AppEvents.emit(
-            'ui_browser:clear'
-        );
+        if (this.addressInput) {
+            this.addressInput.value = url;
+        }
+    }
+
+    normalizeUrl(url) {
+
+        if (!url) {
+            return 'about:blank';
+        }
+
+        const hasProtocol =
+            /^https?:\/\//i.test(url);
+
+        if (hasProtocol) {
+            return url;
+        }
+
+        return `https://${url}`;
     }
 }
 
-const UIBrowserRuntime =
-    new UIBrowser();
+const BrowserUI = new UIBrowser();
 
 export {
-    UIBrowserRuntime
+    BrowserUI
 };
