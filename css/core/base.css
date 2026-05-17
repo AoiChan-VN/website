@@ -1,72 +1,38 @@
 /* css/core/base.css */
 
-html,
 body {
     background:
-        var(--aoi-color-bg);
+        var(--aoi-bg);
 
     color:
-        var(--aoi-color-text);
+        var(--aoi-text);
 
     font-family:
-        var(--aoi-font-family);
+        Inter,
+        sans-serif;
+
+    overflow: hidden;
 }
 
-body {
-    position: relative;
-
-    min-height: 100vh;
+#app {
+    width: 100vw;
+    height: 100vh;
 }
 
-::selection {
-    background:
-        var(--aoi-color-primary);
-
-    color:
-        #ffffff;
-}
-
-[data-app='booting'] body {
-    pointer-events: none;
-}
-
-[data-app='crashed'] body {
-    opacity: 0.6;
-}
-
-input,
-textarea,
-select {
-    color:
-        var(--aoi-color-text);
-}
-
-button {
-    transition:
-        background var(--aoi-transition-fast),
-        opacity var(--aoi-transition-fast),
-        transform var(--aoi-transition-fast);
-}
-
-button:active {
-    transform:
-        scale(0.98);
+iframe {
+    width: 100%;
+    height: 100%;
+    border: none;
 }
 
 ::-webkit-scrollbar {
     width: 10px;
-    height: 10px;
-}
-
-::-webkit-scrollbar-track {
-    background:
-        transparent;
 }
 
 ::-webkit-scrollbar-thumb {
     background:
-        var(--aoi-color-surface-alt);
+        var(--aoi-surface-alt);
 
     border-radius:
         999px;
-} 
+}
