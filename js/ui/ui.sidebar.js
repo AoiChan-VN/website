@@ -5,62 +5,66 @@ import { AppEvents } from '../services/app.events.js';
 class UISidebar {
 
     constructor() {
-        this.opened = true;
+        this.sidebar = null;
+        this.toggleButton = null;
     }
 
     initialize() {
 
-        this.bind();
+        this.sidebar = document.querySelector('.aoi-sidebar');
+        this.toggleButton = document.querySelector('[data-sidebar-toggle]');
 
-        AppEvents.emit(
-            'ui_sidebar:ready'
-        );
+        if (!this.sidebar) {
+            return;
+        }
+
+        this.bindEvents();
     }
 
-    bind() {
+    bindEvents() {
 
-        document.addEventListener(
-            'click',
-            (event) => {
+        if (this.toggleButton) {
 
-                const target =
-                    event.target;
+            this.toggleButton.addEventListener('click', () => {
+                this.toggle();
+            });
+        }
 
-                if (
-                    target.matches(
-                        '[data-sidebar-toggle]'
-                    )
-                ) {
+        document.addEventListener('click', (event) => {
 
-                    this.toggle();
-                }
+            const item = event.target.closest('[data-route]');
+
+            if (!item) {
+                return;
             }
-        );
+
+            this.setActive(item);
+        });
     }
 
     toggle() {
 
-        this.opened =
-            !this.opened;
+        this.sidebar.classList.toggle('is-open');
 
-        document.body.dataset.sidebar =
-            this.opened
-                ? 'open'
-                : 'closed';
+        AppEvents.emit('sidebar:toggle', {
+            open: this.sidebar.classList.contains('is-open')
+        });
+    }
 
-        AppEvents.emit(
-            'ui_sidebar:toggle',
-            {
-                opened:
-                    this.opened
-            }
-        );
+    setActive(target) {
+
+        const items = this.sidebar.querySelectorAll('.aoi-sidebar__item');
+
+        items.forEach((item) => {
+            item.classList.remove('is-active');
+        });
+
+        target.classList.add('is-active');
     }
 }
 
-const UISidebarRuntime =
-    new UISidebar();
+const SidebarUI = new UISidebar();
 
 export {
-    UISidebarRuntime
+    SidebarUI
 };
