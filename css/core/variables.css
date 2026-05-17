@@ -4,59 +4,115 @@
 
     /* layout */
 
-    --aoi-sidebar-width: 280px;
-    --aoi-topbar-height: 56px;
-    --aoi-tabs-height: 42px;
-    --aoi-radius: 14px;
+    --sidebar-width: 280px;
+
+    --topbar-height: 52px;
+
+    --tabs-height: 42px;
+
+    --statusbar-height: 28px;
+
+    --radius-sm: 8px;
+
+    --radius-md: 14px;
+
+    --radius-lg: 22px;
 
     /* spacing */
 
-    --aoi-space-1: 4px;
-    --aoi-space-2: 8px;
-    --aoi-space-3: 12px;
-    --aoi-space-4: 16px;
-    --aoi-space-5: 20px;
-    --aoi-space-6: 24px;
+    --space-1: 4px;
+
+    --space-2: 8px;
+
+    --space-3: 12px;
+
+    --space-4: 16px;
+
+    --space-5: 20px;
+
+    --space-6: 28px;
 
     /* typography */
 
-    --aoi-font-family:
+    --font-family:
         Inter,
         system-ui,
         sans-serif;
 
-    --aoi-font-size-xs: 12px;
-    --aoi-font-size-sm: 14px;
-    --aoi-font-size-md: 16px;
-    --aoi-font-size-lg: 18px;
-    --aoi-font-size-xl: 22px;
+    --font-size-xs: 11px;
+
+    --font-size-sm: 13px;
+
+    --font-size-md: 14px;
+
+    --font-size-lg: 16px;
+
+    --font-size-xl: 20px;
+
+    /* runtime colors */
+
+    --color-bg:
+        #050505;
+
+    --color-surface:
+        #0f1115;
+
+    --color-surface-2:
+        #171a20;
+
+    --color-surface-3:
+        #1d2129;
+
+    --color-border:
+        rgba(255,255,255,0.08);
+
+    --color-text:
+        #f5f7fa;
+
+    --color-text-muted:
+        rgba(255,255,255,0.52);
+
+    --color-accent:
+        #7c5cff;
+
+    --color-success:
+        #00c896;
+
+    --color-warning:
+        #ffb020;
+
+    --color-danger:
+        #ff5470;
+
+    /* shadows */
+
+    --shadow-sm:
+        0 2px 8px rgba(0,0,0,0.24);
+
+    --shadow-md:
+        0 8px 24px rgba(0,0,0,0.32);
+
+    --shadow-lg:
+        0 14px 40px rgba(0,0,0,0.45);
 
     /* animation */
 
-    --aoi-transition-fast: 120ms ease;
-    --aoi-transition-normal: 220ms ease;
-    --aoi-transition-slow: 360ms ease;
+    --transition-fast:
+        120ms ease;
 
-    /* layers */
+    --transition-normal:
+        220ms ease;
 
-    --aoi-z-sidebar: 200;
-    --aoi-z-overlay: 300;
-    --aoi-z-modal: 400;
+    --transition-slow:
+        420ms ease;
 
-    /* theme */
+    /* z-index */
 
-    --aoi-color-bg: #0f1115;
-    --aoi-color-surface: #181b22;
-    --aoi-color-surface-alt: #20242d;
+    --z-sidebar: 100;
 
-    --aoi-color-text: #f5f7fb;
-    --aoi-color-text-muted: #97a0b5;
+    --z-tabs: 200;
 
-    --aoi-color-border: #2d3442;
+    --z-overlay: 400;
 
-    --aoi-color-primary: #5b8cff;
-    --aoi-color-danger: #ff5f7a;
-
-    --aoi-shadow-md:
-        0 10px 30px rgba(0, 0, 0, 0.24);
+    --z-modal: 1000;
 }
