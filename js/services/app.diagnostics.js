@@ -5,56 +5,93 @@ import { AppEvents } from './app.events.js';
 class AppDiagnostics {
 
     constructor() {
-        this.reports = [];
+        this.runtime = {
+            booted: false,
+            workers: 0,
+            memory: null,
+            visibility: 'visible'
+        };
     }
 
     initialize() {
 
-        this.captureEnvironment();
+        this.bindEvents();
+
+        this.capture();
 
         AppEvents.emit(
             'diagnostics:ready'
         );
     }
 
-    captureEnvironment() {
+    bindEvents() {
 
-        const report = {
-            userAgent:
-                navigator.userAgent,
-            language:
-                navigator.language,
-            online:
-                navigator.onLine,
-            timestamp:
-                Date.now()
-        };
+        AppEvents.on('app:booted', () => {
 
-        this.reports.push(report);
+            this.runtime.booted = true;
+        });
 
-        AppEvents.emit(
-            'diagnostics:captured',
-            report
-        );
+        AppEvents.on('worker:registered', () => {
+
+            this.runtime.workers += 1;
+        });
+
+        AppEvents.on('visibility:update', ({
+            visible
+        }) => {
+
+            this.runtime.visibility =
+                visible
+                    ? 'visible'
+                    : 'hidden';
+        });
     }
 
-    generate() {
+    capture() {
+
+        if (
+            performance &&
+            performance.memory
+        ) {
+
+            this.runtime.memory = {
+                limit:
+                    performance.memory
+                        .jsHeapSizeLimit,
+
+                total:
+                    performance.memory
+                        .totalJSHeapSize,
+
+                used:
+                    performance.memory
+                        .usedJSHeapSize
+            };
+        }
+    }
+
+    getRuntime() {
 
         return {
-            reports:
-                [...this.reports],
-            timestamp:
-                Date.now()
+            ...this.runtime
         };
     }
 
-    clear() {
+    snapshot() {
 
-        this.reports = [];
+        const snapshot = {
+            ...this.runtime,
+            timestamp: Date.now()
+        };
 
         AppEvents.emit(
-            'diagnostics:clear'
+            'diagnostics:snapshot',
+            {
+                snapshot
+            }
         );
+
+        return snapshot;
     }
 }
 
@@ -63,4 +100,4 @@ const AppDiagnosticsRuntime =
 
 export {
     AppDiagnosticsRuntime
-}; 
+};
