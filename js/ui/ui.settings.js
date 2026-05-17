@@ -1,74 +1,72 @@
 // js/ui/ui.settings.js
 
+import { AppStorage } from '../services/app.storage.js';
 import { AppEvents } from '../services/app.events.js';
 
 class UISettings {
 
     constructor() {
-        this.panel = null;
+        this.root = null;
+
+        this.themeSelect = null;
     }
 
     initialize() {
 
-        this.panel =
-            document.querySelector(
-                '[data-settings-panel]'
-            );
+        this.root = document.querySelector('.aoi-settings');
 
-        this.bind();
-
-        AppEvents.emit(
-            'ui_settings:ready'
-        );
-    }
-
-    bind() {
-
-        document.addEventListener(
-            'click',
-            (event) => {
-
-                const target =
-                    event.target;
-
-                if (
-                    target.matches(
-                        '[data-settings-toggle]'
-                    )
-                ) {
-
-                    this.toggle();
-                }
-            }
-        );
-    }
-
-    toggle() {
-
-        if (!this.panel) {
+        if (!this.root) {
             return;
         }
 
-        const opened =
-            this.panel.dataset.open
-                === 'true';
-
-        this.panel.dataset.open =
-            (!opened).toString();
-
-        AppEvents.emit(
-            'ui_settings:toggle',
-            {
-                opened:
-                    !opened
-            }
+        this.themeSelect = this.root.querySelector(
+            '[data-setting-theme]'
         );
+
+        this.bindEvents();
+
+        this.restore();
+    }
+
+    bindEvents() {
+
+        if (this.themeSelect) {
+
+            this.themeSelect.addEventListener('change', (event) => {
+
+                const value = event.target.value;
+
+                this.setTheme(value);
+            });
+        }
+    }
+
+    restore() {
+
+        const theme =
+            AppStorage.get('theme', 'dark');
+
+        this.setTheme(theme);
+
+        if (this.themeSelect) {
+            this.themeSelect.value = theme;
+        }
+    }
+
+    setTheme(theme = 'dark') {
+
+        document.documentElement.dataset.theme = theme;
+
+        AppStorage.set('theme', theme);
+
+        AppEvents.emit('theme:change', {
+            theme
+        });
     }
 }
 
-const UISettingsRuntime =
-    new UISettings();
+const SettingsUI = new UISettings();
 
 export {
-    UISettingsRuntime
+    SettingsUI
 };
