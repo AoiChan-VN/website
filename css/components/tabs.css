@@ -1,89 +1,53 @@
 /* css/components/tabs.css */
 
-.aoi-tabs {
+.ui-tabs {
     display: flex;
-    align-items: stretch;
+    align-items: center;
+    gap: 8px;
 
-    height:
-        var(--aoi-tabs-height);
+    padding: 12px;
 
-    overflow-x: auto;
-    overflow-y: hidden;
+    background:
+        var(--aoi-surface);
 
     border-bottom:
-        1px solid var(--aoi-color-border);
+        1px solid
+        var(--aoi-border);
 
-    background:
-        var(--aoi-color-surface);
+    overflow-x: auto;
 }
 
-.aoi-tab {
-    position: relative;
-
-    display: flex;
-    align-items: center;
-    gap: var(--aoi-space-2);
-
-    min-width: 180px;
-    max-width: 240px;
+.ui-tab {
+    min-width: 160px;
 
     padding:
-        0 var(--aoi-space-4);
+        10px 14px;
 
-    border-right:
-        1px solid var(--aoi-color-border);
+    border-radius:
+        var(--aoi-radius);
+
+    background:
+        var(--aoi-surface-alt);
 
     color:
-        var(--aoi-color-text-muted);
+        var(--aoi-text-soft);
+
+    cursor: pointer;
 
     transition:
-        background var(--aoi-transition-fast),
-        color var(--aoi-transition-fast);
+        all
+        var(--aoi-transition);
 }
 
-.aoi-tab:hover {
+.ui-tab:hover {
+    color:
+        var(--aoi-text);
+}
+
+.ui-tab.active {
     background:
-        var(--aoi-color-surface-alt);
+        var(--aoi-accent);
 
     color:
-        var(--aoi-color-text);
+        #ffffff;
 }
-
-.aoi-tab.is-active {
-    background:
-        var(--aoi-color-bg);
-
-    color:
-        var(--aoi-color-text);
-}
-
-.aoi-tab__title {
-    flex: 1;
-
-    overflow: hidden;
-
-    white-space: nowrap;
-    text-overflow: ellipsis;
-}
-
-.aoi-tab__close {
-    width: 20px;
-    height: 20px;
-
-    display: inline-flex;
-    align-items: center;
-    justify-content: center;
-
-    border-radius: 50%;
-
-    opacity: 0;
-}
-
-.aoi-tab:hover .aoi-tab__close {
-    opacity: 1;
-}
-
-.aoi-tab__close:hover {
-    background:
-        var(--aoi-color-surface-alt);
-} 
