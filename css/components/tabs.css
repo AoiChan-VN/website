@@ -1,53 +1,89 @@
 /* css/components/tabs.css */
 
-[data-tabs] {
+.aoi-tabs {
     display: flex;
-    align-items: center;
-    gap: 8px;
+    align-items: stretch;
 
-    padding: 12px;
-
-    background:
-        var(--aoi-surface);
-
-    border-bottom:
-        1px solid
-        var(--aoi-border);
+    height:
+        var(--aoi-tabs-height);
 
     overflow-x: auto;
+    overflow-y: hidden;
+
+    border-bottom:
+        1px solid var(--aoi-color-border);
+
+    background:
+        var(--aoi-color-surface);
 }
 
-[data-tab-id] {
-    min-width: 160px;
+.aoi-tab {
+    position: relative;
+
+    display: flex;
+    align-items: center;
+    gap: var(--aoi-space-2);
+
+    min-width: 180px;
+    max-width: 240px;
 
     padding:
-        10px 14px;
+        0 var(--aoi-space-4);
 
-    border-radius:
-        var(--aoi-radius);
-
-    background:
-        var(--aoi-surface-alt);
+    border-right:
+        1px solid var(--aoi-color-border);
 
     color:
-        var(--aoi-text-soft);
-
-    cursor: pointer;
+        var(--aoi-color-text-muted);
 
     transition:
-        all
-        var(--aoi-transition);
+        background var(--aoi-transition-fast),
+        color var(--aoi-transition-fast);
 }
 
-[data-tab-id]:hover {
-    color:
-        var(--aoi-text);
-}
-
-[data-tab-active="true"] {
+.aoi-tab:hover {
     background:
-        var(--aoi-accent);
+        var(--aoi-color-surface-alt);
 
     color:
-        #ffffff;
+        var(--aoi-color-text);
+}
+
+.aoi-tab.is-active {
+    background:
+        var(--aoi-color-bg);
+
+    color:
+        var(--aoi-color-text);
+}
+
+.aoi-tab__title {
+    flex: 1;
+
+    overflow: hidden;
+
+    white-space: nowrap;
+    text-overflow: ellipsis;
+}
+
+.aoi-tab__close {
+    width: 20px;
+    height: 20px;
+
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+
+    border-radius: 50%;
+
+    opacity: 0;
+}
+
+.aoi-tab:hover .aoi-tab__close {
+    opacity: 1;
+}
+
+.aoi-tab__close:hover {
+    background:
+        var(--aoi-color-surface-alt);
 }
