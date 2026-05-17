@@ -2,61 +2,36 @@
 
 :root {
 
-    /* layout */
+    --aoi-bg:
+        #0f1117;
 
-    --aoi-sidebar-width: 280px;
-    --aoi-topbar-height: 56px;
-    --aoi-tabs-height: 42px;
-    --aoi-radius: 14px;
+    --aoi-surface:
+        #171923;
 
-    /* spacing */
+    --aoi-surface-alt:
+        #202431;
 
-    --aoi-space-1: 4px;
-    --aoi-space-2: 8px;
-    --aoi-space-3: 12px;
-    --aoi-space-4: 16px;
-    --aoi-space-5: 20px;
-    --aoi-space-6: 24px;
+    --aoi-border:
+        #2d3445;
 
-    /* typography */
+    --aoi-text:
+        #f4f7ff;
 
-    --aoi-font-family:
-        Inter,
-        system-ui,
-        sans-serif;
+    --aoi-text-soft:
+        #a8b0c7;
 
-    --aoi-font-size-xs: 12px;
-    --aoi-font-size-sm: 14px;
-    --aoi-font-size-md: 16px;
-    --aoi-font-size-lg: 18px;
-    --aoi-font-size-xl: 22px;
+    --aoi-accent:
+        #6aa9ff;
 
-    /* animation */
+    --aoi-danger:
+        #ff6b81;
 
-    --aoi-transition-fast: 120ms ease;
-    --aoi-transition-normal: 220ms ease;
-    --aoi-transition-slow: 360ms ease;
+    --aoi-radius:
+        14px;
 
-    /* layers */
+    --aoi-sidebar-width:
+        280px;
 
-    --aoi-z-sidebar: 200;
-    --aoi-z-overlay: 300;
-    --aoi-z-modal: 400;
-
-    /* theme */
-
-    --aoi-color-bg: #0f1115;
-    --aoi-color-surface: #181b22;
-    --aoi-color-surface-alt: #20242d;
-
-    --aoi-color-text: #f5f7fb;
-    --aoi-color-text-muted: #97a0b5;
-
-    --aoi-color-border: #2d3442;
-
-    --aoi-color-primary: #5b8cff;
-    --aoi-color-danger: #ff5f7a;
-
-    --aoi-shadow-md:
-        0 10px 30px rgba(0, 0, 0, 0.24);
-} 
+    --aoi-transition:
+        180ms ease;
+}
