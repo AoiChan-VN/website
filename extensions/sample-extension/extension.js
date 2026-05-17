@@ -1,51 +1,14 @@
-// extensions/sample-extension/extension.js
-
-class SampleExtension {
-
-    constructor() {
-        this.id = 'sample-extension';
-
-        this.enabled = false;
-    }
-
-    async enable() {
-
-        if (this.enabled) {
-            return;
-        }
-
-        this.enabled = true;
-
-        document.documentElement.dataset.extensionSample =
-            'enabled';
-
-        console.info(
-            '[AOI] Sample Extension Enabled'
-        );
-    }
-
-    async disable() {
-
-        if (!this.enabled) {
-            return;
-        }
-
-        this.enabled = false;
-
-        delete document.documentElement.dataset.extensionSample;
-
-        console.info(
-            '[AOI] Sample Extension Disabled'
-        );
-    }
-
-    async initialize() {
-
-        await this.enable();
-    }
+{
+    "id": "sample-extension",
+    "name": "Sample Extension",
+    "version": "1.0.0",
+    "description": "AOI runtime sample extension",
+    "author": "AOI",
+    "entry": "extension.js",
+    "style": "extension.css",
+    "enabled": true,
+    "permissions": [
+        "tabs",
+        "browser"
+    ]
 }
-
-const extension =
-    new SampleExtension();
-
-export default extension; 
