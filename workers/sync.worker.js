@@ -102,4 +102,4 @@ function delay(time = 0) {
 
         setTimeout(resolve, time);
     });
-  } 
+} 
