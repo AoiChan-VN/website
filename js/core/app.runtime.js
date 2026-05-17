@@ -2,106 +2,123 @@
 
 import { AppEvents } from '../services/app.events.js';
 
-class RuntimeState {
+import {
+    AppBootstrapRuntime
+} from './app.bootstrap.js';
+
+import {
+    AppExtensionRuntime
+} from './app.extension.js';
+
+class AppRuntime {
+
     constructor() {
         this.ready = false;
-        this.startedAt = 0;
 
-        this.flags = {
-            booted: false,
-            router: false,
-            workers: false,
-            storage: false
-        };
-
-        this.modules = new Map();
-        this.services = new Map();
-    }
-}
-
-class AppRuntimeClass {
-    constructor() {
-        this.state = new RuntimeState();
+        this.workers = new Map();
     }
 
     async initialize() {
 
-        if (this.state.ready) {
+        if (this.ready) {
             return;
         }
 
-        this.state.startedAt = Date.now();
+        await AppBootstrapRuntime.initialize();
+
+        await AppExtensionRuntime.initialize();
+
+        this.initializeWorkers();
 
         this.bindEvents();
 
-        this.state.flags.booted = true;
-        this.state.ready = true;
+        this.ready = true;
 
-        AppEvents.emit('runtime:initialized', {
-            startedAt: this.state.startedAt
-        });
+        AppEvents.emit('runtime:ready');
+    }
+
+    initializeWorkers() {
+
+        this.registerWorker(
+            'runtime',
+            './workers/runtime.worker.js'
+        );
+
+        this.registerWorker(
+            'cache',
+            './workers/cache.worker.js'
+        );
+
+        this.registerWorker(
+            'sync',
+            './workers/sync.worker.js'
+        );
+
+        this.registerWorker(
+            'render',
+            './workers/render.worker.js'
+        );
+    }
+
+    registerWorker(name, path) {
+
+        if (this.workers.has(name)) {
+            return;
+        }
+
+        try {
+
+            const worker =
+                new Worker(path, {
+                    type: 'module'
+                });
+
+            this.workers.set(name, worker);
+
+            AppEvents.emit('worker:registered', {
+                name
+            });
+
+        } catch (error) {
+
+            console.error(
+                '[AOI] Worker Register Error',
+                error
+            );
+        }
     }
 
     bindEvents() {
 
-        AppEvents.on('workers:ready', () => {
-            this.state.flags.workers = true;
-        });
+        AppEvents.on('runtime:shutdown', () => {
 
-        AppEvents.on('storage:ready', () => {
-            this.state.flags.storage = true;
-        });
-
-        AppEvents.on('router:ready', () => {
-            this.state.flags.router = true;
+            this.destroy();
         });
     }
 
-    registerModule(key, module) {
+    destroy() {
 
-        if (this.state.modules.has(key)) {
-            return;
-        }
+        this.workers.forEach((worker) => {
 
-        this.state.modules.set(key, module);
-
-        AppEvents.emit('runtime:module_registered', {
-            key
+            worker.terminate();
         });
+
+        this.workers.clear();
+
+        this.ready = false;
+
+        AppEvents.emit('runtime:destroyed');
     }
 
-    getModule(key) {
-        return this.state.modules.get(key);
-    }
+    getWorker(name) {
 
-    registerService(key, service) {
-
-        if (this.state.services.has(key)) {
-            return;
-        }
-
-        this.state.services.set(key, service);
-
-        AppEvents.emit('runtime:service_registered', {
-            key
-        });
-    }
-
-    getService(key) {
-        return this.state.services.get(key);
-    }
-
-    isReady() {
-        return this.state.ready;
-    }
-
-    getState() {
-        return this.state;
+        return this.workers.get(name) || null;
     }
 }
 
-const AppRuntime = new AppRuntimeClass();
+const AOIRuntime =
+    new AppRuntime();
 
 export {
-    AppRuntime
-}; 
+    AOIRuntime
+};
