@@ -1,6 +1,6 @@
 /* css/components/tabs.css */
 
-.ui-tabs {
+[data-tabs] {
     display: flex;
     align-items: center;
     gap: 8px;
@@ -17,7 +17,7 @@
     overflow-x: auto;
 }
 
-.ui-tab {
+[data-tab-id] {
     min-width: 160px;
 
     padding:
@@ -39,12 +39,12 @@
         var(--aoi-transition);
 }
 
-.ui-tab:hover {
+[data-tab-id]:hover {
     color:
         var(--aoi-text);
 }
 
-.ui-tab.active {
+[data-tab-active="true"] {
     background:
         var(--aoi-accent);
 
