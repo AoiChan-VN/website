@@ -5,66 +5,62 @@ import { AppEvents } from '../services/app.events.js';
 class UISidebar {
 
     constructor() {
-        this.sidebar = null;
-        this.toggleButton = null;
+        this.opened = true;
     }
 
     initialize() {
 
-        this.sidebar = document.querySelector('.aoi-sidebar');
-        this.toggleButton = document.querySelector('[data-sidebar-toggle]');
+        this.bind();
 
-        if (!this.sidebar) {
-            return;
-        }
-
-        this.bindEvents();
+        AppEvents.emit(
+            'ui_sidebar:ready'
+        );
     }
 
-    bindEvents() {
+    bind() {
 
-        if (this.toggleButton) {
+        document.addEventListener(
+            'click',
+            (event) => {
 
-            this.toggleButton.addEventListener('click', () => {
-                this.toggle();
-            });
-        }
+                const target =
+                    event.target;
 
-        document.addEventListener('click', (event) => {
+                if (
+                    target.matches(
+                        '[data-sidebar-toggle]'
+                    )
+                ) {
 
-            const item = event.target.closest('[data-route]');
-
-            if (!item) {
-                return;
+                    this.toggle();
+                }
             }
-
-            this.setActive(item);
-        });
+        );
     }
 
     toggle() {
 
-        this.sidebar.classList.toggle('is-open');
+        this.opened =
+            !this.opened;
 
-        AppEvents.emit('sidebar:toggle', {
-            open: this.sidebar.classList.contains('is-open')
-        });
-    }
+        document.body.dataset.sidebar =
+            this.opened
+                ? 'open'
+                : 'closed';
 
-    setActive(target) {
-
-        const items = this.sidebar.querySelectorAll('.aoi-sidebar__item');
-
-        items.forEach((item) => {
-            item.classList.remove('is-active');
-        });
-
-        target.classList.add('is-active');
+        AppEvents.emit(
+            'ui_sidebar:toggle',
+            {
+                opened:
+                    this.opened
+            }
+        );
     }
 }
 
-const SidebarUI = new UISidebar();
+const UISidebarRuntime =
+    new UISidebar();
 
 export {
-    SidebarUI
+    UISidebarRuntime
 };
