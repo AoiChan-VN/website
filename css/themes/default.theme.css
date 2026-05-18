@@ -1,0 +1,87 @@
+/* css/themes/default.theme.css */
+
+:root {
+
+    --theme-background:
+        #050505;
+
+    --theme-surface:
+        #0f1115;
+
+    --theme-surface-2:
+        #171a20;
+
+    --theme-surface-3:
+        #20242d;
+
+    --theme-border:
+        rgba(255,255,255,0.08);
+
+    --theme-text:
+        #f5f7fa;
+
+    --theme-text-muted:
+        rgba(255,255,255,0.56);
+
+    --theme-accent:
+        #7c5cff;
+
+    --theme-accent-hover:
+        #9277ff;
+
+    --theme-success:
+        #00c896;
+
+    --theme-warning:
+        #ffb020;
+
+    --theme-danger:
+        #ff5470;
+}
+
+body {
+
+    background:
+        var(--theme-background);
+
+    color:
+        var(--theme-text);
+}
+
+.theme-default .app-sidebar,
+.theme-default .app-topbar,
+.theme-default .app-statusbar {
+
+    background:
+        var(--theme-surface);
+
+    border-color:
+        var(--theme-border);
+}
+
+.theme-default .app-tabs {
+
+    background:
+        var(--theme-surface-2);
+
+    border-color:
+        var(--theme-border);
+}
+
+.theme-default .app-viewport {
+
+    background:
+        #0b0d11;
+}
+
+.theme-default .is-accent {
+
+    color:
+        var(--theme-accent);
+}
+
+.theme-default .is-muted {
+
+    color:
+        var(--theme-text-muted);
+} 
