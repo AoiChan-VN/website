@@ -124,16 +124,17 @@ class UITabs {
             }
         );
     }
-
-    create() {
-
+    
+    create(title = 'New Tab') {
         const id =
             `tab-${Date.now()}`;
-
-        this.tabs.push({
+        
+        const tab = {
             id,
-            title: 'New Tab'
-        });
+            title
+        };
+        
+        this.tabs.push(tab);
 
         this.active = id;
 
@@ -142,9 +143,11 @@ class UITabs {
         AppEvents.emit(
             'ui_tabs:create',
             {
-                id
+                tab
             }
         );
+
+        return tab;
     }
 
     select(id) {
