@@ -6,138 +6,193 @@ class UITabs {
 
     constructor() {
         this.container = null;
-        this.tabs = new Map();
 
-        this.activeTab = null;
+        this.tabs = [
+            {
+                id: 'tab-home',
+                title: 'New Tab'
+            }
+        ];
+
+        this.active =
+            'tab-home';
     }
 
     initialize() {
 
-        this.container = document.querySelector('.aoi-tabs');
+        this.container =
+            document.querySelector(
+                '.app-tabs'
+            );
 
         if (!this.container) {
             return;
         }
 
+        this.render();
+
         this.bindEvents();
+
+        AppEvents.emit(
+            'ui_tabs:ready'
+        );
+    }
+
+    render() {
+
+        this.container.innerHTML = `
+            ${this.tabs.map((tab) => {
+
+                return `
+                    <div
+                        class="tab-item ${
+                            this.active === tab.id
+                                ? 'is-active'
+                                : ''
+                        }"
+                        data-tab="${tab.id}"
+                    >
+
+                        <div
+                            class="tab-favicon"
+                        ></div>
+
+                        <div class="tab-title">
+                            ${tab.title}
+                        </div>
+
+                        <button
+                            class="tab-close"
+                            data-close="${tab.id}"
+                        >
+                            ×
+                        </button>
+
+                    </div>
+                `;
+            }).join('')}
+
+            <button class="tabs-create">
+                +
+            </button>
+        `;
     }
 
     bindEvents() {
 
-        this.container.addEventListener('click', (event) => {
+        this.container.addEventListener(
+            'click',
+            (event) => {
 
-            const tab = event.target.closest('[data-tab-id]');
+                const close =
+                    event.target.closest(
+                        '[data-close]'
+                    );
 
-            if (!tab) {
-                return;
+                if (close) {
+
+                    this.remove(
+                        close.dataset.close
+                    );
+
+                    return;
+                }
+
+                const tab =
+                    event.target.closest(
+                        '[data-tab]'
+                    );
+
+                if (tab) {
+
+                    this.select(
+                        tab.dataset.tab
+                    );
+
+                    return;
+                }
+
+                const create =
+                    event.target.closest(
+                        '.tabs-create'
+                    );
+
+                if (create) {
+
+                    this.create();
+                }
             }
-
-            const close = event.target.closest('[data-tab-close]');
-
-            if (close) {
-
-                this.close(
-                    tab.dataset.tabId
-                );
-
-                return;
-            }
-
-            this.activate(
-                tab.dataset.tabId
-            );
-        });
+        );
     }
 
-    create(payload = {}) {
+    create() {
 
-        const id = payload.id || crypto.randomUUID();
+        const id =
+            `tab-${Date.now()}`;
 
-        const element = document.createElement('button');
-
-        element.className = 'aoi-tab';
-
-        element.dataset.tabId = id;
-
-        element.innerHTML = `
-            <span class="aoi-tab__title">
-                ${payload.title || 'New Tab'}
-            </span>
-
-            <span
-                class="aoi-tab__close"
-                data-tab-close>
-                ×
-            </span>
-        `;
-
-        this.container.appendChild(element);
-
-        this.tabs.set(id, {
+        this.tabs.push({
             id,
-            title: payload.title || 'New Tab',
-            element
+            title: 'New Tab'
         });
 
-        this.activate(id);
+        this.active = id;
 
-        AppEvents.emit('tabs:create', {
-            id
-        });
+        this.render();
 
-        return id;
-    }
-
-    activate(id) {
-
-        if (!this.tabs.has(id)) {
-            return;
-        }
-
-        this.tabs.forEach((tab) => {
-            tab.element.classList.remove('is-active');
-        });
-
-        const current = this.tabs.get(id);
-
-        current.element.classList.add('is-active');
-
-        this.activeTab = id;
-
-        AppEvents.emit('tabs:activate', {
-            id
-        });
-    }
-
-    close(id) {
-
-        if (!this.tabs.has(id)) {
-            return;
-        }
-
-        const tab = this.tabs.get(id);
-
-        tab.element.remove();
-
-        this.tabs.delete(id);
-
-        if (this.activeTab === id) {
-
-            const next = this.tabs.values().next().value;
-
-            if (next) {
-                this.activate(next.id);
+        AppEvents.emit(
+            'ui_tabs:create',
+            {
+                id
             }
+        );
+    }
+
+    select(id) {
+
+        this.active = id;
+
+        this.render();
+
+        AppEvents.emit(
+            'ui_tabs:select',
+            {
+                id
+            }
+        );
+    }
+
+    remove(id) {
+
+        if (this.tabs.length <= 1) {
+            return;
         }
 
-        AppEvents.emit('tabs:close', {
-            id
-        });
+        this.tabs =
+            this.tabs.filter((tab) => {
+
+                return tab.id !== id;
+            });
+
+        if (this.active === id) {
+
+            this.active =
+                this.tabs[0]?.id || null;
+        }
+
+        this.render();
+
+        AppEvents.emit(
+            'ui_tabs:remove',
+            {
+                id
+            }
+        );
     }
 }
 
-const TabsUI = new UITabs();
+const UITabsRuntime =
+    new UITabs();
 
 export {
-    TabsUI
-};
+    UITabsRuntime
+}; 
