@@ -1,38 +1,168 @@
 // main.js
 
+/* core services */
+
 import {
-    AOIRuntime
-} from './js/core/app.runtime.js';
+    AppEvents
+} from './js/services/app.events.js';
 
-async function bootstrap() {
+import {
+    AppLoggerRuntime
+} from './js/services/app.logger.js';
 
-    try {
+import {
+    AppDiagnosticsRuntime
+} from './js/services/app.diagnostics.js';
 
-        await AOIRuntime.initialize();
+import {
+    AppPerformanceRuntime
+} from './js/services/app.performance.js';
 
-        console.info(
-            '[AOI] Runtime Initialized'
+import {
+    AppMemoryRuntime
+} from './js/services/app.memory.js';
+
+import {
+    AppRuntimeMonitorRuntime
+} from './js/services/app.runtime.monitor.js';
+
+/* ui runtime */
+
+import {
+    UILayoutRuntime
+} from './js/ui/ui.layout.js';
+
+import {
+    UISidebarRuntime
+} from './js/ui/ui.sidebar.js';
+
+import {
+    UITabsRuntime
+} from './js/ui/ui.tabs.js';
+
+import {
+    UIBrowserRuntime
+} from './js/ui/ui.browser.js';
+
+import {
+    UIViewportRuntime
+} from './js/ui/ui.viewport.js';
+
+import {
+    UISettingsRuntime
+} from './js/ui/ui.settings.js';
+
+import {
+    UINotificationsRuntime
+} from './js/ui/ui.notifications.js';
+
+/* bootstrap */
+
+class AOIRuntime {
+
+    async initialize() {
+
+        this.initializeServices();
+
+        this.initializeUI();
+
+        this.initializeTheme();
+
+        this.initializeEvents();
+
+        AppEvents.emit(
+            'app:booted'
         );
 
-    } catch (error) {
+        AppLoggerRuntime.info(
+            'AOI Runtime Booted'
+        );
+    }
 
-        console.error(
-            '[AOI] Bootstrap Error',
-            error
+    initializeServices() {
+
+        AppLoggerRuntime.initialize();
+
+        AppDiagnosticsRuntime.initialize();
+
+        AppPerformanceRuntime.initialize();
+
+        AppMemoryRuntime.initialize();
+
+        AppRuntimeMonitorRuntime.initialize();
+    }
+
+    initializeUI() {
+
+        UILayoutRuntime.initialize();
+
+        UISidebarRuntime.initialize();
+
+        UITabsRuntime.initialize();
+
+        UIBrowserRuntime.initialize();
+
+        UIViewportRuntime.initialize();
+
+        UISettingsRuntime.initialize();
+
+        UINotificationsRuntime.initialize();
+    }
+
+    initializeTheme() {
+
+        document.body.classList.add(
+            'theme-default'
+        );
+    }
+
+    initializeEvents() {
+
+        AppEvents.on(
+            'ui_browser:navigate',
+            ({ query }) => {
+
+                AppLoggerRuntime.info(
+                    'Navigate',
+                    {
+                        query
+                    }
+                );
+            }
+        );
+
+        AppEvents.on(
+            'ui_settings:theme',
+            ({ theme }) => {
+
+                AppLoggerRuntime.info(
+                    'Theme Changed',
+                    {
+                        theme
+                    }
+                );
+
+                AppEvents.emit(
+                    'ui_notifications:push',
+                    {
+                        type: 'success',
+                        title: 'Theme Applied',
+                        message:
+                            `Active: ${theme}`
+                    }
+                );
+            }
         );
     }
 }
 
-if (
-    document.readyState === 'loading'
-) {
+const runtime =
+    new AOIRuntime();
 
-    document.addEventListener(
-        'DOMContentLoaded',
-        bootstrap
-    );
+window.addEventListener(
+    'DOMContentLoaded',
+    () => {
 
-} else {
-
-    bootstrap();
-} 
+        runtime.initialize();
+    }
+);
