@@ -1,0 +1,85 @@
+/* css/themes/glass.theme.css */
+
+.theme-glass {
+
+    --theme-background:
+        #060816;
+
+    --theme-surface:
+        rgba(18,22,34,0.72);
+
+    --theme-surface-2:
+        rgba(24,28,42,0.68);
+
+    --theme-surface-3:
+        rgba(34,40,58,0.74);
+
+    --theme-border:
+        rgba(255,255,255,0.10);
+
+    --theme-text:
+        #f4f7ff;
+
+    --theme-text-muted:
+        rgba(255,255,255,0.58);
+
+    --theme-accent:
+        #78a6ff;
+}
+
+.theme-glass body {
+
+    background:
+        radial-gradient(
+            circle at top,
+            rgba(120,166,255,0.12),
+            transparent 40%
+        ),
+        #060816;
+}
+
+.theme-glass .app-sidebar,
+.theme-glass .app-topbar,
+.theme-glass .app-tabs,
+.theme-glass .app-statusbar {
+
+    backdrop-filter:
+        blur(18px);
+
+    -webkit-backdrop-filter:
+        blur(18px);
+
+    background:
+        var(--theme-surface);
+
+    border-color:
+        var(--theme-border);
+}
+
+.theme-glass .app-viewport {
+
+    background:
+        linear-gradient(
+            180deg,
+            rgba(10,12,20,0.96),
+            rgba(6,8,16,1)
+        );
+}
+
+.theme-glass .glass-card {
+
+    background:
+        rgba(255,255,255,0.05);
+
+    border:
+        1px solid rgba(255,255,255,0.08);
+
+    box-shadow:
+        0 10px 30px rgba(0,0,0,0.35);
+
+    backdrop-filter:
+        blur(16px);
+
+    border-radius:
+        var(--radius-lg);
+} 
