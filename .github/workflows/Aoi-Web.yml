@@ -25,16 +25,16 @@ jobs:
     
     steps:
       - name: 👨‍💻 Checkout mã nguồn
-        uses: actions/checkout@v4
+        uses: actions/checkout@v6
           
       - name: Artifacts ➺ Deploy
-        uses: actions/upload-pages-artifact@v3
+        uses: actions/upload-pages-artifact@v4
         with:
           path: .
           
       - name: Triển khai ➺【GitHub Pages】
         id: deployment
-        uses: actions/deploy-pages@v4
+        uses: actions/deploy-pages@v5
         
       - name: 🗑️ 𝐎𝐋𝐃 deployment
         run: |
