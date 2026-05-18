@@ -39,7 +39,7 @@
         #ff5470;
 }
 
-body {
+body.theme-default {
 
     background:
         var(--theme-background);
