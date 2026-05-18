@@ -1,0 +1,88 @@
+/* css/themes/neon.theme.css */
+
+.theme-neon {
+
+    --theme-background:
+        #04010a;
+
+    --theme-surface:
+        #0b0814;
+
+    --theme-surface-2:
+        #120d20;
+
+    --theme-surface-3:
+        #1a1330;
+
+    --theme-border:
+        rgba(167,96,255,0.24);
+
+    --theme-text:
+        #f7f2ff;
+
+    --theme-text-muted:
+        rgba(255,255,255,0.58);
+
+    --theme-accent:
+        #a760ff;
+
+    --theme-accent-hover:
+        #c08cff;
+
+    --theme-glow:
+        0 0 18px rgba(167,96,255,0.55);
+}
+
+.theme-neon body {
+
+    background:
+        radial-gradient(
+            circle at top,
+            rgba(167,96,255,0.18),
+            transparent 38%
+        ),
+        var(--theme-background);
+}
+
+.theme-neon .app-sidebar,
+.theme-neon .app-topbar,
+.theme-neon .app-tabs,
+.theme-neon .app-statusbar {
+
+    background:
+        var(--theme-surface);
+
+    border-color:
+        var(--theme-border);
+
+    box-shadow:
+        var(--theme-glow);
+}
+
+.theme-neon .app-viewport {
+
+    background:
+        linear-gradient(
+            180deg,
+            #090511,
+            #04010a
+        );
+}
+
+.theme-neon .is-accent {
+
+    color:
+        var(--theme-accent);
+
+    text-shadow:
+        0 0 12px rgba(167,96,255,0.7);
+}
+
+.theme-neon .neon-border {
+
+    border:
+        1px solid rgba(167,96,255,0.4);
+
+    box-shadow:
+        0 0 14px rgba(167,96,255,0.4);
+} 
