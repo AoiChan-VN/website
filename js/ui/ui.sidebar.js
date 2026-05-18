@@ -5,66 +5,176 @@ import { AppEvents } from '../services/app.events.js';
 class UISidebar {
 
     constructor() {
-        this.sidebar = null;
-        this.toggleButton = null;
+        this.container = null;
+
+        this.items = [
+            {
+                id: 'home',
+                label: 'Home'
+            },
+            {
+                id: 'browser',
+                label: 'Browser'
+            },
+            {
+                id: 'extensions',
+                label: 'Extensions'
+            },
+            {
+                id: 'settings',
+                label: 'Settings'
+            }
+        ];
     }
 
     initialize() {
 
-        this.sidebar = document.querySelector('.aoi-sidebar');
-        this.toggleButton = document.querySelector('[data-sidebar-toggle]');
+        this.container =
+            document.querySelector(
+                '.app-sidebar'
+            );
 
-        if (!this.sidebar) {
+        if (!this.container) {
             return;
         }
 
+        this.render();
+
         this.bindEvents();
+
+        AppEvents.emit(
+            'ui_sidebar:ready'
+        );
+    }
+
+    render() {
+
+        this.container.innerHTML = `
+            <div class="sidebar-header">
+
+                <div class="sidebar-logo">
+                    <div class="sidebar-logo-icon"></div>
+
+                    <span>AOI</span>
+                </div>
+
+            </div>
+
+            <div class="sidebar-nav">
+
+                <div class="sidebar-nav-group">
+
+                    <div class="sidebar-nav-title">
+                        Runtime
+                    </div>
+
+                    ${this.items.map((item) => {
+
+                        return `
+                            <button
+                                class="sidebar-nav-item"
+                                data-sidebar="${item.id}"
+                            >
+                                <span
+                                    class="sidebar-nav-icon"
+                                >
+                                    ◈
+                                </span>
+
+                                <span>
+                                    ${item.label}
+                                </span>
+                            </button>
+                        `;
+                    }).join('')}
+
+                </div>
+
+            </div>
+
+            <div class="sidebar-footer">
+
+                <div class="sidebar-profile">
+
+                    <div class="sidebar-avatar"></div>
+
+                    <div class="sidebar-user">
+
+                        <div class="sidebar-username">
+                            Runtime User
+                        </div>
+
+                        <div class="sidebar-status">
+                            System Online
+                        </div>
+
+                    </div>
+
+                </div>
+
+            </div>
+        `;
     }
 
     bindEvents() {
 
-        if (this.toggleButton) {
+        this.container.addEventListener(
+            'click',
+            (event) => {
 
-            this.toggleButton.addEventListener('click', () => {
-                this.toggle();
+                const target =
+                    event.target.closest(
+                        '[data-sidebar]'
+                    );
+
+                if (!target) {
+                    return;
+                }
+
+                this.select(
+                    target.dataset.sidebar
+                );
+            }
+        );
+    }
+
+    select(id) {
+
+        this.container
+            .querySelectorAll(
+                '.sidebar-nav-item'
+            )
+            .forEach((item) => {
+
+                item.classList.remove(
+                    'is-active'
+                );
             });
+
+        const active =
+            this.container.querySelector(
+                `[data-sidebar="${id}"]`
+            );
+
+        if (active) {
+
+            active.classList.add(
+                'is-active'
+            );
         }
 
-        document.addEventListener('click', (event) => {
-
-            const item = event.target.closest('[data-route]');
-
-            if (!item) {
-                return;
+        AppEvents.emit(
+            'ui_sidebar:select',
+            {
+                id
             }
-
-            this.setActive(item);
-        });
-    }
-
-    toggle() {
-
-        this.sidebar.classList.toggle('is-open');
-
-        AppEvents.emit('sidebar:toggle', {
-            open: this.sidebar.classList.contains('is-open')
-        });
-    }
-
-    setActive(target) {
-
-        const items = this.sidebar.querySelectorAll('.aoi-sidebar__item');
-
-        items.forEach((item) => {
-            item.classList.remove('is-active');
-        });
-
-        target.classList.add('is-active');
+        );
     }
 }
 
-const SidebarUI = new UISidebar();
+const UISidebarRuntime =
+    new UISidebar();
 
 export {
-    SidebarUI
+    UISidebarRuntime
 };
