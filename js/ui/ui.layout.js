@@ -11,39 +11,59 @@ class UILayout {
     initialize() {
 
         this.root =
-            document.querySelector(
-                '#app'
-            );
+            document.querySelector('#app');
+
+        if (!this.root) {
+            return;
+        }
+
+        this.render();
+
+        this.bindEvents();
 
         AppEvents.emit(
             'ui_layout:ready'
         );
     }
 
-    mount(template = '') {
+    render() {
 
-        if (!this.root) {
-            return;
-        }
+        this.root.innerHTML = `
+            <div class="app-sidebar"></div>
 
-        this.root.innerHTML =
-            template;
+            <div class="app-runtime">
 
-        AppEvents.emit(
-            'ui_layout:mounted'
-        );
+                <div class="app-topbar"></div>
+
+                <div class="app-tabs"></div>
+
+                <div class="app-viewport"></div>
+
+                <div class="app-statusbar">
+                    AOI Runtime Ready
+                </div>
+
+            </div>
+        `;
     }
 
-    clear() {
+    bindEvents() {
 
-        if (!this.root) {
-            return;
-        }
+        window.addEventListener(
+            'resize',
+            () => {
 
-        this.root.innerHTML = '';
+                AppEvents.emit(
+                    'ui_layout:resize',
+                    {
+                        width:
+                            window.innerWidth,
 
-        AppEvents.emit(
-            'ui_layout:clear'
+                        height:
+                            window.innerHeight
+                    }
+                );
+            }
         );
     }
 }
@@ -53,4 +73,4 @@ const UILayoutRuntime =
 
 export {
     UILayoutRuntime
-}; 
+};
