@@ -27,7 +27,7 @@
         #78a6ff;
 }
 
-.theme-glass body {
+body.theme-glass {
 
     background:
         radial-gradient(
