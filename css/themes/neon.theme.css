@@ -33,7 +33,7 @@
         0 0 18px rgba(167,96,255,0.55);
 }
 
-.theme-neon body {
+body.theme-neon {
 
     background:
         radial-gradient(
