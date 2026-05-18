@@ -1,72 +1,210 @@
 // js/ui/ui.settings.js
 
-import { AppStorage } from '../services/app.storage.js';
 import { AppEvents } from '../services/app.events.js';
 
 class UISettings {
 
     constructor() {
-        this.root = null;
+        this.modal = null;
 
-        this.themeSelect = null;
+        this.visible = false;
+
+        this.theme = 'theme-default';
     }
 
     initialize() {
 
-        this.root = document.querySelector('.aoi-settings');
-
-        if (!this.root) {
-            return;
-        }
-
-        this.themeSelect = this.root.querySelector(
-            '[data-setting-theme]'
-        );
+        this.create();
 
         this.bindEvents();
 
-        this.restore();
+        AppEvents.emit(
+            'ui_settings:ready'
+        );
+    }
+
+    create() {
+
+        this.modal =
+            document.createElement('div');
+
+        this.modal.className =
+            'modal-root';
+
+        this.modal.innerHTML = `
+            <div class="modal">
+
+                <div class="modal-header">
+
+                    <div class="modal-title">
+                        Settings
+                    </div>
+
+                    <button
+                        class="modal-close"
+                    >
+                        ×
+                    </button>
+
+                </div>
+
+                <div class="modal-content">
+
+                    <div class="settings-section">
+
+                        <div
+                            class="settings-section-title"
+                        >
+                            Themes
+                        </div>
+
+                        <div class="home-actions">
+
+                            <button
+                                class="home-button"
+                                data-theme="theme-default"
+                            >
+                                Default
+                            </button>
+
+                            <button
+                                class="home-button"
+                                data-theme="theme-glass"
+                            >
+                                Glass
+                            </button>
+
+                            <button
+                                class="home-button"
+                                data-theme="theme-neon"
+                            >
+                                Neon
+                            </button>
+
+                        </div>
+
+                    </div>
+
+                </div>
+
+            </div>
+        `;
+
+        document.body.appendChild(
+            this.modal
+        );
     }
 
     bindEvents() {
 
-        if (this.themeSelect) {
+        AppEvents.on(
+            'ui_browser:action',
+            ({ action }) => {
 
-            this.themeSelect.addEventListener('change', (event) => {
+                if (action !== 'settings') {
+                    return;
+                }
 
-                const value = event.target.value;
+                this.toggle();
+            }
+        );
 
-                this.setTheme(value);
-            });
-        }
+        this.modal.addEventListener(
+            'click',
+            (event) => {
+
+                if (
+                    event.target.classList.contains(
+                        'modal-root'
+                    )
+                ) {
+
+                    this.hide();
+                }
+
+                if (
+                    event.target.closest(
+                        '.modal-close'
+                    )
+                ) {
+
+                    this.hide();
+                }
+
+                const theme =
+                    event.target.closest(
+                        '[data-theme]'
+                    );
+
+                if (theme) {
+
+                    this.applyTheme(
+                        theme.dataset.theme
+                    );
+                }
+            }
+        );
     }
 
-    restore() {
+    toggle() {
 
-        const theme =
-            AppStorage.get('theme', 'dark');
-
-        this.setTheme(theme);
-
-        if (this.themeSelect) {
-            this.themeSelect.value = theme;
-        }
+        this.visible
+            ? this.hide()
+            : this.show();
     }
 
-    setTheme(theme = 'dark') {
+    show() {
 
-        document.documentElement.dataset.theme = theme;
+        this.visible = true;
 
-        AppStorage.set('theme', theme);
+        this.modal.classList.add(
+            'is-visible'
+        );
 
-        AppEvents.emit('theme:change', {
+        AppEvents.emit(
+            'ui_settings:show'
+        );
+    }
+
+    hide() {
+
+        this.visible = false;
+
+        this.modal.classList.remove(
+            'is-visible'
+        );
+
+        AppEvents.emit(
+            'ui_settings:hide'
+        );
+    }
+
+    applyTheme(theme) {
+
+        document.body.classList.remove(
+            'theme-default',
+            'theme-glass',
+            'theme-neon'
+        );
+
+        document.body.classList.add(
             theme
-        });
+        );
+
+        this.theme = theme;
+
+        AppEvents.emit(
+            'ui_settings:theme',
+            {
+                theme
+            }
+        );
     }
 }
 
-const SettingsUI = new UISettings();
+const UISettingsRuntime =
+    new UISettings();
 
 export {
-    SettingsUI
+    UISettingsRuntime
 };
