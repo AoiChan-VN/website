@@ -3,73 +3,65 @@
 class AppEventsClass {
 
     constructor() {
+
         this.events = new Map();
     }
 
     on(event, callback) {
 
         if (!this.events.has(event)) {
-            this.events.set(event, new Set());
+
+            this.events.set(
+                event,
+                []
+            );
         }
 
-        this.events.get(event).add(callback);
+        this.events
+            .get(event)
+            .push(callback);
+    }
+
+    emit(
+        event,
+        payload = {}
+    ) {
+
+        const listeners =
+            this.events.get(event);
+
+        if (!listeners) {
+            return;
+        }
+
+        listeners.forEach((callback) => {
+
+            callback(payload);
+        });
     }
 
     off(event, callback) {
 
-        if (!this.events.has(event)) {
+        const listeners =
+            this.events.get(event);
+
+        if (!listeners) {
             return;
         }
 
-        this.events.get(event).delete(callback);
-    }
+        this.events.set(
+            event,
+            listeners.filter((item) => {
 
-    emit(event, payload = {}) {
-
-        if (!this.events.has(event)) {
-            return;
-        }
-
-        for (const callback of this.events.get(event)) {
-
-            try {
-                callback(payload);
-
-            } catch (error) {
-
-                console.error('[AOI] Event Error:', event, error);
-            }
-        }
-    }
-
-    once(event, callback) {
-
-        const wrapper = (payload) => {
-
-            callback(payload);
-
-            this.off(event, wrapper);
-        };
-
-        this.on(event, wrapper);
-    }
-
-    clear(event) {
-
-        if (!this.events.has(event)) {
-            return;
-        }
-
-        this.events.delete(event);
-    }
-
-    clearAll() {
-        this.events.clear();
+                return item !== callback;
+            })
+        );
     }
 }
 
-const AppEvents = new AppEventsClass();
+const AppEvents =
+    new AppEventsClass();
 
 export {
     AppEvents
-}; 
+};
