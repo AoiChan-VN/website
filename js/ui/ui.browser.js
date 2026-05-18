@@ -5,93 +5,158 @@ import { AppEvents } from '../services/app.events.js';
 class UIBrowser {
 
     constructor() {
-        this.viewport = null;
-        this.addressInput = null;
-        this.iframe = null;
+        this.container = null;
     }
 
     initialize() {
 
-        this.viewport = document.querySelector('.aoi-browser');
-        this.addressInput = document.querySelector(
-            '.aoi-browser__address-input'
-        );
+        this.container =
+            document.querySelector(
+                '.app-topbar'
+            );
 
-        this.iframe = document.querySelector(
-            '.aoi-browser__iframe'
-        );
-
-        if (!this.viewport) {
+        if (!this.container) {
             return;
         }
 
+        this.render();
+
         this.bindEvents();
+
+        AppEvents.emit(
+            'ui_browser:ready'
+        );
+    }
+
+    render() {
+
+        this.container.innerHTML = `
+            <div class="browser-toolbar">
+
+                <div class="browser-navigation">
+
+                    <button
+                        class="browser-nav-button"
+                        data-browser-action="back"
+                    >
+                        ←
+                    </button>
+
+                    <button
+                        class="browser-nav-button"
+                        data-browser-action="forward"
+                    >
+                        →
+                    </button>
+
+                    <button
+                        class="browser-nav-button"
+                        data-browser-action="refresh"
+                    >
+                        ↻
+                    </button>
+
+                </div>
+
+                <div class="browser-addressbar">
+
+                    <input
+                        class="browser-address-input"
+                        type="text"
+                        placeholder="Search or enter URL"
+                    />
+
+                </div>
+
+                <div class="browser-actions">
+
+                    <button
+                        class="browser-action"
+                        data-browser-action="extensions"
+                    >
+                        ⌘
+                    </button>
+
+                    <button
+                        class="browser-action"
+                        data-browser-action="settings"
+                    >
+                        ⚙
+                    </button>
+
+                </div>
+
+            </div>
+        `;
     }
 
     bindEvents() {
 
-        if (this.addressInput) {
+        const input =
+            this.container.querySelector(
+                '.browser-address-input'
+            );
 
-            this.addressInput.addEventListener('keydown', (event) => {
+        input.addEventListener(
+            'keydown',
+            (event) => {
 
                 if (event.key !== 'Enter') {
                     return;
                 }
 
                 this.navigate(
-                    this.addressInput.value
+                    input.value
                 );
-            });
-        }
+            }
+        );
 
-        AppEvents.on('browser:navigate', ({ url }) => {
-            this.load(url);
-        });
+        this.container.addEventListener(
+            'click',
+            (event) => {
+
+                const action =
+                    event.target.closest(
+                        '[data-browser-action]'
+                    );
+
+                if (!action) {
+                    return;
+                }
+
+                AppEvents.emit(
+                    'ui_browser:action',
+                    {
+                        action:
+                            action.dataset
+                                .browserAction
+                    }
+                );
+            }
+        );
     }
 
-    navigate(url = '') {
+    navigate(value = '') {
 
-        const normalized = this.normalizeUrl(url);
+        const query =
+            value.trim();
 
-        this.load(normalized);
-
-        AppEvents.emit('browser:navigated', {
-            url: normalized
-        });
-    }
-
-    load(url) {
-
-        if (!this.iframe) {
+        if (!query) {
             return;
         }
 
-        this.iframe.src = url;
-
-        if (this.addressInput) {
-            this.addressInput.value = url;
-        }
-    }
-
-    normalizeUrl(url) {
-
-        if (!url) {
-            return 'about:blank';
-        }
-
-        const hasProtocol =
-            /^https?:\/\//i.test(url);
-
-        if (hasProtocol) {
-            return url;
-        }
-
-        return `https://${url}`;
+        AppEvents.emit(
+            'ui_browser:navigate',
+            {
+                query
+            }
+        );
     }
 }
 
-const BrowserUI = new UIBrowser();
+const UIBrowserRuntime =
+    new UIBrowser();
 
 export {
-    BrowserUI
+    UIBrowserRuntime
 };
