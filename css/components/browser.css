@@ -1,111 +1,190 @@
 /* css/components/browser.css */
 
-.aoi-browser {
+.browser-shell {
+
     position: relative;
 
+    width: 100%;
+    height: 100%;
+
     display: flex;
+
     flex-direction: column;
 
-    width: 100%;
-    height: 100%;
+    overflow: hidden;
 }
 
-.aoi-browser__toolbar {
-    display: flex;
-    align-items: center;
-    gap: var(--aoi-space-3);
+/* toolbar */
 
-    min-height:
-        54px;
-
-    padding:
-        0 var(--aoi-space-4);
-
-    border-bottom:
-        1px solid var(--aoi-color-border);
-
-    background:
-        var(--aoi-color-surface);
-}
-
-.aoi-browser__actions {
-    display: flex;
-    align-items: center;
-    gap: var(--aoi-space-2);
-}
-
-.aoi-browser__button {
-    width: 36px;
-    height: 36px;
-
-    display: inline-flex;
-    align-items: center;
-    justify-content: center;
-
-    border-radius:
-        10px;
-
-    color:
-        var(--aoi-color-text-muted);
-
-    transition:
-        background var(--aoi-transition-fast),
-        color var(--aoi-transition-fast);
-}
-
-.aoi-browser__button:hover {
-    background:
-        var(--aoi-color-surface-alt);
-
-    color:
-        var(--aoi-color-text);
-}
-
-.aoi-browser__address {
-    flex: 1;
-
-    display: flex;
-    align-items: center;
-
-    height: 40px;
-
-    padding:
-        0 var(--aoi-space-4);
-
-    border:
-        1px solid var(--aoi-color-border);
-
-    border-radius:
-        999px;
-
-    background:
-        var(--aoi-color-bg);
-}
-
-.aoi-browser__address-input {
-    width: 100%;
-    height: 100%;
-
-    background: transparent;
-
-    color:
-        var(--aoi-color-text);
-}
-
-.aoi-browser__viewport {
-    flex: 1;
+.browser-toolbar {
 
     position: relative;
 
-    overflow: hidden;
+    display: flex;
+
+    align-items: center;
+
+    gap:
+        var(--space-3);
+
+    width: 100%;
+
+    min-height:
+        var(--topbar-height);
+
+    padding:
+        0 var(--space-4);
+
+    border-bottom:
+        1px solid var(--color-border);
 
     background:
-        var(--aoi-color-bg);
+        var(--color-surface);
 }
 
-.aoi-browser__iframe {
-    width: 100%;
-    height: 100%;
+/* navigation */
 
-    border: none;
+.browser-navigation {
+
+    display: flex;
+
+    align-items: center;
+
+    gap:
+        var(--space-2);
+}
+
+.browser-nav-button {
+
+    display: flex;
+
+    align-items: center;
+
+    justify-content: center;
+
+    width: 34px;
+    height: 34px;
+
+    border-radius:
+        var(--radius-md);
+
+    background:
+        rgba(255,255,255,0.04);
+
+    color:
+        var(--color-text-muted);
+
+    transition:
+        background var(--transition-fast),
+        color var(--transition-fast);
+}
+
+.browser-nav-button:hover {
+
+    background:
+        rgba(255,255,255,0.08);
+
+    color:
+        var(--color-text);
+}
+
+/* address bar */
+
+.browser-addressbar {
+
+    position: relative;
+
+    flex: 1;
+
+    display: flex;
+
+    align-items: center;
+
+    gap:
+        var(--space-3);
+
+    height: 38px;
+
+    padding:
+        0 var(--space-4);
+
+    border:
+        1px solid transparent;
+
+    border-radius:
+        var(--radius-lg);
+
+    background:
+        rgba(255,255,255,0.04);
+
+    transition:
+        border-color var(--transition-fast),
+        background var(--transition-fast);
+}
+
+.browser-addressbar:focus-within {
+
+    border-color:
+        rgba(124,92,255,0.28);
+
+    background:
+        rgba(255,255,255,0.06);
+}
+
+.browser-address-input {
+
+    flex: 1;
+
+    min-width: 0;
+
+    color:
+        var(--color-text);
+
+    font-size:
+        var(--font-size-sm);
+}
+
+.browser-address-input::placeholder {
+
+    color:
+        var(--color-text-muted);
+}
+
+/* actions */
+
+.browser-actions {
+
+    display: flex;
+
+    align-items: center;
+
+    gap:
+        var(--space-2);
+}
+
+.browser-action {
+
+    display: flex;
+
+    align-items: center;
+
+    justify-content: center;
+
+    width: 34px;
+    height: 34px;
+
+    border-radius:
+        var(--radius-md);
+
+    background:
+        rgba(255,255,255,0.04);
+
+    transition:
+        background var(--transition-fast);
+}
+
+.browser-action:hover {
+
+    background:
+        rgba(255,255,255,0.08);
 } 
