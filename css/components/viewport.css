@@ -1,0 +1,140 @@
+/* css/components/viewport.css */
+
+.browser-viewport {
+
+    position: relative;
+
+    flex: 1;
+
+    overflow: hidden;
+
+    background:
+        #0a0d12;
+}
+
+/* page container */
+
+.viewport-page {
+
+    position: absolute;
+
+    inset: 0;
+
+    width: 100%;
+    height: 100%;
+
+    opacity: 0;
+
+    visibility: hidden;
+
+    transition:
+        opacity var(--transition-normal),
+        visibility var(--transition-normal);
+}
+
+.viewport-page.is-active {
+
+    opacity: 1;
+
+    visibility: visible;
+}
+
+/* iframe */
+
+.viewport-frame {
+
+    width: 100%;
+    height: 100%;
+
+    border: none;
+
+    background:
+        #ffffff;
+}
+
+/* loading */
+
+.viewport-loading {
+
+    position: absolute;
+
+    inset: 0;
+
+    display: flex;
+
+    align-items: center;
+
+    justify-content: center;
+
+    background:
+        rgba(5,5,5,0.65);
+
+    backdrop-filter:
+        blur(8px);
+
+    z-index: 20;
+}
+
+.viewport-loader {
+
+    width: 42px;
+    height: 42px;
+
+    border-radius: 50%;
+
+    border:
+        3px solid rgba(255,255,255,0.08);
+
+    border-top-color:
+        var(--color-accent);
+
+    animation:
+        viewport-spin 1s linear infinite;
+}
+
+@keyframes viewport-spin {
+
+    from {
+        transform:
+            rotate(0deg);
+    }
+
+    to {
+        transform:
+            rotate(360deg);
+    }
+}
+
+/* empty state */
+
+.viewport-empty {
+
+    position: absolute;
+
+    inset: 0;
+
+    display: flex;
+
+    flex-direction: column;
+
+    align-items: center;
+
+    justify-content: center;
+
+    gap:
+        var(--space-3);
+
+    color:
+        var(--color-text-muted);
+
+    text-align: center;
+}
+
+.viewport-empty-title {
+
+    font-size:
+        var(--font-size-xl);
+
+    color:
+        var(--color-text);
+} 
