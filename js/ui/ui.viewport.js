@@ -54,106 +54,142 @@ class UIViewport {
             </div>
         `;
     }
-
+    
     bindEvents() {
 
         AppEvents.on(
             'ui_browser:navigate',
             ({ query }) => {
 
-                this.open(query);
+                const active =
+                    document.querySelector(
+                    '.tab-item.is-active'
+                );
+
+            let tabId =
+                active?.dataset.tab;
+
+            if (!tabId) {
+
+                const created =
+                    AppEvents.emit?.(
+                        'ui_tabs:create'
+                    );
+
+                tabId =
+                    created?.id;
             }
+
+            this.open(
+                tabId,
+                query
+            );
+        }
+    );
+
+    AppEvents.on(
+        'ui_tabs:select',
+        ({ id }) => {
+
+            this.activate(id);
+        }
+    );
+
+    AppEvents.on(
+        'ui_tabs:remove',
+        ({ id }) => {
+
+            this.remove(id);
+        }
+    );
+}
+
+open(tabId, query) {
+
+    const viewport =
+        this.container.querySelector(
+            '.browser-viewport'
         );
 
-        AppEvents.on(
-            'ui_tabs:select',
-            ({ id }) => {
+    let page =
+        this.pages.get(tabId);
 
-                this.activate(id);
-            }
-        );
-    }
+    if (!page) {
 
-    open(query) {
-
-        const id =
-            `page-${Date.now()}`;
-
-        const page =
+        page =
             document.createElement('div');
 
         page.className =
-            'viewport-page is-active';
+            'viewport-page';
 
-        page.dataset.page = id;
+        page.dataset.page = tabId;
 
         page.innerHTML = `
             <iframe
                 class="viewport-frame"
-                src="${this.resolve(query)}"
+                sandbox="
+                    allow-scripts
+                    allow-same-origin
+                    allow-forms
+                "
+                referrerpolicy="
+                    no-referrer
+                "
             ></iframe>
         `;
 
-        const viewport =
-            this.container.querySelector(
-                '.browser-viewport'
-            );
-
-        viewport
-            .querySelectorAll(
-                '.viewport-page'
-            )
-            .forEach((item) => {
-
-                item.classList.remove(
-                    'is-active'
-                );
-            });
-
         viewport.appendChild(page);
 
-        this.pages.set(id, page);
-
-        this.active = id;
-
-        AppEvents.emit(
-            'ui_viewport:open',
-            {
-                id,
-                query
-            }
+        this.pages.set(
+            tabId,
+            page
         );
     }
 
-    activate(id) {
+    const frame =
+        page.querySelector(
+            '.viewport-frame'
+        );
 
-        this.pages.forEach((page) => {
+    frame.src =
+        this.resolve(query);
 
-            page.classList.remove(
-                'is-active'
-            );
-        });
+    this.activate(tabId);
 
-        const target =
-            this.pages.get(id);
-
-        if (!target) {
-            return;
+    AppEvents.emit(
+        'ui_viewport:open',
+        {
+            id: tabId,
+            query
         }
+    );
+}
 
-        target.classList.add(
-            'is-active'
-        );
+remove(id) {
 
-        this.active = id;
+    const page =
+        this.pages.get(id);
 
-        AppEvents.emit(
-            'ui_viewport:activate',
-            {
-                id
-            }
-        );
+    if (!page) {
+        return;
     }
+
+    page.remove();
+
+    this.pages.delete(id);
+
+    if (this.active === id) {
+
+        this.active = null;
+    }
+
+    AppEvents.emit(
+        'ui_viewport:remove',
+        {
+            id
+        }
+    );
+}
 
     resolve(query) {
 
