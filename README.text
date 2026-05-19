@@ -1,0 +1,56 @@
+/root
+│
+├── index.html
+├── 404.html
+├── robots.txt
+├── sitemap.xml
+├── favicon.ico
+│
+├── /pages
+│   ├── about.html
+│   ├── projects.html
+│   ├── blog.html
+│   └── contact.html
+│
+├── /assets
+│   │
+│   ├── /css
+│   │   ├── reset.css
+│   │   ├── variables.css
+│   │   ├── global.css
+│   │   ├── layout.css
+│   │   ├── components.css
+│   │   └── responsive.css
+│   │
+│   ├── /js
+│   │   ├── /core
+│   │   │   ├── app.js
+│   │   │   ├── router.js
+│   │   │   ├── storage.js
+│   │   │   └── config.js
+│   │   │
+│   │   ├── /modules
+│   │   │   ├── navbar.js
+│   │   │   ├── theme.js
+│   │   │   ├── animations.js
+│   │   │   └── projects.js
+│   │   │
+│   │   ├── /utils
+│   │   │   ├── dom.js
+│   │   │   ├── validator.js
+│   │   │   ├── helpers.js
+│   │   │   └── security.js
+│   │   │
+│   │   └── main.js
+│   │
+│   ├── /img
+│   ├── /fonts
+│   │
+│   └── /data
+│       ├── projects.json
+│       └── blog.json
+│
+└── /docs
+    ├── LICENSE.txt
+    ├── CHANGELOG.md
+    └── README.md 
