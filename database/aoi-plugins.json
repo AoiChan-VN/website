@@ -1,0 +1,11 @@
+[
+    {
+        "id": "00",
+        "name": "Aoi Plugins",
+        "description": "Advanced Minecraft Plugin Collection",
+        "img": "./public/pictures/plugins.webp",
+        "file": "./public/content/plugins/tu_luyen.md",
+        "link": "./post.html?id=00",
+        "download": "https://github.com/"
+    }
+]
