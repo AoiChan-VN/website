@@ -25,7 +25,7 @@ jobs:
     
     steps:
       - name: 👨‍💻 Checkout mã nguồn
-        uses: actions/checkout@v6
+        uses: actions/checkout@v4
           
       - name: Artifacts ➺ Deploy
         uses: actions/upload-pages-artifact@v4
