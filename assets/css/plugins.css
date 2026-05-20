@@ -1,34 +1,70 @@
-.plugins-grid {
+.plugins-page {
+    padding: 60px 40px;
+}
+
+.plugins-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+
+    gap: 20px;
+
+    margin-bottom: 40px;
+}
+
+.plugins-header input {
+    width: 320px;
+
+    padding: 14px 18px;
+
+    border-radius: 14px;
+
+    background: rgba(255,255,255,0.06);
+    color: white;
+}
+
+.plugin-grid {
     display: grid;
     grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-    gap: 1.5rem;
+    gap: 24px;
 }
 
 .plugin-card {
-    background: #1f2937;
-    border-radius: 12px;
     overflow: hidden;
-    padding: 1rem;
+
+    border-radius: 24px;
+
+    background: rgba(255,255,255,0.04);
+    border: 1px solid rgba(255,255,255,0.08);
+
+    transition: 0.25s ease;
 }
 
-.plugin-card img,
-.plugin-card video {
-    border-radius: 10px;
-    margin-bottom: 1rem;
+.plugin-card:hover {
+    transform: translateY(-6px);
 }
 
-.plugin-card h2 {
-    margin-bottom: 0.5rem;
+.plugin-card img {
+    width: 100%;
+    height: 220px;
+    object-fit: cover;
 }
 
-.plugin-card .actions {
-    display: flex;
-    gap: 1rem;
-    margin-top: 1rem;
+.plugin-content {
+    padding: 22px;
 }
 
-.plugin-card .actions a {
-    background: #2563eb;
-    padding: 0.6rem 1rem;
-    border-radius: 8px;
+.plugin-content p {
+    opacity: 0.7;
+    margin: 10px 0 20px;
+}
+
+.plugin-content a {
+    display: inline-flex;
+
+    padding: 12px 18px;
+
+    border-radius: 12px;
+
+    background: linear-gradient(135deg, #7c5cff, #00d4ff);
 }
