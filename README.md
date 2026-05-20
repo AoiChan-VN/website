@@ -17,33 +17,45 @@ http://localhost:8080
 portfolio/
 ├── index.html
 ├── data/
-│   └── portfolioData.js
+│   ├── portfolioData.js
+│   ├── routes.js
+│   ├── themes.js
+│   └── settings.js
 ├── assets/
 │   ├── images/
-│   │   ├── project-dashboard.webp
-│   │   ├── project-ai.webp
-│   │   └── project-music.webp
 │   └── icons/
 ├── src/
 │   ├── core/
 │   │   ├── RenderEngine.js
-│   │   └── DOMCache.js
+│   │   ├── DOMCache.js
+│   │   ├── Router.js
+│   │   ├── StateManager.js
+│   │   ├── EventSystem.js
+│   │   ├── VirtualDOM.js
+│   │   ├── Lifecycle.js
+│   │   └── ErrorBoundary.js
 │   ├── components/
 │   │   ├── ProjectCard.js
 │   │   ├── ProfileSection.js
 │   │   ├── SkillsSection.js
-│   │   └── ProjectsSection.js
+│   │   ├── ProjectsSection.js
+│   │   └── ThemeToggle.js
 │   ├── utils/
 │   │   ├── animation.js
 │   │   ├── dom.js
-│   │   └── sanitizer.js
+│   │   ├── sanitizer.js
+│   │   ├── lazyLoad.js
+│   │   ├── performance.js
+│   │   └── debounce.js
 │   └── main.js
 ├── css/
 │   ├── reset.css
 │   ├── variables.css
+│   ├── themes.css
 │   ├── base.css
 │   ├── layout.css
 │   ├── components.css
+│   ├── responsive.css
 │   └── animations.css
 └── README.md
 ```
