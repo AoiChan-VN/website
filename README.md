@@ -1,17 +1,4 @@
-# Aoi Vanilla Web
-
-## Chạy localhost
-
-Python:
-
-```txt
-python -m http.server 8080
-```
-
-Sau đó mở:
-
-http://localhost:8080
-
+# Aoi Vanilla Websites
 # Structure:
 ```txt
 Website/
