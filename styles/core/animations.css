@@ -1,0 +1,202 @@
+/* ==========================================================================
+   KEYFRAMES
+   ========================================================================== */
+
+@keyframes fade-in {
+    from {
+        opacity: 0;
+        transform: translate3d(0, 20px, 0);
+    }
+
+    to {
+        opacity: 1;
+        transform: translate3d(0, 0, 0);
+    }
+}
+
+@keyframes float-soft {
+    0% {
+        transform:
+            translate3d(0, 0, 0)
+            rotate(0deg);
+    }
+
+    50% {
+        transform:
+            translate3d(0, -10px, 0)
+            rotate(0.6deg);
+    }
+
+    100% {
+        transform:
+            translate3d(0, 0, 0)
+            rotate(0deg);
+    }
+}
+
+@keyframes glow-pulse {
+    0% {
+        opacity: 0.4;
+        transform: scale(1);
+    }
+
+    50% {
+        opacity: 0.9;
+        transform: scale(1.08);
+    }
+
+    100% {
+        opacity: 0.4;
+        transform: scale(1);
+    }
+}
+
+@keyframes gradient-shift {
+    0% {
+        background-position: 0% 50%;
+    }
+
+    50% {
+        background-position: 100% 50%;
+    }
+
+    100% {
+        background-position: 0% 50%;
+    }
+}
+
+@keyframes blur-breathe {
+    0% {
+        backdrop-filter:
+            blur(14px)
+            saturate(160%);
+    }
+
+    50% {
+        backdrop-filter:
+            blur(22px)
+            saturate(220%);
+    }
+
+    100% {
+        backdrop-filter:
+            blur(14px)
+            saturate(160%);
+    }
+}
+
+@keyframes cursor-expand {
+    from {
+        transform:
+            translate3d(-50%, -50%, 0)
+            scale(0.8);
+
+        opacity: 0.6;
+    }
+
+    to {
+        transform:
+            translate3d(-50%, -50%, 0)
+            scale(1.4);
+
+        opacity: 0;
+    }
+}
+
+@keyframes hero-grid-pan {
+    from {
+        transform:
+            translate3d(0, 0, 0);
+    }
+
+    to {
+        transform:
+            translate3d(-120px, -120px, 0);
+    }
+}
+
+/* ==========================================================================
+   ANIMATION HELPERS
+   ========================================================================== */
+
+.animate-fade-in {
+    animation:
+        fade-in
+        600ms
+        cubic-bezier(0.22, 1, 0.36, 1)
+        both;
+}
+
+.animate-float {
+    animation:
+        float-soft
+        6s
+        ease-in-out
+        infinite;
+}
+
+.animate-glow {
+    animation:
+        glow-pulse
+        4s
+        ease-in-out
+        infinite;
+}
+
+.animate-gradient {
+    background-size: 200% 200%;
+
+    animation:
+        gradient-shift
+        10s
+        ease
+        infinite;
+}
+
+.animate-blur {
+    animation:
+        blur-breathe
+        8s
+        ease-in-out
+        infinite;
+}
+
+/* ==========================================================================
+   INTERACTION STATES
+   ========================================================================== */
+
+.hover-lift {
+    transition:
+        transform var(--transition-medium),
+        box-shadow var(--transition-medium),
+        background var(--transition-medium);
+}
+
+.hover-lift:hover {
+    transform:
+        translate3d(0, -6px, 0);
+
+    box-shadow:
+        0 20px 60px rgba(0, 0, 0, 0.32);
+}
+
+.hover-scale {
+    transition:
+        transform var(--transition-fast);
+}
+
+.hover-scale:hover {
+    transform: scale(1.03);
+}
+
+.press-feedback {
+    transition:
+        transform
+        80ms
+        ease;
+}
+
+.press-feedback:active {
+    transform:
+        scale(0.97);
+} 
