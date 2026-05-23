@@ -17,7 +17,7 @@ concurrency:
 
 jobs:
   aoichan:
-    name: 🍒𝓐𝓸𝓲𝓒𝓱ān🦋
+    name: 🍒𝓐𝓸𝓲𝓒𝓱𝓪𝓷🦋
     runs-on: ubuntu-latest
     environment: 
       name: github-pages
@@ -32,37 +32,40 @@ jobs:
         with:
           path: .
           
-      # Bước này GitHub tự xử lý Token hệ thống, tuyệt đối không chèn GH_TOKEN tùy chỉnh vào đây
       - name: Triển khai ➺【GitHub Pages】
         id: deployment
         uses: actions/deploy-pages@v4
         
       - name: 🗑️ 𝐎𝐋𝐃 deployment
-        if: always() # Chạy kể cả khi các bước trên lỗi để dọn dẹp
         run: |
-          gh api repos/${{ github.repository }}/deployments --jq '.[] | select(.environment=="github-pages") | .id' | tail -n +2 | while read id; do
-            echo "🗑️ deleting deployment $id"
-            gh api repos/${{ github.repository }}/deployments/$id -X DELETE
-          done
+          gh api repos/${{ github.repository }}/deployments \
+            --jq '.[] | select(.environment=="github-pages") | .id' \
+            | while read id; do
+                echo "🗑️ deleting deployment $id"
+                gh api repos/${{ github.repository }}/deployments/$id -X DELETE
+              done
         env:
           GH_TOKEN: ${{ secrets.AOI_WEB }} 
         
       - name: 🗑️ 𝐎𝐋𝐃 𝐖𝐎𝐑𝐊𝐅𝐋𝐎𝐖𝐒
-        if: always()
         run: |
-          gh run list --status completed --limit 100 --json databaseId | jq -r '.[1:] | .[].databaseId' | while read run; do
-            echo "🗑️ đã xóa workflow run: $run"
-            gh run delete "$run"
-          done
+          gh api repos/${{ github.repository }}/actions/runs \
+            --paginate \
+            --jq '.workflow_runs | sort_by(.created_at) | reverse | .[1:] | map(select(.status=="completed")) | .[].id' \
+            | while read run; do
+                echo "🗑️ đã xóa $run"
+                gh api repos/${{ github.repository }}/actions/runs/$run -X DELETE
+              done
         env:
           GH_TOKEN: ${{ secrets.AOI_WEB }}
 
       - name: 🗑️ 𝐎𝐋𝐃 𝐂𝐀𝐂𝐇𝐄
-        if: always()
         run: |
-          gh cache list --json id,createdAt | jq -r 'sort_by(.createdAt) | reverse | .[1:] | .[].id' | while read id; do
-            echo "🗑️ đã xóa cache: $id"
-            gh cache delete "$id"
-          done
+          gh cache list --json id,createdAt \
+            | jq 'sort_by(.createdAt) | reverse | .[1:] | .[].id' \
+            | while read id; do
+                echo "🗑️ đã xóa $id"
+                gh cache delete "$id"
+              done
         env:
           GH_TOKEN: ${{ secrets.AOI_WEB }}
