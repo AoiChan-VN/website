@@ -1,0 +1,7 @@
+#app {
+    width: min(1600px, calc(100% - 32px));
+
+    margin-inline: auto;
+
+    padding-block: 24px 80px;
+} 
