@@ -1,0 +1,12 @@
+[
+    {
+        "id": 1,
+        "name": "UltraSky",
+        "img": "assets/images/cards/ultrasky.webp",
+        "type": "plugin",
+        "version": "1.21",
+        "download": "https://example.com/download",
+        "website": "https://example.com",
+        "information": "docs/ultrasky.md"
+    }
+] 
