@@ -32,11 +32,13 @@ jobs:
         with:
           path: .
           
+      # Bước này GitHub tự xử lý Token hệ thống, tuyệt đối không chèn GH_TOKEN tùy chỉnh vào đây
       - name: Triển khai ➺【GitHub Pages】
         id: deployment
         uses: actions/deploy-pages@v4
         
       - name: 🗑️ 𝐎𝐋𝐃 deployment
+        if: always() # Chạy kể cả khi các bước trên lỗi để dọn dẹp
         run: |
           gh api repos/${{ github.repository }}/deployments --jq '.[] | select(.environment=="github-pages") | .id' | tail -n +2 | while read id; do
             echo "🗑️ deleting deployment $id"
@@ -46,6 +48,7 @@ jobs:
           GH_TOKEN: ${{ secrets.AOI_WEB }} 
         
       - name: 🗑️ 𝐎𝐋𝐃 𝐖𝐎𝐑𝐊𝐅𝐋𝐎𝐖𝐒
+        if: always()
         run: |
           gh run list --status completed --limit 100 --json databaseId | jq -r '.[1:] | .[].databaseId' | while read run; do
             echo "🗑️ đã xóa workflow run: $run"
@@ -55,6 +58,7 @@ jobs:
           GH_TOKEN: ${{ secrets.AOI_WEB }}
 
       - name: 🗑️ 𝐎𝐋𝐃 𝐂𝐀𝐂𝐇𝐄
+        if: always()
         run: |
           gh cache list --json id,createdAt | jq -r 'sort_by(.createdAt) | reverse | .[1:] | .[].id' | while read id; do
             echo "🗑️ đã xóa cache: $id"
