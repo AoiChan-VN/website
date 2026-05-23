@@ -1,0 +1,10 @@
+[
+    {
+        "id": 0,
+        "name": "minecraft",
+        "folder": "aoi_folder",
+        "title": "Minecraft Plugins",
+        "icon": "assets/icons/minecraft.svg",
+        "banner": "assets/images/themes/minecraft.webp"
+    }
+] 
