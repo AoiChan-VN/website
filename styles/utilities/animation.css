@@ -1,0 +1,132 @@
+.reveal-init {
+    opacity: 0;
+
+    transform:
+        translate3d(0, 40px, 0);
+
+    transition:
+        opacity 900ms cubic-bezier(0.22, 1, 0.36, 1),
+        transform 900ms cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+.reveal-visible {
+    opacity: 1;
+
+    transform:
+        translate3d(0, 0, 0);
+}
+
+.press-feedback {
+    transition:
+        transform
+        120ms
+        ease-out;
+}
+
+.press-feedback:active {
+    transform:
+        scale(0.96);
+}
+
+.animate-float {
+    animation:
+        float-soft
+        7s
+        ease-in-out
+        infinite;
+}
+
+.animate-glow {
+    animation:
+        glow-pulse
+        4s
+        ease-in-out
+        infinite;
+}
+
+@keyframes float-soft {
+    0%,
+    100% {
+        transform:
+            translate3d(0, 0, 0);
+    }
+
+    50% {
+        transform:
+            translate3d(0, -12px, 0);
+    }
+}
+
+@keyframes glow-pulse {
+    0%,
+    100% {
+        opacity: 0.72;
+
+        transform:
+            scale(1);
+    }
+
+    50% {
+        opacity: 1;
+
+        transform:
+            scale(1.08);
+    }
+}
+
+@keyframes hero-grid-pan {
+    from {
+        transform:
+            translate3d(0, 0, 0);
+    }
+
+    to {
+        transform:
+            translate3d(-120px, -80px, 0);
+    }
+}
+
+@keyframes cursor-expand {
+    0% {
+        opacity: 1;
+
+        transform:
+            translate3d(-50%, -50%, 0)
+            scale(0.8);
+    }
+
+    100% {
+        opacity: 0;
+
+        transform:
+            translate3d(-50%, -50%, 0)
+            scale(3.2);
+    }
+}
+
+@media (
+    prefers-reduced-motion: reduce
+) {
+    *,
+    *::before,
+    *::after {
+        animation-duration:
+            0.01ms !important;
+
+        animation-iteration-count:
+            1 !important;
+
+        transition-duration:
+            0.01ms !important;
+
+        scroll-behavior:
+            auto !important;
+    }
+
+    .reveal-init,
+    .reveal-visible {
+        opacity: 1;
+
+        transform: none;
+    }
+} 
