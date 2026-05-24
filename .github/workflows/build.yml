@@ -1,0 +1,78 @@
+name: Deploy to GitHub Pages
+
+on:
+  push:
+    branches: ["main"]
+  workflow_dispatch:
+
+concurrency:
+  group: "pages"
+  cancel-in-progress: true
+
+jobs:
+  deploy:
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
+    runs-on: ubuntu-latest
+    permissions:
+      contents: read
+      pages: write
+      id-token: write
+      actions: write # Quyền bắt buộc để có thể xóa các run cũ
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Setup Pages
+        uses: actions/configure-pages@v5
+
+      # Gốc là thư mục tĩnh '.', đổi thành 'dist' hoặc 'build' nếu bạn dùng framework
+      - name: Upload artifact
+        uses: actions/upload-pages-artifact@v3
+        with:
+          path: "." 
+
+      - name: Deploy to GitHub Pages
+        id: deployment
+        uses: actions/deploy-pages@v4
+
+      # BƯỚC DỌN DẸP: Xóa sạch các workflow runs cũ, chỉ giữ lại run hiện tại
+      - name: Clean up old workflow runs
+        uses: actions/github-script@v7
+        with:
+          github-token: ${{ secrets.AOI_WEB }}
+          script: |
+            const owner = context.repo.owner;
+            const repo = context.repo.repo;
+            const workflow_id = context.workflow;
+            const current_run_id = context.runId;
+
+            // Lấy danh sách tất cả các lần chạy của workflow này
+            const response = await github.rest.actions.listWorkflowRuns({
+              owner,
+              repo,
+              workflow_id,
+              per_page: 100
+            });
+
+            const runs = response.data.workflow_runs;
+            console.log(`Tìm thấy ${runs.length} workflow runs.`);
+
+            // Lọc và xóa tất cả các run khác với run hiện tại
+            for (const run of runs) {
+              if (run.id !== current_run_id) {
+                try {
+                  await github.rest.actions.deleteWorkflowRun({
+                    owner,
+                    repo,
+                    run_id: run.id
+                  });
+                  console.log(`Đã xóa run cũ thành công: ID ${run.id}`);
+                } catch (error) {
+                  console.log(`Không thể xóa run ID ${run.id}: ${error.message}`);
+                }
+              }
+            }
+ 
