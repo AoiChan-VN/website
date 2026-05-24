@@ -1,0 +1,38 @@
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+
+  background: var(--aoi-bg);
+  color: var(--aoi-text);
+
+  font-family: sans-serif;
+}
+
+.aoi-shell {
+  width: 100%;
+  min-height: 100vh;
+}
+
+.aoi-header {
+
+  padding: 20px;
+
+  border-bottom:
+    1px solid var(--aoi-border);
+}
+
+.aoi-content {
+
+  display: grid;
+
+  grid-template-columns:
+    repeat(auto-fit, minmax(280px, 1fr));
+
+  gap: 20px;
+
+  padding: 20px;
+} 
