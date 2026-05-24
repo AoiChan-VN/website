@@ -9,6 +9,16 @@
     var(--aoi-radius);
 
   overflow: hidden;
+
+  transition:
+    transform .2s ease;
+}
+
+.aoi-card:hover {
+
+  transform:
+    translateY(-4px);
+
 }
 
 .aoi-card-image {
@@ -16,6 +26,8 @@
   aspect-ratio: 16 / 9;
 
   overflow: hidden;
+
+  cursor: pointer;
 }
 
 .aoi-card-image img {
@@ -24,6 +36,15 @@
   height: 100%;
 
   object-fit: cover;
+
+  transition:
+    transform .3s ease;
+}
+
+.aoi-card-image:hover img {
+
+  transform: scale(1.04);
+
 }
 
 .aoi-card-body {
@@ -36,6 +57,13 @@
   padding: 16px;
 }
 
+.aoi-card-title {
+
+  font-size: 14px;
+
+  font-weight: 600;
+}
+
 .aoi-card-action {
 
   width: 40px;
@@ -46,4 +74,4 @@
   border-radius: 50%;
 
   cursor: pointer;
-} 
+}
