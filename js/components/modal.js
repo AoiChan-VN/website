@@ -4,6 +4,7 @@ export class ModalComponent {
     }
 
     render(data) {
+        if (!this.container) return;
         this.container.innerHTML = `
             <div class="modal-content">
                 <button class="close-modal" id="close-modal-btn">✕</button>
@@ -19,7 +20,7 @@ export class ModalComponent {
         
         document.getElementById('close-modal-btn').addEventListener('click', () => this.close());
         this.container.addEventListener('click', (e) => {
-            if(e.target === this.container) this.close();
+            if (e.target === this.container) this.close();
         });
     }
 
