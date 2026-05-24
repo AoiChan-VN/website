@@ -20,7 +20,6 @@ jobs:
       pages: write
       id-token: write
       actions: write # Quyền bắt buộc để có thể xóa các run cũ
-      deployments: write
 
     steps:
       - name: Checkout repository
@@ -40,25 +39,6 @@ jobs:
         uses: actions/deploy-pages@v4
 
       # Tự động dọn dẹp Workflows Runs 【 1 Runs 】
-      - name: Delete All Deployments
-        env:
-          GH_TOKEN: ${{ secrets.AOI_WEB }}
-        run: |
-          # 1. Lấy danh sách tất cả các ID deployment của github-pages
-          ids=$(gh api /repos/${{ github.repository }}/deployments --jq '.[] | select(.environment=="github-pages") | .id')
-          
-          if [ -z "$ids" ]; then
-            echo "Không tìm thấy bản deployment nào."
-            exit 0
-          fi
-
-          # 2. Duyệt qua từng ID và xóa sạch
-          for id in $ids; do
-            echo "Đang xóa deployment ID: $id"
-            gh api --method DELETE /repos/${{ github.repository }}/deployments/$id
-          done
-          echo "Đã xóa xong tất cả deployment!"
-
       - name: ♻️𝐎𝐋𝐃 𝐖𝐎𝐑𝐊𝐅𝐋𝐎𝐖𝐒
         run: |
           gh api repos/${{ github.repository }}/actions/runs \
