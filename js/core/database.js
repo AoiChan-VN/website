@@ -1,7 +1,7 @@
 export class DatabaseEngine {
     constructor() {
-        this.treePath = 'database/aoi_tree.json';
-        this.folderBasePath = 'database';
+        this.treePath = './database/aoi_tree.json';
+        this.folderBasePath = './database';
     }
 
     async fetchTree() {
@@ -28,4 +28,3 @@ export class DatabaseEngine {
         return aggregateData;
     }
 }
- 
