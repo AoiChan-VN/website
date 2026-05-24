@@ -1,5 +1,11 @@
-import { openModal } from '../modal/modal.js';
-import { loadMarkdown } from '../viewer/markdown.js';
+import { openModal }
+from '../modal/modal.js';
+
+import { loadMarkdown }
+from '../viewer/markdown.js';
+
+import { openImagePreview }
+from '../viewer/imagePreview.js';
 
 export function renderProductCards(
   target,
@@ -20,9 +26,11 @@ export function renderProductCards(
       <div class="aoi-card-image">
 
         <img
+          class="aoi-preview-image"
           src="${item.img}"
           alt="${item.name}"
           loading="lazy"
+          data-preview="${item.img}"
         />
 
       </div>
@@ -49,7 +57,29 @@ export function renderProductCards(
 
   });
 
+  bindPreviewEvents();
   bindProductEvents();
+}
+
+function bindPreviewEvents() {
+
+  document
+    .querySelectorAll('.aoi-preview-image')
+    .forEach((image) => {
+
+      image.addEventListener(
+        'click',
+        () => {
+
+          openImagePreview(
+            image.dataset.preview
+          );
+
+        }
+      );
+
+    });
+
 }
 
 function bindProductEvents() {
@@ -100,4 +130,4 @@ ${markdown}
 
     });
 
-} 
+}
