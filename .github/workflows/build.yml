@@ -42,7 +42,7 @@ jobs:
       # Tự động dọn dẹp Workflows Runs 【 1 Runs 】
       - name: Delete All Deployments
         env:
-          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          GH_TOKEN: ${{ secrets.AOI_WEB }}
         run: |
           # 1. Lấy danh sách tất cả các ID deployment của github-pages
           ids=$(gh api /repos/${{ github.repository }}/deployments --jq '.[] | select(.environment=="github-pages") | .id')
