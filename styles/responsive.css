@@ -1,0 +1,9 @@
+@media (max-width: 768px) {
+
+  .aoi-content {
+
+    grid-template-columns: 1fr;
+
+  }
+
+} 
