@@ -6,11 +6,13 @@ export class DatabaseEngine {
 
     async fetchTree() {
         const response = await fetch(this.treePath);
+        if (!response.ok) throw new Error(`Failed to fetch tree: ${response.status}`);
         return await response.json();
     }
 
     async loadFolderData(folderName, fileName = 'aoi_plugins.json') {
         const response = await fetch(`${this.folderBasePath}/${folderName}/${fileName}`);
+        if (!response.ok) throw new Error(`Failed to load folder data: ${response.status}`);
         return await response.json();
     }
 
@@ -22,7 +24,7 @@ export class DatabaseEngine {
                 const data = await this.loadFolderData(item.folder);
                 aggregateData = [...aggregateData, ...data];
             } catch (error) {
-                console.error(`Error mapping folder: ${item.folder}`, error);
+                console.error(`Error mapping matrix folder [${item.folder}]:`, error);
             }
         }
         return aggregateData;
