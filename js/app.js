@@ -10,12 +10,10 @@ class AppEngine {
     }
 
     async init() {
-        // Đóng các menu con đang mở nếu bấm ra ngoài card
         document.addEventListener('click', () => {
             document.querySelectorAll('.action-menu').forEach(m => m.classList.remove('active'));
         });
 
-        // Tự động nhận diện cây thư mục database và render
         try {
             const products = await this.db.fetchAllProducts();
             this.panel.renderGrid(products);
@@ -29,7 +27,5 @@ class AppEngine {
     }
 }
 
-// Khởi chạy hệ thống Single Page Module thực thụ
 const app = new AppEngine();
 document.addEventListener('DOMContentLoaded', () => app.init());
- 
