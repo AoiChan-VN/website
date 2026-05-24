@@ -10,9 +10,9 @@ jobs:
   delete-history:
     runs-on: ubuntu-latest
     steps:
-      - name: Delete All Deployments
+      - name: Deactivate and Delete All Deployments
         env:
-          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          GH_TOKEN: ${{ secrets.AOI_WEB }}
         run: |
           # 1. Lấy danh sách tất cả các ID deployment của github-pages
           ids=$(gh api /repos/${{ github.repository }}/deployments --jq '.[] | select(.environment=="github-pages") | .id')
@@ -22,10 +22,20 @@ jobs:
             exit 0
           fi
 
-          # 2. Duyệt qua từng ID và xóa sạch
+          # 2. Duyệt qua từng ID để xử lý
           for id in $ids; do
-            echo "Đang xóa deployment ID: $id"
-            gh api --method DELETE /repos/${{ github.repository }}/deployments/$id
+            echo "-----------------------------------"
+            echo "Đang xử lý deployment ID: $id"
+            
+            # Bước A: Ép trạng thái về 'inactive' để gỡ bỏ tính chất 'Active' của bản deploy đó
+            gh api -X POST /repos/${{ github.repository }}/deployments/$id/statuses \
+              -f state="inactive" \
+              -H "Accept: application/vnd.github+json" > /dev/null 2>&1 || true
+            
+            # Bước B: Xóa hoàn toàn deployment
+            echo "Đang xóa hoàn toàn ID: $id"
+            gh api -X DELETE /repos/${{ github.repository }}/deployments/$id
           done
-          echo "Đã xóa xong tất cả deployment!"
- 
+          
+          echo "-----------------------------------"
+          echo "Xóa sạch toàn bộ lịch sử deployment thành công!"
