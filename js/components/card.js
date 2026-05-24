@@ -29,20 +29,22 @@ export class CardComponent {
         const actionBtn = element.querySelector('.card-action-btn');
         const menu = element.querySelector('.action-menu');
 
-        // Logic toggle menu con dạng popup (...)
         actionBtn.addEventListener('click', (e) => {
             e.stopPropagation();
-            document.querySelectorAll('.action-menu').forEach(m => { if(m !== menu) m.classList.remove('active'); });
+            document.querySelectorAll('.action-menu').forEach(m => {
+                if (m !== menu) m.classList.remove('active');
+            });
             menu.classList.toggle('active');
         });
 
-        // Event xử lý trong menu con
-        element.querySelector('.menu-info-btn').addEventListener('click', () => {
+        element.querySelector('.menu-info-btn').addEventListener('click', (e) => {
+            e.stopPropagation();
             menu.classList.remove('active');
             this.onDetailsClick(this.product);
         });
 
-        element.querySelector('.menu-dl-btn').addEventListener('click', () => {
+        element.querySelector('.menu-dl-btn').addEventListener('click', (e) => {
+            e.stopPropagation();
             menu.classList.remove('active');
             window.open(this.product.link, '_blank');
         });
@@ -50,4 +52,3 @@ export class CardComponent {
         return element;
     }
 }
- 
