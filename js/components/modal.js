@@ -13,7 +13,7 @@ export class ModalComponent {
                 <p><strong>Định dạng File cấu hình:</strong> ${data.file}</p>
                 <p><strong>Nguồn phát hành:</strong> ${data.link}</p>
             </div>
-         airs`;
+        `;
         
         this.container.classList.add('active');
         
@@ -28,4 +28,3 @@ export class ModalComponent {
         this.container.innerHTML = '';
     }
 }
- 
