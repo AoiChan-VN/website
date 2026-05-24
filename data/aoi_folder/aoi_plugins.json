@@ -1,0 +1,11 @@
+[
+  {
+    "id": 1,
+    "name": "SuperPlugin",
+    "img": "./assets/products/plugin.webp",
+    "file": "./docs/plugin.md",
+    "download": "./downloads/plugin.zip",
+    "link": "https://example.com",
+    "version": "1.0.0"
+  }
+] 
