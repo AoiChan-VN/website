@@ -1,0 +1,49 @@
+.aoi-panel-root {
+
+  position: fixed;
+
+  inset: 0;
+
+  pointer-events: none;
+}
+
+.aoi-panel-root.active {
+  pointer-events: auto;
+}
+
+.aoi-panel {
+
+  position: absolute;
+
+  right: 20px;
+  bottom: 20px;
+
+  width: 240px;
+
+  padding: 12px;
+
+  background: #181b24;
+
+  border:
+    1px solid var(--aoi-border);
+
+  border-radius:
+    var(--aoi-radius);
+
+  display: flex;
+  flex-direction: column;
+
+  gap: 10px;
+}
+
+.aoi-panel-btn,
+.aoi-panel-close {
+
+  height: 44px;
+
+  border: none;
+
+  border-radius: 12px;
+
+  cursor: pointer;
+} 
