@@ -1,0 +1,31 @@
+name: Delete GitHub Pages Deployments
+
+on:
+  workflow_dispatch:
+
+permissions:
+  deployments: write
+
+jobs:
+  delete-history:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Delete All Deployments
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        run: |
+          # 1. Lấy danh sách tất cả các ID deployment của github-pages
+          ids=$(gh api /repos/${{ github.repository }}/deployments --jq '.[] | select(.environment=="github-pages") | .id')
+          
+          if [ -z "$ids" ]; then
+            echo "Không tìm thấy bản deployment nào."
+            exit 0
+          fi
+
+          # 2. Duyệt qua từng ID và xóa sạch
+          for id in $ids; do
+            echo "Đang xóa deployment ID: $id"
+            gh api --method DELETE /repos/${{ github.repository }}/deployments/$id
+          done
+          echo "Đã xóa xong tất cả deployment!"
+ 
