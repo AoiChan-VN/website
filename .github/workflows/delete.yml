@@ -3,22 +3,40 @@ name: ◡🥀𝓐𝓸𝓲𝓒𝓱𝓪𝓷🥀◡ xóa
 on:
   push:
    branches: ["main"]
-  workflow_dispatch:
 
-permissions:
-  actions: write
-  contents: write
-  id-token: write
+concurrency:
+  group: "pages"
+  cancel-in-progress: true
 
 jobs:
   aoichan:
-    name: 🍒𝓐𝓸𝓲𝓒𝓱𝓪𝓷🦋
-    runs-on: ubuntu-latest
     environment:
       name: github-pages
       url: ${{ steps.deployment.outputs.page_url }}
-    
+    runs-on: ubuntu-latest
+    permissions:
+      contents: read
+      pages: write
+      id-token: write
+      actions: write # Quyền bắt buộc để có thể xóa các run cũ
+
     steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Setup Pages
+        uses: actions/configure-pages@v5
+
+      # Gốc là thư mục tĩnh '.', đổi thành 'dist' hoặc 'build' nếu bạn dùng framework
+      - name: Upload artifact
+        uses: actions/upload-pages-artifact@v3
+        with:
+          path: "." 
+
+      - name: Deploy to GitHub Pages
+        id: deployment
+        uses: actions/deploy-pages@v4
+
       - name: 🗑️ 𝐎𝐋𝐃 deployment
         run: |
           gh api repos/${{ github.repository }}/deployments \
