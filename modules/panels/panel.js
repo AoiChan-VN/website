@@ -1,3 +1,28 @@
+import { resolveFolderData } from '../../core/resolver.js';
+
+import { renderProductCards } from '../cards/productCards.js';
+
+import { pushState } from '../../core/navigation.js';
+
+export async function openCardPanel(data) {
+
+  const products =
+    await resolveFolderData(data.folder);
+
+  pushState({
+    type: 'category',
+    folder: data.folder
+  });
+
+  renderProductCards(
+    document.querySelector(
+      '#aoi-content'
+    ),
+    products
+  );
+
+}
+
 export function openCardPanel(data) {
 
   const root = document.querySelector(
