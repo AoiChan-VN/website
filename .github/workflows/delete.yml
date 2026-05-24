@@ -7,35 +7,14 @@ on:
 
 permissions:
   actions: write
-  contents: read
-  pages: write
   id-token: write
-
-#concurrency:
-  #group: "pages"
-  #cancel-in-progress: true
 
 jobs:
   aoichan:
     name: 🍒𝓐𝓸𝓲𝓒𝓱𝓪𝓷🦋
     runs-on: ubuntu-latest
-    environment: 
-      name: github-pages
-      url: ${{ steps.deployment.outputs.page_url }}
     
     steps:
-      - name: 👨‍💻 Checkout mã nguồn
-        uses: actions/checkout@v4
-          
-      - name: Artifacts ➺ Deploy
-        uses: actions/upload-pages-artifact@v4
-        with:
-          path: .
-          
-      - name: Triển khai ➺【GitHub Pages】
-        id: deployment
-        uses: actions/deploy-pages@v4
-        
       - name: 🗑️ 𝐎𝐋𝐃 deployment
         run: |
           gh api repos/${{ github.repository }}/deployments \
