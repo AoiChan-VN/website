@@ -7,6 +7,7 @@ export class PanelComponent {
     }
 
     renderGrid(products) {
+        if (!this.container) return;
         this.container.innerHTML = '';
         products.forEach(product => {
             const card = new CardComponent(product, this.onItemSelect);
@@ -14,4 +15,3 @@ export class PanelComponent {
         });
     }
 }
- 
