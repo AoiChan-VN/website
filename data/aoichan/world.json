@@ -1,9 +1,0 @@
-[
-  {
-    "name":"world",
-    "description":"this is world...",
-    "img":"./assets/images/placeholder.webp",
-    "file":"./content/world/world.md",
-    "link":"https://example.com"
-  }
-] 
