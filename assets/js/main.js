@@ -1,5 +1,24 @@
-import { loadPortfolio } from "./modules/load-portfolio.js";
+import { loadPortfolio }
+from "./modules/load-portfolio.js";
 
-document.addEventListener("DOMContentLoaded", async () => {
-  await loadPortfolio();
-}); 
+async function initializeApp() {
+
+  try {
+
+    await loadPortfolio();
+
+  } catch (error) {
+
+    console.error(
+      "Initialize App Failed:",
+      error
+    );
+
+  }
+
+}
+
+document.addEventListener(
+  "DOMContentLoaded",
+  initializeApp
+);
