@@ -1,11 +1,17 @@
 :root {
 
   --color-bg: #0b0d12;
-  --color-surface: rgba(255, 255, 255, 0.08);
-  --color-border: rgba(255, 255, 255, 0.12);
+
+  --color-surface:
+    rgba(255, 255, 255, 0.08);
+
+  --color-border:
+    rgba(255, 255, 255, 0.12);
 
   --color-text: #ffffff;
-  --color-text-soft: rgba(255, 255, 255, 0.72);
+
+  --color-text-soft:
+    rgba(255, 255, 255, 0.72);
 
   --glass-blur: 24px;
 
@@ -17,5 +23,10 @@
 
   --container-width: 1280px;
 
-  --transition-fast: 180ms ease;
-} 
+  --transition-fast:
+    180ms ease;
+
+  --safe-bottom:
+    max(20px, env(safe-area-inset-bottom));
+
+}
