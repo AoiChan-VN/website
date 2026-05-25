@@ -1,98 +1,162 @@
 <!DOCTYPE html>
 <html lang="vi">
 <head>
-  <meta charset="UTF-8">
-  <meta http-equiv="X-UA-Compatible" content="IE=edge">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover" />
 
   <title>Aoi Portfolio</title>
-  <meta name="description" content="Aoi Portfolio Static Website">
-  <meta name="theme-color" content="#0f172a">
-  <meta name="color-scheme" content="dark">
 
-  <meta property="og:title" content="Aoi Portfolio">
-  <meta property="og:description" content="Static Portfolio for GitHub Pages">
-  <meta property="og:image" content="./assets/images/preview.webp">
-  <meta property="og:type" content="website">
+  <meta
+    name="description"
+    content="Aoi Portfolio Website"
+  />
 
-  <link rel="icon" href="./assets/icons/favicon.ico">
-  <link rel="apple-touch-icon" href="./assets/icons/apple-touch-icon.png">
+  <meta
+    name="theme-color"
+    content="#0f1117"
+  />
 
-  <link rel="preload" href="./assets/images/background.webp" as="image">
-  <link rel="preload" href="./assets/images/logo.webp" as="image">
+  <link
+    rel="icon"
+    href="./favicon.ico"
+  />
 
-  <link rel="stylesheet" href="./assets/css/reset.css">
-  <link rel="stylesheet" href="./assets/css/variables.css">
-  <link rel="stylesheet" href="./assets/css/base.css">
-  <link rel="stylesheet" href="./assets/css/layout.css">
-  <link rel="stylesheet" href="./assets/css/components.css">
-  <link rel="stylesheet" href="./assets/css/animations.css">
-  <link rel="stylesheet" href="./assets/css/responsive.css">
+  <link
+    rel="apple-touch-icon"
+    href="./assets/icons/apple-touch-icon.png"
+  />
+
+  <link
+    rel="stylesheet"
+    href="./assets/css/reset.css"
+  />
+
+  <link
+    rel="stylesheet"
+    href="./assets/css/variables.css"
+  />
+
+  <link
+    rel="stylesheet"
+    href="./assets/css/base.css"
+  />
+
+  <link
+    rel="stylesheet"
+    href="./assets/css/layout.css"
+  />
+
+  <link
+    rel="stylesheet"
+    href="./assets/css/components.css"
+  />
+
+  <link
+    rel="stylesheet"
+    href="./assets/css/animations.css"
+  />
+
+  <link
+    rel="stylesheet"
+    href="./assets/css/responsive.css"
+  />
 </head>
+
 <body>
 
-  <div class="app-shell">
+  <div class="bg-layer"></div>
 
-    <div class="background-layer"></div>
-    <div class="background-overlay"></div>
+  <main class="app-shell">
 
-    <header class="header">
-      <div class="header-inner">
-        <div class="brand">
-          <img
-            src="./assets/images/logo.webp"
-            alt="Aoi Logo"
-            class="brand-logo"
-            width="72"
-            height="72"
-            loading="eager"
-            decoding="async"
-          >
+    <header class="hero">
 
-          <div class="brand-content">
-            <h1 class="brand-title">Aoi Portfolio</h1>
-            <p class="brand-description">
-              Static Vanilla JS • GitHub Pages Ready
-            </p>
-          </div>
-        </div>
+      <div class="hero-top">
+
+        <img
+          class="hero-logo"
+          src="./assets/images/logo.webp"
+          alt="Aoi Logo"
+        />
+
       </div>
+
+      <div class="hero-content">
+
+        <h1 class="hero-title">
+          Aoi Portfolio
+        </h1>
+
+        <p class="hero-description">
+          Static Portfolio dành cho GitHub Pages.
+        </p>
+
+      </div>
+
     </header>
 
-    <main class="main-content">
+    <section class="cards-section">
 
-      <section class="hero-section glass-card">
-        <h2 class="hero-title">
-          Creative Archive
-        </h2>
+      <div
+        id="cards-container"
+        class="cards-grid"
+      ></div>
 
-        <p class="hero-text">
-          Dynamic data-driven portfolio using static JSON.
-        </p>
-      </section>
+    </section>
 
-      <section class="portfolio-section">
-        <div
-          id="portfolio-grid"
-          class="portfolio-grid"
-          aria-live="polite"
-        ></div>
-      </section>
+  </main>
 
-    </main>
+  <div
+    id="overlay"
+    class="overlay hidden"
+  ></div>
 
-    <footer class="footer">
-      <p class="footer-text">
-        © 2026 Aoi Portfolio
-      </p>
-    </footer>
+  <aside
+    id="panel"
+    class="panel hidden"
+  >
 
-  </div>
+    <button
+      id="close-panel"
+      class="panel-close"
+      type="button"
+      aria-label="Đóng"
+    >
+      ×
+    </button>
 
-  <script src="./assets/js/utils.js" defer></script>
-  <script src="./assets/js/observer.js" defer></script>
-  <script src="./assets/js/loader.js" defer></script>
-  <script src="./assets/js/renderer.js" defer></script>
-  <script src="./assets/js/app.js" defer></script>
+    <div id="panel-content"></div>
+
+  </aside>
+
+  <script
+    src="./assets/js/utils.js"
+    defer
+  ></script>
+
+  <script
+    src="./assets/js/markdown.js"
+    defer
+  ></script>
+
+  <script
+    src="./assets/js/modal.js"
+    defer
+  ></script>
+
+  <script
+    src="./assets/js/loader.js"
+    defer
+  ></script>
+
+  <script
+    src="./assets/js/renderer.js"
+    defer
+  ></script>
+
+  <script
+    src="./assets/js/app.js"
+    defer
+  ></script>
+
 </body>
-</html> 
+</html>
