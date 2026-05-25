@@ -1,5 +1,8 @@
 import { fetchJson } from "./fetch-json.js";
 import { createCard } from "./create-card.js";
+import { renderEmpty } from "./render-empty.js";
+import { renderError } from "./render-error.js";
+import { validateItem } from "./validate-item.js";
 
 export async function loadPortfolio() {
 
@@ -15,32 +18,59 @@ export async function loadPortfolio() {
     const folders =
       await fetchJson("./data/aoi-file.json");
 
+    if (
+      !Array.isArray(folders) ||
+      folders.length === 0
+    ) {
+      renderEmpty(container);
+      return;
+    }
+
+    let totalItems = 0;
+
     for (const folder of folders) {
+
+      if (!folder.file) {
+        continue;
+      }
 
       const items =
         await fetchJson(folder.file);
 
-      items.forEach((item) => {
+      if (!Array.isArray(items)) {
+        continue;
+      }
+
+      for (const item of items) {
+
+        const isValid =
+          validateItem(item);
+
+        if (!isValid) {
+          continue;
+        }
 
         const card =
           createCard(item);
 
         container.appendChild(card);
 
-      });
+        totalItems++;
 
+      }
+
+    }
+
+    if (totalItems === 0) {
+      renderEmpty(container);
     }
 
   } catch (error) {
 
     console.error(error);
 
-    container.innerHTML = `
-      <div class="glass-card" style="padding:24px;border-radius:24px;">
-        Failed to load data.
-      </div>
-    `;
+    renderError(container);
 
   }
 
-} 
+}
