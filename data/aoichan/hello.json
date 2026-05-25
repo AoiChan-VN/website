@@ -3,7 +3,7 @@
     "name": "hello",
     "description": "xin chào mọi người...",
     "img": "assets/images/aoichan.webp",
-    "file": "content/hello/hello.md",
+    "file": "./posts/hello/hello.md",
     "link": ""
   }
 ]
