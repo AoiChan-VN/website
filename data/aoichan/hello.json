@@ -2,7 +2,7 @@
   {
     "name": "hello",
     "description": "xin chào mọi người...",
-    "img": "assets/images/aoichan.webp",
+    "img": "./assets/images/aoichan.webp",
     "file": "./posts/hello/hello.md",
     "link": ""
   }
