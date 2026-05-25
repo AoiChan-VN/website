@@ -7,6 +7,9 @@ from "./sanitize-text.js";
 import { applyImageFallback }
 from "./image-fallback.js";
 
+import { createLinkButton }
+from "./create-link-button.js";
+
 export function createCard(item) {
 
   const article =
@@ -28,9 +31,12 @@ export function createCard(item) {
     );
 
   image.src = item.img;
-  image.alt = sanitizeText(item.name);
+
+  image.alt =
+    sanitizeText(item.name);
 
   image.loading = "lazy";
+
   image.decoding = "async";
 
   applyImageFallback(image);
@@ -49,8 +55,8 @@ export function createCard(item) {
       "card-title"
     );
 
-  title.innerHTML =
-    sanitizeText(item.name);
+  title.textContent =
+    item.name;
 
   const description =
     createElement(
@@ -58,10 +64,11 @@ export function createCard(item) {
       "card-description"
     );
 
-  description.innerHTML =
-    sanitizeText(item.description);
+  description.textContent =
+    item.description;
 
   content.appendChild(title);
+
   content.appendChild(description);
 
   const hasLink =
@@ -77,19 +84,7 @@ export function createCard(item) {
       );
 
     const button =
-      createElement(
-        "a",
-        "card-button"
-      );
-
-    button.href = item.link;
-
-    button.target = "_blank";
-
-    button.rel =
-      "noopener noreferrer";
-
-    button.textContent = "Open";
+      createLinkButton(item.link);
 
     footer.appendChild(button);
 
@@ -98,6 +93,7 @@ export function createCard(item) {
   }
 
   article.appendChild(imageWrapper);
+
   article.appendChild(content);
 
   return article;
