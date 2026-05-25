@@ -1,0 +1,39 @@
+@media (max-width: 768px) {
+
+  .hero-content {
+    padding: 28px;
+  }
+
+  .section-title {
+    font-size: 1.6rem;
+  }
+
+  .portfolio-grid {
+    grid-template-columns: 1fr;
+  }
+
+}
+
+@media (max-width: 480px) {
+
+  .site-main {
+    padding:
+      24px
+      16px
+      80px;
+  }
+
+  .hero-content {
+    padding: 24px;
+  }
+
+  .brand-logo {
+    width: 48px;
+    height: 48px;
+  }
+
+  .hero-title {
+    line-height: 1.15;
+  }
+
+} 
