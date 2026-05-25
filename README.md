@@ -1,3 +1,4 @@
+```text
 aoi-project/
 │
 ├── index.html
@@ -69,3 +70,4 @@ aoi-project/
 │       └── hello.md
 │
 └── README.md 
+```
