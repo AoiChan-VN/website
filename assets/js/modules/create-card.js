@@ -1,67 +1,104 @@
+import { createElement }
+from "./create-element.js";
+
+import { sanitizeText }
+from "./sanitize-text.js";
+
 import { applyImageFallback }
 from "./image-fallback.js";
 
 export function createCard(item) {
 
   const article =
-    document.createElement("article");
+    createElement(
+      "article",
+      "portfolio-card glass-card"
+    );
 
-  article.className =
-    "portfolio-card glass-card";
+  const imageWrapper =
+    createElement(
+      "div",
+      "card-image-wrapper"
+    );
+
+  const image =
+    createElement(
+      "img",
+      "card-image"
+    );
+
+  image.src = item.img;
+  image.alt = sanitizeText(item.name);
+
+  image.loading = "lazy";
+  image.decoding = "async";
+
+  applyImageFallback(image);
+
+  imageWrapper.appendChild(image);
+
+  const content =
+    createElement(
+      "div",
+      "card-content"
+    );
+
+  const title =
+    createElement(
+      "h3",
+      "card-title"
+    );
+
+  title.innerHTML =
+    sanitizeText(item.name);
+
+  const description =
+    createElement(
+      "p",
+      "card-description"
+    );
+
+  description.innerHTML =
+    sanitizeText(item.description);
+
+  content.appendChild(title);
+  content.appendChild(description);
 
   const hasLink =
     typeof item.link === "string" &&
     item.link.trim() !== "";
 
-  article.innerHTML = `
-    <div class="card-image-wrapper">
+  if (hasLink) {
 
-      <img
-        src="${item.img}"
-        alt="${item.name}"
-        class="card-image"
-        loading="lazy"
-        decoding="async"
-      />
+    const footer =
+      createElement(
+        "div",
+        "card-footer"
+      );
 
-    </div>
+    const button =
+      createElement(
+        "a",
+        "card-button"
+      );
 
-    <div class="card-content">
+    button.href = item.link;
 
-      <h3 class="card-title">
-        ${item.name}
-      </h3>
+    button.target = "_blank";
 
-      <p class="card-description">
-        ${item.description}
-      </p>
+    button.rel =
+      "noopener noreferrer";
 
-      ${
-        hasLink
-          ? `
-            <div class="card-footer">
+    button.textContent = "Open";
 
-              <a
-                href="${item.link}"
-                class="card-button"
-                target="_blank"
-                rel="noopener noreferrer"
-              >
-                Open
-              </a>
+    footer.appendChild(button);
 
-            </div>
-          `
-          : ""
-      }
+    content.appendChild(footer);
 
-    </div>
-  `;
+  }
 
-  const image =
-    article.querySelector(".card-image");
-
-  applyImageFallback(image);
+  article.appendChild(imageWrapper);
+  article.appendChild(content);
 
   return article;
 
