@@ -1,0 +1,170 @@
+.avatar{
+  width:120px;
+  height:120px;
+
+  border-radius:50%;
+
+  object-fit:cover;
+
+  border:
+    3px solid rgba(255,255,255,0.15);
+
+  margin-bottom:18px;
+}
+
+.hero-title{
+  font-size:clamp(2rem,4vw,3rem);
+  font-weight:700;
+}
+
+.hero-subtitle{
+  margin-top:12px;
+  color:var(--text-secondary);
+}
+
+.card{
+  position:relative;
+
+  background:
+    rgba(255,255,255,0.04);
+
+  border:
+    1px solid var(--border);
+
+  border-radius:var(--radius-lg);
+
+  overflow:hidden;
+
+  backdrop-filter:blur(var(--blur));
+
+  transition:
+    transform var(--transition),
+    background var(--transition);
+
+  box-shadow:var(--shadow);
+}
+
+.card:hover{
+  transform:translateY(-4px);
+  background:var(--card-hover);
+}
+
+.card-image{
+  aspect-ratio:16/9;
+  object-fit:cover;
+}
+
+.card-body{
+  padding:18px;
+}
+
+.card-title{
+  font-size:1.1rem;
+  font-weight:600;
+}
+
+.card-description{
+  margin-top:10px;
+  color:var(--text-secondary);
+  line-height:1.5;
+}
+
+.card-actions{
+  margin-top:18px;
+
+  display:flex;
+  justify-content:space-between;
+  align-items:center;
+}
+
+.card-button{
+  width:42px;
+  height:42px;
+
+  border-radius:50%;
+
+  background:
+    rgba(255,255,255,0.08);
+
+  color:#fff;
+
+  font-size:1rem;
+
+  transition:var(--transition);
+}
+
+.card-button:hover{
+  background:
+    rgba(255,255,255,0.16);
+}
+
+.panel-overlay{
+  position:fixed;
+  inset:0;
+
+  background:
+    rgba(0,0,0,0.55);
+
+  z-index:80;
+
+  transition:var(--transition);
+}
+
+.card-panel{
+  position:fixed;
+  right:20px;
+  bottom:20px;
+
+  width:min(420px,92vw);
+
+  background:
+    rgba(25,28,34,0.96);
+
+  border:
+    1px solid var(--border);
+
+  border-radius:28px;
+
+  padding:24px;
+
+  z-index:100;
+
+  box-shadow:var(--shadow);
+
+  backdrop-filter:blur(40px);
+
+  transition:var(--transition);
+}
+
+.panel-close{
+  position:absolute;
+  top:14px;
+  right:14px;
+
+  width:36px;
+  height:36px;
+
+  border-radius:50%;
+
+  background:
+    rgba(255,255,255,0.08);
+
+  color:#fff;
+}
+
+.panel-link{
+  display:inline-flex;
+  margin-top:16px;
+  padding:12px 16px;
+
+  border-radius:14px;
+
+  background:
+    rgba(255,255,255,0.08);
+}
+
+.markdown-content{
+  margin-top:18px;
+  line-height:1.8;
+  color:var(--text-secondary);
+} 
