@@ -1,5 +1,7 @@
 :root {
 
+  --app-height: 100vh;
+
   --color-bg: #0b0d12;
 
   --color-surface:
@@ -19,6 +21,7 @@
     0 10px 40px rgba(0, 0, 0, 0.35);
 
   --radius-lg: 28px;
+
   --radius-md: 20px;
 
   --container-width: 1280px;
