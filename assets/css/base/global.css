@@ -1,0 +1,16 @@
+html,
+body {
+  width: 100%;
+  min-height: 100%;
+  overflow-x: hidden;
+  background: var(--bg-primary);
+  color: var(--text-primary);
+  font-family:
+    "SF Pro Display",
+    "Segoe UI",
+    sans-serif;
+}
+
+body {
+  position: relative;
+} 
