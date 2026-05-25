@@ -1,4 +1,7 @@
-import { normalizePath }
+import {
+  normalizePath,
+  isExternalLink
+}
 from "./path-utils.js";
 
 export function validateItem(item) {
@@ -35,13 +38,20 @@ export function validateItem(item) {
     normalizePath(item.img);
 
   if (item.file) {
+
     item.file =
       normalizePath(item.file);
+
   }
 
-  if (item.link) {
+  if (
+    item.link &&
+    !isExternalLink(item.link)
+  ) {
+
     item.link =
       normalizePath(item.link);
+
   }
 
   return true;
