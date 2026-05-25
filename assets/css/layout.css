@@ -1,0 +1,60 @@
+.app-shell{
+  width:min(100%,var(--max-width));
+  margin:auto;
+
+  padding:
+    32px
+    20px
+    100px;
+}
+
+.hero{
+  margin-bottom:48px;
+}
+
+.hero-top{
+  display:flex;
+  justify-content:center;
+}
+
+.hero-logo{
+  width:120px;
+  height:120px;
+
+  object-fit:cover;
+
+  border-radius:36px;
+
+  border:1px solid var(--border);
+
+  box-shadow:var(--shadow);
+
+  backdrop-filter:blur(var(--blur));
+}
+
+.hero-content{
+  margin-top:24px;
+  text-align:center;
+}
+
+.hero-title{
+  font-size:clamp(2rem,5vw,4rem);
+  font-weight:700;
+}
+
+.hero-description{
+  margin-top:12px;
+
+  color:var(--muted);
+
+  font-size:1rem;
+}
+
+.cards-grid{
+  display:grid;
+
+  grid-template-columns:
+    repeat(auto-fit,minmax(280px,1fr));
+
+  gap:24px;
+} 
