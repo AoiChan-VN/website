@@ -1,0 +1,19 @@
+@media (max-width:768px){
+
+  .app-shell{
+    padding:
+      20px
+      16px
+      80px;
+  }
+
+  .hero-logo{
+    width:96px;
+    height:96px;
+  }
+
+  .panel{
+    width:min(94%,100%);
+  }
+
+} 
