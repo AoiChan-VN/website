@@ -1,10 +1,12 @@
 .portfolio-card {
   overflow: hidden;
+
   border-radius: var(--radius-lg);
 
   transition:
     transform var(--transition-fast),
-    border-color var(--transition-fast);
+    border-color var(--transition-fast),
+    background var(--transition-fast);
 }
 
 .portfolio-card:hover {
@@ -12,10 +14,16 @@
 
   border-color:
     rgba(255, 255, 255, 0.24);
+
+  background:
+    rgba(255, 255, 255, 0.1);
 }
 
 .card-image-wrapper {
+  position: relative;
+
   aspect-ratio: 16 / 10;
+
   overflow: hidden;
 }
 
@@ -24,6 +32,13 @@
   height: 100%;
 
   object-fit: cover;
+
+  transition:
+    transform 400ms ease;
+}
+
+.portfolio-card:hover .card-image {
+  transform: scale(1.03);
 }
 
 .card-content {
@@ -33,6 +48,8 @@
 .card-title {
   font-size: 1.1rem;
   font-weight: 700;
+
+  line-height: 1.4;
 }
 
 .card-description {
@@ -41,6 +58,8 @@
   color: var(--color-text-soft);
 
   line-height: 1.7;
+
+  word-break: break-word;
 }
 
 .card-footer {
@@ -62,10 +81,37 @@
     rgba(255, 255, 255, 0.12);
 
   transition:
-    background var(--transition-fast);
+    background var(--transition-fast),
+    transform var(--transition-fast);
 }
 
 .card-button:hover {
   background:
     rgba(255, 255, 255, 0.18);
-} 
+
+  transform: translateY(-1px);
+}
+
+.empty-state,
+.error-state {
+  padding: 32px;
+
+  border-radius: var(--radius-lg);
+
+  text-align: center;
+}
+
+.empty-title,
+.error-title {
+  font-size: 1.2rem;
+  font-weight: 700;
+}
+
+.empty-description,
+.error-description {
+  margin-top: 12px;
+
+  color: var(--color-text-soft);
+
+  line-height: 1.7;
+}
