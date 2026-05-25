@@ -1,0 +1,11 @@
+@media (max-width: 768px) {
+
+  .app-shell {
+    padding: 24px 16px;
+  }
+
+  .navbar-logo {
+    font-size: 2rem;
+  }
+
+} 
