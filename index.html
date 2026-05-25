@@ -5,161 +5,86 @@
   <meta
     name="viewport"
     content="width=device-width, initial-scale=1.0, viewport-fit=cover"
-/>
+  />
 
   <title>Aoi Portfolio</title>
 
   <meta
     name="description"
-    content="Aoi Portfolio Website"
+    content="Aoi Portfolio Static Vanilla Website"
   />
 
-  <meta
-    name="theme-color"
-    content="#0f1117"
-  />
+  <meta name="theme-color" content="#0f1115" />
 
-  <link
-    rel="icon"
-    href="./favicon.ico"
-  />
+  <link rel="icon" href="./favicon.ico" />
 
-  <link
-    rel="apple-touch-icon"
-    href="./assets/icons/apple-touch-icon.png"
-  />
-
-  <link
-    rel="stylesheet"
-    href="./assets/css/reset.css"
-  />
-
-  <link
-    rel="stylesheet"
-    href="./assets/css/variables.css"
-  />
-
-  <link
-    rel="stylesheet"
-    href="./assets/css/base.css"
-  />
-
-  <link
-    rel="stylesheet"
-    href="./assets/css/layout.css"
-  />
-
-  <link
-    rel="stylesheet"
-    href="./assets/css/components.css"
-  />
-
-  <link
-    rel="stylesheet"
-    href="./assets/css/animations.css"
-  />
-
-  <link
-    rel="stylesheet"
-    href="./assets/css/responsive.css"
-  />
+  <link rel="stylesheet" href="./assets/css/reset.css" />
+  <link rel="stylesheet" href="./assets/css/variables.css" />
+  <link rel="stylesheet" href="./assets/css/base.css" />
+  <link rel="stylesheet" href="./assets/css/layout.css" />
+  <link rel="stylesheet" href="./assets/css/components.css" />
+  <link rel="stylesheet" href="./assets/css/responsive.css" />
+  <link rel="stylesheet" href="./assets/css/animations.css" />
 </head>
 
 <body>
 
-  <div class="bg-layer"></div>
-
-  <main class="app-shell">
+  <div class="app-shell">
 
     <header class="hero">
-
-      <div class="hero-top">
-
-        <img
-          class="hero-logo"
-          src="./assets/images/logo.webp"
-          alt="Aoi Logo"
-        />
-
-      </div>
+      <div class="hero-overlay"></div>
 
       <div class="hero-content">
+        <img
+          class="avatar"
+          src="./assets/images/avatar.webp"
+          alt="Aoi Avatar"
+          loading="lazy"
+        />
 
-        <h1 class="hero-title">
-          Aoi Portfolio
-        </h1>
+        <h1 class="hero-title">Aoi Portfolio</h1>
 
-        <p class="hero-description">
-          Static Portfolio dành cho GitHub Pages.
+        <p class="hero-subtitle">
+          Static Vanilla Portfolio for GitHub Pages
         </p>
-
       </div>
-
     </header>
 
-    <section class="cards-section">
+    <main class="main-content">
 
-      <div
-        id="cards-container"
-        class="cards-grid"
-      ></div>
+      <section class="cards-section">
+        <div
+          id="cards-container"
+          class="cards-grid"
+        ></div>
+      </section>
 
-    </section>
+    </main>
 
-  </main>
+  </div>
 
   <div
-    id="overlay"
-    class="overlay hidden"
+    id="panel-overlay"
+    class="panel-overlay hidden"
   ></div>
 
   <aside
-    id="panel"
-    class="panel hidden"
+    id="card-panel"
+    class="card-panel hidden"
   >
-
     <button
-      id="close-panel"
+      id="panel-close"
       class="panel-close"
       type="button"
-      aria-label="Đóng"
+      aria-label="Close"
     >
-      ×
+      ✕
     </button>
 
     <div id="panel-content"></div>
-
   </aside>
 
-  <script
-    src="./assets/js/utils.js"
-    defer
-  ></script>
-
-  <script
-    src="./assets/js/markdown.js"
-    defer
-  ></script>
-
-  <script
-    src="./assets/js/modal.js"
-    defer
-  ></script>
-
-  <script
-    src="./assets/js/loader.js"
-    defer
-  ></script>
-
-  <script
-    src="./assets/js/renderer.js"
-    defer
-  ></script>
-
-  <script
-    src="./assets/js/app.js"
-    defer
-  ></script>
+  <script type="module" src="./assets/js/app.js"></script>
 
 </body>
-</html>
+</html> 
