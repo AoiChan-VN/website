@@ -1,0 +1,156 @@
+.card{
+  position:relative;
+
+  overflow:hidden;
+
+  background:rgba(255,255,255,0.05);
+
+  border:1px solid var(--border);
+
+  border-radius:var(--radius);
+
+  backdrop-filter:blur(var(--blur));
+
+  box-shadow:var(--shadow);
+
+  transition:
+    transform var(--transition),
+    border-color var(--transition);
+}
+
+.card:hover{
+  transform:translateY(-4px);
+  border-color:rgba(255,255,255,0.18);
+}
+
+.card-image{
+  aspect-ratio:16/9;
+  overflow:hidden;
+}
+
+.card-image img{
+  width:100%;
+  height:100%;
+  object-fit:cover;
+}
+
+.card-content{
+  padding:20px;
+}
+
+.card-title{
+  font-size:1.2rem;
+  font-weight:700;
+}
+
+.card-description{
+  margin-top:12px;
+
+  color:var(--muted);
+
+  line-height:1.6;
+}
+
+.card-actions{
+  display:flex;
+  justify-content:flex-end;
+
+  margin-top:20px;
+}
+
+.card-button{
+  width:42px;
+  height:42px;
+
+  border:none;
+  border-radius:50%;
+
+  background:rgba(255,255,255,0.08);
+
+  color:#ffffff;
+
+  cursor:pointer;
+
+  transition:background var(--transition);
+}
+
+.card-button:hover{
+  background:rgba(255,255,255,0.16);
+}
+
+.overlay{
+  position:fixed;
+  inset:0;
+
+  background:rgba(0,0,0,0.5);
+
+  backdrop-filter:blur(10px);
+
+  z-index:90;
+}
+
+.panel{
+  position:fixed;
+
+  top:50%;
+  left:50%;
+
+  width:min(92%,500px);
+
+  transform:translate(-50%,-50%);
+
+  background:#151922;
+
+  border:1px solid var(--border);
+
+  border-radius:32px;
+
+  padding:24px;
+
+  z-index:100;
+}
+
+.panel-close{
+  position:absolute;
+
+  top:16px;
+  right:16px;
+
+  width:40px;
+  height:40px;
+
+  border:none;
+  border-radius:50%;
+
+  background:rgba(255,255,255,0.08);
+
+  color:#ffffff;
+
+  cursor:pointer;
+}
+
+.panel-links{
+  display:flex;
+  flex-direction:column;
+  gap:12px;
+
+  margin-top:20px;
+}
+
+.panel-link{
+  padding:14px 16px;
+
+  border-radius:16px;
+
+  background:rgba(255,255,255,0.06);
+
+  transition:background var(--transition);
+}
+
+.panel-link:hover{
+  background:rgba(255,255,255,0.12);
+}
+
+.hidden{
+  display:none;
+} 
