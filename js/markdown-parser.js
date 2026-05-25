@@ -1,4 +1,5 @@
-export function parseMarkdown(text) {
+window.parseMarkdown = function(text) {
+    if (!text) return '';
     return text
         .replace(/^# (.*$)/gim, '<h1>$1</h1>')
         .replace(/^## (.*$)/gim, '<h2>$1</h2>')
@@ -8,5 +9,4 @@ export function parseMarkdown(text) {
         .replace(/\*\*(.*)\*\*/g, '<strong>$1</strong>')
         .replace(/\*(.*)\*/g, '<em>$1</em>')
         .replace(/\n$/gim, '<br />');
-}
- 
+};
