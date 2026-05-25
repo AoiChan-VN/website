@@ -1,3 +1,6 @@
+import { normalizePath }
+from "./path-utils.js";
+
 export function validateItem(item) {
 
   if (!item) {
@@ -8,18 +11,39 @@ export function validateItem(item) {
     return false;
   }
 
-  if (!item.name) {
+  if (
+    typeof item.name !== "string" ||
+    item.name.trim() === ""
+  ) {
     return false;
   }
 
-  if (!item.description) {
+  if (
+    typeof item.description !== "string"
+  ) {
     return false;
   }
 
-  if (!item.img) {
+  if (
+    typeof item.img !== "string" ||
+    item.img.trim() === ""
+  ) {
     return false;
+  }
+
+  item.img =
+    normalizePath(item.img);
+
+  if (item.file) {
+    item.file =
+      normalizePath(item.file);
+  }
+
+  if (item.link) {
+    item.link =
+      normalizePath(item.link);
   }
 
   return true;
 
-} 
+}
