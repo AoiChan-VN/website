@@ -1,5 +1,8 @@
-import { fetchJson } from "./fetch-json.js";
-import { createCard } from "./create-card.js";
+import { fetchJson }
+from "./fetch-json.js";
+
+import { createCard }
+from "./create-card.js";
 
 import { renderLoading }
 from "./render-loading.js";
@@ -49,11 +52,17 @@ export async function loadPortfolio() {
 
     container.innerHTML = "";
 
+    const fragment =
+      document.createDocumentFragment();
+
     let totalItems = 0;
 
     for (const folder of folders) {
 
-      if (!folder.file) {
+      if (
+        !folder ||
+        typeof folder.file !== "string"
+      ) {
         continue;
       }
 
@@ -90,7 +99,7 @@ export async function loadPortfolio() {
         const card =
           createCard(item);
 
-        container.appendChild(card);
+        fragment.appendChild(card);
 
         totalItems++;
 
@@ -98,16 +107,21 @@ export async function loadPortfolio() {
 
     }
 
+    container.appendChild(fragment);
+
     if (totalItems === 0) {
       renderEmpty(container);
     }
 
   } catch (error) {
 
-    console.error(error);
+    console.error(
+      "Portfolio Load Failed:",
+      error
+    );
 
     renderError(container);
 
   }
 
-}
+} 
