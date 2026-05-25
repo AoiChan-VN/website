@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+  <meta charset="UTF-8" />
+  <meta
+    name="viewport"
+    content="width=device-width, initial-scale=1.0"
+  />
+
+  <title>Aoi Web</title>
+
+  <link rel="stylesheet" href="./assets/css/main.css" />
+
+  <script type="module" src="./assets/js/main.js"></script>
+</head>
+
+<body>
+
+  <div class="parallax-scene">
+
+    <div
+      class="parallax-layer layer-back"
+      data-speed="0.08"
+    ></div>
+
+    <div
+      class="parallax-layer layer-mid"
+      data-speed="0.14"
+    ></div>
+
+    <div
+      class="parallax-layer layer-front"
+      data-speed="0.22"
+    ></div>
+
+  </div>
+
+  <div class="app-shell">
+
+    <header class="navbar">
+
+      <div class="navbar-logo">
+        Aoi-Chan
+      </div>
+
+      <div class="navbar-sub">
+        IOS • Anime • Huyền Huyễn
+      </div>
+
+    </header>
+
+    <main class="main-view">
+
+      <section
+        id="cards-container"
+        class="cards-grid"
+      ></section>
+
+    </main>
+
+  </div>
+
+  <div
+    id="floating-panel"
+    class="floating-panel hidden"
+  >
+    <div class="panel-inner">
+
+      <button
+        id="close-panel"
+        class="panel-close"
+        type="button"
+      >
+        ✕
+      </button>
+
+      <div id="panel-content"></div>
+
+    </div>
+  </div>
+
+</body>
+</html> 
