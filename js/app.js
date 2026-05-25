@@ -1,8 +1,8 @@
-import { loadProjectData } from './data-loader.js';
-import { renderCards } from './ui-render.js';
-
 document.addEventListener('DOMContentLoaded', async () => {
-    const data = await loadProjectData();
-    renderCards(data);
+    if (window.loadProjectData && window.renderCards) {
+        const data = await window.loadProjectData();
+        window.renderCards(data);
+    } else {
+        console.error("Hệ thống core script bị thiếu hoặc tải sai thứ tự.");
+    }
 });
- 
