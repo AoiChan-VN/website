@@ -3,6 +3,7 @@ import { createCard } from "./create-card.js";
 import { renderEmpty } from "./render-empty.js";
 import { renderError } from "./render-error.js";
 import { validateItem } from "./validate-item.js";
+import { preloadImage } from "./preload-image.js";
 
 export async function loadPortfolio() {
 
@@ -48,6 +49,14 @@ export async function loadPortfolio() {
 
         if (!isValid) {
           continue;
+        }
+
+        try {
+          await preloadImage(item.img);
+        } catch {
+          console.warn(
+            `Image preload failed: ${item.img}`
+          );
         }
 
         const card =
