@@ -1,0 +1,93 @@
+name: 🍒𝓐𝓸𝓲𝓒𝓱𝓪𝓷🦋
+
+on:
+  #push:
+    #branches: ["main"]
+  workflow_dispatch:
+
+concurrency:
+  group: "pages"
+  cancel-in-progress: false
+
+jobs:
+  aoichan:
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
+    runs-on: ubuntu-latest
+    permissions:
+      contents: read
+      pages: write
+      id-token: write
+      actions: write # Quyền bắt buộc để có thể xóa các run cũ
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v5
+
+      - name: Setup Pages
+        uses: actions/configure-pages@v5
+
+      # Gốc là thư mục tĩnh '.', đổi thành 'dist' hoặc 'build' nếu bạn dùng framework
+      - name: Upload artifact
+        uses: actions/upload-pages-artifact@v3
+        with:
+          path: "." 
+
+      - name: Deploy to GitHub Pages
+        id: deployment
+        uses: actions/deploy-pages@v5
+
+      # Tự động dọn dẹp Workflows Runs 【 1 Runs 】
+      - name: ♻️𝐎𝐋𝐃 𝐖𝐎𝐑𝐊𝐅𝐋𝐎𝐖𝐒
+        run: |
+          gh api repos/${{ github.repository }}/actions/runs \
+            --paginate \
+            --jq '.workflow_runs | sort_by(.created_at) | reverse | .[1:] | map(select(.status=="completed")) | .[].id' \
+            | while read run; do
+                echo "🗑️ đã xóa $run"
+                gh api repos/${{ github.repository }}/actions/runs/$run -X DELETE
+              done
+        env:
+          GH_TOKEN: ${{ secrets.AOI_WEB }}
+
+      - name: ♻️𝐎𝐋𝐃 𝐂𝐀𝐂𝐇𝐄
+        run: |
+          gh cache list --json id,createdAt \
+            | jq 'sort_by(.createdAt) | reverse | .[1:] | .[].id' \
+            | while read id; do
+                echo "🗑️ đã xóa $id"
+                gh cache delete "$id"
+              done
+        env:
+          GH_TOKEN: ${{ secrets.AOI_WEB }}
+          
+      - name: ♻️Delete All Deployments
+        env:
+          GH_TOKEN: ${{ secrets.AOI_WEB }}
+        run: |
+          # 1. Lấy danh sách tất cả các ID deployment của github-pages
+          ids=$(gh api /repos/${{ github.repository }}/deployments --jq '.[] | select(.environment=="github-pages") | .id')
+          
+          if [ -z "$ids" ]; then
+            echo "Không tìm thấy bản deployment nào."
+            exit 0
+          fi
+
+          # 2. Duyệt qua từng ID để xử lý
+          for id in $ids; do
+            echo "-----------------------------------"
+            echo "Đang xử lý deployment ID: $id"
+            
+            # Bước A: Ép trạng thái về 'inactive' để gỡ bỏ tính chất 'Active' của bản deploy đó
+            gh api -X POST /repos/${{ github.repository }}/deployments/$id/statuses \
+              -f state="inactive" \
+              -H "Accept: application/vnd.github+json" > /dev/null 2>&1 || true
+            
+            # Bước B: Xóa hoàn toàn deployment
+            echo "Đang xóa hoàn toàn ID: $id"
+            gh api -X DELETE /repos/${{ github.repository }}/deployments/$id
+          done
+          
+          echo "-----------------------------------"
+          echo "Xóa sạch toàn bộ lịch sử deployment thành công!"
