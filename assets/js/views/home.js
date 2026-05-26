@@ -1,30 +1,43 @@
-import { loadContent } from "../services/database.js";
-import { createCard } from "../components/card.js";
+import { loadContent }
+from "../services/database.js";
 
-export async function renderHome(root) {
+import { createCard }
+from "../components/card.js";
+
+import { initLazyObserver }
+from "../modules/lazy-observer.js";
+
+import { applyImageFallback }
+from "../modules/image-fallback.js";
+
+export async function renderHome(
+  root
+) {
 
   const content =
     await loadContent();
 
   const hero =
-    document.createElement("section");
+    document.createElement(
+      "section"
+    );
 
   hero.className =
-    "hero-section";
+    "hero-section observe";
 
   hero.innerHTML = `
     <div class="hero-content">
 
       <div class="hero-badge">
-        IOS • Anime • 3D • Huyền Huyễn
+        IOS • Anime • 3D
       </div>
 
       <h1 class="hero-title">
-        Aoi Personal Interface
+        Aoi Interface
       </h1>
 
       <p class="hero-description">
-        Static architecture built for GitHub Pages.
+        Production-grade static architecture.
       </p>
 
     </div>
@@ -37,7 +50,9 @@ export async function renderHome(root) {
   `;
 
   const grid =
-    document.createElement("section");
+    document.createElement(
+      "section"
+    );
 
   grid.className =
     "content-grid";
@@ -58,4 +73,8 @@ export async function renderHome(root) {
   root.appendChild(hero);
   root.appendChild(grid);
 
-} 
+  initLazyObserver();
+
+  applyImageFallback();
+
+}
