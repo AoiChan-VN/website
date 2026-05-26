@@ -16,6 +16,9 @@ from "../ui/renderer.js";
 import { initializeParallax }
 from "../ui/parallax.js";
 
+import { applyTheme }
+from "./theme.js";
+
 export async function initializeApp() {
 
   try {
@@ -39,7 +42,9 @@ export async function initializeApp() {
         if (
           validateItem(item)
         ) {
+
           allItems.push(item);
+
         }
 
       });
@@ -48,6 +53,16 @@ export async function initializeApp() {
 
     appState.items =
       allItems;
+
+    if (
+      appState.items[0]?.theme
+    ) {
+
+      applyTheme(
+        appState.items[0].theme
+      );
+
+    }
 
     renderCards(
       appState.items
@@ -59,4 +74,4 @@ export async function initializeApp() {
 
   }
 
-} 
+}
