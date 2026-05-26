@@ -1,6 +1,9 @@
 import { createCard }
 from "./cards.js";
 
+import { bindCardActions }
+from "./actions.js";
+
 export function renderCards(items) {
 
   const container =
@@ -15,8 +18,13 @@ export function renderCards(items) {
     const card =
       createCard(item);
 
+    bindCardActions(
+      card,
+      item
+    );
+
     container.appendChild(card);
 
   });
 
-} 
+}
