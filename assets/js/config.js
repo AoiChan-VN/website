@@ -1,10 +1,11 @@
-export const CONFIG = Object.freeze({
+export const CONFIG = {
+  DATA_FILE: "./data/aoi-file.json",
 
-  registryPath:
-    "./data/aoi-file.json",
+  MOBILE_BREAKPOINT: 768,
 
-  markdownCacheLimit:50,
-
-  parallaxIntensity:18
-
-}); 
+  PARALLAX_INTENSITY: {
+    BACK: 8,
+    MID: 18,
+    FRONT: 32
+  }
+};
