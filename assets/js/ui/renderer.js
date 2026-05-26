@@ -7,6 +7,9 @@ from "./actions.js";
 import { initializeCardEffects }
 from "./effects.js";
 
+import { lazyLoadImages }
+from "../services/image-loader.js";
+
 export function renderCards(items) {
 
   const container =
@@ -31,5 +34,7 @@ export function renderCards(items) {
   });
 
   initializeCardEffects();
+
+  lazyLoadImages();
 
 }
