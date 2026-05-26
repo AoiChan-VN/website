@@ -4,6 +4,9 @@ from "./cards.js";
 import { bindCardActions }
 from "./actions.js";
 
+import { initializeCardEffects }
+from "./effects.js";
+
 export function renderCards(items) {
 
   const container =
@@ -26,5 +29,7 @@ export function renderCards(items) {
     container.appendChild(card);
 
   });
+
+  initializeCardEffects();
 
 }
