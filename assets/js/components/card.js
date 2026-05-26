@@ -1,12 +1,15 @@
-import { openOverlay } from "../modules/overlay.js";
+import { openOverlay }
+from "../modules/overlay.js";
 
 export function createCard(item) {
 
   const article =
-    document.createElement("article");
+    document.createElement(
+      "article"
+    );
 
   article.className =
-    "content-card";
+    "content-card observe";
 
   article.innerHTML = `
     <div class="card-image-wrap">
@@ -25,9 +28,12 @@ export function createCard(item) {
 
       <div class="card-top">
 
-        <h2 class="card-title">
+        <a
+          class="card-route"
+          href="#/posts/${item.id}"
+        >
           ${item.id}
-        </h2>
+        </a>
 
         <button
           class="card-button"
@@ -46,7 +52,9 @@ export function createCard(item) {
   `;
 
   article
-    .querySelector(".card-button")
+    .querySelector(
+      ".card-button"
+    )
     .addEventListener(
       "click",
       () => {
@@ -58,4 +66,4 @@ export function createCard(item) {
 
   return article;
 
-} 
+}
