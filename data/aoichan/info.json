@@ -1,9 +1,9 @@
 [
   {
-    "name":"Hello",
+    "name":"👻",
     "description":"Xin chào mọi người...",
     "img":"./assets/images/cards/aoichan.webp",
-    "file":"./content/hello/hello.md",
+    "file":"./content/posts/gioi_thieu.md",
     "link":""
   }
 ] 
