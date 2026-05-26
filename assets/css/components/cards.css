@@ -1,4 +1,4 @@
-.cards-grid {
+.content-grid {
 
   display: grid;
 
@@ -10,51 +10,42 @@
 
   gap: 18px;
 
-  padding-bottom: 120px;
+  padding-bottom: 80px;
 
 }
 
-.aoi-card {
-
-  position: relative;
+.content-card {
 
   overflow: hidden;
 
   border-radius:
-    var(--radius);
+    24px;
 
   background:
-    var(--surface);
+    rgba(17,24,39,0.72);
 
   border:
-    1px solid var(--surface-border);
-
-  box-shadow:
-    var(--shadow);
+    1px solid rgba(255,255,255,0.06);
 
   transition:
-    transform var(--transition),
-    border-color var(--transition);
+    transform 180ms ease,
+    border-color 180ms ease;
 
 }
 
-.aoi-card:hover {
+.content-card:hover {
 
   transform:
     translateY(-4px);
 
   border-color:
-    rgba(255,255,255,0.14);
+    rgba(255,255,255,0.12);
 
 }
 
-.card-cover {
-
-  position: relative;
+.card-image-wrap {
 
   aspect-ratio: 4 / 5;
-
-  overflow: hidden;
 
 }
 
@@ -81,35 +72,16 @@
 
 }
 
-.card-title {
+.card-button {
 
-  font-size: 15px;
-
-}
-
-.card-description {
-
-  margin-top: 10px;
-
-  color:
-    var(--muted);
-
-  font-size: 13px;
-
-  line-height: 1.7;
-
-}
-
-.card-action {
-
-  width: 34px;
-  height: 34px;
+  width: 32px;
+  height: 32px;
 
   border-radius: 50%;
-
-  color: white;
 
   background:
     rgba(255,255,255,0.08);
 
-} 
+  color: white;
+
+}
