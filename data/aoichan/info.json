@@ -2,7 +2,7 @@
   {
     "id": "info-0",
     "name": "Giới thiệu",
-    "description": "Xin chào mọi người đến với Aoi Web.",
+    "description": "Xin chào, bạn đến với Aoi Web.",
     "img": "./assets/images/aoichan.webp",
     "file": "./posts/aoi-info/info.md",
     "download": "",
