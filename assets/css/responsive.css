@@ -1,0 +1,17 @@
+@media (max-width:768px){
+
+  .shell-container{
+    width:min(
+      calc(100% - 20px),
+      100%
+    );
+  }
+
+  .card-content{
+    padding:16px;
+  }
+
+  .panel{
+    width:200px;
+  }
+} 
