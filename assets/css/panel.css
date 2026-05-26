@@ -1,0 +1,107 @@
+.floating-panel {
+
+  position: fixed;
+  inset: 0;
+
+  z-index: 999;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  background:
+    rgba(0,0,0,0.62);
+
+  backdrop-filter:
+    blur(10px);
+
+}
+
+.hidden {
+
+  display: none;
+
+}
+
+.panel-content {
+
+  position: relative;
+
+  width:
+    min(560px, 92%);
+
+  padding: 30px;
+
+  border-radius: 30px;
+
+  background:
+    rgba(12,16,32,0.92);
+
+  border:
+    1px solid rgba(255,255,255,0.08);
+
+}
+
+.panel-close {
+
+  position: absolute;
+  top: 18px;
+  right: 18px;
+
+  width: 42px;
+  height: 42px;
+
+  border-radius: 50%;
+
+  color: white;
+
+  background:
+    rgba(255,255,255,0.08);
+
+}
+
+.panel-image {
+
+  border-radius: 22px;
+
+  margin-bottom: 22px;
+
+}
+
+.panel-title {
+
+  font-size: 32px;
+
+}
+
+.panel-description {
+
+  margin-top: 18px;
+
+  line-height: 1.8;
+
+}
+
+.panel-link {
+
+  display: inline-flex;
+
+  margin-top: 24px;
+
+  padding:
+    14px 22px;
+
+  border-radius: 999px;
+
+  color: white;
+
+  text-decoration: none;
+
+  background:
+    linear-gradient(
+      120deg,
+      #7b9cff,
+      #9f7bff
+    );
+
+} 
