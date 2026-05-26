@@ -1,6 +1,9 @@
 import { openOverlay }
 from "../modules/overlay.js";
 
+import { preloadImage }
+from "../modules/preload.js";
+
 export function createCard(item) {
 
   const article =
@@ -17,14 +20,20 @@ export function createCard(item) {
       <img
         class="card-image"
         src="${item.img}"
-        alt="${item.id}"
+        alt="${item.title || item.id}"
         loading="lazy"
         decoding="async"
       />
 
+      <div class="card-gradient"></div>
+
     </div>
 
     <div class="card-body">
+
+      <div class="card-category">
+        ${item.category || "POST"}
+      </div>
 
       <div class="card-top">
 
@@ -32,12 +41,13 @@ export function createCard(item) {
           class="card-route"
           href="#/posts/${item.id}"
         >
-          ${item.id}
+          ${item.title || item.id}
         </a>
 
         <button
           class="card-button"
           type="button"
+          aria-label="Open panel"
         >
           +
         </button>
@@ -50,6 +60,18 @@ export function createCard(item) {
 
     </div>
   `;
+
+  article.addEventListener(
+    "mouseenter",
+    () => {
+
+      preloadImage(
+        item.img
+      );
+
+    },
+    { passive: true }
+  );
 
   article
     .querySelector(
