@@ -1,41 +1,45 @@
-const ROOT_FILE =
+import { fetchJSON }
+from "./fetch.js";
+
+const ROOT =
   "./data/aoi-file.json";
 
-async function getJSON(path) {
+function sanitize(value) {
 
-  const response =
-    await fetch(path);
-
-  if (!response.ok) {
-
-    throw new Error(
-      `[DATABASE] ${path}`
-    );
-
-  }
-
-  return response.json();
+  return String(
+    value || ""
+  ).trim();
 
 }
 
-function sanitize(item) {
+function normalize(item) {
 
   return {
 
     id:
-      String(item.id || "UNKNOWN"),
+      sanitize(item.id),
+
+    title:
+      sanitize(item.title),
 
     description:
-      String(item.description || ""),
+      sanitize(
+        item.description
+      ),
 
     img:
-      String(item.img || ""),
+      sanitize(item.img),
 
     file:
-      String(item.file || ""),
+      sanitize(item.file),
 
     link:
-      String(item.link || "")
+      sanitize(item.link),
+
+    category:
+      sanitize(
+        item.category
+      )
 
   };
 
@@ -44,9 +48,9 @@ function sanitize(item) {
 export async function loadContent() {
 
   const folders =
-    await getJSON(ROOT_FILE);
+    await fetchJSON(ROOT);
 
-  const results = [];
+  const result = [];
 
   for (const folder of folders) {
 
@@ -55,18 +59,20 @@ export async function loadContent() {
     }
 
     const entries =
-      await getJSON(folder.path);
+      await fetchJSON(
+        folder.path
+      );
 
     entries.forEach((entry) => {
 
-      results.push(
-        sanitize(entry)
+      result.push(
+        normalize(entry)
       );
 
     });
 
   }
 
-  return results;
+  return result;
 
-} 
+}
