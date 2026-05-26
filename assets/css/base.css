@@ -1,0 +1,46 @@
+body{
+  background:
+    linear-gradient(
+      180deg,
+      #040714 0%,
+      #070b1c 100%
+    );
+
+  color:var(--text-primary);
+
+  font-family:
+    Inter,
+    system-ui,
+    sans-serif;
+
+  overflow-x:hidden;
+}
+
+#app{
+  position:relative;
+  min-height:100vh;
+}
+
+#shell{
+  position:relative;
+  z-index:10;
+}
+
+.noise-overlay{
+  position:fixed;
+  inset:0;
+
+  pointer-events:none;
+
+  opacity:0.05;
+
+  background-image:
+    radial-gradient(
+      rgba(255,255,255,0.2) 1px,
+      transparent 1px
+    );
+
+  background-size:3px 3px;
+
+  z-index:2;
+} 
