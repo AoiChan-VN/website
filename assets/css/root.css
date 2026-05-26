@@ -1,0 +1,30 @@
+:root {
+
+  --bg-primary:
+    #060816;
+
+  --bg-secondary:
+    rgba(16, 22, 40, 0.72);
+
+  --text-primary:
+    #ffffff;
+
+  --text-secondary:
+    #cfd8ff;
+
+  --border-color:
+    rgba(255,255,255,0.12);
+
+  --glass-blur:
+    blur(18px);
+
+  --card-radius:
+    28px;
+
+  --shadow-main:
+    0 10px 50px rgba(0,0,0,0.35);
+
+  --transition-main:
+    280ms ease;
+
+}
