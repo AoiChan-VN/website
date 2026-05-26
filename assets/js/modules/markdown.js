@@ -1,6 +1,6 @@
-function escapeHTML(value) {
+function escapeHTML(text) {
 
-  return value
+  return text
     .replaceAll("&", "&amp;")
     .replaceAll("<", "&lt;")
     .replaceAll(">", "&gt;")
@@ -9,7 +9,7 @@ function escapeHTML(value) {
 
 }
 
-function parseInline(text) {
+function inline(text) {
 
   let output =
     escapeHTML(text);
@@ -28,7 +28,7 @@ function parseInline(text) {
 
   output =
     output.replace(
-      /`(.*?)`/g,
+      /`([^`]+)`/g,
       "<code>$1</code>"
     );
 
@@ -43,11 +43,13 @@ function parseInline(text) {
 
         const safe =
           href.startsWith("http")
-          || href.startsWith("#")
-          || href.startsWith("./");
+          || href.startsWith("./")
+          || href.startsWith("#");
 
         if (!safe) {
+
           return label;
+
         }
 
         return `
@@ -67,14 +69,16 @@ function parseInline(text) {
 
 }
 
-export function renderMarkdown(raw) {
+export function renderMarkdown(
+  raw
+) {
 
   const lines =
     raw.split("\n");
 
   const html = [];
 
-  let inCode = false;
+  let code = false;
 
   for (const line of lines) {
 
@@ -82,10 +86,10 @@ export function renderMarkdown(raw) {
       line.startsWith("```")
     ) {
 
-      inCode = !inCode;
+      code = !code;
 
       html.push(
-        inCode
+        code
           ? "<pre><code>"
           : "</code></pre>"
       );
@@ -94,7 +98,7 @@ export function renderMarkdown(raw) {
 
     }
 
-    if (inCode) {
+    if (code) {
 
       html.push(
         escapeHTML(line)
@@ -110,7 +114,7 @@ export function renderMarkdown(raw) {
 
       html.push(`
         <h1>
-          ${parseInline(
+          ${inline(
             line.slice(2)
           )}
         </h1>
@@ -126,7 +130,7 @@ export function renderMarkdown(raw) {
 
       html.push(`
         <h2>
-          ${parseInline(
+          ${inline(
             line.slice(3)
           )}
         </h2>
@@ -142,7 +146,7 @@ export function renderMarkdown(raw) {
 
       html.push(`
         <blockquote>
-          ${parseInline(
+          ${inline(
             line.slice(2)
           )}
         </blockquote>
@@ -153,10 +157,26 @@ export function renderMarkdown(raw) {
     }
 
     if (
+      line.startsWith("- ")
+    ) {
+
+      html.push(`
+        <li>
+          ${inline(
+            line.slice(2)
+          )}
+        </li>
+      `);
+
+      continue;
+
+    }
+
+    if (
       line.trim() === ""
     ) {
 
-      html.push("<br />");
+      html.push("<br>");
 
       continue;
 
@@ -164,7 +184,7 @@ export function renderMarkdown(raw) {
 
     html.push(`
       <p>
-        ${parseInline(line)}
+        ${inline(line)}
       </p>
     `);
 
@@ -172,4 +192,4 @@ export function renderMarkdown(raw) {
 
   return html.join("");
 
-}
+  } 
