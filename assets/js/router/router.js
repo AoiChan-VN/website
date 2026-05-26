@@ -1,7 +1,23 @@
-import { renderHome } from "../views/home.js";
+import { renderHome }
+from "../views/home.js";
+
+import { renderPost }
+from "../views/post.js";
 
 const app =
-  document.getElementById("app-view");
+  document.getElementById(
+    "app-view"
+  );
+
+const routes = {
+
+  home:
+    renderHome,
+
+  posts:
+    renderPost
+
+};
 
 export async function initRouter() {
 
@@ -18,26 +34,52 @@ export async function initRouter() {
 async function handleRoute() {
 
   const hash =
-    window.location.hash || "#/home";
+    window.location.hash
+    || "#/home";
 
-  const route =
+  const clean =
     hash.replace("#/", "");
+
+  const segments =
+    clean.split("/");
+
+  const page =
+    segments[0];
+
+  const renderer =
+    routes[page];
 
   app.innerHTML = "";
 
-  switch (route) {
+  if (!renderer) {
 
-    case "home":
-      await renderHome(app);
-      break;
+    render404();
 
-    default:
-      app.innerHTML = `
-        <section class="empty-view">
-          <h2>404</h2>
-        </section>
-      `;
+    return;
 
   }
+
+  await renderer(
+    app,
+    segments
+  );
+
+}
+
+function render404() {
+
+  app.innerHTML = `
+    <section class="error-view">
+
+      <span class="error-code">
+        404
+      </span>
+
+      <h1 class="error-title">
+        Page Not Found
+      </h1>
+
+    </section>
+  `;
 
 } 
