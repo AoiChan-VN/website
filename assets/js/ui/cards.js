@@ -8,6 +8,7 @@ export function createCard(item) {
   article.innerHTML = `
     <div class="card-image">
       <img
+        src="${item.img}"
         data-src="${item.img}"
         alt="${item.name}"
         loading="lazy"
@@ -40,4 +41,5 @@ export function createCard(item) {
   `;
 
   return article;
+
 }
