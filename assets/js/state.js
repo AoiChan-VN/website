@@ -1,9 +1,5 @@
 export const state = {
-
-  registry:[],
-
-  entries:[],
-
-  current:null
-
-}; 
+  collections: [],
+  cards: [],
+  activeCard: null
+};
