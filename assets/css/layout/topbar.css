@@ -1,0 +1,83 @@
+.topbar {
+
+  position: sticky;
+  top: 0;
+
+  z-index: 50;
+
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+
+  margin-bottom: 24px;
+
+  padding:
+    18px 24px;
+
+  border:
+    1px solid rgba(255,255,255,0.05);
+
+  border-radius:
+    24px;
+
+  background:
+    rgba(12,16,28,0.72);
+
+  backdrop-filter:
+    blur(12px);
+
+}
+
+.topbar-left,
+.topbar-right {
+
+  display: flex;
+  align-items: center;
+
+  gap: 12px;
+
+}
+
+.status-dot {
+
+  width: 10px;
+  height: 10px;
+
+  border-radius: 50%;
+
+  background:
+    #79ffb0;
+
+  box-shadow:
+    0 0 18px #79ffb0;
+
+}
+
+.status-text {
+
+  color:
+    var(--text-muted);
+
+  letter-spacing: 2px;
+
+  font-size: 12px;
+
+}
+
+.top-button {
+
+  height: 38px;
+
+  padding:
+    0 16px;
+
+  border-radius:
+    999px;
+
+  color:
+    white;
+
+  background:
+    rgba(255,255,255,0.06);
+
+} 
