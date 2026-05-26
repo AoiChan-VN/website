@@ -4,80 +4,50 @@
   <meta charset="UTF-8" />
   <meta
     name="viewport"
-    content="width=device-width, initial-scale=1.0"
+    content="width=device-width, initial-scale=1.0, viewport-fit=cover"
   />
 
-  <title>Aoi Web</title>
+  <meta
+    name="description"
+    content="AoiChan Personal Website"
+  />
 
-  <link rel="stylesheet" href="./assets/css/main.css" />
+  <meta
+    name="theme-color"
+    content="#0b1020"
+  />
 
-  <script type="module" src="./assets/js/main.js"></script>
+  <title>AoiChan</title>
+
+  <link rel="stylesheet" href="./assets/css/reset.css" />
+  <link rel="stylesheet" href="./assets/css/variables.css" />
+  <link rel="stylesheet" href="./assets/css/base.css" />
+  <link rel="stylesheet" href="./assets/css/layout.css" />
+  <link rel="stylesheet" href="./assets/css/components.css" />
+  <link rel="stylesheet" href="./assets/css/animations.css" />
+  <link rel="stylesheet" href="./assets/css/responsive.css" />
+  <link rel="stylesheet" href="./assets/css/themes.css" />
+
+  <link
+    rel="preload"
+    href="./assets/images/background/bg-layer-1.webp"
+    as="image"
+  />
 </head>
 
 <body>
 
-  <div class="parallax-scene">
+  <div id="app">
 
-    <div
-      class="parallax-layer layer-back"
-      data-speed="0.08"
-    ></div>
+    <div id="background-root"></div>
 
-    <div
-      class="parallax-layer layer-mid"
-      data-speed="0.14"
-    ></div>
+    <div class="noise-overlay"></div>
 
-    <div
-      class="parallax-layer layer-front"
-      data-speed="0.22"
-    ></div>
+    <main id="shell"></main>
 
   </div>
 
-  <div class="app-shell">
-
-    <header class="navbar">
-
-      <div class="navbar-logo">
-        Aoi-Chan
-      </div>
-
-      <div class="navbar-sub">
-        IOS • Anime • Huyền Huyễn
-      </div>
-
-    </header>
-
-    <main class="main-view">
-
-      <section
-        id="cards-container"
-        class="cards-grid"
-      ></section>
-
-    </main>
-
-  </div>
-
-  <div
-    id="floating-panel"
-    class="floating-panel hidden"
-  >
-    <div class="panel-inner">
-
-      <button
-        id="close-panel"
-        class="panel-close"
-        type="button"
-      >
-        ✕
-      </button>
-
-      <div id="panel-content"></div>
-
-    </div>
-  </div>
+  <script type="module" src="./assets/js/app.js"></script>
 
 </body>
-</html> 
+</html>
