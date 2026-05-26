@@ -1,81 +1,151 @@
 <!DOCTYPE html>
 <html lang="vi">
 <head>
+
   <meta charset="UTF-8" />
+
   <meta
     name="viewport"
-    content="width=device-width, initial-scale=1.0"
+    content="width=device-width, initial-scale=1.0, viewport-fit=cover"
   />
 
-  <title>AoiChan</title>
+  <meta
+    name="theme-color"
+    content="#070b17"
+  />
 
-  <link rel="stylesheet" href="./assets/css/reset.css" />
-  <link rel="stylesheet" href="./assets/css/root.css" />
-  <link rel="stylesheet" href="./assets/css/layout.css" />
-  <link rel="stylesheet" href="./assets/css/animations.css" />
-  <link rel="stylesheet" href="./assets/css/parallax.css" />
-  <link rel="stylesheet" href="./assets/css/cards.css" />
-  <link rel="stylesheet" href="./assets/css/panel.css" />
-  <link rel="stylesheet" href="./assets/css/responsive.css" />
-  <link rel="stylesheet" href="./assets/css/themes/aoi-theme.css" />
+  <title>Aoi Chan</title>
+
+  <link
+    rel="preload"
+    href="./assets/images/background/main-bg.webp"
+    as="image"
+  />
+
+  <link
+    rel="stylesheet"
+    href="./assets/css/app.css"
+  />
+
 </head>
 
 <body>
 
-  <div class="app-shell">
+  <div class="app">
 
-    <div class="parallax-layer layer-back"></div>
-    <div class="parallax-layer layer-middle"></div>
-    <div class="parallax-layer layer-front"></div>
+    <div class="ambient-layer ambient-back"></div>
+    <div class="ambient-layer ambient-light"></div>
 
-    <main class="main-container">
+    <header class="topbar">
 
-      <section class="hero-section">
-        <div class="hero-glow"></div>
+      <div class="brand">
 
-        <div class="hero-content">
-          <h1 class="hero-title">
+        <img
+          src="./assets/icons/logo.svg"
+          alt="Aoi Logo"
+          class="brand-logo"
+        />
+
+        <div class="brand-meta">
+
+          <h1 class="brand-title">
             AOI CHAN
           </h1>
 
-          <p class="hero-subtitle">
-            IOS • Anime • Huyền Huyễn • 3D Interface
+          <p class="brand-subtitle">
+            Personal Interface
           </p>
+
         </div>
+
+      </div>
+
+      <nav class="topbar-nav">
+
+        <button
+          class="nav-button active"
+          type="button"
+        >
+          Home
+        </button>
+
+        <button
+          class="nav-button"
+          type="button"
+        >
+          Posts
+        </button>
+
+      </nav>
+
+    </header>
+
+    <main class="main-shell">
+
+      <section class="hero-shell">
+
+        <div class="hero-left">
+
+          <div class="hero-badge">
+            IOS • Anime • Huyền Huyễn
+          </div>
+
+          <h2 class="hero-title">
+            Cinematic
+            <span>
+              Personal Space
+            </span>
+          </h2>
+
+          <p class="hero-description">
+            Static GitHub website với kiến trúc
+            production-grade Vanilla JS.
+          </p>
+
+        </div>
+
+        <div class="hero-right">
+
+          <div class="hero-orb"></div>
+
+        </div>
+
       </section>
 
       <section
-        id="cards-container"
+        id="cards"
         class="cards-grid"
       ></section>
 
     </main>
 
-  </div>
+    <div
+      id="panel"
+      class="panel hidden"
+    >
 
-  <div
-    id="floating-panel"
-    class="floating-panel hidden"
-  >
-    <div class="panel-content">
+      <div class="panel-box">
 
-      <button
-        id="panel-close"
-        class="panel-close"
-        type="button"
-      >
-        ×
-      </button>
+        <button
+          id="panel-close"
+          class="panel-close"
+          type="button"
+        >
+          ×
+        </button>
 
-      <div id="panel-body"></div>
+        <div id="panel-content"></div>
+
+      </div>
 
     </div>
+
   </div>
 
   <script
     type="module"
-    src="./assets/js/core/app.js"
+    src="./assets/js/app.js"
   ></script>
 
 </body>
-</html> 
+</html>
