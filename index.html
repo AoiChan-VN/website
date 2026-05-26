@@ -11,15 +11,33 @@
 
   <meta
     name="theme-color"
-    content="#070b17"
+    content="#080b14"
+  />
+
+  <meta
+    name="description"
+    content="Aoi Chan Personal Interface"
   />
 
   <title>Aoi Chan</title>
 
   <link
+    rel="icon"
+    href="./assets/icons/logo.svg"
+    type="image/svg+xml"
+  />
+
+  <link
+    rel="manifest"
+    href="./manifest/site.webmanifest"
+  />
+
+  <link
     rel="preload"
-    href="./assets/images/background/main-bg.webp"
-    as="image"
+    href="./assets/fonts/inter/inter-variable.woff2"
+    as="font"
+    type="font/woff2"
+    crossorigin
   />
 
   <link
@@ -31,112 +49,114 @@
 
 <body>
 
-  <div class="app">
+  <div class="app-shell">
 
-    <div class="ambient-layer ambient-back"></div>
-    <div class="ambient-layer ambient-light"></div>
+    <div class="bg-layer bg-image"></div>
+    <div class="bg-layer bg-gradient"></div>
+    <div class="bg-layer bg-noise"></div>
 
-    <header class="topbar">
+    <aside class="sidebar">
 
-      <div class="brand">
+      <div class="sidebar-top">
 
-        <img
-          src="./assets/icons/logo.svg"
-          alt="Aoi Logo"
-          class="brand-logo"
-        />
+        <a
+          href="#/home"
+          class="logo-wrap"
+        >
 
-        <div class="brand-meta">
+          <img
+            src="./assets/icons/logo.svg"
+            alt="Aoi"
+            class="logo-image"
+          />
 
-          <h1 class="brand-title">
-            AOI CHAN
-          </h1>
-
-          <p class="brand-subtitle">
-            Personal Interface
-          </p>
-
-        </div>
+        </a>
 
       </div>
 
-      <nav class="topbar-nav">
+      <nav class="sidebar-nav">
 
-        <button
-          class="nav-button active"
-          type="button"
+        <a
+          href="#/home"
+          class="nav-item"
+          data-route="home"
         >
           Home
-        </button>
+        </a>
 
-        <button
-          class="nav-button"
-          type="button"
+        <a
+          href="#/posts"
+          class="nav-item"
+          data-route="posts"
         >
           Posts
-        </button>
+        </a>
+
+        <a
+          href="#/gallery"
+          class="nav-item"
+          data-route="gallery"
+        >
+          Gallery
+        </a>
 
       </nav>
 
-    </header>
+    </aside>
 
-    <main class="main-shell">
+    <div class="main-layout">
 
-      <section class="hero-shell">
+      <header class="topbar">
 
-        <div class="hero-left">
+        <div class="topbar-left">
 
-          <div class="hero-badge">
-            IOS • Anime • Huyền Huyễn
-          </div>
+          <span class="status-dot"></span>
 
-          <h2 class="hero-title">
-            Cinematic
-            <span>
-              Personal Space
-            </span>
-          </h2>
-
-          <p class="hero-description">
-            Static GitHub website với kiến trúc
-            production-grade Vanilla JS.
-          </p>
+          <span class="status-text">
+            ONLINE
+          </span>
 
         </div>
 
-        <div class="hero-right">
+        <div class="topbar-right">
 
-          <div class="hero-orb"></div>
+          <button
+            id="motion-toggle"
+            class="top-button"
+            type="button"
+          >
+            Motion
+          </button>
 
         </div>
 
-      </section>
+      </header>
 
-      <section
-        id="cards"
-        class="cards-grid"
-      ></section>
+      <main
+        id="app-view"
+        class="app-view"
+      ></main>
 
-    </main>
+    </div>
 
-    <div
-      id="panel"
-      class="panel hidden"
-    >
+  </div>
 
-      <div class="panel-box">
+  <div
+    id="overlay-panel"
+    class="overlay-panel hidden"
+  >
 
-        <button
-          id="panel-close"
-          class="panel-close"
-          type="button"
-        >
-          ×
-        </button>
+    <div class="overlay-box">
 
-        <div id="panel-content"></div>
+      <button
+        id="overlay-close"
+        class="overlay-close"
+        type="button"
+      >
+        ×
+      </button>
 
-      </div>
+      <div id="overlay-content"></div>
 
     </div>
 
@@ -144,8 +164,8 @@
 
   <script
     type="module"
-    src="./assets/js/app.js"
+    src="./assets/js/bootstrap.js"
   ></script>
 
 </body>
-</html>
+</html> 
