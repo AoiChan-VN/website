@@ -1,0 +1,39 @@
+body {
+
+  background:
+    #080b14;
+
+  color:
+    var(--text-primary);
+
+  font-family:
+    Inter,
+    Arial,
+    sans-serif;
+
+  overflow-x: hidden;
+
+}
+
+.app-shell {
+
+  position: relative;
+
+  display: grid;
+
+  grid-template-columns:
+    92px 1fr;
+
+  min-height: 100vh;
+
+}
+
+.main-layout {
+
+  position: relative;
+  z-index: 2;
+
+  padding:
+    24px;
+
+}
