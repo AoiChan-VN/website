@@ -4,6 +4,9 @@ from "../views/home.js";
 import { renderPost }
 from "../views/post.js";
 
+import { syncNavigation }
+from "../modules/navigation.js";
+
 const app =
   document.getElementById(
     "app-view"
@@ -32,6 +35,8 @@ export async function initRouter() {
 }
 
 async function handleRoute() {
+
+  syncNavigation();
 
   const hash =
     window.location.hash
@@ -64,6 +69,11 @@ async function handleRoute() {
     segments
   );
 
+  window.scrollTo({
+    top: 0,
+    behavior: "instant"
+  });
+
 }
 
 function render404() {
@@ -72,7 +82,7 @@ function render404() {
     <section class="error-view">
 
       <span class="error-code">
-        404
+        👻「404」
       </span>
 
       <h1 class="error-title">
@@ -82,4 +92,4 @@ function render404() {
     </section>
   `;
 
-} 
+}
