@@ -1,0 +1,41 @@
+.bg-layer {
+
+  position: fixed;
+  inset: 0;
+
+  pointer-events: none;
+
+}
+
+.bg-image {
+
+  background:
+    url("../../images/background/main-bg.webp")
+    center / cover;
+
+  opacity: 0.18;
+
+}
+
+.bg-gradient {
+
+  background:
+    radial-gradient(
+      circle at center,
+      rgba(130,160,255,0.22),
+      transparent 65%
+    );
+
+  will-change:
+    transform;
+
+}
+
+.bg-noise {
+
+  opacity: 0.04;
+
+  background-image:
+    url("../../images/background/noise.webp");
+
+} 
