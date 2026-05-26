@@ -1,0 +1,45 @@
+.parallax-layer {
+
+  position: fixed;
+  inset: -10%;
+
+  pointer-events: none;
+
+  will-change: transform;
+
+}
+
+.layer-back {
+
+  background:
+    url("../../images/background/bg-main.webp")
+    center / cover;
+
+  opacity: 0.28;
+
+  filter:
+    blur(4px);
+
+}
+
+.layer-middle {
+
+  background:
+    radial-gradient(
+      circle,
+      rgba(133,182,255,0.16),
+      transparent 70%
+    );
+
+}
+
+.layer-front {
+
+  background:
+    linear-gradient(
+      120deg,
+      rgba(255,255,255,0.03),
+      transparent
+    );
+
+} 
