@@ -13,7 +13,10 @@
     url("../../images/background/main-bg.webp")
     center / cover;
 
-  opacity: 0.18;
+  opacity: 0.16;
+
+  transform:
+    scale(1.05);
 
 }
 
@@ -22,8 +25,8 @@
   background:
     radial-gradient(
       circle at center,
-      rgba(130,160,255,0.22),
-      transparent 65%
+      rgba(128,160,255,0.18),
+      transparent 70%
     );
 
   will-change:
@@ -33,9 +36,12 @@
 
 .bg-noise {
 
-  opacity: 0.04;
+  opacity: 0.03;
+
+  mix-blend-mode:
+    soft-light;
 
   background-image:
     url("../../images/background/noise.webp");
 
-} 
+}
