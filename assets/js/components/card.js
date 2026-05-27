@@ -81,19 +81,28 @@ export function createCard(item) {
     </div>
   `;
 
-  article.addEventListener(
-    "mouseenter",
-    () => {
+  const desktop =
+    window.matchMedia(
+      "(hover: hover)"
+    ).matches;
 
-      preloadImage(
-        item.img
-      );
+  if (desktop) {
 
-    },
-    {
-      passive: true
-    }
-  );
+    article.addEventListener(
+      "mouseenter",
+      () => {
+
+        preloadImage(
+          item.img
+        );
+
+      },
+      {
+        passive: true
+      }
+    );
+
+  }
 
   article
     .querySelector(
@@ -110,4 +119,4 @@ export function createCard(item) {
 
   return article;
 
-} 
+}
