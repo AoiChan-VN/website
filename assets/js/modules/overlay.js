@@ -1,3 +1,9 @@
+import {
+  safeText,
+  safeURL
+}
+from "./security.js";
+
 const overlay =
   document.getElementById(
     "overlay-panel"
@@ -24,8 +30,27 @@ export function initOverlay() {
     "click",
     (event) => {
 
-      if (event.target === overlay) {
+      if (
+        event.target === overlay
+      ) {
+
         closeOverlay();
+
+      }
+
+    }
+  );
+
+  window.addEventListener(
+    "keydown",
+    (event) => {
+
+      if (
+        event.key === "Escape"
+      ) {
+
+        closeOverlay();
+
       }
 
     }
@@ -33,7 +58,22 @@ export function initOverlay() {
 
 }
 
-export function openOverlay(data) {
+export function openOverlay(
+  data
+) {
+
+  const title =
+    safeText(
+      data.title || data.id
+    );
+
+  const description =
+    safeText(
+      data.description
+    );
+
+  const link =
+    safeURL(data.link);
 
   content.innerHTML = `
     <div class="overlay-card">
@@ -41,28 +81,28 @@ export function openOverlay(data) {
       <img
         class="overlay-image"
         src="${data.img}"
-        alt="${data.id}"
+        alt="${title}"
       />
 
       <h2 class="overlay-title">
-        ${data.id}
+        ${title}
       </h2>
 
       <p class="overlay-description">
-        ${data.description}
+        ${description}
       </p>
 
       ${
-        data.link
+        link
           ? `
-            <a
-              class="overlay-link"
-              href="${data.link}"
-              target="_blank"
-              rel="noopener noreferrer"
-            >
-              OPEN LINK
-            </a>
+          <a
+            class="overlay-link"
+            href="${link}"
+            target="_blank"
+            rel="noopener noreferrer"
+          >
+            OPEN LINK
+          </a>
           `
           : ""
       }
@@ -74,6 +114,9 @@ export function openOverlay(data) {
     "hidden"
   );
 
+  document.body.style.overflow =
+    "hidden";
+
 }
 
 export function closeOverlay() {
@@ -82,4 +125,7 @@ export function closeOverlay() {
     "hidden"
   );
 
-} 
+  document.body.style.overflow =
+    "";
+
+}
