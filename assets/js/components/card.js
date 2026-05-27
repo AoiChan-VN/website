@@ -4,7 +4,27 @@ from "../modules/overlay.js";
 import { preloadImage }
 from "../modules/preload.js";
 
+import {
+  safeText
+}
+from "../modules/security.js";
+
 export function createCard(item) {
+
+  const title =
+    safeText(
+      item.title || item.id
+    );
+
+  const category =
+    safeText(
+      item.category || "POST"
+    );
+
+  const description =
+    safeText(
+      item.description
+    );
 
   const article =
     document.createElement(
@@ -12,7 +32,7 @@ export function createCard(item) {
     );
 
   article.className =
-    "content-card observe";
+    "content-card reveal-item";
 
   article.innerHTML = `
     <div class="card-image-wrap">
@@ -20,7 +40,7 @@ export function createCard(item) {
       <img
         class="card-image"
         src="${item.img}"
-        alt="${item.title || item.id}"
+        alt="${title}"
         loading="lazy"
         decoding="async"
       />
@@ -32,7 +52,7 @@ export function createCard(item) {
     <div class="card-body">
 
       <div class="card-category">
-        ${item.category || "POST"}
+        ${category}
       </div>
 
       <div class="card-top">
@@ -41,7 +61,7 @@ export function createCard(item) {
           class="card-route"
           href="#/posts/${item.id}"
         >
-          ${item.title || item.id}
+          ${title}
         </a>
 
         <button
@@ -55,7 +75,7 @@ export function createCard(item) {
       </div>
 
       <p class="card-description">
-        ${item.description}
+        ${description}
       </p>
 
     </div>
@@ -70,7 +90,9 @@ export function createCard(item) {
       );
 
     },
-    { passive: true }
+    {
+      passive: true
+    }
   );
 
   article
