@@ -1,15 +1,19 @@
-const memory =
+const storage =
   new Map();
 
-export function hasCache(key) {
+export function hasCache(
+  key
+) {
 
-  return memory.has(key);
+  return storage.has(key);
 
 }
 
-export function getCache(key) {
+export function getCache(
+  key
+) {
 
-  return memory.get(key);
+  return storage.get(key);
 
 }
 
@@ -18,9 +22,9 @@ export function setCache(
   value
 ) {
 
-  memory.set(
+  storage.set(
     key,
     value
   );
 
-} 
+}
