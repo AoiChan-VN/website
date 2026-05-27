@@ -1,41 +1,67 @@
 .markdown {
 
   width:
-    min(900px, 100%);
+    min(920px, 100%);
 
   margin: 0 auto;
 
-  padding-bottom: 120px;
+  padding-bottom: 140px;
+
+  animation:
+    fadeUp 400ms ease;
 
 }
 
 .markdown h1 {
 
-  margin-bottom: 24px;
+  margin-bottom: 28px;
 
   font-size:
-    clamp(36px, 5vw, 72px);
+    clamp(42px, 6vw, 84px);
+
+  line-height: 1;
 
 }
 
 .markdown h2 {
 
   margin:
-    40px 0 18px;
+    44px 0 18px;
 
   font-size:
-    clamp(24px, 4vw, 42px);
+    clamp(28px, 4vw, 48px);
 
 }
 
 .markdown p {
 
-  margin-bottom: 18px;
-
-  line-height: 1.9;
+  margin-bottom: 20px;
 
   color:
     var(--text-muted);
+
+  line-height: 1.95;
+
+}
+
+.markdown strong {
+
+  color:
+    white;
+
+}
+
+.markdown em {
+
+  color:
+    #d5e2ff;
+
+}
+
+.markdown a {
+
+  color:
+    var(--accent);
 
 }
 
@@ -43,10 +69,11 @@
 
   width: 100%;
 
-  border-radius: 24px;
-
   margin:
-    24px 0;
+    26px 0;
+
+  border-radius:
+    28px;
 
 }
 
@@ -54,12 +81,19 @@
 
   overflow-x: auto;
 
-  padding: 18px;
+  margin:
+    26px 0;
 
-  border-radius: 20px;
+  padding: 20px;
+
+  border-radius:
+    24px;
 
   background:
     rgba(255,255,255,0.04);
+
+  border:
+    1px solid rgba(255,255,255,0.06);
 
 }
 
@@ -68,21 +102,40 @@
   font-family:
     monospace;
 
+  color:
+    #c9ddff;
+
 }
 
 .markdown blockquote {
 
   margin:
-    24px 0;
+    28px 0;
 
   padding:
-    18px 22px;
+    20px 24px;
 
   border-left:
-    3px solid
-    rgba(255,255,255,0.18);
+    3px solid rgba(130,170,255,0.42);
+
+  border-radius:
+    0 20px 20px 0;
 
   background:
     rgba(255,255,255,0.04);
 
-} 
+  color:
+    #dce6ff;
+
+}
+
+.markdown li {
+
+  margin-bottom: 12px;
+
+  color:
+    var(--text-muted);
+
+  line-height: 1.8;
+
+}
