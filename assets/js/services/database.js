@@ -2,7 +2,7 @@ import { fetchJSON }
 from "./fetch.js";
 
 const ROOT =
-  "./data/aoi-file.json";
+  "./data/aoi-tree.json";
 
 function sanitize(value) {
 
