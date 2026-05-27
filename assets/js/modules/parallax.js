@@ -1,6 +1,9 @@
 import { isLowEndMobile }
 from "./device.js";
 
+import { createFrameLimiter }
+from "./performance.js";
+
 let ticking = false;
 
 let currentX = 0;
@@ -21,6 +24,12 @@ export function initParallax() {
     return;
   }
 
+  const handleMove =
+    createFrameLimiter(
+      updatePointer,
+      48
+    );
+
   window.addEventListener(
     "pointermove",
     handleMove,
@@ -29,7 +38,9 @@ export function initParallax() {
     }
   );
 
-  function handleMove(event) {
+  function updatePointer(
+    event
+  ) {
 
     currentX =
       (
@@ -62,17 +73,11 @@ export function initParallax() {
           layer.dataset.depth
         ) || 0;
 
-      const moveX =
-        currentX * depth;
-
-      const moveY =
-        currentY * depth;
-
       layer.style.transform =
         `
         translate3d(
-          ${moveX}px,
-          ${moveY}px,
+          ${currentX * depth}px,
+          ${currentY * depth}px,
           0
         )
       `;
@@ -83,4 +88,4 @@ export function initParallax() {
 
   }
 
-} 
+}
