@@ -1,108 +1,61 @@
-function escapeHTML(text) {
-
-  return text
-    .replaceAll("&", "&amp;")
-    .replaceAll("<", "&lt;")
-    .replaceAll(">", "&gt;")
-    .replaceAll('"', "&quot;")
-    .replaceAll("'", "&#039;");
-
+import {
+  safeText
 }
+from "./security.js";
 
-function inline(text) {
+function renderInline(
+  text
+) {
 
-  let output =
-    escapeHTML(text);
+  return safeText(text)
 
-  output =
-    output.replace(
+    .replace(
       /\*\*(.*?)\*\*/g,
       "<strong>$1</strong>"
-    );
+    )
 
-  output =
-    output.replace(
+    .replace(
       /\*(.*?)\*/g,
       "<em>$1</em>"
-    );
+    )
 
-  output =
-    output.replace(
-      /`([^`]+)`/g,
+    .replace(
+      /`(.*?)`/g,
       "<code>$1</code>"
     );
 
-  output =
-    output.replace(
-      /\[(.*?)\]\((.*?)\)/g,
-      (
-        _,
-        label,
-        href
-      ) => {
-
-        const safe =
-          href.startsWith("http")
-          || href.startsWith("./")
-          || href.startsWith("#");
-
-        if (!safe) {
-
-          return label;
-
-        }
-
-        return `
-          <a
-            href="${href}"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            ${label}
-          </a>
-        `;
-
-      }
-    );
-
-  return output;
-
 }
 
-export function renderMarkdown(
-  raw
+export function parseMarkdown(
+  markdown
 ) {
 
   const lines =
-    raw.split("\n");
+    markdown.split("\n");
 
-  const html = [];
+  const html =
+    [];
 
-  let code = false;
+  let inList =
+    false;
 
-  for (const line of lines) {
+  for (
+    const rawLine
+    of lines
+  ) {
 
-    if (
-      line.startsWith("```")
-    ) {
+    const line =
+      rawLine.trim();
 
-      code = !code;
+    if (!line) {
 
-      html.push(
-        code
-          ? "<pre><code>"
-          : "</code></pre>"
-      );
+      if (inList) {
 
-      continue;
+        html.push("</ul>");
 
-    }
+        inList = false;
 
-    if (code) {
-
-      html.push(
-        escapeHTML(line)
-      );
+      }
 
       continue;
 
@@ -112,9 +65,17 @@ export function renderMarkdown(
       line.startsWith("# ")
     ) {
 
+      if (inList) {
+
+        html.push("</ul>");
+
+        inList = false;
+
+      }
+
       html.push(`
         <h1>
-          ${inline(
+          ${renderInline(
             line.slice(2)
           )}
         </h1>
@@ -128,9 +89,17 @@ export function renderMarkdown(
       line.startsWith("## ")
     ) {
 
+      if (inList) {
+
+        html.push("</ul>");
+
+        inList = false;
+
+      }
+
       html.push(`
         <h2>
-          ${inline(
+          ${renderInline(
             line.slice(3)
           )}
         </h2>
@@ -141,15 +110,23 @@ export function renderMarkdown(
     }
 
     if (
-      line.startsWith("> ")
+      line.startsWith("### ")
     ) {
 
+      if (inList) {
+
+        html.push("</ul>");
+
+        inList = false;
+
+      }
+
       html.push(`
-        <blockquote>
-          ${inline(
-            line.slice(2)
+        <h3>
+          ${renderInline(
+            line.slice(4)
           )}
-        </blockquote>
+        </h3>
       `);
 
       continue;
@@ -160,9 +137,17 @@ export function renderMarkdown(
       line.startsWith("- ")
     ) {
 
+      if (!inList) {
+
+        html.push("<ul>");
+
+        inList = true;
+
+      }
+
       html.push(`
         <li>
-          ${inline(
+          ${renderInline(
             line.slice(2)
           )}
         </li>
@@ -172,24 +157,20 @@ export function renderMarkdown(
 
     }
 
-    if (
-      line.trim() === ""
-    ) {
-
-      html.push("<br>");
-
-      continue;
-
-    }
-
     html.push(`
       <p>
-        ${inline(line)}
+        ${renderInline(line)}
       </p>
     `);
 
   }
 
+  if (inList) {
+
+    html.push("</ul>");
+
+  }
+
   return html.join("");
 
-  } 
+} 
