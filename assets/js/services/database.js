@@ -1,78 +1,85 @@
 import { fetchJSON }
 from "./fetch.js";
 
-const ROOT =
+const DATABASE =
   "./data/aoi-tree.json";
 
-function sanitize(value) {
+let contentCache =
+  null;
 
-  return String(
-    value || ""
-  ).trim();
+async function loadCollections() {
 
-}
+  const collections =
+    await fetchJSON(
+      DATABASE
+    );
 
-function normalize(item) {
+  const requests =
+    collections.map(
+      async (entry) => {
 
-  return {
+        const source =
+          await fetchJSON(
+            entry.source
+          );
 
-    id:
-      sanitize(item.id),
+        return source.map(
+          (item) => ({
 
-    title:
-      sanitize(item.title),
+            id:
+              item.id,
 
-    description:
-      sanitize(
-        item.description
-      ),
+            title:
+              item.title
+              || item.id,
 
-    img:
-      sanitize(item.img),
+            category:
+              item.category
+              || entry.category
+              || "POST",
 
-    file:
-      sanitize(item.file),
+            description:
+              item.description
+              || "",
 
-    link:
-      sanitize(item.link),
+            img:
+              item.img
+              || "./assets/images/fallback.webp",
 
-    category:
-      sanitize(
-        item.category
-      )
+            file:
+              item.file
+              || "",
 
-  };
+            link:
+              item.link
+              || ""
+
+          })
+        );
+
+      }
+    );
+
+  const result =
+    await Promise.all(
+      requests
+    );
+
+  return result.flat();
 
 }
 
 export async function loadContent() {
 
-  const folders =
-    await fetchJSON(ROOT);
+  if (contentCache) {
 
-  const result = [];
-
-  for (const folder of folders) {
-
-    if (!folder.path) {
-      continue;
-    }
-
-    const entries =
-      await fetchJSON(
-        folder.path
-      );
-
-    entries.forEach((entry) => {
-
-      result.push(
-        normalize(entry)
-      );
-
-    });
+    return contentCache;
 
   }
 
-  return result;
+  contentCache =
+    await loadCollections();
+
+  return contentCache;
 
 }
