@@ -1,44 +1,32 @@
-const button =
-  document.getElementById(
-    "motion-toggle"
-  );
+import {
+  isLowEndMobile,
+  prefersReducedMotion
+}
+from "./device.js";
 
 export function initMotion() {
 
-  const reduced =
-    localStorage.getItem(
-      "aoi-motion"
-    ) === "off";
+  const root =
+    document.documentElement;
 
-  if (reduced) {
+  if (
+    prefersReducedMotion()
+  ) {
 
-    document.body.classList.add(
+    root.classList.add(
       "reduce-motion"
     );
 
   }
 
-  button.addEventListener(
-    "click",
-    () => {
+  if (
+    isLowEndMobile()
+  ) {
 
-      document.body.classList.toggle(
-        "reduce-motion"
-      );
+    root.classList.add(
+      "low-end-device"
+    );
 
-      const disabled =
-        document.body.classList.contains(
-          "reduce-motion"
-        );
+  }
 
-      localStorage.setItem(
-        "aoi-motion",
-        disabled
-          ? "off"
-          : "on"
-      );
-
-    }
-  );
-
-} 
+}
