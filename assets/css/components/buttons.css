@@ -1,0 +1,40 @@
+.hero-button,
+.overlay-link,
+.top-button {
+
+  position: relative;
+
+  overflow: hidden;
+
+}
+
+.hero-button::before,
+.overlay-link::before,
+.top-button::before {
+
+  content: "";
+
+  position: absolute;
+  inset: 0;
+
+  opacity: 0;
+
+  background:
+    linear-gradient(
+      135deg,
+      rgba(255,255,255,0.22),
+      transparent
+    );
+
+  transition:
+    opacity 180ms ease;
+
+}
+
+.hero-button:hover::before,
+.overlay-link:hover::before,
+.top-button:hover::before {
+
+  opacity: 1;
+
+} 
