@@ -4,12 +4,25 @@ from "./device.js";
 import { createFrameLimiter }
 from "./performance.js";
 
-let ticking = false;
+let initialized =
+  false;
 
-let currentX = 0;
-let currentY = 0;
+let ticking =
+  false;
+
+let currentX =
+  0;
+
+let currentY =
+  0;
 
 export function initParallax() {
+
+  if (initialized) {
+    return;
+  }
+
+  initialized = true;
 
   if (isLowEndMobile()) {
     return;
