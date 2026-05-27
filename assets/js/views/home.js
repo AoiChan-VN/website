@@ -4,8 +4,8 @@ from "../services/database.js";
 import { createCard }
 from "../components/card.js";
 
-import { initLazyObserver }
-from "../modules/lazy-observer.js";
+import { reveal }
+from "../modules/reveal.js";
 
 import { applyImageFallback }
 from "../modules/image-fallback.js";
@@ -26,7 +26,7 @@ export async function renderHome(
     );
 
   hero.className =
-    "hero-section observe";
+    "hero-section reveal-item";
 
   hero.innerHTML = `
     <div
@@ -35,7 +35,7 @@ export async function renderHome(
     >
 
       <div class="hero-badge">
-        IOS • Anime • 3D
+        IOS • Anime • Huyền Huyễn
       </div>
 
       <h1 class="hero-title">
@@ -44,7 +44,7 @@ export async function renderHome(
 
       <p class="hero-description">
         Cinematic static architecture
-        for GitHub deployment.
+        optimized for GitHub Pages.
       </p>
 
       <div class="hero-actions">
@@ -61,6 +61,11 @@ export async function renderHome(
     </div>
 
     <div class="hero-visual">
+
+      <div
+        class="hero-grid"
+        data-depth="8"
+      ></div>
 
       <div
         class="hero-ring"
@@ -104,10 +109,13 @@ export async function renderHome(
   root.appendChild(hero);
   root.appendChild(grid);
 
-  initParallax();
+  reveal([
+    hero,
+    ...grid.children
+  ]);
 
-  initLazyObserver();
+  initParallax();
 
   applyImageFallback();
 
-}
+} 
