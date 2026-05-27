@@ -1,5 +1,6 @@
 [
   {
-    "./data/data-tree/default/info.json"
+    "category": "AoiChan"
+    "source": "./data/data-tree/default/info.json"
   }
 ]
