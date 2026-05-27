@@ -5,7 +5,53 @@ import {
 }
 from "./cache.js";
 
-export async function fetchJSON(path) {
+const TIMEOUT =
+  12000;
+
+async function fetchWithTimeout(
+  path
+) {
+
+  const controller =
+    new AbortController();
+
+  const timer =
+    setTimeout(
+      () => {
+
+        controller.abort();
+
+      },
+      TIMEOUT
+    );
+
+  try {
+
+    const response =
+      await fetch(path, {
+        method: "GET",
+        cache: "force-cache",
+        signal:
+          controller.signal
+      });
+
+    clearTimeout(timer);
+
+    return response;
+
+  } catch (error) {
+
+    clearTimeout(timer);
+
+    throw error;
+
+  }
+
+}
+
+export async function fetchJSON(
+  path
+) {
 
   if (hasCache(path)) {
 
@@ -14,10 +60,9 @@ export async function fetchJSON(path) {
   }
 
   const response =
-    await fetch(path, {
-      method: "GET",
-      cache: "force-cache"
-    });
+    await fetchWithTimeout(
+      path
+    );
 
   if (!response.ok) {
 
@@ -36,7 +81,9 @@ export async function fetchJSON(path) {
 
 }
 
-export async function fetchText(path) {
+export async function fetchText(
+  path
+) {
 
   if (hasCache(path)) {
 
@@ -45,10 +92,9 @@ export async function fetchText(path) {
   }
 
   const response =
-    await fetch(path, {
-      method: "GET",
-      cache: "force-cache"
-    });
+    await fetchWithTimeout(
+      path
+    );
 
   if (!response.ok) {
 
@@ -65,4 +111,4 @@ export async function fetchText(path) {
 
   return text;
 
-} 
+}
