@@ -1,36 +1,66 @@
 :root {
 
   --bg:
-    #080b14;
+    #070b14;
 
-  --surface:
-    rgba(18,24,39,0.72);
+  --bg-elevated:
+    rgba(16,20,34,0.82);
 
-  --surface-border:
+  --bg-soft:
+    rgba(255,255,255,0.04);
+
+  --border:
     rgba(255,255,255,0.08);
 
   --text-primary:
-    #f3f6ff;
+    rgba(255,255,255,0.96);
+
+  --text-secondary:
+    rgba(255,255,255,0.82);
 
   --text-muted:
-    #9faecc;
+    rgba(255,255,255,0.58);
 
   --accent:
-    #8db7ff;
+    #8aa8ff;
+
+  --accent-soft:
+    rgba(138,168,255,0.18);
 
   --danger:
-    #ff7f9f;
+    #ff7a9e;
 
-  --radius:
-    26px;
+  --shadow-soft:
+    0 10px 30px rgba(0,0,0,0.24);
 
-  --transition:
-    180ms ease;
+  --shadow-heavy:
+    0 24px 80px rgba(0,0,0,0.42);
 
-  --shadow:
-    0 14px 34px rgba(0,0,0,0.34);
+  --radius-card:
+    28px;
+
+  --radius-panel:
+    32px;
+
+  --radius-pill:
+    999px;
 
   --content-width:
-    1400px;
+    1420px;
 
-} 
+  --topbar-height:
+    78px;
+
+  --sidebar-width:
+    94px;
+
+  --transition-fast:
+    180ms ease;
+
+  --transition-base:
+    260ms ease;
+
+  --transition-slow:
+    420ms ease;
+
+}
