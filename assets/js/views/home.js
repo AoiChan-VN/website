@@ -13,9 +13,20 @@ from "../modules/image-fallback.js";
 import { initParallax }
 from "../modules/parallax.js";
 
+import { updateMeta }
+from "../modules/meta.js";
+
 export async function renderHome(
   root
 ) {
+
+  updateMeta({
+    title:
+      "Aoi Interface",
+
+    description:
+      "IOS Anime cinematic static website."
+  });
 
   const content =
     await loadContent();
@@ -118,4 +129,4 @@ export async function renderHome(
 
   applyImageFallback();
 
-} 
+}
