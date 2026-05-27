@@ -1,18 +1,27 @@
-export function preloadImage(src) {
+const loaded =
+  new Set();
 
-  if (!src) {
+export function preloadImage(
+  source
+) {
+
+  if (
+    !source
+    || loaded.has(source)
+  ) {
+
     return;
+
   }
 
   const image =
     new Image();
 
-  image.decoding =
-    "async";
+  image.src =
+    source;
 
-  image.loading =
-    "eager";
+  loaded.add(
+    source
+  );
 
-  image.src = src;
-
-} 
+}
