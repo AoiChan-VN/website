@@ -7,7 +7,7 @@ const ASSETS = [
 
   "./index.html",
 
-  "./manifest/aoi.webmanifest",
+  "./manifest.webmanifest",
 
   "./assets/css/main.css",
 
