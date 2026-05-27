@@ -7,7 +7,7 @@ const ASSETS = [
 
   "./index.html",
 
-  "./aoi.webmanifest",
+  "./manifest/aoi.webmanifest",
 
   "./assets/css/main.css",
 
@@ -26,6 +26,36 @@ self.addEventListener(
 
           return cache.addAll(
             ASSETS
+          );
+
+        })
+
+    );
+
+  }
+);
+
+self.addEventListener(
+  "activate",
+  (event) => {
+
+    event.waitUntil(
+
+      caches.keys()
+        .then((keys) => {
+
+          return Promise.all(
+
+            keys.map((key) => {
+
+              if (key !== CACHE) {
+
+                return caches.delete(key);
+
+              }
+
+            })
+
           );
 
         })
@@ -56,4 +86,4 @@ self.addEventListener(
     );
 
   }
-); 
+);
