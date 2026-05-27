@@ -1,0 +1,46 @@
+.content-card::after {
+
+  content: "";
+
+  position: absolute;
+  inset: 0;
+
+  background:
+    radial-gradient(
+      circle at top,
+      rgba(255,255,255,0.12),
+      transparent 42%
+    );
+
+  opacity: 0;
+
+  transition:
+    opacity 220ms ease;
+
+  pointer-events: none;
+
+}
+
+.content-card:hover::after {
+
+  opacity: 1;
+
+}
+
+.hero-orb::before {
+
+  content: "";
+
+  position: absolute;
+  inset: -12%;
+
+  border-radius: 50%;
+
+  background:
+    radial-gradient(
+      circle,
+      rgba(255,255,255,0.22),
+      transparent 72%
+    );
+
+} 
