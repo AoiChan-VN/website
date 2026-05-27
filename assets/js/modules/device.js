@@ -1,18 +1,37 @@
 export function isLowEndMobile() {
 
-  const memory =
-    navigator.deviceMemory || 4;
-
   const cores =
-    navigator.hardwareConcurrency || 4;
+    navigator.hardwareConcurrency
+    || 2;
+
+  const memory =
+    navigator.deviceMemory
+    || 2;
 
   const width =
     window.innerWidth;
 
+  const mobile =
+    /android|iphone|ipad/i
+      .test(
+        navigator.userAgent
+      );
+
   return (
-    memory <= 4
-    || cores <= 4
-    || width <= 768
+    mobile
+    && (
+      cores <= 4
+      || memory <= 4
+      || width <= 768
+    )
   );
 
-} 
+}
+
+export function prefersReducedMotion() {
+
+  return window.matchMedia(
+    "(prefers-reduced-motion: reduce)"
+  ).matches;
+
+}
