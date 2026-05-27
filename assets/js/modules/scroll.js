@@ -1,6 +1,16 @@
-let previous = 0;
+let initialized =
+  false;
+
+let previous =
+  0;
 
 export function initScrollEffects() {
+
+  if (initialized) {
+    return;
+  }
+
+  initialized = true;
 
   const topbar =
     document.querySelector(
@@ -67,4 +77,4 @@ export function initScrollEffects() {
     }
   );
 
-} 
+}
