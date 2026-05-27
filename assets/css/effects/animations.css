@@ -3,21 +3,46 @@
   0% {
 
     transform:
-      translateY(0px);
+      translate3d(0, 0, 0)
+      scale(1);
 
   }
 
   50% {
 
     transform:
-      translateY(-12px);
+      translate3d(0, -18px, 0)
+      scale(1.03);
 
   }
 
   100% {
 
     transform:
-      translateY(0px);
+      translate3d(0, 0, 0)
+      scale(1);
+
+  }
+
+}
+
+@keyframes orbPulse {
+
+  0% {
+
+    opacity: 0.72;
+
+  }
+
+  50% {
+
+    opacity: 1;
+
+  }
+
+  100% {
+
+    opacity: 0.72;
 
   }
 
@@ -30,7 +55,7 @@
     opacity: 0;
 
     transform:
-      translateY(20px);
+      translateY(18px);
 
   }
 
@@ -43,4 +68,4 @@
 
   }
 
-} 
+}
