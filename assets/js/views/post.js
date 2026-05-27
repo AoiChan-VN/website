@@ -4,6 +4,12 @@ from "../services/content.js";
 import { loadContent }
 from "../services/database.js";
 
+import { reveal }
+from "../modules/reveal.js";
+
+import { updateMeta }
+from "../modules/meta.js";
+
 export async function renderPost(
   root,
   segments
@@ -52,6 +58,16 @@ export async function renderPost(
 
   }
 
+  updateMeta({
+    title:
+      target.title
+      || target.id,
+
+    description:
+      target.description
+    || "Aoi Content"
+  });
+
   const html =
     await getMarkdown(
       target.file
@@ -63,7 +79,7 @@ export async function renderPost(
     );
 
   article.className =
-    "markdown observe";
+    "markdown reveal-item";
 
   article.innerHTML =
     html;
@@ -72,4 +88,6 @@ export async function renderPost(
     article
   );
 
-} 
+  reveal([article]);
+
+}
