@@ -110,4 +110,4 @@ export function createCard(item) {
 
   return article;
 
-}
+} 
