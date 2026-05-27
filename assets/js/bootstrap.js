@@ -13,6 +13,9 @@ from "./modules/background.js";
 import { initScrollEffects }
 from "./modules/scroll.js";
 
+import { initPWA }
+from "./modules/pwa.js";
+
 async function bootstrap() {
 
   initOverlay();
@@ -22,6 +25,8 @@ async function bootstrap() {
   initBackgroundFX();
 
   initScrollEffects();
+
+  initPWA();
 
   await initRouter();
 
