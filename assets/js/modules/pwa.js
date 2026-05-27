@@ -11,7 +11,9 @@ export async function initPWA() {
   try {
 
     await navigator.serviceWorker
-      .register("./sw.js");
+      .register("./sw.js", {
+        scope: "./"
+      });
 
   } catch (error) {
 
@@ -22,4 +24,4 @@ export async function initPWA() {
 
   }
 
-} 
+}
