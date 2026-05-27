@@ -18,9 +18,11 @@ export function applyImageFallback() {
           FALLBACK;
 
       },
-      { once: true }
+      {
+        once: true
+      }
     );
 
   });
 
-} 
+}
