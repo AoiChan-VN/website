@@ -9,7 +9,7 @@
 
   align-items: center;
 
-  min-height: 78vh;
+  min-height: 82vh;
 
   gap: 40px;
 
@@ -41,9 +41,9 @@
   color:
     var(--text-muted);
 
-  letter-spacing: 2px;
-
   font-size: 12px;
+
+  letter-spacing: 2px;
 
   backdrop-filter:
     blur(12px);
@@ -55,25 +55,25 @@
   margin-top: 22px;
 
   font-size:
-    clamp(64px, 9vw, 130px);
+    clamp(72px, 9vw, 138px);
 
-  line-height: 0.92;
+  line-height: 0.9;
 
-  letter-spacing: -4px;
+  letter-spacing: -5px;
 
 }
 
 .hero-description {
 
   width:
-    min(520px, 100%);
+    min(540px, 100%);
 
   margin-top: 26px;
 
   color:
     var(--text-muted);
 
-  line-height: 1.9;
+  line-height: 1.95;
 
 }
 
@@ -81,7 +81,7 @@
 
   display: flex;
 
-  margin-top: 34px;
+  margin-top: 36px;
 
 }
 
@@ -91,7 +91,7 @@
   align-items: center;
   justify-content: center;
 
-  height: 52px;
+  height: 54px;
 
   padding:
     0 24px;
@@ -99,17 +99,17 @@
   border-radius:
     999px;
 
-  color: white;
-
   background:
     linear-gradient(
       135deg,
-      #84a8ff,
-      #7a67ff
+      #89adff,
+      #7d67ff
     );
 
+  color: white;
+
   box-shadow:
-    0 10px 30px rgba(110,130,255,0.28);
+    0 14px 34px rgba(92,110,255,0.34);
 
 }
 
@@ -125,12 +125,42 @@
 
 }
 
+.hero-grid {
+
+  position: absolute;
+
+  width: 560px;
+  height: 560px;
+
+  background-image:
+    linear-gradient(
+      rgba(255,255,255,0.04) 1px,
+      transparent 1px
+    ),
+    linear-gradient(
+      90deg,
+      rgba(255,255,255,0.04) 1px,
+      transparent 1px
+    );
+
+  background-size:
+    40px 40px;
+
+  mask-image:
+    radial-gradient(
+      circle,
+      rgba(0,0,0,1),
+      transparent 72%
+    );
+
+}
+
 .hero-ring {
 
   position: absolute;
 
-  width: 440px;
-  height: 440px;
+  width: 420px;
+  height: 420px;
 
   border-radius: 50%;
 
@@ -143,21 +173,21 @@
 
   position: absolute;
 
-  width: 340px;
-  height: 340px;
+  width: 320px;
+  height: 320px;
 
   border-radius: 50%;
 
   background:
     radial-gradient(
       circle,
-      rgba(130,170,255,0.44),
-      rgba(130,170,255,0.08),
+      rgba(136,170,255,0.5),
+      rgba(136,170,255,0.08),
       transparent
     );
 
   filter:
-    blur(10px);
+    blur(12px);
 
   animation:
     heroFloat 8s ease-in-out infinite;
@@ -168,16 +198,16 @@
 
   position: absolute;
 
-  width: 560px;
-  height: 560px;
+  width: 620px;
+  height: 620px;
 
   border-radius: 50%;
 
   background:
     radial-gradient(
       circle,
-      rgba(132,162,255,0.14),
+      rgba(132,162,255,0.12),
       transparent 72%
     );
 
-}
+} 
