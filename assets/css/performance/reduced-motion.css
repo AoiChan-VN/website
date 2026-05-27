@@ -1,0 +1,45 @@
+.reduce-motion *,
+.low-end-device * {
+
+  animation-duration:
+    0.01ms !important;
+
+  animation-iteration-count:
+    1 !important;
+
+  transition-duration:
+    0.01ms !important;
+
+  scroll-behavior:
+    auto !important;
+
+}
+
+.low-end-device
+.hero-glow,
+
+.low-end-device
+.hero-grid {
+
+  display: none;
+
+}
+
+.low-end-device
+.content-card {
+
+  backdrop-filter:
+    none;
+
+}
+
+.low-end-device
+.topbar,
+
+.low-end-device
+.sidebar {
+
+  backdrop-filter:
+    none;
+
+} 
