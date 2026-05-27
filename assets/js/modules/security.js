@@ -3,7 +3,9 @@ const ALLOWED_PROTOCOLS = [
   "https:"
 ];
 
-export function safeURL(value) {
+export function safeURL(
+  value
+) {
 
   try {
 
@@ -32,10 +34,13 @@ export function safeURL(value) {
 
 }
 
-export function safeText(value) {
+export function safeText(
+  value
+) {
 
   return String(value || "")
     .replace(/[<>]/g, "")
+    .replace(/[{}]/g, "")
     .trim();
 
-} 
+}
