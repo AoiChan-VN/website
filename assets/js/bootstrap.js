@@ -10,6 +10,9 @@ from "./modules/motion.js";
 import { initBackgroundFX }
 from "./modules/background.js";
 
+import { initScrollEffects }
+from "./modules/scroll.js";
+
 async function bootstrap() {
 
   initOverlay();
@@ -17,6 +20,8 @@ async function bootstrap() {
   initMotion();
 
   initBackgroundFX();
+
+  initScrollEffects();
 
   await initRouter();
 
