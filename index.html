@@ -28,6 +28,8 @@
   <link rel="stylesheet" href="./assets/css/effects/cosmic.css" />
   <link rel="stylesheet" href="./assets/css/components/navigation.css" />
   <link rel="stylesheet" href="./assets/css/components/orbital.css" />
+  <link rel="stylesheet" href="./assets/css/components/particles.css" />
+  <link rel="stylesheet" href="./assets/css/components/cursor.css" />
   <link rel="stylesheet" href="./assets/css/main.css" />
   <link rel="stylesheet" href="./assets/css/responsive.css" />
 </head>
@@ -43,6 +45,18 @@
       <div class="cosmic-gradient"></div>
       <div class="cosmic-stars"></div>
       <div class="cosmic-glow"></div>
+    </div>
+
+    <div
+      class="particle-field"
+      aria-hidden="true"
+    ></div>
+
+    <div
+      class="cursor-field"
+      aria-hidden="true"
+    >
+      <div class="cursor-orb"></div>
     </div>
 
     <div
@@ -141,9 +155,9 @@
           </h1>
 
           <p class="hero-description">
-            Hệ thống không gian đa tầng với cinematic depth,
-            ánh sáng vũ trụ và chuyển động parallax tối ưu
-            cho Android, iOS, iPad và desktop.
+            Không gian cinematic đa tầng với volumetric light,
+            galaxy particles và motion engine tối ưu GPU
+            cho mọi nền tảng native static.
           </p>
 
           <div class="hero-actions">
