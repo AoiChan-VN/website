@@ -1,0 +1,59 @@
+.aurora-layer{
+  position:fixed;
+
+  inset:-20%;
+
+  pointer-events:none;
+
+  overflow:hidden;
+
+  z-index:2;
+}
+
+.aurora-wave{
+  position:absolute;
+
+  width:60vw;
+  height:60vw;
+
+  border-radius:50%;
+
+  opacity:0.14;
+
+  filter:blur(90px);
+
+  mix-blend-mode:screen;
+
+  animation:
+    auroraFloat 18s ease-in-out infinite;
+}
+
+.aurora-wave-a{
+  top:-10%;
+  left:-10%;
+
+  background:
+    radial-gradient(
+      circle,
+      rgba(78,216,255,0.9),
+      transparent 70%
+    );
+}
+
+.aurora-wave-b{
+  bottom:-20%;
+  right:-10%;
+
+  background:
+    radial-gradient(
+      circle,
+      rgba(143,123,255,0.9),
+      transparent 70%
+    );
+
+  animation-delay:-8s;
+}
+
+.reduced-motion .aurora-layer{
+  display:none;
+} 
