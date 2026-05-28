@@ -231,6 +231,18 @@ body{
   letter-spacing:-0.04em;
 }
 
+.low-performance .particle{
+  display:none;
+}
+
+.low-performance .cursor-field{
+  display:none;
+}
+
+.low-performance .hero-panel{
+  animation:none;
+}
+
 .reduced-motion *{
   animation:none !important;
   transition:none !important;
