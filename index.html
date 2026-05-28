@@ -30,6 +30,8 @@
   <link rel="stylesheet" href="./assets/css/components/orbital.css" />
   <link rel="stylesheet" href="./assets/css/components/particles.css" />
   <link rel="stylesheet" href="./assets/css/components/cursor.css" />
+  <link rel="stylesheet" href="./assets/css/components/reveal.css" />
+  <link rel="stylesheet" href="./assets/css/components/aurora.css" />
   <link rel="stylesheet" href="./assets/css/main.css" />
   <link rel="stylesheet" href="./assets/css/responsive.css" />
 </head>
@@ -45,6 +47,14 @@
       <div class="cosmic-gradient"></div>
       <div class="cosmic-stars"></div>
       <div class="cosmic-glow"></div>
+    </div>
+
+    <div
+      class="aurora-layer"
+      aria-hidden="true"
+    >
+      <div class="aurora-wave aurora-wave-a"></div>
+      <div class="aurora-wave aurora-wave-b"></div>
     </div>
 
     <div
@@ -81,7 +91,7 @@
 
     </div>
 
-    <header class="space-navigation">
+    <header class="space-navigation reveal">
 
       <nav
         class="navigation-shell glass-panel"
@@ -140,8 +150,9 @@
     <main class="main-container">
 
       <section
-        class="hero-panel glass-panel"
+        class="hero-panel glass-panel reveal"
         id="explore"
+        data-depth-scroll="-0.03"
       >
 
         <div class="hero-content">
@@ -155,9 +166,9 @@
           </h1>
 
           <p class="hero-description">
-            Không gian cinematic đa tầng với volumetric light,
-            galaxy particles và motion engine tối ưu GPU
-            cho mọi nền tảng native static.
+            Hệ thống cinematic space environment
+            với adaptive rendering, reveal motion,
+            aurora lighting và depth scroll engine.
           </p>
 
           <div class="hero-actions">
@@ -183,7 +194,7 @@
       </section>
 
       <section
-        class="content-section"
+        class="content-section reveal"
         id="dimensions"
       >
 
@@ -201,7 +212,10 @@
 
         <div class="orbital-grid">
 
-          <article class="orbital-card glass-panel">
+          <article
+            class="orbital-card glass-panel"
+            data-depth-scroll="0.01"
+          >
 
             <span class="orbital-label">
               Depth Layer
@@ -212,13 +226,16 @@
             </h3>
 
             <p class="orbital-description">
-              Hệ thống chiều sâu cinematic render bằng
-              translate3d tối ưu GPU và mobile rendering.
+              Render cinematic bằng translate3d
+              tối ưu GPU và mobile rendering.
             </p>
 
           </article>
 
-          <article class="orbital-card glass-panel">
+          <article
+            class="orbital-card glass-panel"
+            data-depth-scroll="0.015"
+          >
 
             <span class="orbital-label">
               Motion Engine
@@ -229,13 +246,16 @@
             </h3>
 
             <p class="orbital-description">
-              Chuyển động thích ứng theo thiết bị,
-              tự động giảm tải trên mobile yếu.
+              Chuyển động tự thích ứng theo FPS
+              và hiệu năng thiết bị.
             </p>
 
           </article>
 
-          <article class="orbital-card glass-panel">
+          <article
+            class="orbital-card glass-panel"
+            data-depth-scroll="0.02"
+          >
 
             <span class="orbital-label">
               Native System
@@ -247,7 +267,7 @@
 
             <p class="orbital-description">
               Chạy trực tiếp trên GitHub Pages,
-              USB offline và LocalHost không cần backend.
+              USB offline và LocalHost.
             </p>
 
           </article>
