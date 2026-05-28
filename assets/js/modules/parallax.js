@@ -1,46 +1,86 @@
-import { rafThrottle } from '../utils/raf.js';
+import {
+  isTouchDevice,
+  prefersReducedMotion
+} from '../core/device.js';
 
 const layers = [
   ...document.querySelectorAll('.parallax-layer')
 ];
 
-let pointerX = 0;
-let pointerY = 0;
+let viewportWidth = window.innerWidth;
+let viewportHeight = window.innerHeight;
 
-function updateLayers(){
+let currentX = 0;
+let currentY = 0;
+
+let rafId = 0;
+
+function updateViewport(){
+
+  viewportWidth = window.innerWidth;
+  viewportHeight = window.innerHeight;
+}
+
+function render(){
 
   for(const layer of layers){
 
     const depth =
       Number(layer.dataset.depth) || 0;
 
-    const moveX = pointerX * depth;
-    const moveY = pointerY * depth;
+    const moveX = currentX * depth;
+    const moveY = currentY * depth;
 
     layer.style.transform =
       `translate3d(${moveX}px, ${moveY}px, 0)`;
   }
+
+  rafId = 0;
 }
 
-const handlePointerMove = rafThrottle((event) => {
+function queueRender(){
 
-  const centerX = window.innerWidth * 0.5;
-  const centerY = window.innerHeight * 0.5;
+  if(rafId){
+    return;
+  }
 
-  pointerX =
-    (event.clientX - centerX) * 0.08;
+  rafId = requestAnimationFrame(render);
+}
 
-  pointerY =
-    (event.clientY - centerY) * 0.08;
+function handlePointerMove(event){
 
-  updateLayers();
-});
+  const centerX = viewportWidth * 0.5;
+  const centerY = viewportHeight * 0.5;
+
+  currentX =
+    (event.clientX - centerX) * 0.045;
+
+  currentY =
+    (event.clientY - centerY) * 0.045;
+
+  queueRender();
+}
 
 export function initializeParallax(){
+
+  if(
+    isTouchDevice() ||
+    prefersReducedMotion()
+  ){
+    return;
+  }
+
+  updateViewport();
+
+  window.addEventListener(
+    'resize',
+    updateViewport,
+    { passive:true }
+  );
 
   window.addEventListener(
     'pointermove',
     handlePointerMove,
     { passive:true }
   );
-} 
+}
