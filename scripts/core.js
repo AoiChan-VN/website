@@ -1,4 +1,4 @@
-// FILE: /native-space-portal/scripts/core.js
+// FILE: /aoichan-native/scripts/core.js
 
 const portalRuntime = {
 
