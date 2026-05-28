@@ -1,109 +1,115 @@
 .space-navigation{
   position:fixed;
 
-  top:
-    calc(24px + var(--safe-top));
+  top:0;
+  left:0;
 
-  left:50%;
+  width:100%;
 
-  transform:translateX(-50%);
-
-  width:min(1100px,calc(100% - 24px));
-
-  z-index:40;
+  z-index:120;
 }
 
 .navigation-shell{
+  width:min(
+    calc(100% - 24px),
+    1240px
+  );
+
+  margin:
+    calc(14px + var(--safe-top))
+    auto
+    0;
+
+  min-height:72px;
+
+  padding:0 18px;
+
   display:flex;
   align-items:center;
   justify-content:space-between;
 
-  min-height:74px;
-
-  padding:0 20px;
-
-  border-radius:28px;
+  border-radius:24px;
 }
 
 .navigation-brand{
   display:flex;
   align-items:center;
-  gap:14px;
+  gap:12px;
+
+  min-width:0;
 }
 
-.brand-orb{
-  width:14px;
-  height:14px;
+.brand-logo{
+  width:38px;
+  height:38px;
 
-  border-radius:50%;
+  object-fit:contain;
 
-  background:
-    radial-gradient(
-      circle,
-      #ffffff 0%,
-      var(--accent-secondary) 40%,
-      var(--accent-primary) 100%
-    );
-
-  box-shadow:
-    0 0 20px rgba(78,216,255,0.8);
+  flex-shrink:0;
 }
 
 .brand-title{
   font-size:14px;
-  letter-spacing:0.18em;
-  text-transform:uppercase;
-  color:var(--text-primary);
+
+  letter-spacing:0.16em;
+
+  white-space:nowrap;
 }
 
 .navigation-links{
   display:flex;
   align-items:center;
-  gap:10px;
+  gap:28px;
 }
 
 .navigation-link{
-  position:relative;
-
-  min-height:46px;
-
-  display:inline-flex;
-  align-items:center;
-  justify-content:center;
-
-  padding:0 18px;
-
-  border-radius:16px;
-
   color:var(--text-secondary);
 
-  transition:
-    background var(--transition-fast),
-    color var(--transition-fast),
-    transform var(--transition-fast);
+  font-size:14px;
 }
 
-.navigation-link:hover{
-  color:var(--text-primary);
-
-  background:
-    rgba(255,255,255,0.08);
-
-  transform:
-    translateY(-1px);
-}
-
-.navigation-action{
-  min-width:150px;
+.mobile-menu-toggle{
+  display:none;
 }
 
 @media (max-width:860px){
+
+  .navigation-shell{
+    min-height:64px;
+
+    padding:0 14px;
+  }
 
   .navigation-links{
     display:none;
   }
 
-  .navigation-shell{
-    padding:0 16px;
+  .brand-title{
+    font-size:12px;
+  }
+
+  .brand-logo{
+    width:34px;
+    height:34px;
+  }
+
+  .mobile-menu-toggle{
+    display:inline-flex;
+
+    width:46px;
+    height:46px;
+
+    align-items:center;
+    justify-content:center;
+
+    border-radius:16px;
+
+    background:
+      rgba(255,255,255,0.06);
+
+    border:
+      1px solid rgba(255,255,255,0.08);
+
+    color:#ffffff;
   }
 }
