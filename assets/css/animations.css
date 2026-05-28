@@ -5,7 +5,7 @@
   }
 
   50%{
-    transform:translate3d(0,-14px,0);
+    transform:translate3d(0,-10px,0);
   }
 
   100%{
@@ -13,50 +13,39 @@
   }
 }
 
-@keyframes cosmicPulse{
+@keyframes planetFloat{
 
   0%{
-    opacity:0.5;
+    transform:
+      translate3d(0,0,220px)
+      rotate(0deg);
   }
 
   50%{
-    opacity:1;
+    transform:
+      translate3d(-12px,-18px,220px)
+      rotate(1deg);
   }
 
   100%{
-    opacity:0.5;
+    transform:
+      translate3d(0,0,220px)
+      rotate(0deg);
   }
 }
 
-@keyframes starDrift{
+@keyframes ringRotate{
 
   from{
-    transform:translate3d(0,0,0);
+    transform:
+      translate3d(0,0,260px)
+      rotate(0deg);
   }
 
   to{
-    transform:translate3d(-100px,-120px,0);
-  }
-}
-
-@keyframes auroraFloat{
-
-  0%{
     transform:
-      translate3d(0,0,0)
-      scale(1);
-  }
-
-  50%{
-    transform:
-      translate3d(4%,-3%,0)
-      scale(1.08);
-  }
-
-  100%{
-    transform:
-      translate3d(0,0,0)
-      scale(1);
+      translate3d(0,0,260px)
+      rotate(360deg);
   }
 }
 
@@ -69,4 +58,4 @@
   to{
     transform:rotate(360deg);
   }
-} 
+}
