@@ -30,7 +30,7 @@ jobs:
 
       # Gốc là thư mục tĩnh '.', đổi thành 'dist' hoặc 'build' nếu bạn dùng framework
       - name: Upload artifact
-        uses: actions/upload-pages-artifact@v3
+        uses: actions/upload-pages-artifact@v4
         with:
           path: "." 
 
