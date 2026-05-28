@@ -35,13 +35,16 @@ function createParticle(container){
   element.style.opacity =
     String(random(0.3,0.8));
 
-  element.style.transform =
-    `translate3d(${particle.x}px, ${particle.y}px, 0)
-     scale(${particle.scale})`;
-
   container.appendChild(element);
 
   particles.push(particle);
+}
+
+function renderParticle(particle){
+
+  particle.element.style.transform =
+    `translate3d(${particle.x}px, ${particle.y}px, 0)
+     scale(${particle.scale})`;
 }
 
 function updateParticles(){
@@ -67,9 +70,7 @@ function updateParticles(){
       particle.y = -40;
     }
 
-    particle.element.style.transform =
-      `translate3d(${particle.x}px, ${particle.y}px, 0)
-       scale(${particle.scale})`;
+    renderParticle(particle);
   }
 
   animationId =
@@ -93,7 +94,12 @@ export function initializeParticles(){
   }
 
   for(let i = 0; i < PARTICLE_COUNT; i += 1){
+
     createParticle(container);
+
+    renderParticle(
+      particles[particles.length - 1]
+    );
   }
 
   updateParticles();
@@ -113,4 +119,4 @@ export function initializeParticles(){
     },
     { passive:true }
   );
-}
+} 
