@@ -1,3 +1,4 @@
+```text
 assets/images/space/
   stars-back.webp
   nebula-mid.webp
@@ -7,3 +8,4 @@ assets/images/space/
 
 assets/images/logo/
   logo-orb.webp
+```
