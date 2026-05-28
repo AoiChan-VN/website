@@ -1,3 +1,7 @@
+import {
+  updateSceneState
+} from '../core/state.js';
+
 export function initializeMobileMenu(){
 
   const toggle =
@@ -24,11 +28,33 @@ export function initializeMobileMenu(){
     );
 
     document.body.style.overflow = '';
+
+    toggle.setAttribute(
+      'aria-expanded',
+      'false'
+    );
+
+    updateSceneState(
+      'menuOpen',
+      false
+    );
   };
 
   toggle.addEventListener(
     'click',
     () => {
+
+      const isOpen =
+        overlay.classList.contains(
+          'mobile-overlay-active'
+        );
+
+      if(isOpen){
+
+        closeMenu();
+
+        return;
+      }
 
       overlay.classList.add(
         'mobile-overlay-active'
@@ -36,6 +62,16 @@ export function initializeMobileMenu(){
 
       document.body.style.overflow =
         'hidden';
+
+      toggle.setAttribute(
+        'aria-expanded',
+        'true'
+      );
+
+      updateSceneState(
+        'menuOpen',
+        true
+      );
     }
   );
 
@@ -46,6 +82,18 @@ export function initializeMobileMenu(){
       if(
         event.target !== overlay
       ){
+        return;
+      }
+
+      closeMenu();
+    }
+  );
+
+  window.addEventListener(
+    'keydown',
+    (event) => {
+
+      if(event.key !== 'Escape'){
         return;
       }
 
@@ -66,4 +114,4 @@ export function initializeMobileMenu(){
       closeMenu
     );
   }
-} 
+}
