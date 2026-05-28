@@ -2,6 +2,7 @@
 <html lang="vi">
 <head>
   <meta charset="UTF-8" />
+
   <meta
     name="viewport"
     content="width=device-width, initial-scale=1.0, viewport-fit=cover"
@@ -12,9 +13,12 @@
     content="#050816"
   />
 
-  <title>Cosmic Fantasy Portal</title>
+  <meta
+    name="color-scheme"
+    content="dark"
+  />
 
-  <link rel="preconnect" href="./" />
+  <title>Cosmic Fantasy Portal</title>
 
   <link rel="stylesheet" href="./assets/css/reset.css" />
   <link rel="stylesheet" href="./assets/css/variables.css" />
@@ -27,15 +31,22 @@
 </head>
 
 <body>
+
   <div class="app-shell">
 
-    <div class="cosmic-background">
+    <div
+      class="cosmic-background"
+      aria-hidden="true"
+    >
       <div class="cosmic-gradient"></div>
       <div class="cosmic-stars"></div>
       <div class="cosmic-glow"></div>
     </div>
 
-    <div class="parallax-world">
+    <div
+      class="parallax-world"
+      aria-hidden="true"
+    >
 
       <div
         class="parallax-layer layer-back"
@@ -69,18 +80,29 @@
           </h1>
 
           <p class="hero-description">
-            Không gian huyễn tưởng đa tầng với hiệu ứng 3D parallax,
-            ánh sáng vũ trụ và chuyển động cinematic tối ưu cho mọi thiết bị.
+            Không gian huyễn tưởng đa tầng với
+            hiệu ứng 3D parallax cinematic,
+            tối ưu GPU cho mọi thiết bị.
           </p>
 
           <div class="hero-actions">
-            <button class="primary-button">
+
+            <button
+              type="button"
+              class="primary-button"
+              aria-label="Explore Universe"
+            >
               Explore Universe
             </button>
 
-            <button class="secondary-button">
+            <button
+              type="button"
+              class="secondary-button"
+              aria-label="Enter Portal"
+            >
               Enter Portal
             </button>
+
           </div>
 
         </div>
@@ -95,5 +117,6 @@
     type="module"
     src="./assets/js/main.js"
   ></script>
+
 </body>
-</html> 
+</html>
