@@ -1,6 +1,14 @@
+let initialized = false;
+
 export function initializeViewport(){
 
-  const setViewportHeight = () => {
+  if(initialized){
+    return;
+  }
+
+  initialized = true;
+
+  const updateViewport = () => {
 
     const vh =
       window.innerHeight * 0.01;
@@ -11,11 +19,17 @@ export function initializeViewport(){
     );
   };
 
-  setViewportHeight();
+  updateViewport();
 
   window.addEventListener(
     'resize',
-    setViewportHeight,
+    updateViewport,
     { passive:true }
   );
-} 
+
+  window.addEventListener(
+    'orientationchange',
+    updateViewport,
+    { passive:true }
+  );
+}
