@@ -1,7 +1,7 @@
 # ROOT STRUCTURE
 
 ```txt
-/native-space-portal/
+/aoichan-native/
 │
 ├── index.html
 ├── manifest.webmanifest
