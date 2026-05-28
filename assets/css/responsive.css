@@ -6,14 +6,18 @@
   }
 
   .hero-title{
-    font-size:clamp(42px,12vw,72px);
+    font-size:
+      clamp(42px,12vw,72px);
   }
 }
 
 @media (max-width:640px){
 
   .main-container{
-    width:min(calc(100% - 20px),100%);
+    width:min(
+      calc(100% - 20px),
+      100%
+    );
   }
 
   .hero-panel{
@@ -34,4 +38,11 @@
   .secondary-button{
     width:100%;
   }
-} 
+}
+
+@media (prefers-reduced-motion: reduce){
+
+  *{
+    scroll-behavior:auto !important;
+  }
+}
