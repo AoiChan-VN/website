@@ -1,6 +1,14 @@
 export function isTouchDevice(){
+
   return (
-    'ontouchstart' in window ||
+    window.matchMedia('(pointer:coarse)').matches ||
     navigator.maxTouchPoints > 0
   );
-} 
+}
+
+export function prefersReducedMotion(){
+
+  return window.matchMedia(
+    '(prefers-reduced-motion: reduce)'
+  ).matches;
+}
