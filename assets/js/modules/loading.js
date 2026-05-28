@@ -1,3 +1,7 @@
+import {
+  updateSceneState
+} from '../core/state.js';
+
 export function initializeLoading(){
 
   const screen =
@@ -16,8 +20,16 @@ export function initializeLoading(){
         screen.classList.add(
           'loading-screen-hidden'
         );
+
+        updateSceneState(
+          'loaded',
+          true
+        );
       });
     },
-    { passive:true, once:true }
+    {
+      passive:true,
+      once:true
+    }
   );
-} 
+}
