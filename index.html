@@ -45,89 +45,91 @@
 
 <body>
 
+<div class="app-shell">
+
   <div
-    class="loading-screen"
+    class="space-scene"
     aria-hidden="true"
   >
 
-    <div
-      class="loading-core"
-      aria-hidden="true"
-    >
+    <img
+      src="./assets/images/space/stars-back.webp"
+      alt=""
+      class="scene-layer scene-stars"
+      loading="eager"
+      decoding="async"
+    />
 
-      <div class="loading-ring"></div>
+    <img
+      src="./assets/images/space/nebula-mid.webp"
+      alt=""
+      class="scene-layer scene-nebula"
+      loading="eager"
+      decoding="async"
+    />
 
-      <div
-        class="loading-ring loading-ring-delay"
-      ></div>
+    <img
+      src="./assets/images/space/fog-overlay.webp"
+      alt=""
+      class="scene-layer scene-fog"
+      loading="eager"
+      decoding="async"
+    />
 
-      <div class="loading-center"></div>
+    <img
+      src="./assets/images/space/planet-front.webp"
+      alt=""
+      class="scene-planet"
+      loading="eager"
+      decoding="async"
+    />
+
+    <img
+      src="./assets/images/space/orbital-ring.webp"
+      alt=""
+      class="scene-ring"
+      loading="eager"
+      decoding="async"
+    />
+
+    <div class="scene-cinematic">
+
+      <img
+        src="./assets/images/space/volumetric-light.webp"
+        alt=""
+        class="scene-light"
+        loading="lazy"
+        decoding="async"
+      />
+
+      <img
+        src="./assets/images/space/cosmic-grid.webp"
+        alt=""
+        class="scene-grid"
+        loading="lazy"
+        decoding="async"
+      />
+
+      <img
+        src="./assets/images/space/asteroid-front.webp"
+        alt=""
+        class="scene-asteroid"
+        loading="lazy"
+        decoding="async"
+      />
+
+      <img
+        src="./assets/images/space/glow-particles.webp"
+        alt=""
+        class="scene-particles-overlay"
+        loading="lazy"
+        decoding="async"
+      />
 
     </div>
 
   </div>
-
-  <div class="app-shell">
-
-    <div
-      class="space-scene"
-      aria-hidden="true"
-    >
-
-      <img
-        src="./assets/images/space/stars-back.webp"
-        alt=""
-        class="scene-layer scene-stars"
-        loading="eager"
-        decoding="async"
-      />
-
-      <img
-        src="./assets/images/space/nebula-mid.webp"
-        alt=""
-        class="scene-layer scene-nebula"
-        loading="eager"
-        decoding="async"
-      />
-
-      <img
-        src="./assets/images/space/fog-overlay.webp"
-        alt=""
-        class="scene-layer scene-fog"
-        loading="eager"
-        decoding="async"
-      />
-
-      <img
-        src="./assets/images/space/planet-front.webp"
-        alt=""
-        class="scene-planet"
-        loading="eager"
-        decoding="async"
-      />
-
-      <img
-        src="./assets/images/space/orbital-ring.webp"
-        alt=""
-        class="scene-ring"
-        loading="eager"
-        decoding="async"
-      />
-
-    </div>
-
-    <div
-      class="particle-field"
-      aria-hidden="true"
-    ></div>
-
-    <div
-      class="cursor-field"
-      aria-hidden="true"
-    >
-      <div class="cursor-orb"></div>
-    </div>
-
+  
     <div class="mobile-overlay">
 
       <aside class="mobile-menu">
