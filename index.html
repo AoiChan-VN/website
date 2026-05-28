@@ -32,11 +32,32 @@
   <link rel="stylesheet" href="./assets/css/components/cursor.css" />
   <link rel="stylesheet" href="./assets/css/components/reveal.css" />
   <link rel="stylesheet" href="./assets/css/components/aurora.css" />
+  <link rel="stylesheet" href="./assets/css/components/loading.css" />
+  <link rel="stylesheet" href="./assets/css/components/mobile-menu.css" />
   <link rel="stylesheet" href="./assets/css/main.css" />
   <link rel="stylesheet" href="./assets/css/responsive.css" />
 </head>
 
 <body>
+
+  <div
+    class="loading-screen"
+    aria-hidden="true"
+  >
+
+    <div class="loading-core">
+
+      <div class="loading-ring"></div>
+
+      <div
+        class="loading-ring loading-ring-delay"
+      ></div>
+
+      <div class="loading-center"></div>
+
+    </div>
+
+  </div>
 
   <div class="app-shell">
 
@@ -91,6 +112,42 @@
 
     </div>
 
+    <div class="mobile-overlay">
+
+      <aside class="mobile-menu">
+
+        <nav
+          class="mobile-navigation-links"
+          aria-label="Mobile Navigation"
+        >
+
+          <a
+            href="#explore"
+            class="mobile-navigation-link"
+          >
+            Explore
+          </a>
+
+          <a
+            href="#dimensions"
+            class="mobile-navigation-link"
+          >
+            Dimensions
+          </a>
+
+          <a
+            href="#gateway"
+            class="mobile-navigation-link"
+          >
+            Gateway
+          </a>
+
+        </nav>
+
+      </aside>
+
+    </div>
+
     <header class="space-navigation reveal">
 
       <nav
@@ -138,6 +195,14 @@
 
         <button
           type="button"
+          class="mobile-menu-toggle"
+          aria-label="Open Mobile Menu"
+        >
+          ☰
+        </button>
+
+        <button
+          type="button"
           class="primary-button navigation-action"
         >
           Launch Space
@@ -167,8 +232,8 @@
 
           <p class="hero-description">
             Hệ thống cinematic space environment
-            với adaptive rendering, reveal motion,
-            aurora lighting và depth scroll engine.
+            với adaptive rendering, loading transition,
+            mobile overlay và runtime optimization.
           </p>
 
           <div class="hero-actions">
