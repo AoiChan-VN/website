@@ -1,7 +1,22 @@
+import {
+  isTouchDevice,
+  prefersReducedMotion
+} from './device.js';
+
 export function initializePerformance(){
 
-  document.documentElement.style.setProperty(
+  const root = document.documentElement;
+
+  root.style.setProperty(
     '--device-pixel-ratio',
-    window.devicePixelRatio.toString()
+    String(window.devicePixelRatio || 1)
   );
-} 
+
+  if(isTouchDevice()){
+    root.classList.add('is-touch-device');
+  }
+
+  if(prefersReducedMotion()){
+    root.classList.add('reduced-motion');
+  }
+}
