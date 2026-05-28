@@ -1,0 +1,146 @@
+.scene-cinematic{
+  position:absolute;
+
+  inset:0;
+
+  pointer-events:none;
+
+  overflow:hidden;
+}
+
+.scene-light{
+  position:absolute;
+
+  width:120vw;
+  height:120vh;
+
+  left:-10vw;
+  top:-20vh;
+
+  opacity:0.5;
+
+  object-fit:cover;
+
+  mix-blend-mode:screen;
+
+  filter:
+    blur(8px)
+    saturate(1.3);
+
+  transform:
+    translate3d(0,0,-120px)
+    scale(1.2);
+}
+
+.scene-grid{
+  position:absolute;
+
+  inset:auto 0 -16vh 0;
+
+  width:100%;
+  height:52vh;
+
+  object-fit:cover;
+
+  opacity:0.2;
+
+  transform:
+    perspective(1800px)
+    rotateX(72deg)
+    translate3d(0,0,-80px);
+}
+
+.scene-asteroid{
+  position:absolute;
+
+  width:min(22vw,280px);
+
+  left:6vw;
+  top:52vh;
+
+  opacity:0.9;
+
+  transform:
+    translate3d(0,0,260px);
+
+  filter:
+    drop-shadow(
+      0 0 50px
+      rgba(108,166,255,0.28)
+    );
+
+  animation:
+    asteroidFloat 10s ease-in-out infinite;
+}
+
+.scene-particles-overlay{
+  position:absolute;
+
+  inset:0;
+
+  width:100%;
+  height:100%;
+
+  object-fit:cover;
+
+  opacity:0.32;
+
+  mix-blend-mode:screen;
+
+  transform:
+    translate3d(0,0,140px)
+    scale(1.08);
+
+  animation:
+    particlesDrift 30s linear infinite;
+}
+
+@media (max-width:980px){
+
+  .scene-asteroid{
+    width:min(36vw,240px);
+
+    left:-8vw;
+
+    top:58vh;
+  }
+
+  .scene-grid{
+    opacity:0.14;
+  }
+}
+
+@media (max-width:640px){
+
+  .scene-light{
+    opacity:0.32;
+  }
+
+  .scene-grid{
+    height:40vh;
+
+    opacity:0.1;
+  }
+
+  .scene-asteroid{
+    width:48vw;
+
+    left:-14vw;
+
+    top:64vh;
+
+    opacity:0.7;
+  }
+
+  .scene-particles-overlay{
+    opacity:0.16;
+  }
+}
+
+.low-performance .scene-particles-overlay{
+  display:none;
+}
+
+.low-performance .scene-grid{
+  display:none;
+}
