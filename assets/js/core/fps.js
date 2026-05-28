@@ -1,10 +1,20 @@
+import {
+  updateSceneState
+} from './state.js';
+
 let lastTime = performance.now();
 
 let lowFpsFrames = 0;
 
+let degraded = false;
+
 export function initializeFpsManager(){
 
   function measure(now){
+
+    if(degraded){
+      return;
+    }
 
     const delta =
       now - lastTime;
@@ -25,8 +35,15 @@ export function initializeFpsManager(){
 
     if(lowFpsFrames > 40){
 
+      degraded = true;
+
       document.documentElement.classList.add(
         'low-performance'
+      );
+
+      updateSceneState(
+        'lowPerformance',
+        true
       );
 
       return;
@@ -36,4 +53,4 @@ export function initializeFpsManager(){
   }
 
   requestAnimationFrame(measure);
-} 
+}
