@@ -18,6 +18,9 @@
       calc(100% - 20px),
       100%
     );
+
+    padding-top:
+      calc(140px + var(--safe-top));
   }
 
   .hero-panel{
@@ -37,6 +40,10 @@
   .primary-button,
   .secondary-button{
     width:100%;
+  }
+
+  .section-title{
+    line-height:1.08;
   }
 }
 
