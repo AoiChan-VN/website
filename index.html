@@ -70,20 +70,50 @@
   <div class="app-shell">
 
     <div
-      class="cosmic-background"
+      class="space-scene"
       aria-hidden="true"
     >
-      <div class="cosmic-gradient"></div>
-      <div class="cosmic-stars"></div>
-      <div class="cosmic-glow"></div>
-    </div>
 
-    <div
-      class="aurora-layer"
-      aria-hidden="true"
-    >
-      <div class="aurora-wave aurora-wave-a"></div>
-      <div class="aurora-wave aurora-wave-b"></div>
+      <img
+        src="./assets/images/space/stars-back.webp"
+        alt=""
+        class="scene-layer scene-stars"
+        loading="eager"
+        decoding="async"
+      />
+
+      <img
+        src="./assets/images/space/nebula-mid.webp"
+        alt=""
+        class="scene-layer scene-nebula"
+        loading="eager"
+        decoding="async"
+      />
+
+      <img
+        src="./assets/images/space/fog-overlay.webp"
+        alt=""
+        class="scene-layer scene-fog"
+        loading="eager"
+        decoding="async"
+      />
+
+      <img
+        src="./assets/images/space/planet-front.webp"
+        alt=""
+        class="scene-planet"
+        loading="eager"
+        decoding="async"
+      />
+
+      <img
+        src="./assets/images/space/orbital-ring.webp"
+        alt=""
+        class="scene-ring"
+        loading="eager"
+        decoding="async"
+      />
+
     </div>
 
     <div
@@ -98,37 +128,9 @@
       <div class="cursor-orb"></div>
     </div>
 
-    <div
-      class="parallax-world"
-      aria-hidden="true"
-    >
+    <div class="mobile-overlay">
 
-      <div
-        class="parallax-layer layer-back"
-        data-depth="0.08"
-      ></div>
-
-      <div
-        class="parallax-layer layer-mid"
-        data-depth="0.16"
-      ></div>
-
-      <div
-        class="parallax-layer layer-front"
-        data-depth="0.24"
-      ></div>
-
-    </div>
-
-    <div
-      class="mobile-overlay"
-      aria-hidden="true"
-    >
-
-      <aside
-        class="mobile-menu"
-        aria-label="Mobile Menu"
-      >
+      <aside class="mobile-menu">
 
         <nav
           class="mobile-navigation-links"
@@ -171,10 +173,13 @@
 
         <div class="navigation-brand">
 
-          <div
-            class="brand-orb"
-            aria-hidden="true"
-          ></div>
+          <img
+            src="./assets/images/logo/logo-orb.webp"
+            alt="Cosmic Portal Logo"
+            class="brand-logo"
+            loading="eager"
+            decoding="async"
+          />
 
           <span class="brand-title">
             Cosmic Portal
@@ -216,13 +221,6 @@
           ☰
         </button>
 
-        <button
-          type="button"
-          class="primary-button navigation-action"
-        >
-          Launch Space
-        </button>
-
       </nav>
 
     </header>
@@ -232,13 +230,12 @@
       <section
         class="hero-panel glass-panel reveal"
         id="explore"
-        data-depth-scroll="-0.03"
       >
 
         <div class="hero-content">
 
           <span class="hero-tag">
-            Fantasy • Cosmic • 4D Space
+            Fantasy • Space • 4D Environment
           </span>
 
           <h1 class="hero-title">
@@ -246,9 +243,10 @@
           </h1>
 
           <p class="hero-description">
-            Native cinematic fantasy environment
-            với adaptive runtime rendering và
-            production-grade optimization.
+            Cinematic layered fantasy environment
+            với volumetric depth rendering,
+            orbital composition và real visual
+            parallax architecture.
           </p>
 
           <div class="hero-actions">
@@ -268,89 +266,6 @@
             </button>
 
           </div>
-
-        </div>
-
-      </section>
-
-      <section
-        class="content-section reveal"
-        id="dimensions"
-      >
-
-        <div class="section-heading">
-
-          <span class="section-kicker">
-            Space Architecture
-          </span>
-
-          <h2 class="section-title">
-            Orbital Dimension System
-          </h2>
-
-        </div>
-
-        <div class="orbital-grid">
-
-          <article
-            class="orbital-card glass-panel"
-            data-depth-scroll="0.01"
-          >
-
-            <span class="orbital-label">
-              Depth Layer
-            </span>
-
-            <h3 class="orbital-title">
-              Multi-Layer Parallax
-            </h3>
-
-            <p class="orbital-description">
-              GPU-safe cinematic rendering
-              bằng translate3d native pipeline.
-            </p>
-
-          </article>
-
-          <article
-            class="orbital-card glass-panel"
-            data-depth-scroll="0.015"
-          >
-
-            <span class="orbital-label">
-              Motion Engine
-            </span>
-
-            <h3 class="orbital-title">
-              Adaptive Motion
-            </h3>
-
-            <p class="orbital-description">
-              Motion system thích ứng theo FPS,
-              touch device và performance runtime.
-            </p>
-
-          </article>
-
-          <article
-            class="orbital-card glass-panel"
-            data-depth-scroll="0.02"
-          >
-
-            <span class="orbital-label">
-              Native System
-            </span>
-
-            <h3 class="orbital-title">
-              Offline Ready
-            </h3>
-
-            <p class="orbital-description">
-              Hoạt động trên GitHub Pages,
-              USB offline và LocalHost.
-            </p>
-
-          </article>
 
         </div>
 
