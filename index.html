@@ -26,6 +26,8 @@
   <link rel="stylesheet" href="./assets/css/effects/parallax.css" />
   <link rel="stylesheet" href="./assets/css/effects/glassmorphism.css" />
   <link rel="stylesheet" href="./assets/css/effects/cosmic.css" />
+  <link rel="stylesheet" href="./assets/css/components/navigation.css" />
+  <link rel="stylesheet" href="./assets/css/components/orbital.css" />
   <link rel="stylesheet" href="./assets/css/main.css" />
   <link rel="stylesheet" href="./assets/css/responsive.css" />
 </head>
@@ -65,9 +67,68 @@
 
     </div>
 
+    <header class="space-navigation">
+
+      <nav
+        class="navigation-shell glass-panel"
+        aria-label="Primary Navigation"
+      >
+
+        <div class="navigation-brand">
+
+          <div
+            class="brand-orb"
+            aria-hidden="true"
+          ></div>
+
+          <span class="brand-title">
+            Cosmic Portal
+          </span>
+
+        </div>
+
+        <div class="navigation-links">
+
+          <a
+            href="#explore"
+            class="navigation-link"
+          >
+            Explore
+          </a>
+
+          <a
+            href="#dimensions"
+            class="navigation-link"
+          >
+            Dimensions
+          </a>
+
+          <a
+            href="#gateway"
+            class="navigation-link"
+          >
+            Gateway
+          </a>
+
+        </div>
+
+        <button
+          type="button"
+          class="primary-button navigation-action"
+        >
+          Launch Space
+        </button>
+
+      </nav>
+
+    </header>
+
     <main class="main-container">
 
-      <section class="hero-panel glass-panel">
+      <section
+        class="hero-panel glass-panel"
+        id="explore"
+      >
 
         <div class="hero-content">
 
@@ -80,9 +141,9 @@
           </h1>
 
           <p class="hero-description">
-            Không gian huyễn tưởng đa tầng với
-            hiệu ứng 3D parallax cinematic,
-            tối ưu GPU cho mọi thiết bị.
+            Hệ thống không gian đa tầng với cinematic depth,
+            ánh sáng vũ trụ và chuyển động parallax tối ưu
+            cho Android, iOS, iPad và desktop.
           </p>
 
           <div class="hero-actions">
@@ -90,7 +151,6 @@
             <button
               type="button"
               class="primary-button"
-              aria-label="Explore Universe"
             >
               Explore Universe
             </button>
@@ -98,12 +158,85 @@
             <button
               type="button"
               class="secondary-button"
-              aria-label="Enter Portal"
             >
               Enter Portal
             </button>
 
           </div>
+
+        </div>
+
+      </section>
+
+      <section
+        class="content-section"
+        id="dimensions"
+      >
+
+        <div class="section-heading">
+
+          <span class="section-kicker">
+            Space Architecture
+          </span>
+
+          <h2 class="section-title">
+            Orbital Dimension System
+          </h2>
+
+        </div>
+
+        <div class="orbital-grid">
+
+          <article class="orbital-card glass-panel">
+
+            <span class="orbital-label">
+              Depth Layer
+            </span>
+
+            <h3 class="orbital-title">
+              Multi-Layer Parallax
+            </h3>
+
+            <p class="orbital-description">
+              Hệ thống chiều sâu cinematic render bằng
+              translate3d tối ưu GPU và mobile rendering.
+            </p>
+
+          </article>
+
+          <article class="orbital-card glass-panel">
+
+            <span class="orbital-label">
+              Motion Engine
+            </span>
+
+            <h3 class="orbital-title">
+              Adaptive Motion
+            </h3>
+
+            <p class="orbital-description">
+              Chuyển động thích ứng theo thiết bị,
+              tự động giảm tải trên mobile yếu.
+            </p>
+
+          </article>
+
+          <article class="orbital-card glass-panel">
+
+            <span class="orbital-label">
+              Native System
+            </span>
+
+            <h3 class="orbital-title">
+              Offline Ready
+            </h3>
+
+            <p class="orbital-description">
+              Chạy trực tiếp trên GitHub Pages,
+              USB offline và LocalHost không cần backend.
+            </p>
+
+          </article>
 
         </div>
 
@@ -119,4 +252,4 @@
   ></script>
 
 </body>
-</html>
+</html> 
