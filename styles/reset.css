@@ -1,0 +1,148 @@
+/* FILE: styles/reset.css */
+
+/* =========================
+   GLOBAL RESET
+========================= */
+
+*,
+*::before,
+*::after{
+    margin:0;
+    padding:0;
+    box-sizing:border-box;
+}
+
+/* =========================
+   HTML / BODY
+========================= */
+
+html{
+    width:100%;
+    height:100%;
+    overflow:hidden;
+
+    -webkit-text-size-adjust:100%;
+    touch-action:manipulation;
+}
+
+body{
+    width:100%;
+    height:100%;
+
+    overflow:hidden;
+
+    position:relative;
+
+    background:#000000;
+    color:#ffffff;
+
+    font-family:Arial, Helvetica, sans-serif;
+
+    -webkit-font-smoothing:antialiased;
+    -moz-osx-font-smoothing:grayscale;
+
+    user-select:none;
+    -webkit-user-select:none;
+
+    text-rendering:optimizeLegibility;
+}
+
+/* =========================
+   ROOT APP
+========================= */
+
+#app{
+    width:100%;
+    height:100%;
+
+    position:relative;
+
+    overflow:hidden;
+}
+
+/* =========================
+   MEDIA ELEMENTS
+========================= */
+
+img,
+picture,
+canvas,
+video{
+    display:block;
+    max-width:100%;
+}
+
+img{
+    pointer-events:none;
+    user-drag:none;
+    -webkit-user-drag:none;
+}
+
+/* =========================
+   BUTTONS / INPUTS
+========================= */
+
+button,
+input,
+textarea,
+select{
+    border:none;
+    outline:none;
+
+    background:none;
+
+    font:inherit;
+    color:inherit;
+}
+
+/* =========================
+   LINKS
+========================= */
+
+a{
+    color:inherit;
+    text-decoration:none;
+}
+
+/* =========================
+   LISTS
+========================= */
+
+ul,
+ol{
+    list-style:none;
+}
+
+/* =========================
+   GPU HINTS
+========================= */
+
+.gpu-layer{
+    transform:translate3d(0,0,0);
+    will-change:transform, opacity;
+    backface-visibility:hidden;
+}
+
+/* =========================
+   SAFE TAP
+========================= */
+
+.safe-tap{
+    -webkit-tap-highlight-color:transparent;
+}
+
+/* =========================
+   MOBILE PERFORMANCE
+========================= */
+
+.mobile-optimized{
+    contain:layout style paint;
+}
+
+/* =========================
+   HIDDEN
+========================= */
+
+.hidden{
+    display:none !important;
+} 
