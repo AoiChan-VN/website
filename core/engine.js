@@ -291,7 +291,7 @@ async function initializeEngine(){
     initializeEventManager({
         onGyroReady:()=>{
 
-            updateGyroStatus('ACTIVE');
+            updateGyroStatus('𝓐𝓬𝓽𝓲𝓿𝓮');
 
         },
 
