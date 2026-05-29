@@ -1,0 +1,299 @@
+/* FILE: styles/layout.css */
+
+/* =========================
+   MAIN VIEWPORT
+========================= */
+
+#portal-viewport{
+    width:100vw;
+    height:100vh;
+
+    position:relative;
+
+    overflow:hidden;
+
+    background:#000000;
+
+    isolation:isolate;
+}
+
+/* =========================
+   MATRIX LAYER
+========================= */
+
+#matrix-layer{
+    width:100%;
+    height:100%;
+
+    position:absolute;
+
+    inset:0;
+
+    overflow:hidden;
+
+    transform:translate3d(0,0,0);
+
+    will-change:transform;
+}
+
+/* =========================
+   PORTAL FRAMES
+========================= */
+
+.portal-frame{
+    width:100%;
+    height:100%;
+
+    position:absolute;
+
+    inset:0;
+
+    object-fit:cover;
+
+    opacity:0;
+
+    pointer-events:none;
+
+    transform:translate3d(0,0,0);
+
+    will-change:opacity;
+
+    backface-visibility:hidden;
+}
+
+/* =========================
+   DEFAULT ACTIVE FRAME
+========================= */
+
+#portal-center{
+    opacity:1;
+}
+
+/* =========================
+   OVERLAY
+========================= */
+
+#portal-overlay{
+    position:absolute;
+
+    inset:0;
+
+    z-index:var(--z-overlay);
+
+    pointer-events:none;
+
+    background:var(--color-overlay);
+}
+
+/* =========================
+   HUD CONTAINER
+========================= */
+
+#hud-container{
+    position:absolute;
+
+    inset:0;
+
+    z-index:var(--z-ui);
+
+    pointer-events:none;
+}
+
+/* =========================
+   HUD PANEL
+========================= */
+
+.hud-panel{
+    min-width:120px;
+
+    position:absolute;
+
+    display:flex;
+    flex-direction:column;
+    gap:6px;
+
+    padding:12px 14px;
+
+    border-radius:var(--hud-radius);
+
+    background:var(--color-panel-bg);
+
+    border:1px solid var(--color-panel-border);
+
+    box-shadow:var(--shadow-panel);
+
+    backdrop-filter:none;
+
+    transform:translate3d(0,0,0);
+
+    will-change:opacity;
+
+    pointer-events:none;
+}
+
+/* =========================
+   HUD LEFT
+========================= */
+
+#hud-left{
+    top:calc(var(--safe-top) + 16px);
+    left:calc(var(--safe-left) + 16px);
+}
+
+/* =========================
+   HUD RIGHT
+========================= */
+
+#hud-right{
+    top:calc(var(--safe-top) + 16px);
+    right:calc(var(--safe-right) + 16px);
+
+    align-items:flex-end;
+}
+
+/* =========================
+   HUD TEXT
+========================= */
+
+.hud-panel span{
+    font-size:var(--hud-font-size);
+
+    color:var(--color-text-soft);
+
+    letter-spacing:var(--hud-letter-spacing);
+
+    line-height:1.4;
+}
+
+/* =========================
+   LOADING SCREEN
+========================= */
+
+#loading-screen{
+    position:fixed;
+
+    inset:0;
+
+    z-index:var(--z-loading);
+
+    display:flex;
+    flex-direction:column;
+    justify-content:center;
+    align-items:center;
+
+    gap:20px;
+
+    background:#000000;
+
+    transition:
+        opacity var(--transition-slow),
+        visibility var(--transition-slow);
+
+    transform:translate3d(0,0,0);
+}
+
+/* =========================
+   LOADING HIDDEN
+========================= */
+
+#loading-screen.hidden{
+    opacity:0;
+    visibility:hidden;
+}
+
+/* =========================
+   LOGO WRAPPER
+========================= */
+
+#loading-logo-wrapper{
+    width:110px;
+    height:110px;
+
+    display:flex;
+    justify-content:center;
+    align-items:center;
+
+    transform:translate3d(0,0,0);
+}
+
+/* =========================
+   LOGO
+========================= */
+
+#loading-logo{
+    width:100%;
+    height:100%;
+
+    object-fit:contain;
+
+    transform:translate3d(0,0,0);
+
+    will-change:transform, opacity;
+}
+
+/* =========================
+   LOADING TEXT
+========================= */
+
+#loading-text{
+    font-size:12px;
+
+    color:var(--color-text-soft);
+
+    letter-spacing:3px;
+
+    text-align:center;
+}
+
+/* =========================
+   DESKTOP SUPPORT
+========================= */
+
+@media screen and (min-width:1024px){
+
+    .hud-panel{
+        min-width:140px;
+    }
+
+}
+
+/* =========================
+   SMALL MOBILE
+========================= */
+
+@media screen and (max-width:480px){
+
+    .hud-panel{
+        min-width:100px;
+
+        padding:10px 12px;
+    }
+
+    #loading-logo-wrapper{
+        width:92px;
+        height:92px;
+    }
+
+}
+
+/* =========================
+   LANDSCAPE MOBILE
+========================= */
+
+@media screen and (orientation:landscape)
+and (max-height:500px){
+
+    .hud-panel{
+        padding:8px 10px;
+    }
+
+    #loading-logo-wrapper{
+        width:72px;
+        height:72px;
+    }
+
+    #loading-text{
+        font-size:10px;
+    }
+
+} 
