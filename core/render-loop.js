@@ -1,12 +1,14 @@
 // FILE: core/render-loop.js
 
 /* =========================
-   RENDER LOOP STATE
+   RENDER STATE
 ========================= */
 
 const RENDER_STATE = {
 
     running:false,
+
+    paused:false,
 
     animationFrameId:0,
 
@@ -23,25 +25,35 @@ const RENDER_STATE = {
 };
 
 /* =========================
-   INTERNAL LOOP
+   FRAME
 ========================= */
 
 function renderFrame(currentTime){
 
-    if(!RENDER_STATE.running){
+    if(
+        !RENDER_STATE.running ||
+        RENDER_STATE.paused
+    ){
         return;
     }
 
-    if(RENDER_STATE.previousTime === 0){
+    if(
+        RENDER_STATE.previousTime === 0
+    ){
 
-        RENDER_STATE.previousTime = currentTime;
+        RENDER_STATE.previousTime =
+            currentTime;
 
     }
 
     RENDER_STATE.deltaTime =
-        currentTime - RENDER_STATE.previousTime;
+        currentTime -
+        RENDER_STATE.previousTime;
 
-    if(RENDER_STATE.deltaTime > RENDER_STATE.maxDelta){
+    if(
+        RENDER_STATE.deltaTime >
+        RENDER_STATE.maxDelta
+    ){
 
         RENDER_STATE.deltaTime =
             RENDER_STATE.maxDelta;
@@ -54,22 +66,35 @@ function renderFrame(currentTime){
     RENDER_STATE.elapsedTime +=
         RENDER_STATE.deltaTime;
 
-    const callbackCount =
+    const count =
         RENDER_STATE.callbacks.length;
 
-    for(let i = 0; i < callbackCount; i++){
+    for(
+        let i = 0;
+        i < count;
+        i++
+    ){
 
         const callback =
             RENDER_STATE.callbacks[i];
 
-        if(typeof callback !== 'function'){
+        if(
+            typeof callback !==
+            'function'
+        ){
             continue;
         }
 
         callback({
+
             currentTime,
-            deltaTime:RENDER_STATE.deltaTime,
-            elapsedTime:RENDER_STATE.elapsedTime
+
+            deltaTime:
+                RENDER_STATE.deltaTime,
+
+            elapsedTime:
+                RENDER_STATE.elapsedTime
+
         });
 
     }
@@ -82,24 +107,33 @@ function renderFrame(currentTime){
 }
 
 /* =========================
-   START LOOP
+   START
 ========================= */
 
-export function startRenderLoop(options = {}){
+export function startRenderLoop(
+    options = {}
+){
 
-    if(RENDER_STATE.running){
-        return;
-    }
-
-    RENDER_STATE.running = true;
-
-    if(typeof options.onFrame === 'function'){
+    if(
+        typeof options.onFrame ===
+        'function'
+    ){
 
         addRenderCallback(
             options.onFrame
         );
 
     }
+
+    if(
+        RENDER_STATE.running
+    ){
+        return;
+    }
+
+    RENDER_STATE.running = true;
+
+    RENDER_STATE.paused = false;
 
     RENDER_STATE.animationFrameId =
         window.requestAnimationFrame(
@@ -109,43 +143,110 @@ export function startRenderLoop(options = {}){
 }
 
 /* =========================
-   STOP LOOP
+   STOP
 ========================= */
 
 export function stopRenderLoop(){
 
-    if(!RENDER_STATE.running){
+    if(
+        !RENDER_STATE.running
+    ){
         return;
     }
 
-    RENDER_STATE.running = false;
-
-    window.cancelAnimationFrame(
+    if(
         RENDER_STATE.animationFrameId
-    );
+    ){
+
+        window.cancelAnimationFrame(
+            RENDER_STATE.animationFrameId
+        );
+
+    }
 
     RENDER_STATE.animationFrameId = 0;
+
+    RENDER_STATE.running = false;
+
+    RENDER_STATE.paused = false;
 
     RENDER_STATE.previousTime = 0;
 
 }
 
 /* =========================
-   ADD CALLBACK
+   PAUSE
 ========================= */
 
-export function addRenderCallback(callback){
+export function pauseRenderLoop(){
 
-    if(typeof callback !== 'function'){
+    if(
+        !RENDER_STATE.running ||
+        RENDER_STATE.paused
+    ){
         return;
     }
 
-    const exists =
-        RENDER_STATE.callbacks.includes(
-            callback
+    RENDER_STATE.paused = true;
+
+    if(
+        RENDER_STATE.animationFrameId
+    ){
+
+        window.cancelAnimationFrame(
+            RENDER_STATE.animationFrameId
         );
 
-    if(exists){
+    }
+
+    RENDER_STATE.animationFrameId = 0;
+
+}
+
+/* =========================
+   RESUME
+========================= */
+
+export function resumeRenderLoop(){
+
+    if(
+        !RENDER_STATE.running ||
+        !RENDER_STATE.paused
+    ){
+        return;
+    }
+
+    RENDER_STATE.paused = false;
+
+    RENDER_STATE.previousTime = 0;
+
+    RENDER_STATE.animationFrameId =
+        window.requestAnimationFrame(
+            renderFrame
+        );
+
+}
+
+/* =========================
+   CALLBACKS
+========================= */
+
+export function addRenderCallback(
+    callback
+){
+
+    if(
+        typeof callback !==
+        'function'
+    ){
+        return;
+    }
+
+    if(
+        RENDER_STATE.callbacks.includes(
+            callback
+        )
+    ){
         return;
     }
 
@@ -155,11 +256,9 @@ export function addRenderCallback(callback){
 
 }
 
-/* =========================
-   REMOVE CALLBACK
-========================= */
-
-export function removeRenderCallback(callback){
+export function removeRenderCallback(
+    callback
+){
 
     const index =
         RENDER_STATE.callbacks.indexOf(
@@ -178,17 +277,7 @@ export function removeRenderCallback(callback){
 }
 
 /* =========================
-   LOOP STATUS
-========================= */
-
-export function isRenderLoopRunning(){
-
-    return RENDER_STATE.running;
-
-}
-
-/* =========================
-   GET DELTA
+   GETTERS
 ========================= */
 
 export function getDeltaTime(){
@@ -197,31 +286,38 @@ export function getDeltaTime(){
 
 }
 
-/* =========================
-   GET ELAPSED
-========================= */
-
 export function getElapsedTime(){
 
     return RENDER_STATE.elapsedTime;
 
 }
 
+export function isRenderLoopRunning(){
+
+    return (
+        RENDER_STATE.running &&
+        !RENDER_STATE.paused
+    );
+
+}
+
 /* =========================
-   VISIBILITY CONTROL
+   VISIBILITY
 ========================= */
 
 function handleVisibilityChange(){
 
-    if(document.hidden){
+    if(
+        document.hidden
+    ){
 
-        stopRenderLoop();
+        pauseRenderLoop();
 
         return;
 
     }
 
-    startRenderLoop();
+    resumeRenderLoop();
 
 }
 
@@ -232,17 +328,19 @@ document.addEventListener(
 );
 
 /* =========================
-   PAGE UNLOAD CLEANUP
+   CLEANUP
 ========================= */
+
+function destroyRenderLoop(){
+
+    stopRenderLoop();
+
+    RENDER_STATE.callbacks.length = 0;
+
+}
 
 window.addEventListener(
     'beforeunload',
-    ()=>{
-
-        stopRenderLoop();
-
-        RENDER_STATE.callbacks.length = 0;
-
-    },
+    destroyRenderLoop,
     { passive:true }
 ); 
