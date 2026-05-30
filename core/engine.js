@@ -2,6 +2,24 @@
 
 import { startRenderLoop } from './render-loop.js';
 import { initializeEventManager } from './event-manager.js';
+import { initializeGyroMatrix } from './gyro-matrix.js';
+import { initializeMobileOptimizer } from './mobile-optimizer.js';
+
+import {
+    initializeLoadingScreen,
+    hideLoadingScreen as hideUILoadingScreen
+} from '../ui/loading-screen.js';
+
+import {
+    initializeNavbar
+} from '../ui/navbar.js';
+
+import {
+    initializeHUDSystem,
+    setPortalLoading,
+    setPortalReady,
+    setPortalActive
+} from '../ui/hud-system.js';
 
 /* =========================
    ENGINE STATE
@@ -21,9 +39,12 @@ const ENGINE_STATE = {
 
     frameCount:0,
 
-    lastFPSUpdate:performance.now(),
+    fps:0,
 
-    fps:0
+    lastFPSUpdate:
+        performance.now(),
+
+    preloadWorker:null
 
 };
 
@@ -34,29 +55,122 @@ const ENGINE_STATE = {
 function cacheDOM(){
 
     ENGINE_STATE.loadingScreen =
-        document.getElementById('loading-screen');
+        document.getElementById(
+            'loading-screen'
+        );
 
     ENGINE_STATE.fpsCounter =
-        document.getElementById('fps-counter');
+        document.getElementById(
+            'fps-counter'
+        );
 
     ENGINE_STATE.gyroStatus =
-        document.getElementById('gyro-status');
+        document.getElementById(
+            'gyro-status'
+        );
 
 }
 
 /* =========================
-   IMAGE PRELOAD
+   PORTAL IMAGES
 ========================= */
 
-async function preloadPortalFrames(){
+function getPortalImages(){
 
-    const frames = document.querySelectorAll('.portal-frame');
+    return [
 
-    const preloadTasks = [];
+        './assets/images/portal/center.webp',
+
+        './assets/images/portal/north.webp',
+        './assets/images/portal/south.webp',
+
+        './assets/images/portal/east.webp',
+        './assets/images/portal/west.webp',
+
+        './assets/images/portal/north-east.webp',
+        './assets/images/portal/north-west.webp',
+
+        './assets/images/portal/south-east.webp',
+        './assets/images/portal/south-west.webp'
+
+    ];
+
+}
+
+/* =========================
+   WORKER PRELOAD
+========================= */
+
+async function preloadWorkerAssets(){
+
+    return new Promise((resolve)=>{
+
+        const worker =
+            new Worker(
+                './workers/image-preload-worker.js'
+            );
+
+        ENGINE_STATE.preloadWorker =
+            worker;
+
+        worker.addEventListener(
+            'message',
+            (event)=>{
+
+                const data =
+                    event.data;
+
+                if(
+                    data.type === 'ready'
+                ){
+
+                    worker.postMessage({
+
+                        type:'preload',
+
+                        images:
+                            getPortalImages()
+
+                    });
+
+                    return;
+
+                }
+
+                if(
+                    data.type === 'complete'
+                ){
+
+                    ENGINE_STATE.assetsLoaded =
+                        true;
+
+                    resolve();
+
+                }
+
+            }
+        );
+
+    });
+
+}
+
+/* =========================
+   IMAGE VERIFY
+========================= */
+
+async function verifyImagesLoaded(){
+
+    const frames =
+        document.querySelectorAll(
+            '.portal-frame'
+        );
+
+    const tasks = [];
 
     frames.forEach((frame)=>{
 
-        preloadTasks.push(
+        tasks.push(
 
             new Promise((resolve)=>{
 
@@ -67,52 +181,15 @@ async function preloadPortalFrames(){
 
                 }
 
-                const handleLoad = ()=>{
-
-                    frame.removeEventListener(
-                        'load',
-                        handleLoad
-                    );
-
-                    frame.removeEventListener(
-                        'error',
-                        handleError
-                    );
-
-                    resolve();
-
-                };
-
-                const handleError = ()=>{
-
-                    frame.removeEventListener(
-                        'load',
-                        handleLoad
-                    );
-
-                    frame.removeEventListener(
-                        'error',
-                        handleError
-                    );
-
-                    console.warn(
-                        '[PORTAL FRAME FAILED]',
-                        frame.src
-                    );
-
-                    resolve();
-
-                };
-
                 frame.addEventListener(
                     'load',
-                    handleLoad,
+                    resolve,
                     { once:true }
                 );
 
                 frame.addEventListener(
                     'error',
-                    handleError,
+                    resolve,
                     { once:true }
                 );
 
@@ -122,132 +199,52 @@ async function preloadPortalFrames(){
 
     });
 
-    await Promise.all(preloadTasks);
-
-    ENGINE_STATE.assetsLoaded = true;
-
-}
-
-/* =========================
-   LOADING SCREEN
-========================= */
-
-function hideLoadingScreen(){
-
-    if(!ENGINE_STATE.loadingScreen){
-        return;
-    }
-
-    ENGINE_STATE.loadingScreen.classList.add('hidden');
-
-    window.setTimeout(()=>{
-
-        if(ENGINE_STATE.loadingScreen){
-
-            ENGINE_STATE.loadingScreen.remove();
-
-            ENGINE_STATE.loadingScreen = null;
-
-        }
-
-    }, 600);
+    await Promise.all(
+        tasks
+    );
 
 }
 
 /* =========================
-   FPS MONITOR
+   FPS
 ========================= */
 
 function updateFPS(){
 
     ENGINE_STATE.frameCount++;
 
-    const now = performance.now();
+    const now =
+        performance.now();
 
-    const delta = now - ENGINE_STATE.lastFPSUpdate;
+    const delta =
+        now -
+        ENGINE_STATE.lastFPSUpdate;
 
-    if(delta >= 1000){
+    if(delta < 1000){
+        return;
+    }
 
-        ENGINE_STATE.fps =
-            Math.round(
-                (ENGINE_STATE.frameCount * 1000) / delta
+    ENGINE_STATE.fps =
+        Math.round(
+            (
+                ENGINE_STATE.frameCount *
+                1000
+            ) / delta
+        );
+
+    ENGINE_STATE.frameCount = 0;
+
+    ENGINE_STATE.lastFPSUpdate =
+        now;
+
+    if(
+        ENGINE_STATE.fpsCounter
+    ){
+
+        ENGINE_STATE.fpsCounter.textContent =
+            String(
+                ENGINE_STATE.fps
             );
-
-        ENGINE_STATE.frameCount = 0;
-
-        ENGINE_STATE.lastFPSUpdate = now;
-
-        if(ENGINE_STATE.fpsCounter){
-
-            ENGINE_STATE.fpsCounter.textContent =
-                String(ENGINE_STATE.fps);
-
-        }
-
-    }
-
-}
-
-/* =========================
-   DEVICE CLASS
-========================= */
-
-function applyDeviceClass(){
-
-    const width = window.innerWidth;
-
-    document.body.classList.remove(
-        'device-mobile',
-        'device-tablet',
-        'device-desktop'
-    );
-
-    if(width <= 768){
-
-        document.body.classList.add(
-            'device-mobile'
-        );
-
-        return;
-
-    }
-
-    if(width <= 1200){
-
-        document.body.classList.add(
-            'device-tablet'
-        );
-
-        return;
-
-    }
-
-    document.body.classList.add(
-        'device-desktop'
-    );
-
-}
-
-/* =========================
-   PERFORMANCE DETECTION
-========================= */
-
-function detectLowPerformanceDevice(){
-
-    const memory =
-        navigator.deviceMemory || 4;
-
-    const cores =
-        navigator.hardwareConcurrency || 4;
-
-    const isLowSpec =
-        memory <= 4 || cores <= 4;
-
-    if(isLowSpec){
-
-        document.body.classList.add(
-            'low-performance-mode'
-        );
 
     }
 
@@ -257,14 +254,99 @@ function detectLowPerformanceDevice(){
    GYRO STATUS
 ========================= */
 
-function updateGyroStatus(status){
+function setGyroStatus(text){
 
-    if(!ENGINE_STATE.gyroStatus){
+    if(
+        !ENGINE_STATE.gyroStatus
+    ){
         return;
     }
 
     ENGINE_STATE.gyroStatus.textContent =
-        status;
+        text;
+
+}
+
+/* =========================
+   EVENT MANAGER
+========================= */
+
+function initializeNativeEvents(){
+
+    initializeEventManager({
+
+        onGyroReady:()=>{
+
+            setGyroStatus(
+                'ACTIVE'
+            );
+
+            setPortalActive();
+
+        },
+
+        onGyroDenied:()=>{
+
+            setGyroStatus(
+                'DENIED'
+            );
+
+        },
+
+        onGyroUnavailable:()=>{
+
+            setGyroStatus(
+                'UNSUPPORTED'
+            );
+
+        }
+
+    });
+
+}
+
+/* =========================
+   UI BOOT
+========================= */
+
+function initializeUI(){
+
+    initializeLoadingScreen();
+
+    initializeNavbar();
+
+    initializeHUDSystem();
+
+}
+
+/* =========================
+   HIDE LOADER
+========================= */
+
+function completeBoot(){
+
+    setPortalReady();
+
+    hideUILoadingScreen();
+
+}
+
+/* =========================
+   WORKER CLEANUP
+========================= */
+
+function cleanupWorker(){
+
+    if(
+        !ENGINE_STATE.preloadWorker
+    ){
+        return;
+    }
+
+    ENGINE_STATE.preloadWorker.terminate();
+
+    ENGINE_STATE.preloadWorker =
+        null;
 
 }
 
@@ -274,40 +356,30 @@ function updateGyroStatus(status){
 
 async function initializeEngine(){
 
-    if(ENGINE_STATE.initialized){
+    if(
+        ENGINE_STATE.initialized
+    ){
         return;
     }
 
-    ENGINE_STATE.initialized = true;
+    ENGINE_STATE.initialized =
+        true;
 
     cacheDOM();
 
-    applyDeviceClass();
+    initializeUI();
 
-    detectLowPerformanceDevice();
+    setPortalLoading();
 
-    await preloadPortalFrames();
+    await initializeMobileOptimizer();
 
-    initializeEventManager({
-        onGyroReady:()=>{
+    await preloadWorkerAssets();
 
-            updateGyroStatus('𝓐𝓬𝓽𝓲𝓿𝓮');
+    await verifyImagesLoaded();
 
-        },
+    initializeNativeEvents();
 
-        onGyroDenied:()=>{
-
-            updateGyroStatus('DENIED');
-
-        },
-
-        onGyroUnavailable:()=>{
-
-            updateGyroStatus('UNSUPPORTED');
-
-        }
-
-    });
+    initializeGyroMatrix();
 
     startRenderLoop({
 
@@ -315,11 +387,21 @@ async function initializeEngine(){
 
     });
 
-    hideLoadingScreen();
+    completeBoot();
 
     console.info(
-        '[NATIVE PORTAL ENGINE READY]'
+        '[PORTAL ENGINE ONLINE]'
     );
+
+}
+
+/* =========================
+   CLEANUP
+========================= */
+
+function destroyEngine(){
+
+    cleanupWorker();
 
 }
 
@@ -334,11 +416,11 @@ window.addEventListener(
 );
 
 /* =========================
-   VIEWPORT RESIZE
+   CLEANUP
 ========================= */
 
 window.addEventListener(
-    'resize',
-    applyDeviceClass,
+    'beforeunload',
+    destroyEngine,
     { passive:true }
 ); 
