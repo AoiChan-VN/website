@@ -8,6 +8,8 @@ const ORIENTATION_STATE = {
 
     initialized:false,
 
+    animationFrameId:0,
+
     current:{
         alpha:0,
         beta:0,
@@ -31,7 +33,9 @@ const ORIENTATION_STATE = {
     maxBeta:45,
     maxGamma:45,
 
-    listeners:new Set()
+    listeners:new Set(),
+
+    updateBound:null
 
 };
 
@@ -39,7 +43,7 @@ const ORIENTATION_STATE = {
    CLAMP
 ========================= */
 
-function clamp(value, min, max){
+function clamp(value,min,max){
 
     if(value < min){
         return min;
@@ -57,7 +61,7 @@ function clamp(value, min, max){
    LERP
 ========================= */
 
-function lerp(start, end, factor){
+function lerp(start,end,factor){
 
     return start + (
         (end - start) * factor
@@ -66,7 +70,21 @@ function lerp(start, end, factor){
 }
 
 /* =========================
-   NORMALIZE ROTATION
+   NORMALIZE
+========================= */
+
+function normalizeToUnit(value,limit){
+
+    return (
+        value + limit
+    ) / (
+        limit * 2
+    );
+
+}
+
+/* =========================
+   LIMIT ROTATION
 ========================= */
 
 function normalizeOrientation(){
@@ -88,7 +106,7 @@ function normalizeOrientation(){
 }
 
 /* =========================
-   APPLY SMOOTHING
+   SMOOTHING
 ========================= */
 
 function smoothOrientation(){
@@ -117,18 +135,21 @@ function smoothOrientation(){
 }
 
 /* =========================
-   BROADCAST UPDATE
+   NOTIFY
 ========================= */
 
 function notifyListeners(){
 
     const payload = {
 
-        alpha:ORIENTATION_STATE.smoothed.alpha,
+        alpha:
+            ORIENTATION_STATE.smoothed.alpha,
 
-        beta:ORIENTATION_STATE.smoothed.beta,
+        beta:
+            ORIENTATION_STATE.smoothed.beta,
 
-        gamma:ORIENTATION_STATE.smoothed.gamma,
+        gamma:
+            ORIENTATION_STATE.smoothed.gamma,
 
         normalizedBeta:
             normalizeToUnit(
@@ -144,24 +165,12 @@ function notifyListeners(){
 
     };
 
-    ORIENTATION_STATE.listeners.forEach((callback)=>{
+    ORIENTATION_STATE.listeners.forEach(
+        (callback)=>{
 
-        callback(payload);
+            callback(payload);
 
-    });
-
-}
-
-/* =========================
-   NORMALIZE UNIT
-========================= */
-
-function normalizeToUnit(value, limit){
-
-    return (
-        value + limit
-    ) / (
-        limit * 2
+        }
     );
 
 }
@@ -189,15 +198,22 @@ function handleOrientation(event){
    UPDATE LOOP
 ========================= */
 
-function update(){
+function updateLoop(){
+
+    if(
+        !ORIENTATION_STATE.initialized
+    ){
+        return;
+    }
 
     smoothOrientation();
 
     notifyListeners();
 
-    window.requestAnimationFrame(
-        update
-    );
+    ORIENTATION_STATE.animationFrameId =
+        window.requestAnimationFrame(
+            ORIENTATION_STATE.updateBound
+        );
 
 }
 
@@ -207,11 +223,17 @@ function update(){
 
 export function initializeOrientationParser(){
 
-    if(ORIENTATION_STATE.initialized){
+    if(
+        ORIENTATION_STATE.initialized
+    ){
         return;
     }
 
-    ORIENTATION_STATE.initialized = true;
+    ORIENTATION_STATE.initialized =
+        true;
+
+    ORIENTATION_STATE.updateBound =
+        updateLoop;
 
     window.addEventListener(
         'native-device-rotation',
@@ -219,7 +241,10 @@ export function initializeOrientationParser(){
         { passive:true }
     );
 
-    update();
+    ORIENTATION_STATE.animationFrameId =
+        window.requestAnimationFrame(
+            ORIENTATION_STATE.updateBound
+        );
 
 }
 
@@ -229,14 +254,35 @@ export function initializeOrientationParser(){
 
 export function destroyOrientationParser(){
 
+    if(
+        !ORIENTATION_STATE.initialized
+    ){
+        return;
+    }
+
     window.removeEventListener(
         'native-device-rotation',
         handleOrientation
     );
 
+    if(
+        ORIENTATION_STATE.animationFrameId
+    ){
+
+        window.cancelAnimationFrame(
+            ORIENTATION_STATE.animationFrameId
+        );
+
+        ORIENTATION_STATE.animationFrameId = 0;
+
+    }
+
     ORIENTATION_STATE.listeners.clear();
 
-    ORIENTATION_STATE.initialized = false;
+    ORIENTATION_STATE.updateBound = null;
+
+    ORIENTATION_STATE.initialized =
+        false;
 
 }
 
@@ -244,9 +290,13 @@ export function destroyOrientationParser(){
    SUBSCRIBE
 ========================= */
 
-export function subscribeOrientation(callback){
+export function subscribeOrientation(
+    callback
+){
 
-    if(typeof callback !== 'function'){
+    if(
+        typeof callback !== 'function'
+    ){
         return;
     }
 
@@ -260,7 +310,9 @@ export function subscribeOrientation(callback){
    UNSUBSCRIBE
 ========================= */
 
-export function unsubscribeOrientation(callback){
+export function unsubscribeOrientation(
+    callback
+){
 
     ORIENTATION_STATE.listeners.delete(
         callback
@@ -269,18 +321,21 @@ export function unsubscribeOrientation(callback){
 }
 
 /* =========================
-   GET CURRENT
+   GET STATE
 ========================= */
 
 export function getOrientation(){
 
     return {
 
-        alpha:ORIENTATION_STATE.smoothed.alpha,
+        alpha:
+            ORIENTATION_STATE.smoothed.alpha,
 
-        beta:ORIENTATION_STATE.smoothed.beta,
+        beta:
+            ORIENTATION_STATE.smoothed.beta,
 
-        gamma:ORIENTATION_STATE.smoothed.gamma
+        gamma:
+            ORIENTATION_STATE.smoothed.gamma
 
     };
 
@@ -290,9 +345,14 @@ export function getOrientation(){
    CONFIG
 ========================= */
 
-export function configureOrientationParser(config = {}){
+export function configureOrientationParser(
+    config = {}
+){
 
-    if(typeof config.lerpFactor === 'number'){
+    if(
+        typeof config.lerpFactor ===
+        'number'
+    ){
 
         ORIENTATION_STATE.lerpFactor =
             clamp(
@@ -303,28 +363,38 @@ export function configureOrientationParser(config = {}){
 
     }
 
-    if(typeof config.maxBeta === 'number'){
+    if(
+        typeof config.maxBeta ===
+        'number'
+    ){
 
         ORIENTATION_STATE.maxBeta =
-            Math.abs(config.maxBeta);
+            Math.abs(
+                config.maxBeta
+            );
 
     }
 
-    if(typeof config.maxGamma === 'number'){
+    if(
+        typeof config.maxGamma ===
+        'number'
+    ){
 
         ORIENTATION_STATE.maxGamma =
-            Math.abs(config.maxGamma);
+            Math.abs(
+                config.maxGamma
+            );
 
     }
 
 }
 
 /* =========================
-   AUTO CLEANUP
+   CLEANUP
 ========================= */
 
 window.addEventListener(
     'beforeunload',
     destroyOrientationParser,
     { passive:true }
-);
+); 
