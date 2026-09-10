@@ -12,7 +12,7 @@
 - **Platform:** **Mobile First** (Android Physical Devices). Cấm dùng PC/Emulator làm chuẩn benchmark.
 - **Engine:** Godot Engine 4.7.2 Stable.
 - **Ngôn ngữ:** C++ (Native Core) + GDExtension (Boundary) + GDScript (Staff/Presenter).
-- **C++ Repository:** `https://github.com/AoiChan-VN/aoi-cpp`
+- **C++ Repository:** `https://github.com/AoiChan-VN/hoyo-cpp`
 - **Tài liệu Godot:** `https://github.com/godotengine/godot-cpp.git`, `https://github.com/godotengine/godot.git`
 
 ## 1. SƠ ĐỒ TỔ CHỨC & CƠ CẤU QUYỀN HẠN (AAA ORG CHART)
